@@ -9,29 +9,39 @@
 import UIKit
 import SpriteKit
 import GameplayKit
+import AVFoundation
 
 class GameViewController: UIViewController {
-
+    
+    var LaunchDefault = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if let view = self.view as! SKView? {
-            // Load the SKScene from 'GameScene.sks'
-            if let scene = SKScene(fileNamed: "GameScene") {
-                // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFill
-                
-                // Present the scene
-                view.presentScene(scene)
-            }
-            
-            view.ignoresSiblingOrder = true
-            
-            view.showsFPS = true
-            view.showsNodeCount = true
-        }
-    }
+        let view = self.view as! SKView?
 
+        if(LaunchDefault.value(forKey: "Launch") == nil || LaunchDefault.integer(forKey: "Launch" ) == 0 ){
+            LaunchDefault.set(0, forKey: "Launch")
+            if let scene = SKScene(fileNamed: "WelcomeScene"){
+                scene.scaleMode = .aspectFill
+                view!.presentScene(scene)
+                view!.ignoresSiblingOrder = false
+                view!.showsFPS = true
+                view!.showsNodeCount = true
+            }
+        }
+        else{
+            if let scene = SKScene(fileNamed: "LoadingScene"){
+                scene.scaleMode = .aspectFill
+                view!.presentScene(scene)
+                view!.ignoresSiblingOrder = false
+                view!.showsFPS = true
+                view!.showsNodeCount = true
+            }
+        }
+        LaunchDefault.set(LaunchDefault.integer(forKey: "Launch") + 1, forKey: "Launch")
+    
+    }
+    
     override var shouldAutorotate: Bool {
         return true
     }
