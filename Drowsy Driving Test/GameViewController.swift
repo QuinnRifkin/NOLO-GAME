@@ -15,6 +15,30 @@ class GameViewController: UIViewController {
     
     var LaunchDefault = UserDefaults.standard
     
+    var audioPlayer = AVAudioPlayer()
+    
+    func playMusic(file: String){
+        
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: file, ofType: "mp3")!))
+            audioPlayer.prepareToPlay()
+        }
+            
+        catch {
+            print(error)
+        }
+        audioPlayer.play()
+    }
+    
+    func isPlayingMusic() -> Bool {
+        return audioPlayer.isPlaying
+    }
+    
+    func stopMusic(){
+        audioPlayer.stop()
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let view = self.view as! SKView?

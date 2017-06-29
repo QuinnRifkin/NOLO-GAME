@@ -12,7 +12,7 @@ import AVFoundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
-    var audioPlayer = AVAudioPlayer()
+    var gameViewController = GameViewController()
     
     var HighScoreDefault = UserDefaults.standard
     var HighScore: Int = 0
@@ -21,6 +21,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         static let carx : UInt32 = 1
         static let zspritex : UInt32 = 2
     }
+    
+    var widthframe : UInt32 = 0
+    var halfwidthframe : UInt32 = 0
+    var heightframe : UInt32 = 0
+    var halfheightframe : UInt32 = 0
+    
+    var randomNumberx1 : Int = 0
+    var rangex1 : Int = 0
+    var randomNumbery1 : Int = 0
+    var rangey1 : Int = 0
+    var randomNumberx2 : Int = 0
+    var rangex2 : Int = 0
+    var randomNumbery2 : Int = 0
+    var rangey2 : Int = 0
+    var randomNumberx3 : Int = 0
+    var rangex3 : Int = 0
+    var randomNumbery3 : Int = 0
+    var rangey3 : Int = 0
+    var randomNumberx4 : Int = 0
+    var rangex4 : Int = 0
+    var randomNumbery4 : Int = 0
+    var rangey4 : Int = 0
     
     let Upper : UInt32 = (128)
     var acc = CGFloat(0.0)
@@ -74,7 +96,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let zspriterandom2 = SKSpriteNode(imageNamed: "ZSprite")
     let zspriterandom3 = SKSpriteNode(imageNamed: "ZSprite")
     let zspriterandom4 = SKSpriteNode(imageNamed: "ZSprite")
-    let zspriterandom5 = SKSpriteNode(imageNamed: "ZSprite")
     
     let leftwall = SKSpriteNode(imageNamed: "FieldLines")
     let rightwall = SKSpriteNode(imageNamed: "FieldLines")
@@ -118,10 +139,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(road)
     }
     
-    func addObstacle(obstacle: SKSpriteNode, location: CGPoint){
+    func addObstacle(obstacle: SKSpriteNode, location: CGPoint, name: String){
+        obstacle.name = name
         obstacle.position = location
         obstacle.size = CGSize(width: 414.98, height: 77.496)
-        obstacle.zPosition = 1
+        obstacle.zPosition = 2
         obstacle.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: obstacle.size.width, height: obstacle.size.height))
         obstacle.physicsBody?.isDynamic = false
         obstacle.physicsBody?.allowsRotation = false
@@ -133,7 +155,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         car.name = "Car"
         car.position = CGPoint(x: 5,y: -563.043)
         car.size = CGSize(width: 95.919, height: 178.812)
-        car.zPosition = 2
+        car.zPosition = 3
         car.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: car.size.width, height: car.size.height))
         car.physicsBody?.isDynamic = true
         car.physicsBody?.allowsRotation = false
@@ -151,7 +173,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         zsprite.name = name
         zsprite.position = CGPoint(x: obstacleX, y: obstacleY - (obstacleSize.size.height/2) - 50)
         zsprite.zPosition = 20
-        zsprite.size = CGSize(width: 50, height: 50)
+        zsprite.size = CGSize(width: 70, height: 70)
         zsprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: zsprite.size.width, height: zsprite.size.height))
         zsprite.physicsBody?.isDynamic = false
         zsprite.physicsBody?.allowsRotation = false
@@ -163,8 +185,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func addRandomZSprite(zsprite: SKSpriteNode, position: CGPoint, name: String){
         zsprite.name = name
         zsprite.position = position
-        zsprite.zPosition = 20
-        zsprite.size = CGSize(width: 50, height: 50)
+        zsprite.zPosition = 1
+        zsprite.size = CGSize(width: 70, height: 70)
         zsprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: zsprite.size.width, height: zsprite.size.height))
         zsprite.physicsBody?.isDynamic = false
         zsprite.physicsBody?.allowsRotation = false
@@ -191,6 +213,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         else {
             zspriteleft.position = CGPoint(x: obstacle.position.x - obstacle.size.width/3, y: obstacle.position.y - (obstacle.size.height/2) - 60)
+        }
+    }
+    
+    func moveRandomZSprite(zsprite: SKSpriteNode, position: CGPoint){
+        if(zsprite.isHidden){
+            zsprite.isHidden = false;
+            zsprite.position = CGPoint(x: rangex1, y: rangey1)
+        }
+        else{
+            zsprite.position = CGPoint(x: zsprite.position.x, y: zsprite.position.y-4-acc+CGFloat(zcount/100))
         }
     }
     
@@ -221,6 +253,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         moveZSprite(zspriteright: zsprite2right, zspritemiddle: zsprite2middle, zspriteleft: zsprite2left, obstacle: obstacle2)
         moveZSprite(zspriteright: zsprite3right, zspritemiddle: zsprite3middle, zspriteleft: zsprite3left, obstacle: obstacle3)
         moveZSprite(zspriteright: zsprite4right, zspritemiddle: zsprite4middle, zspriteleft: zsprite4left, obstacle: obstacle4)
+        
+        moveRandomZSprite(zsprite: zspriterandom1, position: zspriterandom1.position)
+        moveRandomZSprite(zsprite: zspriterandom2, position: zspriterandom2.position)
+        moveRandomZSprite(zsprite: zspriterandom3, position: zspriterandom3.position)
+        moveRandomZSprite(zsprite: zspriterandom4, position: zspriterandom4.position)
     }
     
     func getHighScore() -> Int {
@@ -245,18 +282,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     override func didMove(to view: SKView) {
         
-        let randomNumber = (Int(arc4random_uniform(Upper + Upper)))
-        let range : Int = Int(randomNumber - Int(Upper))
+        widthframe = UInt32(self.frame.width)
+        halfwidthframe = widthframe/2
+        heightframe = UInt32(self.frame.height)
+        halfheightframe = heightframe/2
         
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "GameStartSound", ofType: "mp3")!))
-            audioPlayer.prepareToPlay()
-        }
-            
-        catch {
-            print(error)
-        }
-        audioPlayer.play()
+        randomNumberx1 = (Int(arc4random_uniform(widthframe)))
+        rangex1 = Int(randomNumberx1 - Int(halfwidthframe))
+        randomNumbery1 = (Int(arc4random_uniform(heightframe)))
+        rangey1 = Int(randomNumbery1 - Int(halfheightframe))
+        randomNumberx2 = (Int(arc4random_uniform(widthframe)))
+        rangex2 = Int(randomNumberx2 - Int(halfwidthframe))
+        randomNumbery2 = (Int(arc4random_uniform(heightframe)))
+        rangey2 = Int(randomNumbery2 - Int(halfheightframe))
+        randomNumberx3 = (Int(arc4random_uniform(widthframe)))
+        rangex3 = Int(randomNumberx3 - Int(halfwidthframe))
+        randomNumbery3 = (Int(arc4random_uniform(heightframe)))
+        rangey3 = Int(randomNumbery3 - Int(halfheightframe))
+        randomNumberx4 = (Int(arc4random_uniform(widthframe)))
+        rangex4 = Int(randomNumberx4 - Int(halfwidthframe))
+        randomNumbery4 = (Int(arc4random_uniform(heightframe)))
+        rangey4 = Int(randomNumbery4 - Int(halfheightframe))
+        
+        gameViewController.playMusic(file: "GameStartSound")
         
         if(HighScoreDefault.value(forKey: "HighScore") != nil){
             HighScore = HighScoreDefault.value(forKey: "HighScore") as! NSInteger!
@@ -296,10 +344,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addRoad(road: road1, y: 0)
         addRoad(road: road2, y: road1.size.height-1)
         
-        addObstacle(obstacle: obstacle1, location: CGPoint(x:127.908, y: 1350))
-        addObstacle(obstacle: obstacle2, location: CGPoint(x:-128.339, y: 900))
-        addObstacle(obstacle: obstacle3, location: CGPoint(x:127.908, y: 450))
-        addObstacle(obstacle: obstacle4, location: CGPoint(x:-128.339, y: 0))
+        addObstacle(obstacle: obstacle1, location: CGPoint(x:127.908, y: 1350), name: "obstacle1")
+        addObstacle(obstacle: obstacle2, location: CGPoint(x:-128.339, y: 900), name: "obstacle2")
+        addObstacle(obstacle: obstacle3, location: CGPoint(x:127.908, y: 450), name: "obstacle3")
+        addObstacle(obstacle: obstacle4, location: CGPoint(x:-128.339, y: 0), name: "obstacle4")
         
         addCar(car: car)
         
@@ -319,29 +367,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addZSprite(zsprite: zsprite4middle, obstacleSize: obstacle1, obstaclePlacement: obstacle4.position, name: "zsprite4middle")
         addZSprite(zsprite: zsprite4left, obstacleSize: obstacle1, obstaclePlacement: obstacle4.position, name: "zsprite4left")
         
-        addRandomZSprite(zsprite: zspriterandom1, position: CGPoint(x: range, y: 0), name: "zspriterandom1")
-        addRandomZSprite(zsprite: zspriterandom2, position: CGPoint(x: range, y: 0), name: "zspriterandom2")
-        addRandomZSprite(zsprite: zspriterandom3, position: CGPoint(x: range, y: 0), name: "zspriterandom3")
-        addRandomZSprite(zsprite: zspriterandom4, position: CGPoint(x: range, y: 0), name: "zspriterandom4")
-        addRandomZSprite(zsprite: zspriterandom5, position: CGPoint(x: range, y: 0), name: "zspriterandom5")
+        addRandomZSprite(zsprite: zspriterandom1, position: CGPoint(x: rangex1, y: rangey1), name: "zspriterandom1")
+        addRandomZSprite(zsprite: zspriterandom2, position: CGPoint(x: rangex2, y: rangey2), name: "zspriterandom2")
+        addRandomZSprite(zsprite: zspriterandom3, position: CGPoint(x: rangex3, y: rangey3), name: "zspriterandom3")
+        addRandomZSprite(zsprite: zspriterandom4, position: CGPoint(x: rangex4, y: rangey4), name: "zspriterandom4")
 
-        
         timelabel.textAlignment = NSTextAlignment.center
         highscorelabel.textAlignment = NSTextAlignment.center
         zcountlabel.textAlignment = NSTextAlignment.center
     }
     override func update(_ currentTime: TimeInterval) {
         
-        if(!audioPlayer.isPlaying){
-            do {
-                audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: "GameContinueSound", ofType: "mp3")!))
-                audioPlayer.prepareToPlay()
-            }
-                
-            catch {
-                print(error)
-            }
-            audioPlayer.play()
+        randomNumberx1 = (Int(arc4random_uniform(widthframe)))
+        rangex1 = Int(randomNumberx1 - Int(halfwidthframe))
+        randomNumbery1 = (Int(arc4random_uniform(heightframe)))
+        rangey1 = Int(randomNumbery1 - Int(halfheightframe))
+        randomNumberx2 = (Int(arc4random_uniform(widthframe)))
+        rangex2 = Int(randomNumberx2 - Int(halfwidthframe))
+        randomNumbery2 = (Int(arc4random_uniform(heightframe)))
+        rangey2 = Int(randomNumbery2 - Int(halfheightframe))
+        randomNumberx3 = (Int(arc4random_uniform(widthframe)))
+        rangex3 = Int(randomNumberx3 - Int(halfwidthframe))
+        randomNumbery3 = (Int(arc4random_uniform(heightframe)))
+        rangey3 = Int(randomNumbery3 - Int(halfheightframe))
+        randomNumberx4 = (Int(arc4random_uniform(widthframe)))
+        rangex4 = Int(randomNumberx4 - Int(halfwidthframe))
+        randomNumbery4 = (Int(arc4random_uniform(heightframe)))
+        rangey4 = Int(randomNumbery4 - Int(halfheightframe))
+        
+        if(!gameViewController.isPlayingMusic()){
+            gameViewController.playMusic(file: "GameContinueSound")
         }
         
         highscorelabel.text = String(HighScore)
@@ -388,6 +443,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             resetZSprite(zsprite: zsprite4middle)
             resetZSprite(zsprite: zsprite4left)
         }
+        checkRandomZ(zsprite: zspriterandom1)
+        checkRandomZ(zsprite: zspriterandom2)
+        checkRandomZ(zsprite: zspriterandom3)
+        checkRandomZ(zsprite: zspriterandom4)
+        
         checkCar()
     }
     
@@ -439,6 +499,112 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite4left"){
             removeZSprite(zsprite: zsprite4left)
         }
+        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zspriterandom1"){
+            removeZSprite(zsprite: zspriterandom1)
+        }
+        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zspriterandom2"){
+            removeZSprite(zsprite: zspriterandom2)
+        }
+        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zspriterandom3"){
+            removeZSprite(zsprite: zspriterandom3)
+        }
+        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zspriterandom4"){
+            removeZSprite(zsprite: zspriterandom4)
+        }
+        
+        if(contact.bodyA.node?.name == "obstacle1"){
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        }
+        else{
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+        if(firstBody.node?.name == "obstacle1" && secondBody.node?.name == "zspriterandom1"){
+            zspriterandom1.isHidden = true
+        }
+        else if(firstBody.node?.name == "obstacle1" && secondBody.node?.name == "zspriterandom2"){
+            zspriterandom2.isHidden = true
+        }
+        else if(firstBody.node?.name == "obstacle1" && secondBody.node?.name == "zspriterandom3"){
+            zspriterandom3.isHidden = true
+        }
+        else if(firstBody.node?.name == "obstacle1" && secondBody.node?.name == "zspriterandom4"){
+            zspriterandom4.isHidden = true
+        }
+        
+        if(contact.bodyA.node?.name == "obstacle2"){
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        }
+        else{
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+        if(firstBody.node?.name == "obstacle2" && secondBody.node?.name == "zspriterandom1"){
+            zspriterandom1.isHidden = true
+        }
+        else if(firstBody.node?.name == "obstacle2" && secondBody.node?.name == "zspriterandom2"){
+            zspriterandom2.isHidden = true
+        }
+        else if(firstBody.node?.name == "obstacle2" && secondBody.node?.name == "zspriterandom3"){
+            zspriterandom3.isHidden = true
+        }
+        else if(firstBody.node?.name == "obstacle2" && secondBody.node?.name == "zspriterandom4"){
+            zspriterandom4.isHidden = true
+        }
+        
+        if(contact.bodyA.node?.name == "obstacle3"){
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        }
+        else{
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+        if(firstBody.node?.name == "obstacle3" && secondBody.node?.name == "zspriterandom1"){
+            zspriterandom1.isHidden = true
+        }
+        else if(firstBody.node?.name == "obstacle3" && secondBody.node?.name == "zspriterandom2"){
+            zspriterandom2.isHidden = true
+        }
+        else if(firstBody.node?.name == "obstacle3" && secondBody.node?.name == "zspriterandom3"){
+            zspriterandom3.isHidden = true
+        }
+        else if(firstBody.node?.name == "obstacle3" && secondBody.node?.name == "zspriterandom4"){
+            zspriterandom4.isHidden = true
+        }
+        
+        if(contact.bodyA.node?.name == "obstacle4"){
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        }
+        else{
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+        if(firstBody.node?.name == "obstacle4" && secondBody.node?.name == "zspriterandom1"){
+            zspriterandom1.isHidden = true
+        }
+        else if(firstBody.node?.name == "obstacle4" && secondBody.node?.name == "zspriterandom2"){
+            zspriterandom2.isHidden = true
+        }
+        else if(firstBody.node?.name == "obstacle4" && secondBody.node?.name == "zspriterandom3"){
+            zspriterandom3.isHidden = true
+        }
+        else if(firstBody.node?.name == "obstacle4" && secondBody.node?.name == "zspriterandom4"){
+            zspriterandom4.isHidden = true
+        }
+
+
+        
+
+    }
+    func checkRandomZ(zsprite: SKSpriteNode){
+        if(zsprite.position.y < -self.frame.height/2-zsprite.size.height/2){
+            zsprite.isHidden = true
+            moveRandomZSprite(zsprite: zsprite, position: zsprite.position)
+        }
     }
     
     func removeZSprite(zsprite: SKSpriteNode){
@@ -452,7 +618,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     func checkCar(){
         if(car.position.y < 0 - self.frame.height/2 - car.size.height/2){
-            audioPlayer.stop()
+            gameViewController.stopMusic()
             setHighScore(time: time)
             setFinishTime(time: time)
             zcountlabel.isHidden = true
@@ -473,7 +639,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "HomeNode" {
-                audioPlayer.stop()
+                gameViewController.stopMusic()
                 setHighScore(time: time)
                 setFinishTime(time: time)
                 zcountlabel.isHidden = true
@@ -485,7 +651,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.view?.presentScene(gameScene!, transition: transition)
             }
             if nodesArray.first?.name == "resetButton" {
-                audioPlayer.stop()
+                gameViewController.stopMusic()
                 setHighScore(time: time)
                 setFinishTime(time: time)
                 zcountlabel.isHidden = true
