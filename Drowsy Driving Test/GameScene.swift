@@ -277,7 +277,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
-        movementtimer = Timer.scheduledTimer(timeInterval: 1/80, target: self, selector: #selector(self.movingBackground), userInfo: nil, repeats: true)
+        //movementtimer = Timer.scheduledTimer(timeInterval: 1/80, target: self, selector: #selector(self.movingBackground), userInfo: nil, repeats: true)
         
         resetButtonNode = self.childNode(withName: "resetButton") as! SKSpriteNode
         resetButtonNode.texture = SKTexture(imageNamed: "ResetButton")
@@ -388,6 +388,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             resetZSprite(zsprite: zsprite4middle)
             resetZSprite(zsprite: zsprite4left)
         }
+        movingBackground()
         checkCar()
     }
     
