@@ -54,7 +54,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var TimeDefault = UserDefaults.standard
     var time : Int = 0
     var timer = Timer()
-    var movementtimer = Timer()
     
     var resetButtonNode: SKSpriteNode!
     var TimeLabelNode: SKSpriteNode!
@@ -325,7 +324,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
-        movementtimer = Timer.scheduledTimer(timeInterval: 1/80, target: self, selector: #selector(self.movingBackground), userInfo: nil, repeats: true)
         
         resetButtonNode = self.childNode(withName: "resetButton") as! SKSpriteNode
         resetButtonNode.texture = SKTexture(imageNamed: "ResetButton")
@@ -449,6 +447,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         checkRandomZ(zsprite: zspriterandom4)
         
         checkCar()
+        movingBackground()
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -595,10 +594,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else if(firstBody.node?.name == "obstacle4" && secondBody.node?.name == "zspriterandom4"){
             zspriterandom4.isHidden = true
         }
-
-
         
-
     }
     func checkRandomZ(zsprite: SKSpriteNode){
         if(zsprite.position.y < -self.frame.height/2-zsprite.size.height/2){
