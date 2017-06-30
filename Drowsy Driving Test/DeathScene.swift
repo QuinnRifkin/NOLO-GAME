@@ -26,7 +26,7 @@ class DeathScene: SKScene {
     var sleepFactz = [String]()
     
     override func didMove(to view: SKView) {
-        self.backgroundColor = .clear
+        //self.backgroundColor = .clear
         
         sleepFactz = ["Fact1","Fact2","Fact3","Fact4","Fact5"]
         
