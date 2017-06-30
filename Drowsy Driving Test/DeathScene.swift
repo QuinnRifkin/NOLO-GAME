@@ -24,7 +24,6 @@ class DeathScene: SKScene {
     var sleepFactz = [String]()
     
     override func didMove(to view: SKView) {
-        self.backgroundColor = .clear
 
         timelabel = UILabel(frame: CGRect(x: self.frame.width/8, y: self.frame.height/5, width: 150, height: 20))
         highscorelabel = UILabel(frame: CGRect(x: self.frame.width/4, y: self.frame.height/5, width: 150, height: 20))
