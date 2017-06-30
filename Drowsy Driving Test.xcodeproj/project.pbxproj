@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F2A9EFF1F057E86001304D1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A9EFE1F057E86001304D1 /* ViewController.swift */; };
+        1F2A9EFF1F057E86001304D1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A9EFE1F057E86001304D1 /* ViewController.swift */; };
 		1F5CE6C71EFD660900002231 /* LearnMoreScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CE6C61EFD660900002231 /* LearnMoreScene.sks */; };
 		1F5CE6C91EFD66E900002231 /* LearnMoreScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5CE6C81EFD66E900002231 /* LearnMoreScene.swift */; };
 		1F5CE6CB1EFD6CDF00002231 /* DeathScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CE6CA1EFD6CDF00002231 /* DeathScene.sks */; };
@@ -42,7 +42,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1F2A9EFE1F057E86001304D1 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../../Desktop/ViewController.swift; sourceTree = "<group>"; };
 		1F5CE6C61EFD660900002231 /* LearnMoreScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LearnMoreScene.sks; sourceTree = "<group>"; };
 		1F5CE6C81EFD66E900002231 /* LearnMoreScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LearnMoreScene.swift; sourceTree = "<group>"; };
 		1F5CE6CA1EFD6CDF00002231 /* DeathScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DeathScene.sks; sourceTree = "<group>"; };
@@ -103,7 +102,6 @@
 		1FF69D3B1EF41AFE006140E2 = {
 			isa = PBXGroup;
 			children = (
-				1F2A9EFE1F057E86001304D1 /* ViewController.swift */,
 				1FF69D461EF41AFE006140E2 /* Drowsy Driving Test */,
 				1FF69D451EF41AFE006140E2 /* Products */,
 			);
@@ -250,7 +248,6 @@
 				1FF69D6C1EFAA377006140E2 /* MenuScene.swift in Sources */,
 				1FF69D481EF41AFE006140E2 /* AppDelegate.swift in Sources */,
 				1F5CE6D11EFD8C1700002231 /* InstructionScene1.swift in Sources */,
-				1F2A9EFF1F057E86001304D1 /* ViewController.swift in Sources */,
 				1FB590231F02E6130097F7D1 /* SettingsScene.swift in Sources */,
 				1FB5901F1F017F1A0097F7D1 /* WelcomeScene.swift in Sources */,
 				8FA3633E1EF9925F00192FDD /* StartScene.swift in Sources */,
