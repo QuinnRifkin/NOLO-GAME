@@ -18,8 +18,8 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     
     var HomeButtonNode : SKSpriteNode!
     
-    let NameInput = UITextField(frame: CGRect(x: 65, y: 250, width: 250, height: 30))
-    let NumberInput = UITextField(frame: CGRect(x: 65, y: 320, width: 250, height: 30))
+    var NameInput : UITextField!
+    var NumberInput : UITextField!
     let AgePicker = UIPickerView()
     
     let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
@@ -27,7 +27,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     var Database = [
         ["January","February","March","April","May","June","July","August","September","October","November","December"],
         ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"],
-        ["2017","2016","2015","2014","2013","2012","2011","2010","2009","2008","2007","2006","2005","2004","2003","2002","2001","2000","1999","1998","1997","1996","1995","1994","1993","1992","1991","1990"]
+        ["2017","2016","2015","2014","2013","2012","2011","2010","2009","2008","2007","2006","2005","2004","2003","2002","2001","2000","1999","1998","1997","1996","1995","1994","1993","1992","1991","1990","1989","1988","1987","1986","1985","1984","1983","1982","1981","1980"]
     ]
     var month = ""
     var day = ""
@@ -60,6 +60,9 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     override func didMove(to view: SKView) {
         self.backgroundColor = .clear
         
+        NameInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/5, width: self.frame.width/3, height: 30))
+        NumberInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/4, width: self.frame.width/3, height: 30))
+        
         HomeButtonNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
         HomeButtonNode.texture = SKTexture(imageNamed: "HomeLabel")
         HomeButtonNode.color = .clear
@@ -74,7 +77,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         
         NameInput.attributedPlaceholder = NSAttributedString(string: "Enter Name...", attributes: [NSForegroundColorAttributeName : UIColor.black])
         NameInput.font = UIFont(name: "HelveticaNeue-UltraLight", size: 15)
-        NameInput.borderStyle = UITextBorderStyle.bezel
+        NameInput.borderStyle = UITextBorderStyle.roundedRect
         NameInput.autocorrectionType = UITextAutocorrectionType.no
         NameInput.keyboardType = UIKeyboardType.default
         NameInput.returnKeyType = UIReturnKeyType.done
@@ -86,7 +89,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         
         NumberInput.font = UIFont(name: "HelveticaNeue-UltraLight", size: 15)
         NumberInput.attributedPlaceholder = NSAttributedString(string: "Enter Age...", attributes: [NSForegroundColorAttributeName : UIColor.black])
-        NumberInput.borderStyle = UITextBorderStyle.bezel
+        NumberInput.borderStyle = UITextBorderStyle.roundedRect
         NumberInput.autocorrectionType = UITextAutocorrectionType.no
         NumberInput.keyboardType = UIKeyboardType.numberPad
         NumberInput.returnKeyType = UIReturnKeyType.done
