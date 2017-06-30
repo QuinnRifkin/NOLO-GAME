@@ -66,7 +66,7 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
     }
     
     override func didMove(to view: SKView){
-        self.backgroundColor = .clear
+       // self.backgroundColor = .clear
         
         NameInput = UITextField(frame: CGRect(x: 65, y: 250, width: self.frame.width/4, height: 30))
         NumberInput = UITextField(frame: CGRect(x: 65, y: 320, width: self.frame.width/4, height: 30))
@@ -82,7 +82,7 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
         NameInput.clearButtonMode = UITextFieldViewMode.whileEditing;
         NameInput.contentVerticalAlignment = UIControlContentVerticalAlignment.center
         NameInput.delegate = self as UITextFieldDelegate
-        NameInput.backgroundColor = .lightGray
+        NameInput.backgroundColor = .white
         self.view?.addSubview(NameInput)
         
         NumberInput.font = UIFont(name: "HelveticaNeue-UltraLight", size: 15)
@@ -94,7 +94,7 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
         NumberInput.clearButtonMode = UITextFieldViewMode.whileEditing;
         NumberInput.contentVerticalAlignment = UIControlContentVerticalAlignment.center
         NumberInput.delegate = self as UITextFieldDelegate
-        NumberInput.backgroundColor = .lightGray
+        NumberInput.backgroundColor = .white
         self.view?.addSubview(NumberInput)
         
         ContinueButtonNode = self.childNode(withName: "ContinueNode") as! SKSpriteNode
