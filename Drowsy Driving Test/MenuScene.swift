@@ -43,23 +43,14 @@ class MenuScene: SKScene {
         print("factbary:")
         print(factBar.position.y)
         
-        
-        fact1 = UILabel(frame: CGRect(x: 50 , y: -(factBar.position.y) - 20, width: 270, height: 150))//UILabel(frame: CGRect(x: 7, y: -200, width: 370, height: 100))
-        //fact1.center = CGPoint(x: factBar.anchorPoint.x, y: factBar.anchorPoint.y)
+        fact1 = UILabel(frame: CGRect(x: 50 , y: -(factBar.position.y) - 20, width: 270, height: 150))
         
         fact1.text = fact
+        fact1.font = UIFont(name: "HelveticaNeue-Light", size: 18)
         fact1.lineBreakMode = NSLineBreakMode.byWordWrapping
         fact1.numberOfLines = 0
         fact1.textColor = .white
         fact1.textAlignment = NSTextAlignment.center
-        self.view?.addSubview(fact1)
-        
-        
-        
-        
-
-       // self.backgroundColor = .blue
-       
         
         let name = String(welcomeScene.getName())
         namelabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
@@ -73,10 +64,12 @@ class MenuScene: SKScene {
         SettingsButtonNode.texture = SKTexture(imageNamed: "SettingsButton")
         SettingsButtonNode.color = .clear
         
-        
-
-        
+        let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.view?.addSubview(self.fact1)
         }
+        
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -87,6 +80,7 @@ class MenuScene: SKScene {
             
             if nodesArray.first?.name == "PlayDRButton" {
                 namelabel.isHidden = true
+                fact1.isHidden = true
                 let transition = SKTransition.crossFade(withDuration: 0.5)
                 let gameScene = StartScene(fileNamed: "InstructionScene1")
                 gameScene?.scaleMode = .aspectFill
@@ -94,6 +88,7 @@ class MenuScene: SKScene {
             }
             if nodesArray.first?.name == "LearnMoreButton" {
                 namelabel.isHidden = true
+                fact1.isHidden = true
                 let transition = SKTransition.reveal(with: SKTransitionDirection.left, duration: 0.5)
                 let gameScene = StartScene(fileNamed: "LearnMoreScene")
                 gameScene?.scaleMode = .aspectFill
@@ -101,6 +96,7 @@ class MenuScene: SKScene {
             }
             if nodesArray.first?.name == "SettingsNode" {
                 namelabel.isHidden = true
+                fact1.isHidden = true
                 let transition = SKTransition.reveal(with: SKTransitionDirection.left, duration: 0.5)
                 let gameScene = StartScene(fileNamed: "SettingsScene")
                 gameScene?.scaleMode = .aspectFill

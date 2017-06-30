@@ -170,7 +170,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         zsprite.name = name
         zsprite.position = CGPoint(x: obstacleX, y: obstacleY - (obstacleSize.size.height/2) - 50)
-        zsprite.zPosition = 20
+        zsprite.zPosition = 1
         zsprite.size = CGSize(width: 70, height: 70)
         zsprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: zsprite.size.width, height: zsprite.size.height))
         zsprite.physicsBody?.isDynamic = false
@@ -329,11 +329,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
         
         resetButtonNode = self.childNode(withName: "resetButton") as! SKSpriteNode
-        resetButtonNode.texture = SKTexture(imageNamed: "ResetButton")
         TimeLabelNode = self.childNode(withName: "TimeNode") as! SKSpriteNode
         TimeLabelNode.texture = SKTexture(imageNamed: "TimeLabel")
         HomeLabelNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
-        HomeLabelNode.texture = SKTexture(imageNamed: "HomeLabel")
+        HomeLabelNode.texture = SKTexture(imageNamed: "HomeIcon")
         HighScoreLabelNode = self.childNode(withName: "HighScoreNode") as! SKSpriteNode
         HighScoreLabelNode.texture = SKTexture(imageNamed: "HighScoreLabel")
         ZLabelNode = self.childNode(withName: "ZNode") as! SKSpriteNode
