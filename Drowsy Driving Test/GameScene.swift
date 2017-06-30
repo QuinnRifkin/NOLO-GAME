@@ -370,9 +370,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addRandomZSprite(zsprite: zspriterandom3, position: CGPoint(x: rangex3, y: rangey3), name: "zspriterandom3")
         addRandomZSprite(zsprite: zspriterandom4, position: CGPoint(x: rangex4, y: rangey4), name: "zspriterandom4")
 
-        timelabel.textAlignment = NSTextAlignment.center
-        highscorelabel.textAlignment = NSTextAlignment.center
-        zcountlabel.textAlignment = NSTextAlignment.center
+        timelabel.textAlignment = NSTextAlignment.right
+        highscorelabel.textAlignment = NSTextAlignment.right
+        zcountlabel.textAlignment = NSTextAlignment.right
     }
     override func update(_ currentTime: TimeInterval) {
         
