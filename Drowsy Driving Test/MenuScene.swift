@@ -55,21 +55,21 @@ class MenuScene: SKScene {
             
             if nodesArray.first?.name == "PlayDRButton" {
                 namelabel.isHidden = true
-                let transition = SKTransition.crossFade(withDuration: 0.05)
+                let transition = SKTransition.crossFade(withDuration: 0.5)
                 let gameScene = StartScene(fileNamed: "InstructionScene1")
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)
             }
             if nodesArray.first?.name == "LearnMoreButton" {
                 namelabel.isHidden = true
-                let transition = SKTransition.doorsOpenVertical(withDuration: 1)
+                let transition = SKTransition.reveal(with: SKTransitionDirection.left, duration: 0.5)
                 let gameScene = StartScene(fileNamed: "LearnMoreScene")
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)
             }
             if nodesArray.first?.name == "SettingsNode" {
                 namelabel.isHidden = true
-                let transition = SKTransition.doorsOpenVertical(withDuration: 1)
+                let transition = SKTransition.reveal(with: SKTransitionDirection.left, duration: 0.5)
                 let gameScene = StartScene(fileNamed: "SettingsScene")
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)
