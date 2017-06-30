@@ -67,9 +67,9 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
     
     override func didMove(to view: SKView){
        // self.backgroundColor = .clear
-        
-        NameInput = UITextField(frame: CGRect(x: 65, y: 250, width: self.frame.width/4, height: 30))
-        NumberInput = UITextField(frame: CGRect(x: 65, y: 320, width: self.frame.width/4, height: 30))
+
+        NameInput = UITextField(frame: CGRect(x: self.frame.width/8, y: self.frame.height/5, width: self.frame.width/4, height: 30))
+        NumberInput = UITextField(frame: CGRect(x: self.frame.width/8, y: self.frame.height/4, width: self.frame.width/4, height: 30))
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(WelcomeScene.donePressed(sender:)))
         
