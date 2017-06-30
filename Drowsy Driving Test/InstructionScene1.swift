@@ -145,7 +145,7 @@ class InstructionScene1: SKScene {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "PlayButtonNode" {
-                let transition = SKTransition.crossFade(withDuration: 0.05)
+                let transition = SKTransition.doorsOpenVertical(withDuration: 1)
                 let gameScene = GameScene(fileNamed: "GameScene")
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)

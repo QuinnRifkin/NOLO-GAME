@@ -82,7 +82,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         NameInput.contentVerticalAlignment = UIControlContentVerticalAlignment.center
         NameInput.delegate = self as UITextFieldDelegate
         NameInput.backgroundColor = .white
-        self.view?.addSubview(NameInput)
+        //self.view?.addSubview(NameInput)
         
         NumberInput.font = UIFont(name: "HelveticaNeue-UltraLight", size: 15)
         NumberInput.attributedPlaceholder = NSAttributedString(string: "Enter Age...", attributes: [NSForegroundColorAttributeName : UIColor.black])
@@ -94,7 +94,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         NumberInput.contentVerticalAlignment = UIControlContentVerticalAlignment.center
         NumberInput.delegate = self as UITextFieldDelegate
         NumberInput.backgroundColor = .white
-        self.view?.addSubview(NumberInput)
+        //self.view?.addSubview(NumberInput)
         
         AgePicker.delegate = self
         AgePicker.dataSource = self
@@ -104,7 +104,14 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         toolbar.tintColor = UIColor.blue
         toolbar.setItems([doneButton], animated: true)
         NumberInput.inputAccessoryView = toolbar
+        
+        let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.view?.addSubview(self.NameInput)
+            self.view?.addSubview(self.NumberInput)
+        }
     }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return Database.count
     }
@@ -181,7 +188,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
                 namelabel.isHidden = true
                 NameInput.isHidden = true
                 NumberInput.isHidden = true
-                let transition = SKTransition.doorsCloseVertical(withDuration: 1)
+                let transition = SKTransition.reveal(with: SKTransitionDirection.right, duration: 0.5)
                 let gameScene = StartScene(fileNamed: "MenuScene")
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)

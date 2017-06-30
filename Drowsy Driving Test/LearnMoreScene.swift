@@ -43,7 +43,7 @@ class LearnMoreScene: SKScene {
             
             if nodesArray.first?.name == "HomeNode" {
                 namelabel.isHidden = true
-                let transition = SKTransition.doorsCloseVertical(withDuration: 1)
+                let transition = SKTransition.reveal(with: SKTransitionDirection.right, duration: 0.5)
                 let gameScene = StartScene(fileNamed: "MenuScene")
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)

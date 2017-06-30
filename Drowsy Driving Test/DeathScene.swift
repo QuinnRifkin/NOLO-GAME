@@ -41,12 +41,17 @@ class DeathScene: SKScene {
         timelabel.textAlignment = NSTextAlignment.left
         timelabel.textColor = .white
         timelabel.text = "Time: " + String( gameScene.getFinishTime())
-        self.view?.addSubview(timelabel)
         
         highscorelabel.textAlignment = NSTextAlignment.left
         highscorelabel.textColor = .white
         highscorelabel.text = "Highscore: " + String( gameScene.getHighScore())
-        self.view?.addSubview(highscorelabel)
+        
+        let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.view?.addSubview(self.timelabel)
+            self.view?.addSubview(self.highscorelabel)
+        }
+
         
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -59,7 +64,7 @@ class DeathScene: SKScene {
             if nodesArray.first?.name == "HomeNode" {
                 timelabel.isHidden = true
                 highscorelabel.isHidden = true
-                let transition = SKTransition.crossFade(withDuration: 0.05)
+                let transition = SKTransition.reveal(with: SKTransitionDirection.down, duration: 1)
                 let gameScene = StartScene(fileNamed: "MenuScene")
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)
@@ -67,7 +72,7 @@ class DeathScene: SKScene {
             if nodesArray.first?.name == "PlayAgainNode" {
                 timelabel.isHidden = true
                 highscorelabel.isHidden = true
-                let transition = SKTransition.crossFade(withDuration: 0.05)
+                let transition = SKTransition.reveal(with: SKTransitionDirection.down, duration: 1)
                 let gameScene = StartScene(fileNamed: "GameScene")
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)
