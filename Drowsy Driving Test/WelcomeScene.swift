@@ -18,9 +18,9 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
     
     var ContinueButtonNode: SKSpriteNode!
     
-    let NameInput = UITextField(frame: CGRect(x: 65, y: 250, width: 250, height: 30))
-    let NumberInput = UITextField(frame: CGRect(x: 65, y: 320, width: 250, height: 30))
-    let AgePicker = UIPickerView()
+    var NameInput : UITextField!
+    var NumberInput : UITextField!
+    var AgePicker = UIPickerView()
     
     let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
     
@@ -67,6 +67,9 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
     
     override func didMove(to view: SKView){
         self.backgroundColor = .clear
+        
+        NameInput = UITextField(frame: CGRect(x: 65, y: 250, width: self.frame.width/4, height: 30))
+        NumberInput = UITextField(frame: CGRect(x: 65, y: 320, width: self.frame.width/4, height: 30))
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(WelcomeScene.donePressed(sender:)))
         
