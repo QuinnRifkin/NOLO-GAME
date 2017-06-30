@@ -28,6 +28,14 @@ class DeathScene: SKScene {
     override func didMove(to view: SKView) {
         //self.backgroundColor = .clear
         
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 200))
+        label.center = CGPoint(x: 160, y: 285)
+        label.textAlignment = .center
+        label.text = "I'am a test label"
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.numberOfLines = 0
+       // self.view?.addSubview(label)
+        
         sleepFactz = ["Fact1","Fact2","Fact3","Fact4","Fact5"]
         
         PlayAgainButtonNode = self.childNode(withName: "PlayAgainNode") as! SKSpriteNode
