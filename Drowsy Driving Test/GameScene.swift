@@ -158,7 +158,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         car.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: car.size.width, height: car.size.height))
         car.physicsBody?.isDynamic = true
         car.physicsBody?.allowsRotation = false
-        car.physicsBody?.mass = 1
+        car.physicsBody?.mass = 10
         car.physicsBody?.categoryBitMask = collisionType.carx
         car.physicsBody?.collisionBitMask = collisionType.zspritex
         car.physicsBody?.contactTestBitMask = collisionType.zspritex
@@ -176,7 +176,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         zsprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: zsprite.size.width, height: zsprite.size.height))
         zsprite.physicsBody?.isDynamic = false
         zsprite.physicsBody?.allowsRotation = false
-        zsprite.physicsBody?.mass = 1
+        zsprite.physicsBody?.mass = 0.1
         zsprite.physicsBody?.categoryBitMask = collisionType.zspritex
         addChild(zsprite)
     }
@@ -187,9 +187,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         zsprite.zPosition = 1
         zsprite.size = CGSize(width: 70, height: 70)
         zsprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: zsprite.size.width, height: zsprite.size.height))
-        zsprite.physicsBody?.isDynamic = false
+        zsprite.physicsBody?.isDynamic = true
         zsprite.physicsBody?.allowsRotation = false
-        zsprite.physicsBody?.mass = 1
+        zsprite.physicsBody?.mass = 0.1
         zsprite.physicsBody?.categoryBitMask = collisionType.zspritex
         addChild(zsprite)
     }
