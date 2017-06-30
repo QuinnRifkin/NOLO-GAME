@@ -14,7 +14,7 @@ class LoadingScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        self.backgroundColor = .clear
+       // self.backgroundColor = .clear
         
         let particlePath = Bundle.main.path(forResource: "SparkEmitter", ofType: "sks")!
         let particle = NSKeyedUnarchiver.unarchiveObject(withFile: particlePath) as! SKEmitterNode

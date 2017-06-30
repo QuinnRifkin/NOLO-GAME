@@ -26,7 +26,7 @@ class MenuScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        self.backgroundColor = .clear
+       // self.backgroundColor = .blue
         sleepFactz = ["Fact1","Fact2","Fact3","Fact4","Fact5"]
         
         let name = String(welcomeScene.getName())
