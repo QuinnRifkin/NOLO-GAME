@@ -35,10 +35,8 @@ class MenuScene: SKScene {
         namelabel.font = UIFont(name: "HelveticaNeue", size: 15)
         self.view?.addSubview(namelabel)
         
-        PlayDRButtonNode = self.childNode(withName: "PlayDRButtonThin") as! SKSpriteNode
-        PlayDRButtonNode.texture = SKTexture(imageNamed: "PlayDRButtonThin")
-        LearnMoreButtonNode = self.childNode(withName: "LearnMoreButtonThin") as! SKSpriteNode
-        LearnMoreButtonNode.texture = SKTexture(imageNamed: "LearnMoreButtonThin")
+        PlayDRButtonNode = self.childNode(withName: "PlayDRButton") as! SKSpriteNode
+        LearnMoreButtonNode = self.childNode(withName: "LearnMoreButton") as! SKSpriteNode
         SettingsButtonNode = self.childNode(withName: "SettingsNode") as! SKSpriteNode
         SettingsButtonNode.texture = SKTexture(imageNamed: "SettingsButton")
         SettingsButtonNode.color = .clear
@@ -55,14 +53,14 @@ class MenuScene: SKScene {
         if let location = touch?.location(in: self){
             let nodesArray = self.nodes(at: location)
             
-            if nodesArray.first?.name == "PlayDRButtonThin" {
+            if nodesArray.first?.name == "PlayDRButton" {
                 namelabel.isHidden = true
                 let transition = SKTransition.crossFade(withDuration: 0.05)
                 let gameScene = StartScene(fileNamed: "InstructionScene1")
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)
             }
-            if nodesArray.first?.name == "LearnMoreButtonThin" {
+            if nodesArray.first?.name == "LearnMoreButton" {
                 namelabel.isHidden = true
                 let transition = SKTransition.crossFade(withDuration: 0.05)
                 let gameScene = StartScene(fileNamed: "LearnMoreScene")

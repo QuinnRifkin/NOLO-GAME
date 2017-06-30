@@ -67,15 +67,15 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
     
     override func didMove(to view: SKView){
        // self.backgroundColor = .clear
-
-        NameInput = UITextField(frame: CGRect(x: self.frame.width/8, y: self.frame.height/5, width: self.frame.width/4, height: 30))
-        NumberInput = UITextField(frame: CGRect(x: self.frame.width/8, y: self.frame.height/4, width: self.frame.width/4, height: 30))
+        
+        NameInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/5, width: self.frame.width/3, height: 30))
+        NumberInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/4, width: self.frame.width/3, height: 30))
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(WelcomeScene.donePressed(sender:)))
         
         NameInput.attributedPlaceholder = NSAttributedString(string: "Enter Name...", attributes: [NSForegroundColorAttributeName : UIColor.black])
         NameInput.font = UIFont(name: "HelveticaNeue-UltraLight", size: 15)
-        NameInput.borderStyle = UITextBorderStyle.bezel
+        NameInput.borderStyle = UITextBorderStyle.roundedRect
         NameInput.autocorrectionType = UITextAutocorrectionType.no
         NameInput.keyboardType = UIKeyboardType.default
         NameInput.returnKeyType = UIReturnKeyType.continue
@@ -87,7 +87,7 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
         
         NumberInput.font = UIFont(name: "HelveticaNeue-UltraLight", size: 15)
         NumberInput.attributedPlaceholder = NSAttributedString(string: "Enter Age...", attributes: [NSForegroundColorAttributeName : UIColor.black])
-        NumberInput.borderStyle = UITextBorderStyle.bezel
+        NumberInput.borderStyle = UITextBorderStyle.roundedRect
         NumberInput.autocorrectionType = UITextAutocorrectionType.no
         NumberInput.keyboardType = UIKeyboardType.numberPad
         NumberInput.returnKeyType = UIReturnKeyType.done
