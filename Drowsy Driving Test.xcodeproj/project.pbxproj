@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1F5CE6C71EFD660900002231 /* LearnMoreScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CE6C61EFD660900002231 /* LearnMoreScene.sks */; };
 		1F5CE6C91EFD66E900002231 /* LearnMoreScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5CE6C81EFD66E900002231 /* LearnMoreScene.swift */; };
-		1F5CE6CB1EFD6CDF00002231 /* DeathScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CE6CA1EFD6CDF00002231 /* DeathScene.sks */; };
 		1F5CE6CD1EFD6CFC00002231 /* DeathScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5CE6CC1EFD6CFC00002231 /* DeathScene.swift */; };
 		1F5CE6CF1EFD8BFB00002231 /* InstructionScene1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CE6CE1EFD8BFB00002231 /* InstructionScene1.sks */; };
 		1F5CE6D11EFD8C1700002231 /* InstructionScene1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5CE6D01EFD8C1700002231 /* InstructionScene1.swift */; };
@@ -43,7 +42,6 @@
 /* Begin PBXFileReference section */
 		1F5CE6C61EFD660900002231 /* LearnMoreScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LearnMoreScene.sks; sourceTree = "<group>"; };
 		1F5CE6C81EFD66E900002231 /* LearnMoreScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LearnMoreScene.swift; sourceTree = "<group>"; };
-		1F5CE6CA1EFD6CDF00002231 /* DeathScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DeathScene.sks; sourceTree = "<group>"; };
 		1F5CE6CC1EFD6CFC00002231 /* DeathScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeathScene.swift; sourceTree = "<group>"; };
 		1F5CE6CE1EFD8BFB00002231 /* InstructionScene1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = InstructionScene1.sks; sourceTree = "<group>"; };
 		1F5CE6D01EFD8C1700002231 /* InstructionScene1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionScene1.swift; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 				1F5CE6D01EFD8C1700002231 /* InstructionScene1.swift */,
 				1FF69D6D1EFAAF0A006140E2 /* LoadingScene.sks */,
 				1FF69D6F1EFAAF1B006140E2 /* LoadingScene.swift */,
-				1F5CE6CA1EFD6CDF00002231 /* DeathScene.sks */,
 				1F5CE6CC1EFD6CFC00002231 /* DeathScene.swift */,
 				1FB590201F02E5F50097F7D1 /* SettingsScene.sks */,
 				1FB590221F02E6130097F7D1 /* SettingsScene.swift */,
@@ -212,7 +209,6 @@
 			files = (
 				1FB5901D1F017F000097F7D1 /* WelcomeScene.sks in Resources */,
 				1FF69D741EFAC16C006140E2 /* FireFliesEmitter.sks in Resources */,
-				1F5CE6CB1EFD6CDF00002231 /* DeathScene.sks in Resources */,
 				1FB590271F02F7F10097F7D1 /* GameContinueSound.mp3 in Resources */,
 				1FF69D531EF41AFE006140E2 /* Main.storyboard in Resources */,
 				1F7230B91EFC3EE8001C62F4 /* Assets.xcassets in Resources */,
