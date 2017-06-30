@@ -14,27 +14,20 @@ class DeathScene: SKScene {
     
     var PlayAgainButtonNode:SKSpriteNode!
     var HomeButtonNode: SKSpriteNode!
-    var TimeLabelNode: SKSpriteNode!
-    var HighScoreLabelNode: SKSpriteNode!
     var factBar:SKSpriteNode!
     
     var gameScene = GameScene()
     
-    let timelabel = UILabel(frame: CGRect(x: -90, y: 230, width: 500, height: 100))
-    let highscorelabel = UILabel(frame: CGRect(x: 20, y: 230, width: 500, height: 100))
+    var timelabel : UILabel!
+    var highscorelabel : UILabel!
     
     var sleepFactz = [String]()
     
     override func didMove(to view: SKView) {
-        //self.backgroundColor = .clear
-        
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 20, height: 200))
-        label.center = CGPoint(x: 160, y: 285)
-        label.textAlignment = .center
-        label.text = "I'am a test label"
-        label.lineBreakMode = NSLineBreakMode.byWordWrapping
-        label.numberOfLines = 0
-       // self.view?.addSubview(label)
+        self.backgroundColor = .clear
+
+        timelabel = UILabel(frame: CGRect(x: self.frame.width/8, y: self.frame.height/5, width: 150, height: 20))
+        highscorelabel = UILabel(frame: CGRect(x: self.frame.width/4, y: self.frame.height/5, width: 150, height: 20))
         
         sleepFactz = ["Fact1","Fact2","Fact3","Fact4","Fact5"]
         
@@ -44,29 +37,22 @@ class DeathScene: SKScene {
         HomeButtonNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
         HomeButtonNode.texture = SKTexture(imageNamed: "HomeLabel")
         HomeButtonNode.color = .clear
-        TimeLabelNode = self.childNode(withName: "TimeNode") as! SKSpriteNode
-        TimeLabelNode.texture = SKTexture(imageNamed: "TimeLabel")
-        TimeLabelNode.color = .clear
-        HighScoreLabelNode = self.childNode(withName: "HighScoreNode") as! SKSpriteNode
-        HighScoreLabelNode.texture = SKTexture(imageNamed: "HighScoreLabel")
-        HighScoreLabelNode.color = .clear
         
         factBar = self.childNode(withName: "factBar") as! SKSpriteNode
         factBar.texture = SKTexture(imageNamed: (String)(sleepFactz[Int(arc4random_uniform(5))]))
         factBar.color = .clear
         
-        timelabel.textAlignment = NSTextAlignment.center
+        timelabel.textAlignment = NSTextAlignment.left
         timelabel.textColor = .white
-        timelabel.text = String( gameScene.getFinishTime())
+        timelabel.text = "Time: " + String( gameScene.getFinishTime())
         self.view?.addSubview(timelabel)
         
-        highscorelabel.textAlignment = NSTextAlignment.center
+        highscorelabel.textAlignment = NSTextAlignment.left
         highscorelabel.textColor = .white
-        highscorelabel.text = String( gameScene.getHighScore())
+        highscorelabel.text = "Highscore: " + String( gameScene.getHighScore())
         self.view?.addSubview(highscorelabel)
-
+        
     }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         let touch = touches.first
