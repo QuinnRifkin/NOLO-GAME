@@ -58,14 +58,11 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     }
     
     override func didMove(to view: SKView) {
-        self.backgroundColor = .clear
         
         NameInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/5, width: self.frame.width/3, height: 30))
         NumberInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/4, width: self.frame.width/3, height: 30))
         
         HomeButtonNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
-        HomeButtonNode.texture = SKTexture(imageNamed: "HomeLabel")
-        HomeButtonNode.color = .clear
         
         let name = String(welcomeScene.getName())
         namelabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
@@ -84,7 +81,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         NameInput.clearButtonMode = UITextFieldViewMode.whileEditing;
         NameInput.contentVerticalAlignment = UIControlContentVerticalAlignment.center
         NameInput.delegate = self as UITextFieldDelegate
-        NameInput.backgroundColor = .lightGray
+        NameInput.backgroundColor = .white
         self.view?.addSubview(NameInput)
         
         NumberInput.font = UIFont(name: "HelveticaNeue-UltraLight", size: 15)
@@ -96,7 +93,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         NumberInput.clearButtonMode = UITextFieldViewMode.whileEditing;
         NumberInput.contentVerticalAlignment = UIControlContentVerticalAlignment.center
         NumberInput.delegate = self as UITextFieldDelegate
-        NumberInput.backgroundColor = .lightGray
+        NumberInput.backgroundColor = .white
         self.view?.addSubview(NumberInput)
         
         AgePicker.delegate = self
@@ -184,7 +181,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
                 namelabel.isHidden = true
                 NameInput.isHidden = true
                 NumberInput.isHidden = true
-                let transition = SKTransition.crossFade(withDuration: 0.05)
+                let transition = SKTransition.doorsCloseVertical(withDuration: 1)
                 let gameScene = StartScene(fileNamed: "MenuScene")
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)

@@ -20,13 +20,12 @@ class LearnMoreScene: SKScene {
     let namelabel = UILabel(frame: CGRect(x: 6, y: -40, width: 300, height: 100))
     
     override func didMove(to view: SKView) {
-        self.backgroundColor = .clear
         
         HomeButtonNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
-        HomeButtonNode.texture = SKTexture(imageNamed: "HomeLabel")
-        HomeButtonNode.color = .clear
         
         GoogleButtonNode = self.childNode(withName: "GoogleNode") as! SKSpriteNode
+        GoogleButtonNode.texture = SKTexture(imageNamed: "GoogleIcon")
+        GoogleButtonNode.color = .clear
         
         let name = String(welcomeScene.getName())
         namelabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
@@ -44,7 +43,7 @@ class LearnMoreScene: SKScene {
             
             if nodesArray.first?.name == "HomeNode" {
                 namelabel.isHidden = true
-                let transition = SKTransition.crossFade(withDuration: 0.05)
+                let transition = SKTransition.doorsCloseVertical(withDuration: 1)
                 let gameScene = StartScene(fileNamed: "MenuScene")
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)

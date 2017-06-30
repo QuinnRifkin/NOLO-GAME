@@ -31,11 +31,8 @@ class DeathScene: SKScene {
         sleepFactz = ["Fact1","Fact2","Fact3","Fact4","Fact5"]
         
         PlayAgainButtonNode = self.childNode(withName: "PlayAgainNode") as! SKSpriteNode
-        PlayAgainButtonNode.texture = SKTexture(imageNamed: "PlayAgainButton")
-        PlayAgainButtonNode.color = .clear
         HomeButtonNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
-        HomeButtonNode.texture = SKTexture(imageNamed: "HomeLabel")
-        HomeButtonNode.color = .clear
+        
         
         factBar = self.childNode(withName: "factBar") as! SKSpriteNode
         factBar.texture = SKTexture(imageNamed: (String)(sleepFactz[Int(arc4random_uniform(5))]))
