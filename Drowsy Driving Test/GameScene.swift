@@ -61,9 +61,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var HighScoreLabelNode: SKSpriteNode!
     var ZLabelNode: SKSpriteNode!
     
-    let timelabel = UILabel(frame: CGRect(x: 110, y: -41, width: 500, height: 100))
-    let highscorelabel = UILabel(frame: CGRect(x: 110, y: -21, width: 500, height: 100))
-    let zcountlabel = UILabel(frame: CGRect(x: 110, y: -2, width: 500, height: 100))
+    var timelabel : UILabel!
+    var highscorelabel : UILabel!
+    var zcountlabel : UILabel!
     
     let road1 = SKSpriteNode(imageNamed: "RoadSpriteWGrass")
     let road2 = SKSpriteNode(imageNamed: "RoadSpriteWGrass")
@@ -221,7 +221,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             zsprite.position = CGPoint(x: rangex1, y: rangey1)
         }
         else{
-            zsprite.position = CGPoint(x: zsprite.position.x, y: zsprite.position.y-4-acc+CGFloat(zcount/100))
+            zsprite.position = CGPoint(x: zsprite.position.x, y: zsprite.position.y-4-acc+CGFloat(zcount/10))
         }
     }
     
@@ -240,13 +240,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func movingBackground(){
         
-        road1.position = CGPoint(x: road1.position.x, y: road1.position.y-4-acc+CGFloat(zcount/100))
-        road2.position = CGPoint(x: road2.position.x, y: road2.position.y-4-acc+CGFloat(zcount/100))
+        road1.position = CGPoint(x: road1.position.x, y: road1.position.y-4-acc+CGFloat(zcount/10))
+        road2.position = CGPoint(x: road2.position.x, y: road2.position.y-4-acc+CGFloat(zcount/10))
         
-        obstacle1.position = CGPoint(x: obstacle1.position.x, y: obstacle1.position.y-4-acc+CGFloat(zcount/100))
-        obstacle2.position = CGPoint(x: obstacle2.position.x, y: obstacle2.position.y-4-acc+CGFloat(zcount/100))
-        obstacle3.position = CGPoint(x: obstacle3.position.x, y: obstacle3.position.y-4-acc+CGFloat(zcount/100))
-        obstacle4.position = CGPoint(x: obstacle4.position.x, y: obstacle4.position.y-4-acc+CGFloat(zcount/100))
+        obstacle1.position = CGPoint(x: obstacle1.position.x, y: obstacle1.position.y-4-acc+CGFloat(zcount/10))
+        obstacle2.position = CGPoint(x: obstacle2.position.x, y: obstacle2.position.y-4-acc+CGFloat(zcount/10))
+        obstacle3.position = CGPoint(x: obstacle3.position.x, y: obstacle3.position.y-4-acc+CGFloat(zcount/10))
+        obstacle4.position = CGPoint(x: obstacle4.position.x, y: obstacle4.position.y-4-acc+CGFloat(zcount/10))
         
         moveZSprite(zspriteright: zsprite1right, zspritemiddle: zsprite1middle, zspriteleft: zsprite1left, obstacle: obstacle1)
         moveZSprite(zspriteright: zsprite2right, zspritemiddle: zsprite2middle, zspriteleft: zsprite2left, obstacle: obstacle2)
@@ -280,6 +280,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     override func didMove(to view: SKView) {
+        
+        timelabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width/2 , height: 20))
+        highscorelabel = UILabel(frame: CGRect(x: 0, y: 20, width: self.frame.width/2 , height: 20))
+        zcountlabel = UILabel(frame: CGRect(x: 0, y: 40, width: self.frame.width/2 , height: 20))
         
         widthframe = UInt32(self.frame.width)
         halfwidthframe = widthframe/2
