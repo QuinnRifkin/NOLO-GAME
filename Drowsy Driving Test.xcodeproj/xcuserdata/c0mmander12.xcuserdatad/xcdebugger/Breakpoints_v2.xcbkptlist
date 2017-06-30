@@ -9,129 +9,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Drowsy Driving Test/MenuScene.swift"
-            timestampString = "519665532.597653"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "13"
-            endingLineNumber = "13"
-            landmarkName = "MenuScene"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Drowsy_Driving_Test.MenuScene.__deallocating_deinit"
-                  moduleName = "Drowsy Driving Test"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/c0mmander12/Desktop/Drowsy%20Driving%20Test/Drowsy%20Driving%20Test/MenuScene.swift"
-                  timestampString = "520522735.306094"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "4">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Drowsy_Driving_Test.MenuScene.init (size : __C.CGSize) -&gt; Drowsy_Driving_Test.MenuScene"
-                  moduleName = "Drowsy Driving Test"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/c0mmander12/Desktop/Drowsy%20Driving%20Test/Drowsy%20Driving%20Test/MenuScene.swift"
-                  timestampString = "520522735.30774"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "15"
-                  endingLineNumber = "15"
-                  offsetFromSymbolStart = "42">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Drowsy_Driving_Test.MenuScene.__allocating_init (size : __C.CGSize) -&gt; Drowsy_Driving_Test.MenuScene"
-                  moduleName = "Drowsy Driving Test"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/c0mmander12/Desktop/Drowsy%20Driving%20Test/Drowsy%20Driving%20Test/MenuScene.swift"
-                  timestampString = "520522735.309428"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "4">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Drowsy_Driving_Test.MenuScene.init () -&gt; Drowsy_Driving_Test.MenuScene"
-                  moduleName = "Drowsy Driving Test"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/c0mmander12/Desktop/Drowsy%20Driving%20Test/Drowsy%20Driving%20Test/MenuScene.swift"
-                  timestampString = "520522735.310998"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "15"
-                  endingLineNumber = "15"
-                  offsetFromSymbolStart = "29">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Drowsy_Driving_Test.MenuScene.__allocating_init () -&gt; Drowsy_Driving_Test.MenuScene"
-                  moduleName = "Drowsy Driving Test"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/c0mmander12/Desktop/Drowsy%20Driving%20Test/Drowsy%20Driving%20Test/MenuScene.swift"
-                  timestampString = "520522735.312593"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "4">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Drowsy_Driving_Test.MenuScene.__allocating_init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;Drowsy_Driving_Test.MenuScene&gt;"
-                  moduleName = "Drowsy Driving Test"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/c0mmander12/Desktop/Drowsy%20Driving%20Test/Drowsy%20Driving%20Test/MenuScene.swift"
-                  timestampString = "520522735.313942"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "4">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Drowsy_Driving_Test.MenuScene.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;Drowsy_Driving_Test.MenuScene&gt;"
-                  moduleName = "Drowsy Driving Test"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/c0mmander12/Desktop/Drowsy%20Driving%20Test/Drowsy%20Driving%20Test/MenuScene.swift"
-                  timestampString = "520522735.315459"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "15"
-                  endingLineNumber = "15"
-                  offsetFromSymbolStart = "36">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Drowsy Driving Test/StartScene.swift"
             timestampString = "519681519.489806"
             startingColumnNumber = "9223372036854775807"
@@ -163,7 +40,7 @@
                   moduleName = "Drowsy Driving Test"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/c0mmander12/Desktop/Drowsy%20Driving%20Test/Drowsy%20Driving%20Test/StartScene.swift"
-                  timestampString = "520522736.161659"
+                  timestampString = "520539968.154336"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "15"
@@ -178,7 +55,7 @@
                   moduleName = "Drowsy Driving Test"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/c0mmander12/Desktop/Drowsy%20Driving%20Test/Drowsy%20Driving%20Test/StartScene.swift"
-                  timestampString = "520522736.163155"
+                  timestampString = "520539968.155679"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "15"
@@ -193,7 +70,7 @@
                   moduleName = "Drowsy Driving Test"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/c0mmander12/Desktop/Drowsy%20Driving%20Test/Drowsy%20Driving%20Test/StartScene.swift"
-                  timestampString = "520522736.164436"
+                  timestampString = "520539968.157086"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "15"
@@ -208,7 +85,7 @@
                   moduleName = "Drowsy Driving Test"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/c0mmander12/Desktop/Drowsy%20Driving%20Test/Drowsy%20Driving%20Test/StartScene.swift"
-                  timestampString = "520522736.165691"
+                  timestampString = "520539968.158441"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "15"

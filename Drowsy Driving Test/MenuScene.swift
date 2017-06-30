@@ -24,10 +24,42 @@ class MenuScene: SKScene {
     
     let namelabel = UILabel(frame: CGRect(x: 6, y: -40, width: 300, height: 100))
     
+    var fact : String!
+    
+    var fact1 : UILabel!
+    
+    
     override func didMove(to view: SKView) {
         
+        factBar = self.childNode(withName: "factBar") as! SKSpriteNode
+
+        sleepFactz = ["Sleep deprivation can result in obesity and poor diet quality.", "Sleep deprivation causes heart disease.", "Sleep deprivation increases the risk of diabetes.", "Not getting enough sleep can result in rash decision making.", "Drowsy driving can be as dangerous as drunk driving.", "Getting more sleep is proven to increase performance in school.", "Putting your phone away before bed will result in a much better sleep.", "Beauty Sleep is real; Going to bed earlier can improve your physical appearance."]
+
+        fact = (String) (sleepFactz[Int(arc4random_uniform(8))])
+        
+        print("factbarx:")
+        print(factBar.position.x)
+        print(" ")
+        print("factbary:")
+        print(factBar.position.y)
+        
+        
+        fact1 = UILabel(frame: CGRect(x: 50 , y: -(factBar.position.y) - 20, width: 270, height: 150))//UILabel(frame: CGRect(x: 7, y: -200, width: 370, height: 100))
+        //fact1.center = CGPoint(x: factBar.anchorPoint.x, y: factBar.anchorPoint.y)
+        
+        fact1.text = fact
+        fact1.lineBreakMode = NSLineBreakMode.byWordWrapping
+        fact1.numberOfLines = 0
+        fact1.textColor = .white
+        fact1.textAlignment = NSTextAlignment.center
+        self.view?.addSubview(fact1)
+        
+        
+        
+        
+
        // self.backgroundColor = .blue
-        sleepFactz = ["Fact1","Fact2","Fact3","Fact4","Fact5"]
+       
         
         let name = String(welcomeScene.getName())
         namelabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
@@ -40,9 +72,9 @@ class MenuScene: SKScene {
         SettingsButtonNode = self.childNode(withName: "SettingsNode") as! SKSpriteNode
         SettingsButtonNode.texture = SKTexture(imageNamed: "SettingsButton")
         SettingsButtonNode.color = .clear
-        factBar = self.childNode(withName: "factBar") as! SKSpriteNode
-        factBar.texture = SKTexture(imageNamed: (String)(sleepFactz[Int(arc4random_uniform(5))]))
-        factBar.color = .clear
+        
+        
+
         
         }
     
