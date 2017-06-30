@@ -66,7 +66,6 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
     }
     
     override func didMove(to view: SKView){
-       // self.backgroundColor = .clear
         
         NameInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/5, width: self.frame.width/3, height: 30))
         NumberInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/4, width: self.frame.width/3, height: 30))
@@ -98,9 +97,7 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
         self.view?.addSubview(NumberInput)
         
         ContinueButtonNode = self.childNode(withName: "ContinueNode") as! SKSpriteNode
-        ContinueButtonNode.texture = SKTexture(imageNamed: "ContinueButton")
-        ContinueButtonNode.color = .clear
-        
+
         AgePicker.delegate = self
         AgePicker.dataSource = self
         NumberInput.inputView = AgePicker
