@@ -168,7 +168,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         zsprite.name = name
         zsprite.position = CGPoint(x: obstacleX, y: obstacleY - (obstacleSize.size.height/2) - 50)
         zsprite.zPosition = 1
-        zsprite.size = CGSize(width: 70, height: 70)
+        zsprite.size = CGSize(width: 50, height: 50)
         zsprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: zsprite.size.width, height: zsprite.size.height))
         zsprite.physicsBody?.isDynamic = false
         zsprite.physicsBody?.allowsRotation = false
@@ -181,7 +181,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         zsprite.name = name
         zsprite.position = position
         zsprite.zPosition = 1
-        zsprite.size = CGSize(width: 70, height: 70)
+        zsprite.size = CGSize(width: 50, height: 50)
         zsprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: zsprite.size.width, height: zsprite.size.height))
         zsprite.physicsBody?.isDynamic = true
         zsprite.physicsBody?.allowsRotation = false
@@ -195,19 +195,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             zspriteright.position = CGPoint(x: 1000, y: 1000)
         }
         else {
-            zspriteright.position = CGPoint(x: obstacle.position.x + obstacle.size.width/3, y: obstacle.position.y - (obstacle.size.height/2) - 60)
+            zspriteright.position = CGPoint(x: obstacle.position.x + obstacle.size.width/3, y: obstacle.position.y - (obstacle.size.height/2) - 40)
         }
         if(zspritemiddle.isHidden){
             zspritemiddle.position = CGPoint(x: 1000, y: 1000)
         }
         else {
-            zspritemiddle.position = CGPoint(x: obstacle.position.x , y: obstacle.position.y - (obstacle.size.height/2) - 60)
+            zspritemiddle.position = CGPoint(x: obstacle.position.x , y: obstacle.position.y - (obstacle.size.height/2) - 40)
         }
         if(zspriteleft.isHidden){
             zspriteleft.position = CGPoint(x: 1000, y: 1000)
         }
         else {
-            zspriteleft.position = CGPoint(x: obstacle.position.x - obstacle.size.width/3, y: obstacle.position.y - (obstacle.size.height/2) - 60)
+            zspriteleft.position = CGPoint(x: obstacle.position.x - obstacle.size.width/3, y: obstacle.position.y - (obstacle.size.height/2) - 40)
         }
     }
     
@@ -277,9 +277,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         
-        timelabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width/2 , height: 20))
-        highscorelabel = UILabel(frame: CGRect(x: 0, y: 20, width: self.frame.width/2 , height: 20))
-        zcountlabel = UILabel(frame: CGRect(x: 0, y: 40, width: self.frame.width/2 , height: 20))
+        timelabel = UILabel(frame: CGRect(x: 0, y: 20, width: self.frame.width/2 , height: 20))
+        highscorelabel = UILabel(frame: CGRect(x: 0, y: 40, width: self.frame.width/2 , height: 20))
+        zcountlabel = UILabel(frame: CGRect(x: 0, y: 60, width: self.frame.width/2 , height: 20))
         
         widthframe = UInt32(self.frame.width)
         halfwidthframe = widthframe/2
@@ -390,13 +390,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameViewController.playMusic(file: "GameContinueSound")
         }
         
-        highscorelabel.text = String(HighScore)
+        highscorelabel.attributedText = NSAttributedString(string: String(HighScore), attributes: [NSForegroundColorAttributeName : UIColor.white])
         self.view?.addSubview(highscorelabel)
         
-        timelabel.text = String(time)
+        timelabel.attributedText = NSAttributedString(string: String(time), attributes: [NSForegroundColorAttributeName : UIColor.white])
         self.view?.addSubview(timelabel)
         
-        zcountlabel.text = String(ztruecount)
+        zcountlabel.attributedText = NSAttributedString(string: String(zcount), attributes: [NSForegroundColorAttributeName : UIColor.white])
         self.view?.addSubview(zcountlabel)
         
         let randomNumber = (Int(arc4random_uniform(Upper + Upper)))

@@ -14,7 +14,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     
     let welcomeScene = WelcomeScene()
     
-    let namelabel = UILabel(frame: CGRect(x: 6, y: -41, width: 300, height: 100))
+    let namelabel = UILabel(frame: CGRect(x: 6, y: -20, width: 300, height: 100))
     
     var HomeButtonNode : SKSpriteNode!
     
