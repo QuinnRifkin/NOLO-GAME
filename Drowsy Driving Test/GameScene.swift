@@ -288,20 +288,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         randomNumberx1 = (Int(arc4random_uniform(widthframe)))
         rangex1 = Int(randomNumberx1 - Int(halfwidthframe))
-        randomNumbery1 = (Int(arc4random_uniform(heightframe)))
-        rangey1 = Int(randomNumbery1 - Int(halfheightframe))
+        
         randomNumberx2 = (Int(arc4random_uniform(widthframe)))
         rangex2 = Int(randomNumberx2 - Int(halfwidthframe))
-        randomNumbery2 = (Int(arc4random_uniform(heightframe)))
-        rangey2 = Int(randomNumbery2 - Int(halfheightframe))
+        
         randomNumberx3 = (Int(arc4random_uniform(widthframe)))
         rangex3 = Int(randomNumberx3 - Int(halfwidthframe))
-        randomNumbery3 = (Int(arc4random_uniform(heightframe)))
-        rangey3 = Int(randomNumbery3 - Int(halfheightframe))
+        
         randomNumberx4 = (Int(arc4random_uniform(widthframe)))
         rangex4 = Int(randomNumberx4 - Int(halfwidthframe))
+        
+        randomNumbery1 = (Int(arc4random_uniform(heightframe)))
+        rangey1 = Int(randomNumbery1 + Int(halfheightframe))
+        
+        randomNumbery2 = (Int(arc4random_uniform(heightframe)))
+        rangey2 = Int(randomNumbery2 + Int(halfheightframe))
+        
+        randomNumbery3 = (Int(arc4random_uniform(heightframe)))
+        rangey3 = Int(randomNumbery3 + Int(halfheightframe))
+        
         randomNumbery4 = (Int(arc4random_uniform(heightframe)))
-        rangey4 = Int(randomNumbery4 - Int(halfheightframe))
+        rangey4 = Int(randomNumbery4 + Int(halfheightframe))
         
         gameViewController.playMusic(file: "GameStartSound")
         
@@ -372,19 +379,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         randomNumberx1 = (Int(arc4random_uniform(widthframe)))
         rangex1 = Int(randomNumberx1 - Int(halfwidthframe))
         randomNumbery1 = (Int(arc4random_uniform(heightframe)))
-        rangey1 = Int(randomNumbery1 - Int(halfheightframe))
+        rangey1 = Int(randomNumbery1 + Int(halfheightframe))
         randomNumberx2 = (Int(arc4random_uniform(widthframe)))
         rangex2 = Int(randomNumberx2 - Int(halfwidthframe))
         randomNumbery2 = (Int(arc4random_uniform(heightframe)))
-        rangey2 = Int(randomNumbery2 - Int(halfheightframe))
+        rangey2 = Int(randomNumbery2 + Int(halfheightframe))
         randomNumberx3 = (Int(arc4random_uniform(widthframe)))
         rangex3 = Int(randomNumberx3 - Int(halfwidthframe))
         randomNumbery3 = (Int(arc4random_uniform(heightframe)))
-        rangey3 = Int(randomNumbery3 - Int(halfheightframe))
+        rangey3 = Int(randomNumbery3 + Int(halfheightframe))
         randomNumberx4 = (Int(arc4random_uniform(widthframe)))
         rangex4 = Int(randomNumberx4 - Int(halfwidthframe))
         randomNumbery4 = (Int(arc4random_uniform(heightframe)))
-        rangey4 = Int(randomNumbery4 - Int(halfheightframe))
+        rangey4 = Int(randomNumbery4 + Int(halfheightframe))
         
         if(!gameViewController.isPlayingMusic()){
             gameViewController.playMusic(file: "GameContinueSound")
