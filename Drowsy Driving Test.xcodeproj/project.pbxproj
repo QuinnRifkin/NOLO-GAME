@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-        1F2A9EFF1F057E86001304D1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F2A9EFE1F057E86001304D1 /* ViewController.swift */; };
 		1F5CE6C71EFD660900002231 /* LearnMoreScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CE6C61EFD660900002231 /* LearnMoreScene.sks */; };
 		1F5CE6C91EFD66E900002231 /* LearnMoreScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5CE6C81EFD66E900002231 /* LearnMoreScene.swift */; };
 		1F5CE6CB1EFD6CDF00002231 /* DeathScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CE6CA1EFD6CDF00002231 /* DeathScene.sks */; };
@@ -38,6 +37,7 @@
 		1FF69D861EFAEEA9006140E2 /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D831EFAEEA9006140E2 /* MenuScene.sks */; };
 		1FF69D871EFAEEA9006140E2 /* StartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D841EFAEEA9006140E2 /* StartScene.sks */; };
 		1FF69D881EFAEEA9006140E2 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D851EFAEEA9006140E2 /* GameScene.sks */; };
+		8F3CA7031F0D415400C8BA65 /* MyScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F3CA7021F0D415400C8BA65 /* MyScene.sks */; };
 		8FA3633E1EF9925F00192FDD /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA3633D1EF9925F00192FDD /* StartScene.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +74,7 @@
 		1FF69D831EFAEEA9006140E2 /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		1FF69D841EFAEEA9006140E2 /* StartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StartScene.sks; sourceTree = "<group>"; };
 		1FF69D851EFAEEA9006140E2 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		8F3CA7021F0D415400C8BA65 /* MyScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyScene.sks; sourceTree = "<group>"; };
 		8FA3633D1EF9925F00192FDD /* StartScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -147,6 +148,7 @@
 				1FB5901A1F0164D20097F7D1 /* WhiteWine.mp3 */,
 				1FB590241F02F67B0097F7D1 /* GameStartSound.mp3 */,
 				1FB590261F02F7F10097F7D1 /* GameContinueSound.mp3 */,
+				8F3CA7021F0D415400C8BA65 /* MyScene.sks */,
 			);
 			path = "Drowsy Driving Test";
 			sourceTree = "<group>";
@@ -213,6 +215,7 @@
 			files = (
 				1FB5901D1F017F000097F7D1 /* WelcomeScene.sks in Resources */,
 				1FF69D741EFAC16C006140E2 /* FireFliesEmitter.sks in Resources */,
+				8F3CA7031F0D415400C8BA65 /* MyScene.sks in Resources */,
 				1F5CE6CB1EFD6CDF00002231 /* DeathScene.sks in Resources */,
 				1FB590271F02F7F10097F7D1 /* GameContinueSound.mp3 in Resources */,
 				1FF69D531EF41AFE006140E2 /* Main.storyboard in Resources */,
