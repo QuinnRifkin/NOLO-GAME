@@ -21,7 +21,7 @@ class LearnMoreScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        HomeButtonNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
+        HomeButtonNode = self.childNode(withName: "HomeNodeImage") as! SKSpriteNode
         HomeButtonNode.texture = SKTexture(imageNamed: "HomeIcon")
         HomeButtonNode.color = .clear
         

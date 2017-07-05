@@ -62,7 +62,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         NameInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/5, width: self.frame.width/3, height: 30))
         NumberInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/4, width: self.frame.width/3, height: 30))
         
-        HomeButtonNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
+        HomeButtonNode = self.childNode(withName: "HomeNodeImage") as! SKSpriteNode
         HomeButtonNode.texture = SKTexture(imageNamed: "HomeIcon")
         HomeButtonNode.color = .clear
         
