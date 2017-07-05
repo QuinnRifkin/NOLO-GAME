@@ -342,26 +342,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         addCar(car: car)
         
-        addZSprite(zsprite: zsprite1right, obstacleSize: obstacle1, obstaclePlacement: obstacle1.position, name: "zsprite1right")
-        addZSprite(zsprite: zsprite1middle, obstacleSize: obstacle1, obstaclePlacement: obstacle1.position, name: "zsprite1middle")
-        addZSprite(zsprite: zsprite1left, obstacleSize: obstacle1, obstaclePlacement: obstacle1.position, name: "zsprite1left")
-        
-        addZSprite(zsprite: zsprite2right, obstacleSize: obstacle1, obstaclePlacement: obstacle2.position, name: "zsprite2right")
-        addZSprite(zsprite: zsprite2middle, obstacleSize: obstacle1, obstaclePlacement: obstacle2.position, name: "zsprite2middle")
-        addZSprite(zsprite: zsprite2left, obstacleSize: obstacle1, obstaclePlacement: obstacle2.position, name: "zsprite2left")
-        
-        addZSprite(zsprite: zsprite3right, obstacleSize: obstacle1, obstaclePlacement: obstacle3.position, name: "zsprite3right")
-        addZSprite(zsprite: zsprite3middle, obstacleSize: obstacle1, obstaclePlacement: obstacle3.position, name: "zsprite3middle")
-        addZSprite(zsprite: zsprite3left, obstacleSize: obstacle1, obstaclePlacement: obstacle3.position, name: "zsprite3left")
-        
-        addZSprite(zsprite: zsprite4right, obstacleSize: obstacle1, obstaclePlacement: obstacle4.position, name: "zsprite4right")
-        addZSprite(zsprite: zsprite4middle, obstacleSize: obstacle1, obstaclePlacement: obstacle4.position, name: "zsprite4middle")
-        addZSprite(zsprite: zsprite4left, obstacleSize: obstacle1, obstaclePlacement: obstacle4.position, name: "zsprite4left")
+//        addZSprite(zsprite: zsprite1right, obstacleSize: obstacle1, obstaclePlacement: obstacle1.position, name: "zsprite1right")
+//        addZSprite(zsprite: zsprite1middle, obstacleSize: obstacle1, obstaclePlacement: obstacle1.position, name: "zsprite1middle")
+//        addZSprite(zsprite: zsprite1left, obstacleSize: obstacle1, obstaclePlacement: obstacle1.position, name: "zsprite1left")
+//        
+//        addZSprite(zsprite: zsprite2right, obstacleSize: obstacle1, obstaclePlacement: obstacle2.position, name: "zsprite2right")
+//        addZSprite(zsprite: zsprite2middle, obstacleSize: obstacle1, obstaclePlacement: obstacle2.position, name: "zsprite2middle")
+//        addZSprite(zsprite: zsprite2left, obstacleSize: obstacle1, obstaclePlacement: obstacle2.position, name: "zsprite2left")
+//        
+//        addZSprite(zsprite: zsprite3right, obstacleSize: obstacle1, obstaclePlacement: obstacle3.position, name: "zsprite3right")
+//        addZSprite(zsprite: zsprite3middle, obstacleSize: obstacle1, obstaclePlacement: obstacle3.position, name: "zsprite3middle")
+//        addZSprite(zsprite: zsprite3left, obstacleSize: obstacle1, obstaclePlacement: obstacle3.position, name: "zsprite3left")
+//        
+//        addZSprite(zsprite: zsprite4right, obstacleSize: obstacle1, obstaclePlacement: obstacle4.position, name: "zsprite4right")
+//        addZSprite(zsprite: zsprite4middle, obstacleSize: obstacle1, obstaclePlacement: obstacle4.position, name: "zsprite4middle")
+//        addZSprite(zsprite: zsprite4left, obstacleSize: obstacle1, obstaclePlacement: obstacle4.position, name: "zsprite4left")
         
         addRandomZSprite(zsprite: zspriterandom1, position: CGPoint(x: rangex1, y: rangey1), name: "zspriterandom1")
         addRandomZSprite(zsprite: zspriterandom2, position: CGPoint(x: rangex2, y: rangey2), name: "zspriterandom2")
         addRandomZSprite(zsprite: zspriterandom3, position: CGPoint(x: rangex3, y: rangey3), name: "zspriterandom3")
         addRandomZSprite(zsprite: zspriterandom4, position: CGPoint(x: rangex4, y: rangey4), name: "zspriterandom4")
+        
         
         timelabel.textAlignment = NSTextAlignment.right
         highscorelabel.textAlignment = NSTextAlignment.right
