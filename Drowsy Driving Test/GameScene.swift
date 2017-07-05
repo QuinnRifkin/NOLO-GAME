@@ -643,7 +643,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 zcountlabel.isHidden = true
                 timelabel.isHidden = true
                 highscorelabel.isHidden = true
-                let transition = SKTransition.reveal(with: SKTransitionDirection.down, duration: 1)
+                let transition = SKTransition.push(with: SKTransitionDirection.down, duration: 0.5)
                 let gameScene = StartScene(fileNamed: "MenuScene")
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)

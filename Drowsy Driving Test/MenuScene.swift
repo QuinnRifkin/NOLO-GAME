@@ -64,7 +64,7 @@ class MenuScene: SKScene {
         SettingsButtonNode.texture = SKTexture(imageNamed: "SettingsButton")
         SettingsButtonNode.color = .clear
         
-        let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
+        let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.view?.addSubview(self.fact1)
         }
