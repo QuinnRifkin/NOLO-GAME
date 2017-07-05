@@ -22,7 +22,7 @@ class MenuScene: SKScene {
     
     let welcomeScene = WelcomeScene()
     
-    let namelabel = UILabel(frame: CGRect(x: 6, y: -40, width: 300, height: 100))
+    let namelabel = UILabel(frame: CGRect(x: 6, y: -41, width: 300, height: 100))
     
     var fact : String!
     

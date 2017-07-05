@@ -55,10 +55,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var timer = Timer()
     
     var resetButtonNode: SKSpriteNode!
-    var TimeLabelNode: SKSpriteNode!
     var HomeLabelNode: SKSpriteNode!
-    var HighScoreLabelNode: SKSpriteNode!
-    var ZLabelNode: SKSpriteNode!
     
     var timelabel : UILabel!
     var highscorelabel : UILabel!
@@ -329,14 +326,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
         
         resetButtonNode = self.childNode(withName: "resetButton") as! SKSpriteNode
-        TimeLabelNode = self.childNode(withName: "TimeNode") as! SKSpriteNode
-        TimeLabelNode.texture = SKTexture(imageNamed: "TimeLabel")
         HomeLabelNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
         HomeLabelNode.texture = SKTexture(imageNamed: "HomeIcon")
-        HighScoreLabelNode = self.childNode(withName: "HighScoreNode") as! SKSpriteNode
-        HighScoreLabelNode.texture = SKTexture(imageNamed: "HighScoreLabel")
-        ZLabelNode = self.childNode(withName: "ZNode") as! SKSpriteNode
-        ZLabelNode.texture = SKTexture(imageNamed: "ZLabel")
         
         addLeftWall()
         addRightWall()

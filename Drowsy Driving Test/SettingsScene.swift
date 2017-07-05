@@ -14,7 +14,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     
     let welcomeScene = WelcomeScene()
     
-    let namelabel = UILabel(frame: CGRect(x: 6, y: -40, width: 300, height: 100))
+    let namelabel = UILabel(frame: CGRect(x: 6, y: -41, width: 300, height: 100))
     
     var HomeButtonNode : SKSpriteNode!
     
@@ -63,6 +63,8 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         NumberInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/4, width: self.frame.width/3, height: 30))
         
         HomeButtonNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
+        HomeButtonNode.texture = SKTexture(imageNamed: "HomeIcon")
+        HomeButtonNode.color = .clear
         
         let name = String(welcomeScene.getName())
         namelabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
