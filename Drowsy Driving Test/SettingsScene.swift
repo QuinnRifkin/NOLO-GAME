@@ -191,7 +191,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
                 NameInput.isHidden = true
                 NumberInput.isHidden = true
                 let transition = SKTransition.reveal(with: SKTransitionDirection.right, duration: 0.5)
-                let gameScene = StartScene(fileNamed: "MenuScene")
+                let gameScene = MenuScene(fileNamed: "MenuScene")
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)
             }

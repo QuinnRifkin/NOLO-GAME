@@ -187,7 +187,7 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
                 NameInput.isHidden = true
                 NumberInput.isHidden = true
                 let transition = SKTransition.crossFade(withDuration: 0.05)
-                let gameScene = StartScene(fileNamed: "LoadingScene")
+                let gameScene = MenuScene(fileNamed: "LoadingScene")
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)
             }

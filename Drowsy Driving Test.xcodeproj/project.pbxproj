@@ -35,10 +35,8 @@
 		1FF69D721EFAAF49006140E2 /* SparkEmitter.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D711EFAAF49006140E2 /* SparkEmitter.sks */; };
 		1FF69D741EFAC16C006140E2 /* FireFliesEmitter.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D731EFAC16C006140E2 /* FireFliesEmitter.sks */; };
 		1FF69D861EFAEEA9006140E2 /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D831EFAEEA9006140E2 /* MenuScene.sks */; };
-		1FF69D871EFAEEA9006140E2 /* StartScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D841EFAEEA9006140E2 /* StartScene.sks */; };
 		1FF69D881EFAEEA9006140E2 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D851EFAEEA9006140E2 /* GameScene.sks */; };
 		8F3CA7031F0D415400C8BA65 /* MyScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8F3CA7021F0D415400C8BA65 /* MyScene.sks */; };
-		8FA3633E1EF9925F00192FDD /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FA3633D1EF9925F00192FDD /* StartScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,10 +70,8 @@
 		1FF69D711EFAAF49006140E2 /* SparkEmitter.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SparkEmitter.sks; sourceTree = "<group>"; };
 		1FF69D731EFAC16C006140E2 /* FireFliesEmitter.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireFliesEmitter.sks; sourceTree = "<group>"; };
 		1FF69D831EFAEEA9006140E2 /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
-		1FF69D841EFAEEA9006140E2 /* StartScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StartScene.sks; sourceTree = "<group>"; };
 		1FF69D851EFAEEA9006140E2 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		8F3CA7021F0D415400C8BA65 /* MyScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyScene.sks; sourceTree = "<group>"; };
-		8FA3633D1EF9925F00192FDD /* StartScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,8 +118,6 @@
 				1F7230B31EFAFB65001C62F4 /* Misc. */,
 				1FF69D831EFAEEA9006140E2 /* MenuScene.sks */,
 				1FF69D6B1EFAA377006140E2 /* MenuScene.swift */,
-				1FF69D841EFAEEA9006140E2 /* StartScene.sks */,
-				8FA3633D1EF9925F00192FDD /* StartScene.swift */,
 				1FF69D851EFAEEA9006140E2 /* GameScene.sks */,
 				1FF69D4D1EF41AFE006140E2 /* GameScene.swift */,
 				1F5CE6CE1EFD8BFB00002231 /* InstructionScene1.sks */,
@@ -223,7 +217,6 @@
 				1FF69D881EFAEEA9006140E2 /* GameScene.sks in Resources */,
 				1FB5901B1F0164D20097F7D1 /* WhiteWine.mp3 in Resources */,
 				1F5CE6CF1EFD8BFB00002231 /* InstructionScene1.sks in Resources */,
-				1FF69D871EFAEEA9006140E2 /* StartScene.sks in Resources */,
 				1FF69D6E1EFAAF0A006140E2 /* LoadingScene.sks in Resources */,
 				1FF69D721EFAAF49006140E2 /* SparkEmitter.sks in Resources */,
 				1FF69D581EF41AFE006140E2 /* LaunchScreen.storyboard in Resources */,
@@ -253,7 +246,6 @@
 				1F5CE6D11EFD8C1700002231 /* InstructionScene1.swift in Sources */,
 				1FB590231F02E6130097F7D1 /* SettingsScene.swift in Sources */,
 				1FB5901F1F017F1A0097F7D1 /* WelcomeScene.swift in Sources */,
-				8FA3633E1EF9925F00192FDD /* StartScene.swift in Sources */,
 				1F5CE6CD1EFD6CFC00002231 /* DeathScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
