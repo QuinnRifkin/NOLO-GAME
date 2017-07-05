@@ -42,7 +42,7 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let view = self.view as! SKView?
-
+        
         if(LaunchDefault.value(forKey: "Launch") == nil || LaunchDefault.integer(forKey: "Launch" ) == 0 ){
             LaunchDefault.set(0, forKey: "Launch")
             if let scene = SKScene(fileNamed: "WelcomeScene"){
