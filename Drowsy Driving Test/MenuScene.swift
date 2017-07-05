@@ -46,7 +46,7 @@ class MenuScene: SKScene {
         fact1 = UILabel(frame: CGRect(x: 50 , y: -(factBar.position.y) - 20, width: 270, height: 150))
         
         fact1.text = fact
-        fact1.font = UIFont(name: "HelveticaNeue-Light", size: 18)
+        fact1.font = UIFont(name: "HelveticaNeue-Light", size: 19)
         fact1.lineBreakMode = NSLineBreakMode.byWordWrapping
         fact1.numberOfLines = 0
         fact1.textColor = .white
