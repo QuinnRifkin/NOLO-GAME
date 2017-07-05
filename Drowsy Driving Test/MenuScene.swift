@@ -60,7 +60,7 @@ class MenuScene: SKScene {
         
         PlayDRButtonNode = self.childNode(withName: "PlayDRButton") as! SKSpriteNode
         LearnMoreButtonNode = self.childNode(withName: "LearnMoreButton") as! SKSpriteNode
-        SettingsButtonNode = self.childNode(withName: "SettingsNode") as! SKSpriteNode
+        SettingsButtonNode = self.childNode(withName: "SettingsNodeImage") as! SKSpriteNode
         SettingsButtonNode.texture = SKTexture(imageNamed: "SettingsButton")
         SettingsButtonNode.color = .clear
         
