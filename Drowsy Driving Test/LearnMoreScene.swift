@@ -17,11 +17,13 @@ class LearnMoreScene: SKScene {
 
     let welcomeScene = WelcomeScene()
     
-    let namelabel = UILabel(frame: CGRect(x: 6, y: -40, width: 300, height: 100))
+    let namelabel = UILabel(frame: CGRect(x: 6, y: -41, width: 300, height: 100))
     
     override func didMove(to view: SKView) {
         
         HomeButtonNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
+        HomeButtonNode.texture = SKTexture(imageNamed: "HomeIcon")
+        HomeButtonNode.color = .clear
         
         GoogleButtonNode = self.childNode(withName: "GoogleNode") as! SKSpriteNode
         GoogleButtonNode.texture = SKTexture(imageNamed: "GoogleIcon")
