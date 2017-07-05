@@ -37,6 +37,10 @@ class GameViewController: UIViewController {
     func stopMusic(){
         audioPlayer.stop()
     }
+    
+    func getDefault() -> Int {
+        return LaunchDefault.integer(forKey: "Launch")
+    }
 
     
     override func viewDidLoad() {

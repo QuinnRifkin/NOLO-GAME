@@ -12,6 +12,8 @@ import UIKit
 
 class MenuScene: SKScene {
     
+    let gameViewController = GameViewController()
+    
     var PlayDRButtonNode:SKSpriteNode!
     var LearnMoreButtonNode:SKSpriteNode!
     var factBar:SKSpriteNode!
@@ -22,7 +24,7 @@ class MenuScene: SKScene {
     
     let welcomeScene = WelcomeScene()
     
-    let namelabel = UILabel(frame: CGRect(x: 6, y: -41, width: 300, height: 100))
+    let namelabel = UILabel(frame: CGRect(x: 6, y: -20, width: 300, height: 100))
     
     var fact : String!
     
@@ -72,12 +74,22 @@ class MenuScene: SKScene {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "PlayDRButton" {
-                namelabel.isHidden = true
-                fact1.isHidden = true
-                let transition = SKTransition.crossFade(withDuration: 0.5)
-                let gameScene = MenuScene(fileNamed: "InstructionScene1")
-                gameScene?.scaleMode = .aspectFill
-                self.view?.presentScene(gameScene!, transition: transition)
+                if(Int(gameViewController.getDefault()) == 1){
+                    namelabel.isHidden = true
+                    fact1.isHidden = true
+                    let transition = SKTransition.crossFade(withDuration: 0.5)
+                    let gameScene = MenuScene(fileNamed: "InstructionScene1")
+                    gameScene?.scaleMode = .aspectFill
+                    self.view?.presentScene(gameScene!, transition: transition)
+                }
+                else{
+                    namelabel.isHidden = true
+                    fact1.isHidden = true
+                    let transition = SKTransition.doorsOpenVertical(withDuration: 1)
+                    let gameScene = GameScene(fileNamed: "GameScene")
+                    gameScene?.scaleMode = .aspectFill
+                    self.view?.presentScene(gameScene!, transition: transition)
+                }
             }
             if nodesArray.first?.name == "LearnMoreButton" {
                 namelabel.isHidden = true
