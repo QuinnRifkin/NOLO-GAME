@@ -614,7 +614,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             timelabel.isHidden = true
             highscorelabel.isHidden = true
             let transition = SKTransition.push(with: SKTransitionDirection.up, duration: 1)
-            let gameScene = StartScene(fileNamed: "DeathScene")
+            let gameScene = DeathScene(fileNamed: "DeathScene")
             gameScene?.scaleMode = .aspectFill
             self.view?.presentScene(gameScene!, transition: transition)
         }
@@ -635,7 +635,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 timelabel.isHidden = true
                 highscorelabel.isHidden = true
                 let transition = SKTransition.push(with: SKTransitionDirection.down, duration: 0.5)
-                let gameScene = StartScene(fileNamed: "MenuScene")
+                let gameScene = DeathScene(fileNamed: "MenuScene")
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)
             }
@@ -647,7 +647,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 timelabel.isHidden = true
                 highscorelabel.isHidden = true
                 let transition = SKTransition.fade(withDuration: 1)
-                let gameScene = StartScene(fileNamed: "GameScene")
+                let gameScene = DeathScene(fileNamed: "GameScene")
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)
             }

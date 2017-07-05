@@ -28,7 +28,6 @@ class MenuScene: SKScene {
     
     var fact1 : UILabel!
     
-    
     override func didMove(to view: SKView) {
         
         factBar = self.childNode(withName: "factBar") as! SKSpriteNode
@@ -36,12 +35,6 @@ class MenuScene: SKScene {
         sleepFactz = ["Sleep deprivation can result in obesity and poor diet quality.", "Sleep deprivation causes heart disease.", "Sleep deprivation increases the risk of diabetes.", "Not getting enough sleep can result in rash decision making.", "Drowsy driving can be as dangerous as drunk driving.", "Getting more sleep is proven to increase performance in school.", "Putting your phone away before bed will result in a much better sleep.", "Beauty Sleep is real; Going to bed earlier can improve your physical appearance."]
 
         fact = (String) (sleepFactz[Int(arc4random_uniform(8))])
-        
-        print("factbarx:")
-        print(factBar.position.x)
-        print(" ")
-        print("factbary:")
-        print(factBar.position.y)
         
         fact1 = UILabel(frame: CGRect(x: 50 , y: -(factBar.position.y) - 20, width: 270, height: 150))
         
@@ -82,7 +75,7 @@ class MenuScene: SKScene {
                 namelabel.isHidden = true
                 fact1.isHidden = true
                 let transition = SKTransition.crossFade(withDuration: 0.5)
-                let gameScene = StartScene(fileNamed: "InstructionScene1")
+                let gameScene = MenuScene(fileNamed: "InstructionScene1")
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)
             }
@@ -90,7 +83,7 @@ class MenuScene: SKScene {
                 namelabel.isHidden = true
                 fact1.isHidden = true
                 let transition = SKTransition.reveal(with: SKTransitionDirection.left, duration: 0.5)
-                let gameScene = StartScene(fileNamed: "LearnMoreScene")
+                let gameScene = MenuScene(fileNamed: "LearnMoreScene")
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)
             }
@@ -98,7 +91,7 @@ class MenuScene: SKScene {
                 namelabel.isHidden = true
                 fact1.isHidden = true
                 let transition = SKTransition.reveal(with: SKTransitionDirection.left, duration: 0.5)
-                let gameScene = StartScene(fileNamed: "SettingsScene")
+                let gameScene = MenuScene(fileNamed: "SettingsScene")
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)
             }
