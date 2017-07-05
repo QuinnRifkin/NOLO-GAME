@@ -155,6 +155,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         if(textField == NameInput){
             NameInput.resignFirstResponder()
             setName(name: NameInput.text!)
+            namelabel.attributedText = NSAttributedString(string: NameInput.text!, attributes: [NSForegroundColorAttributeName : UIColor.white])
         }
         else{
             NumberInput.resignFirstResponder()

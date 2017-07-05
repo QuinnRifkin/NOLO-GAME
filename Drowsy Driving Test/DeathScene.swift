@@ -59,22 +59,6 @@ class DeathScene: SKScene {
         fact1.textColor = .white
         fact1.textAlignment = NSTextAlignment.center
         
-        
-                    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         timelabel.textAlignment = NSTextAlignment.left
         timelabel.textColor = .white
         timelabel.text = "Time: " + String( gameScene.getFinishTime())
