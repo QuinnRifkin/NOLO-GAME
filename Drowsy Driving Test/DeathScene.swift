@@ -12,14 +12,14 @@ import UIKit
 
 class DeathScene: SKScene {
     
-    var PlayAgainButtonNode:SKSpriteNode!
-    var HomeButtonNode: SKSpriteNode!
+    var playAgainButtonNode:SKSpriteNode!
+    var homeButtonNode: SKSpriteNode!
     var factBar:SKSpriteNode!
     
     var gameScene = GameScene()
     
-    var timelabel : UILabel!
-    var highscorelabel : UILabel!
+    var timeLabel : UILabel!
+    var highScoreLabel : UILabel!
     var zCountLabel : UILabel!
     
     var sleepFactz = [String]()
@@ -32,10 +32,10 @@ class DeathScene: SKScene {
         
         zCountLabel = UILabel(frame: CGRect(x: self.frame.width/6.5, y: self.frame.height/7, width: 200, height: 40))
         
-        highscorelabel = UILabel(frame: CGRect(x: self.frame.width/8, y: self.frame.height/6, width: 200, height: 40))
+        highScoreLabel = UILabel(frame: CGRect(x: self.frame.width/8, y: self.frame.height/6, width: 200, height: 40))
         
-        PlayAgainButtonNode = self.childNode(withName: "PlayAgainNode") as! SKSpriteNode
-        HomeButtonNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
+        playAgainButtonNode = self.childNode(withName: "PlayAgainNode") as! SKSpriteNode
+        homeButtonNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
         
         factBar = self.childNode(withName: "factBar") as! SKSpriteNode
        
@@ -59,14 +59,14 @@ class DeathScene: SKScene {
         zCountLabel.text = "Z Count: " + String( gameScene.getFinishZCount())
         
         //highscorelabel.frame = CGRect(x: 100, y: 100, width: 200, height: 200)
-        highscorelabel.textAlignment = NSTextAlignment.left
-        highscorelabel.textColor = .white
-        highscorelabel.font = UIFont(name: "HelveticaNeue" , size: 30)
-        highscorelabel.text = "Highscore: " + String( gameScene.getHighScore())
+        highScoreLabel.textAlignment = NSTextAlignment.left
+        highScoreLabel.textColor = .white
+        highScoreLabel.font = UIFont(name: "HelveticaNeue" , size: 30)
+        highScoreLabel.text = "Highscore: " + String( gameScene.getHighScore())
         
         let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
-            self.view?.addSubview(self.highscorelabel)
+            self.view?.addSubview(self.highScoreLabel)
             self.view?.addSubview(self.zCountLabel)
             self.view?.addSubview(self.fact1)
         }
@@ -82,7 +82,7 @@ class DeathScene: SKScene {
             if nodesArray.first?.name == "HomeNode" {
                 zCountLabel.isHidden = true
                 fact1.isHidden = true
-                highscorelabel.isHidden = true
+                highScoreLabel.isHidden = true
                 let transition = SKTransition.reveal(with: SKTransitionDirection.down, duration: 0.5)
                 let gameScene = DeathScene(fileNamed: "MenuScene")
                 gameScene?.scaleMode = .aspectFill
@@ -91,7 +91,7 @@ class DeathScene: SKScene {
             if nodesArray.first?.name == "PlayAgainNode" {
                 zCountLabel.isHidden = true
                 fact1.isHidden = true
-                highscorelabel.isHidden = true
+                highScoreLabel.isHidden = true
                 let transition = SKTransition.push(with: SKTransitionDirection.down, duration: 1)
                 let gameScene = DeathScene(fileNamed: "GameScene")
                 gameScene?.scaleMode = .aspectFill

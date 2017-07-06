@@ -13,7 +13,7 @@ import AVFoundation
 
 class GameViewController: UIViewController {
     
-    var LaunchDefault = UserDefaults.standard
+    var launchDefault = UserDefaults.standard
     
     var audioPlayer = AVAudioPlayer()
     
@@ -39,7 +39,7 @@ class GameViewController: UIViewController {
     }
     
     func getDefault() -> Int {
-        return LaunchDefault.integer(forKey: "Launch")
+        return launchDefault.integer(forKey: "Launch")
     }
 
     
@@ -47,8 +47,8 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         let view = self.view as! SKView?
         
-        if(LaunchDefault.value(forKey: "Launch") == nil || LaunchDefault.integer(forKey: "Launch" ) == 0 ){
-            LaunchDefault.set(0, forKey: "Launch")
+        if(launchDefault.value(forKey: "Launch") == nil || launchDefault.integer(forKey: "Launch" ) == 0 ){
+            launchDefault.set(0, forKey: "Launch")
             if let scene = SKScene(fileNamed: "WelcomeScene"){
                 scene.scaleMode = .aspectFill
                 view!.presentScene(scene)
@@ -66,7 +66,7 @@ class GameViewController: UIViewController {
                 view!.showsNodeCount = true
             }
         }
-        LaunchDefault.set(LaunchDefault.integer(forKey: "Launch") + 1, forKey: "Launch")
+        launchDefault.set(launchDefault.integer(forKey: "Launch") + 1, forKey: "Launch")
     
     }
     

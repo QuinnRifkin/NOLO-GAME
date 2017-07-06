@@ -12,28 +12,28 @@ import UIKit
 
 class LearnMoreScene: SKScene {
     
-    var HomeButtonNode:SKSpriteNode!
-    var GoogleButtonNode: SKSpriteNode!
+    var homeButtonNode:SKSpriteNode!
+    var googleButtonNode: SKSpriteNode!
 
     let welcomeScene = WelcomeScene()
     
-    let namelabel = UILabel(frame: CGRect(x: 6, y: -20, width: 300, height: 100))
+    let nameLabel = UILabel(frame: CGRect(x: 6, y: -20, width: 300, height: 100))
     
     override func didMove(to view: SKView) {
         
-        HomeButtonNode = self.childNode(withName: "HomeNodeImage") as! SKSpriteNode
-        HomeButtonNode.texture = SKTexture(imageNamed: "HomeIcon")
-        HomeButtonNode.color = .clear
+        homeButtonNode = self.childNode(withName: "HomeNodeImage") as! SKSpriteNode
+        homeButtonNode.texture = SKTexture(imageNamed: "HomeIcon")
+        homeButtonNode.color = .clear
         
-        GoogleButtonNode = self.childNode(withName: "GoogleNode") as! SKSpriteNode
-        GoogleButtonNode.texture = SKTexture(imageNamed: "GoogleIcon")
-        GoogleButtonNode.color = .clear
+        googleButtonNode = self.childNode(withName: "GoogleNode") as! SKSpriteNode
+        googleButtonNode.texture = SKTexture(imageNamed: "GoogleIcon")
+        googleButtonNode.color = .clear
         
         let name = String(welcomeScene.getName())
-        namelabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
-        namelabel.textAlignment = NSTextAlignment.left
-        namelabel.font = UIFont(name: "HelveticaNeue", size: 15)
-        self.view?.addSubview(namelabel)
+        nameLabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
+        nameLabel.textAlignment = NSTextAlignment.left
+        nameLabel.font = UIFont(name: "HelveticaNeue", size: 15)
+        self.view?.addSubview(nameLabel)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -44,14 +44,14 @@ class LearnMoreScene: SKScene {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "HomeNode" {
-                namelabel.isHidden = true
+                nameLabel.isHidden = true
                 let transition = SKTransition.reveal(with: SKTransitionDirection.right, duration: 0.5)
                 let gameScene = MenuScene(fileNamed: "MenuScene")
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)
             }
             if nodesArray.first?.name == "GoogleNode"{
-                namelabel.isHidden = true
+                nameLabel.isHidden = true
                 if let google = NSURL(string: "http://www.google.com"){
                     UIApplication.shared.open(google as URL, options: [:], completionHandler: nil)
                 }
