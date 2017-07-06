@@ -161,21 +161,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(car)
     }
     
-    func addZSprite(zsprite: SKSpriteNode, obstacleSize: SKSpriteNode, obstaclePlacement: CGPoint, name: String){
-        let obstacleX = obstaclePlacement.x
-        let obstacleY = obstaclePlacement.y
-        
-        zsprite.name = name
-        zsprite.position = CGPoint(x: obstacleX, y: obstacleY - (obstacleSize.size.height/2) - 50)
-        zsprite.zPosition = 1
-        zsprite.size = CGSize(width: 50, height: 50)
-        zsprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: zsprite.size.width, height: zsprite.size.height))
-        zsprite.physicsBody?.isDynamic = false
-        zsprite.physicsBody?.allowsRotation = false
-        zsprite.physicsBody?.mass = 0.1
-        zsprite.physicsBody?.categoryBitMask = collisionType.zspritex
-        addChild(zsprite)
-    }
     
     func addRandomZSprite(zsprite: SKSpriteNode, position: CGPoint, name: String){
         zsprite.name = name
@@ -348,22 +333,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addObstacle(obstacle: obstacle4, location: CGPoint(x:-128.339, y: 0), name: "obstacle4")
         
         addCar(car: car)
-        
-//        addZSprite(zsprite: zsprite1right, obstacleSize: obstacle1, obstaclePlacement: obstacle1.position, name: "zsprite1right")
-//        addZSprite(zsprite: zsprite1middle, obstacleSize: obstacle1, obstaclePlacement: obstacle1.position, name: "zsprite1middle")
-//        addZSprite(zsprite: zsprite1left, obstacleSize: obstacle1, obstaclePlacement: obstacle1.position, name: "zsprite1left")
-//        
-//        addZSprite(zsprite: zsprite2right, obstacleSize: obstacle1, obstaclePlacement: obstacle2.position, name: "zsprite2right")
-//        addZSprite(zsprite: zsprite2middle, obstacleSize: obstacle1, obstaclePlacement: obstacle2.position, name: "zsprite2middle")
-//        addZSprite(zsprite: zsprite2left, obstacleSize: obstacle1, obstaclePlacement: obstacle2.position, name: "zsprite2left")
-//        
-//        addZSprite(zsprite: zsprite3right, obstacleSize: obstacle1, obstaclePlacement: obstacle3.position, name: "zsprite3right")
-//        addZSprite(zsprite: zsprite3middle, obstacleSize: obstacle1, obstaclePlacement: obstacle3.position, name: "zsprite3middle")
-//        addZSprite(zsprite: zsprite3left, obstacleSize: obstacle1, obstaclePlacement: obstacle3.position, name: "zsprite3left")
-//        
-//        addZSprite(zsprite: zsprite4right, obstacleSize: obstacle1, obstaclePlacement: obstacle4.position, name: "zsprite4right")
-//        addZSprite(zsprite: zsprite4middle, obstacleSize: obstacle1, obstaclePlacement: obstacle4.position, name: "zsprite4middle")
-//        addZSprite(zsprite: zsprite4left, obstacleSize: obstacle1, obstaclePlacement: obstacle4.position, name: "zsprite4left")
         
         addRandomZSprite(zsprite: zspriterandom1, position: CGPoint(x: rangex1, y: rangey1), name: "zspriterandom1")
         addRandomZSprite(zsprite: zspriterandom2, position: CGPoint(x: rangex2, y: rangey2), name: "zspriterandom2")
@@ -659,7 +628,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)
             }
-            
         }
     }
 }

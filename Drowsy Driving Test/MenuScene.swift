@@ -63,7 +63,6 @@ class MenuScene: SKScene {
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.view?.addSubview(self.fact1)
         }
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -107,8 +106,6 @@ class MenuScene: SKScene {
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)
             }
-
-
         }
     }
 }

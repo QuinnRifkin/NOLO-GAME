@@ -26,15 +26,12 @@ class LoadingScene: SKScene {
         touchlabel.text = "tap anywhere to begin"
         touchlabel.position = CGPoint(x: 0, y: 400)
 
-
-        
         let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.addChild(self.touchlabel)
             self.touchlabel.run(SKAction.fadeOut(withDuration: 0))
             self.touchlabel.run(SKAction.repeatForever(self.animatelabel))
         }
-
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
