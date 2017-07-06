@@ -50,7 +50,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var ztruecount = 0
     var zbackcount = 0
     
-    var TimeDefault = UserDefaults.standard
+    var ZCountDefault = UserDefaults.standard
     var time : Int = 0
     var timer = Timer()
     
@@ -214,9 +214,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             zcount -= 1;
             zbackcount -= 5
         }
-        if(time > HighScore){
-            HighScore = time;
-        }
     }
     
     func movingBackground(){
@@ -244,20 +241,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return (HighScoreDefault.integer(forKey: "HighScore"))
     }
     
-    func getFinishTime() -> Int {
-        return TimeDefault.integer(forKey: "FinalTime")
+    func getFinishZCount() -> Int {
+        return ZCountDefault.integer(forKey: "FinalZCount")
     }
     
-    func setHighScore(time: Int){
+    func setHighScore(zcount: Int){
         if(HighScore > (HighScoreDefault.integer(forKey: "HighScore"))){
             HighScoreDefault.set(HighScore, forKey: "HighScore")
         }
         HighScoreDefault.synchronize()
     }
     
-    func setFinishTime(time: Int){
-        TimeDefault.set(time, forKey: "FinalTime")
-        TimeDefault.synchronize()
+    func setFinishZCount(zcount: Int){
+        ZCountDefault.set(zcount, forKey: "FinalZCount")
+        ZCountDefault.synchronize()
     }
     
     override func didMove(to view: SKView) {
@@ -302,7 +299,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             highscorelabel.text = String(HighScore)
             self.view?.addSubview(highscorelabel)
         }
-        TimeDefault.set(0, forKey: "FinalTime")
+        ZCountDefault.set(0, forKey: "FinalTime")
         
         let swLeft:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(_:)))
         swLeft.direction = .left
@@ -367,13 +364,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameViewController.playMusic(file: "GameContinueSound")
         }
         
+        if(ztruecount >= HighScore){
+            HighScore = ztruecount
+        }
+        
         highscorelabel.attributedText = NSAttributedString(string: String(HighScore), attributes: [NSForegroundColorAttributeName : UIColor.white])
         self.view?.addSubview(highscorelabel)
         
         timelabel.attributedText = NSAttributedString(string: String(time), attributes: [NSForegroundColorAttributeName : UIColor.white])
         self.view?.addSubview(timelabel)
         
-        zcountlabel.attributedText = NSAttributedString(string: String(zcount), attributes: [NSForegroundColorAttributeName : UIColor.white])
+        zcountlabel.attributedText = NSAttributedString(string: String(ztruecount), attributes: [NSForegroundColorAttributeName : UIColor.white])
         self.view?.addSubview(zcountlabel)
         
         let randomNumber = (Int(arc4random_uniform(Upper + Upper)))
@@ -585,8 +586,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func checkCar(){
         if(car.position.y < 0 - self.frame.height/2 - car.size.height/2){
             gameViewController.stopMusic()
-            setHighScore(time: time)
-            setFinishTime(time: time)
+            setHighScore(zcount: ztruecount)
+            setFinishZCount(zcount: ztruecount)
             zcountlabel.isHidden = true
             timelabel.isHidden = true
             highscorelabel.isHidden = true
@@ -606,8 +607,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             if nodesArray.first?.name == "HomeNode" {
                 gameViewController.stopMusic()
-                setHighScore(time: time)
-                setFinishTime(time: time)
+                setHighScore(zcount: ztruecount)
+                setFinishZCount(zcount: ztruecount)
                 zcountlabel.isHidden = true
                 timelabel.isHidden = true
                 highscorelabel.isHidden = true
@@ -618,8 +619,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             if nodesArray.first?.name == "resetButton" {
                 gameViewController.stopMusic()
-                setHighScore(time: time)
-                setFinishTime(time: time)
+                setHighScore(zcount: ztruecount)
+                setFinishZCount(zcount: ztruecount)
                 zcountlabel.isHidden = true
                 timelabel.isHidden = true
                 highscorelabel.isHidden = true

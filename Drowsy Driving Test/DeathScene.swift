@@ -30,9 +30,9 @@ class DeathScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        timelabel = UILabel(frame: CGRect(x: self.frame.width/8, y: self.frame.height/5.2, width: 150, height: 30))
-        highscorelabel = UILabel(frame: CGRect(x: self.frame.width/8, y: self.frame.height/6, width: 200, height: 30))
-        zCountLabel = UILabel(frame: CGRect(x: self.frame.width/8, y: self.frame.height/4.6, width: 150, height: 30))
+        zCountLabel = UILabel(frame: CGRect(x: self.frame.width/6.5, y: self.frame.height/7, width: 200, height: 40))
+        
+        highscorelabel = UILabel(frame: CGRect(x: self.frame.width/8, y: self.frame.height/6, width: 200, height: 40))
         
         PlayAgainButtonNode = self.childNode(withName: "PlayAgainNode") as! SKSpriteNode
         HomeButtonNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
@@ -52,34 +52,26 @@ class DeathScene: SKScene {
         fact1.textColor = .white
         fact1.textAlignment = NSTextAlignment.center
         
-        //timelabel.frame = CGRect(x: 100, y: 125, width: 200, height: 200)
-        timelabel.textAlignment = NSTextAlignment.left
-        timelabel.textColor = .white
-        timelabel.font = UIFont(name: "HelveticaNeue" , size: 20)
-        timelabel.text = "Your Time: " + String( gameScene.getFinishTime())
+        //zCountLabel.frame = CGRect(x: 100, y: 125, width: 200, height: 200)
+        zCountLabel.textAlignment = NSTextAlignment.left
+        zCountLabel.textColor = .white
+        zCountLabel.font = UIFont(name: "HelveticaNeue" , size: 30)
+        zCountLabel.text = "Z Count: " + String( gameScene.getFinishZCount())
         
         //highscorelabel.frame = CGRect(x: 100, y: 100, width: 200, height: 200)
         highscorelabel.textAlignment = NSTextAlignment.left
         highscorelabel.textColor = .white
-        highscorelabel.font = UIFont(name: "HelveticaNeue" , size: 20)
-        highscorelabel.text = "Your Highscore: " + String( gameScene.getHighScore())
-        
-        //zCountLabel.frame = CGRect(x: 100, y: 150, width: 200, height: 200)
-        zCountLabel.textAlignment = NSTextAlignment.left
-        zCountLabel.textColor = .white
-        zCountLabel.font = UIFont(name: "HelveticaNeue" , size: 20)
-        zCountLabel.text = "Your Zs: " + String( gameScene.getHighScore())
+        highscorelabel.font = UIFont(name: "HelveticaNeue" , size: 30)
+        highscorelabel.text = "Highscore: " + String( gameScene.getHighScore())
         
         let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
-            self.view?.addSubview(self.timelabel)
             self.view?.addSubview(self.highscorelabel)
             self.view?.addSubview(self.zCountLabel)
             self.view?.addSubview(self.fact1)
         }
-
-        
     }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         let touch = touches.first
@@ -88,7 +80,7 @@ class DeathScene: SKScene {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "HomeNode" {
-                timelabel.isHidden = true
+                zCountLabel.isHidden = true
                 fact1.isHidden = true
                 highscorelabel.isHidden = true
                 let transition = SKTransition.reveal(with: SKTransitionDirection.down, duration: 0.5)
@@ -97,7 +89,7 @@ class DeathScene: SKScene {
                 self.view?.presentScene(gameScene!, transition: transition)
             }
             if nodesArray.first?.name == "PlayAgainNode" {
-                timelabel.isHidden = true
+                zCountLabel.isHidden = true
                 fact1.isHidden = true
                 highscorelabel.isHidden = true
                 let transition = SKTransition.push(with: SKTransitionDirection.down, duration: 1)
