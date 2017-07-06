@@ -152,5 +152,4 @@ class InstructionScene1: SKScene {
             }
         }
     }
-
 }

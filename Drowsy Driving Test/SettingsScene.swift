@@ -198,5 +198,4 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
             }
         }
     }
-
 }
