@@ -62,7 +62,7 @@ class LearnMoreScene: SKScene {
                 }
             }
             if nodesArray.first?.name == "TwitterNode"{
-                namelabel.isHidden = true
+                nameLabel.isHidden = true
                     let screenName =  "@NOLO716"
                     let appURL = NSURL(string: "twitter://user?screen_name=\(screenName)")!
                     let webURL = NSURL(string: "https://twitter.com/\(screenName)")!
