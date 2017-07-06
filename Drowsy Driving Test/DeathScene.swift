@@ -32,7 +32,7 @@ class DeathScene: SKScene {
         
         zCountLabel = UILabel(frame: CGRect(x: self.frame.width/6.5, y: self.frame.height/7, width: 250, height: 40))
         
-        highScoreLabel = UILabel(frame: CGRect(x: self.frame.width/8, y: self.frame.height/6, width: 200, height: 40))
+        highScoreLabel = UILabel(frame: CGRect(x: self.frame.width/8, y: self.frame.height/6, width: 300, height: 40))
 
         
         playAgainButtonNode = self.childNode(withName: "PlayAgainNode") as! SKSpriteNode
@@ -66,7 +66,7 @@ class DeathScene: SKScene {
         //highscorelabel.frame = CGRect(x: 100, y: 100, width: 200, height: 200)
         highScoreLabel.textAlignment = NSTextAlignment.left
         highScoreLabel.textColor = .white
-        highScoreLabel.font = UIFont(name: "HelveticaNeue" , size: 30)
+        highScoreLabel.font = UIFont(name: "HelveticaNeue-Italic" , size: 30)
         highScoreLabel.text = "Highscore: " + String( gameScene.getHighScore())
 
         
