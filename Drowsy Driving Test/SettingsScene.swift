@@ -74,7 +74,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(WelcomeScene.donePressed(sender:)))
         
-        NameInput.attributedPlaceholder = NSAttributedString(string: "Enter Name...", attributes: [NSForegroundColorAttributeName : UIColor.black])
+        NameInput.attributedPlaceholder = NSAttributedString(string: welcomeScene.getName() + "...", attributes: [NSForegroundColorAttributeName : UIColor.black])
         NameInput.font = UIFont(name: "HelveticaNeue-UltraLight", size: 15)
         NameInput.borderStyle = UITextBorderStyle.roundedRect
         NameInput.autocorrectionType = UITextAutocorrectionType.no
@@ -87,7 +87,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         //self.view?.addSubview(NameInput)
         
         NumberInput.font = UIFont(name: "HelveticaNeue-UltraLight", size: 15)
-        NumberInput.attributedPlaceholder = NSAttributedString(string: "Enter Age...", attributes: [NSForegroundColorAttributeName : UIColor.black])
+        NumberInput.attributedPlaceholder = NSAttributedString(string: "Change Age...", attributes: [NSForegroundColorAttributeName : UIColor.black])
         NumberInput.borderStyle = UITextBorderStyle.roundedRect
         NumberInput.autocorrectionType = UITextAutocorrectionType.no
         NumberInput.keyboardType = UIKeyboardType.numberPad
