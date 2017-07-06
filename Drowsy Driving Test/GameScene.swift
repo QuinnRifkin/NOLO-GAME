@@ -13,18 +13,18 @@ import AVFoundation
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameViewController = GameViewController()
     
-    var HighScoreDefault = UserDefaults.standard
-    var HighScore: Int = 0
+    var highScoreDefault = UserDefaults.standard
+    var highScore: Int = 0
     
     struct collisionType{
         static let carx : UInt32 = 1
         static let zspritex : UInt32 = 2
     }
     
-    var widthframe : UInt32 = 0
-    var halfwidthframe : UInt32 = 0
-    var heightframe : UInt32 = 0
-    var halfheightframe : UInt32 = 0
+    var widthFrame : UInt32 = 0
+    var halfWidthFrame : UInt32 = 0
+    var heightFrame : UInt32 = 0
+    var halfHeightFrame : UInt32 = 0
     
     var randomNumberx1 : Int = 0
     var rangex1 : Int = 0
@@ -43,23 +43,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var randomNumbery4 : Int = 0
     var rangey4 : Int = 0
     
-    let Upper : UInt32 = (128)
+    let upper : UInt32 = (128)
     var acc = CGFloat(0.0)
     
-    var zcount = 0
-    var ztruecount = 0
-    var zbackcount = 0
+    var zCount = 0
+    var zTrueCount = 0
+    var zBackCount = 0
     
-    var ZCountDefault = UserDefaults.standard
+    var zCountDefault = UserDefaults.standard
     var time : Int = 0
     var timer = Timer()
     
     var resetButtonNode: SKSpriteNode!
-    var HomeLabelNode: SKSpriteNode!
+    var homeLabelNode: SKSpriteNode!
     
-    var timelabel : UILabel!
-    var highscorelabel : UILabel!
-    var zcountlabel : UILabel!
+    var timeLabel : UILabel!
+    var highScoreLabel : UILabel!
+    var zCountLabel : UILabel!
     
     let road1 = SKSpriteNode(imageNamed: "RoadSpriteWGrass")
     let road2 = SKSpriteNode(imageNamed: "RoadSpriteWGrass")
@@ -71,29 +71,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let car = SKSpriteNode(imageNamed: "CarSprite")
     
-    let zsprite1right = SKSpriteNode(imageNamed: "ZSprite")
-    let zsprite1middle = SKSpriteNode(imageNamed: "ZSprite")
-    let zsprite1left = SKSpriteNode(imageNamed: "ZSprite")
+    let zSprite1Right = SKSpriteNode(imageNamed: "ZSprite")
+    let zSprite1Middle = SKSpriteNode(imageNamed: "ZSprite")
+    let zSprite1Left = SKSpriteNode(imageNamed: "ZSprite")
     
-    let zsprite2right = SKSpriteNode(imageNamed: "ZSprite")
-    let zsprite2middle = SKSpriteNode(imageNamed: "ZSprite")
-    let zsprite2left = SKSpriteNode(imageNamed: "ZSprite")
+    let zSprite2Right = SKSpriteNode(imageNamed: "ZSprite")
+    let zSprite2Middle = SKSpriteNode(imageNamed: "ZSprite")
+    let zSprite2Left = SKSpriteNode(imageNamed: "ZSprite")
     
-    let zsprite3right = SKSpriteNode(imageNamed: "ZSprite")
-    let zsprite3middle = SKSpriteNode(imageNamed: "ZSprite")
-    let zsprite3left = SKSpriteNode(imageNamed: "ZSprite")
+    let zSprite3Right = SKSpriteNode(imageNamed: "ZSprite")
+    let zSprite3Middle = SKSpriteNode(imageNamed: "ZSprite")
+    let zSprite3Left = SKSpriteNode(imageNamed: "ZSprite")
     
-    let zsprite4right = SKSpriteNode(imageNamed: "ZSprite")
-    let zsprite4middle = SKSpriteNode(imageNamed: "ZSprite")
-    let zsprite4left = SKSpriteNode(imageNamed: "ZSprite")
+    let zSprite4Right = SKSpriteNode(imageNamed: "ZSprite")
+    let zSprite4Middle = SKSpriteNode(imageNamed: "ZSprite")
+    let zSprite4Left = SKSpriteNode(imageNamed: "ZSprite")
     
-    let zspriterandom1 = SKSpriteNode(imageNamed: "ZSprite")
-    let zspriterandom2 = SKSpriteNode(imageNamed: "ZSprite")
-    let zspriterandom3 = SKSpriteNode(imageNamed: "ZSprite")
-    let zspriterandom4 = SKSpriteNode(imageNamed: "ZSprite")
+    let zSpriteRandom1 = SKSpriteNode(imageNamed: "ZSprite")
+    let zSpriteRandom2 = SKSpriteNode(imageNamed: "ZSprite")
+    let zSpriteRandom3 = SKSpriteNode(imageNamed: "ZSprite")
+    let zSpriteRandom4 = SKSpriteNode(imageNamed: "ZSprite")
     
-    let leftwall = SKSpriteNode(imageNamed: "FieldLines")
-    let rightwall = SKSpriteNode(imageNamed: "FieldLines")
+    let leftWall = SKSpriteNode(imageNamed: "FieldLines")
+    let rightWall = SKSpriteNode(imageNamed: "FieldLines")
     
     let left = SKAction.moveBy(x: -175, y: 0, duration: 0.2)
     let right = SKAction.moveBy(x: 175, y: 0, duration: 0.2)
@@ -107,25 +107,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addLeftWall(){
-        leftwall.position = CGPoint(x: 0 - (self.frame.width/2) - (leftwall.size.width/2) - 50, y: 0)
-        leftwall.size = CGSize(width: 100, height: self.frame.height + car.size.height*2)
-        leftwall.zPosition = -1
-        leftwall.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: leftwall.size.width, height: leftwall.size.height))
-        leftwall.physicsBody?.isDynamic = false
-        leftwall.physicsBody?.allowsRotation = false
-        leftwall.physicsBody?.mass = 10000000000000000000.0
-        addChild(leftwall)
+        leftWall.position = CGPoint(x: 0 - (self.frame.width/2) - (leftWall.size.width/2) - 50, y: 0)
+        leftWall.size = CGSize(width: 100, height: self.frame.height + car.size.height*2)
+        leftWall.zPosition = -1
+        leftWall.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: leftWall.size.width, height: leftWall.size.height))
+        leftWall.physicsBody?.isDynamic = false
+        leftWall.physicsBody?.allowsRotation = false
+        leftWall.physicsBody?.mass = 10000000000000000000.0
+        addChild(leftWall)
     }
     
     func addRightWall(){
-        rightwall.position = CGPoint(x: 0 + (self.frame.width/2) + (rightwall.size.width/2) + 50, y: 0)
-        rightwall.size = CGSize(width: 100, height: self.frame.height + car.size.height*2)
-        rightwall.zPosition = -1
-        rightwall.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: rightwall.size.width, height: rightwall.size.height))
-        rightwall.physicsBody?.isDynamic = false
-        rightwall.physicsBody?.allowsRotation = false
-        rightwall.physicsBody?.mass = 10000000000000000000.0
-        addChild(rightwall)
+        rightWall.position = CGPoint(x: 0 + (self.frame.width/2) + (rightWall.size.width/2) + 50, y: 0)
+        rightWall.size = CGSize(width: 100, height: self.frame.height + car.size.height*2)
+        rightWall.zPosition = -1
+        rightWall.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: rightWall.size.width, height: rightWall.size.height))
+        rightWall.physicsBody?.isDynamic = false
+        rightWall.physicsBody?.allowsRotation = false
+        rightWall.physicsBody?.mass = 10000000000000000000.0
+        addChild(rightWall)
     }
     
     func addRoad(road: SKSpriteNode, y: CGFloat){
@@ -162,144 +162,144 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     
-    func addRandomZSprite(zsprite: SKSpriteNode, position: CGPoint, name: String){
-        zsprite.name = name
-        zsprite.position = position
-        zsprite.zPosition = 1
-        zsprite.size = CGSize(width: 50, height: 50)
-        zsprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: zsprite.size.width, height: zsprite.size.height))
-        zsprite.physicsBody?.isDynamic = true
-        zsprite.physicsBody?.allowsRotation = false
-        zsprite.physicsBody?.mass = 0.1
-        zsprite.physicsBody?.categoryBitMask = collisionType.zspritex
-        addChild(zsprite)
+    func addRandomZSprite(zSprite: SKSpriteNode, position: CGPoint, name: String){
+        zSprite.name = name
+        zSprite.position = position
+        zSprite.zPosition = 1
+        zSprite.size = CGSize(width: 50, height: 50)
+        zSprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: zSprite.size.width, height: zSprite.size.height))
+        zSprite.physicsBody?.isDynamic = true
+        zSprite.physicsBody?.allowsRotation = false
+        zSprite.physicsBody?.mass = 0.1
+        zSprite.physicsBody?.categoryBitMask = collisionType.zspritex
+        addChild(zSprite)
     }
     
-    func moveZSprite(zspriteright: SKSpriteNode, zspritemiddle: SKSpriteNode, zspriteleft: SKSpriteNode, obstacle: SKSpriteNode){
-        if(zspriteright.isHidden){
-            zspriteright.position = CGPoint(x: 1000, y: 1000)
+    func moveZSprite(zSpriteRight: SKSpriteNode, zSpriteMiddle: SKSpriteNode, zSpriteLeft: SKSpriteNode, obstacle: SKSpriteNode){
+        if(zSpriteRight.isHidden){
+            zSpriteRight.position = CGPoint(x: 1000, y: 1000)
         }
         else {
-            zspriteright.position = CGPoint(x: obstacle.position.x + obstacle.size.width/3, y: obstacle.position.y - (obstacle.size.height/2) - 40)
+            zSpriteRight.position = CGPoint(x: obstacle.position.x + obstacle.size.width/3, y: obstacle.position.y - (obstacle.size.height/2) - 40)
         }
-        if(zspritemiddle.isHidden){
-            zspritemiddle.position = CGPoint(x: 1000, y: 1000)
-        }
-        else {
-            zspritemiddle.position = CGPoint(x: obstacle.position.x , y: obstacle.position.y - (obstacle.size.height/2) - 40)
-        }
-        if(zspriteleft.isHidden){
-            zspriteleft.position = CGPoint(x: 1000, y: 1000)
+        if(zSpriteMiddle.isHidden){
+            zSpriteMiddle.position = CGPoint(x: 1000, y: 1000)
         }
         else {
-            zspriteleft.position = CGPoint(x: obstacle.position.x - obstacle.size.width/3, y: obstacle.position.y - (obstacle.size.height/2) - 40)
+            zSpriteMiddle.position = CGPoint(x: obstacle.position.x , y: obstacle.position.y - (obstacle.size.height/2) - 40)
+        }
+        if(zSpriteLeft.isHidden){
+            zSpriteLeft.position = CGPoint(x: 1000, y: 1000)
+        }
+        else {
+            zSpriteLeft.position = CGPoint(x: obstacle.position.x - obstacle.size.width/3, y: obstacle.position.y - (obstacle.size.height/2) - 40)
         }
     }
     
-    func moveRandomZSprite(zsprite: SKSpriteNode, position: CGPoint){
-        if(zsprite.isHidden){
-            zsprite.isHidden = false;
-            zsprite.position = CGPoint(x: rangex1, y: rangey1)
+    func moveRandomZSprite(zSprite: SKSpriteNode, position: CGPoint){
+        if(zSprite.isHidden){
+            zSprite.isHidden = false;
+            zSprite.position = CGPoint(x: rangex1, y: rangey1)
         }
         else{
-            zsprite.position = CGPoint(x: zsprite.position.x, y: zsprite.position.y-4-acc+CGFloat(zcount/10))
+            zSprite.position = CGPoint(x: zSprite.position.x, y: zSprite.position.y-4-acc+CGFloat(zCount/10))
         }
     }
     
     func updateTime(){
         time += 1;
         acc += 0.15
-        zbackcount += 1;
-        if(zbackcount >= 5 && zcount > 0){
-            zcount -= 1;
-            zbackcount -= 5
+        zBackCount += 1;
+        if(zBackCount >= 5 && zCount > 0){
+            zCount -= 1;
+            zBackCount -= 5
         }
     }
     
     func movingBackground(){
         
-        road1.position = CGPoint(x: road1.position.x, y: road1.position.y-4-acc+CGFloat(zcount/10))
-        road2.position = CGPoint(x: road2.position.x, y: road2.position.y-4-acc+CGFloat(zcount/10))
+        road1.position = CGPoint(x: road1.position.x, y: road1.position.y-4-acc+CGFloat(zCount/10))
+        road2.position = CGPoint(x: road2.position.x, y: road2.position.y-4-acc+CGFloat(zCount/10))
         
-        obstacle1.position = CGPoint(x: obstacle1.position.x, y: obstacle1.position.y-4-acc+CGFloat(zcount/10))
-        obstacle2.position = CGPoint(x: obstacle2.position.x, y: obstacle2.position.y-4-acc+CGFloat(zcount/10))
-        obstacle3.position = CGPoint(x: obstacle3.position.x, y: obstacle3.position.y-4-acc+CGFloat(zcount/10))
-        obstacle4.position = CGPoint(x: obstacle4.position.x, y: obstacle4.position.y-4-acc+CGFloat(zcount/10))
+        obstacle1.position = CGPoint(x: obstacle1.position.x, y: obstacle1.position.y-4-acc+CGFloat(zCount/10))
+        obstacle2.position = CGPoint(x: obstacle2.position.x, y: obstacle2.position.y-4-acc+CGFloat(zCount/10))
+        obstacle3.position = CGPoint(x: obstacle3.position.x, y: obstacle3.position.y-4-acc+CGFloat(zCount/10))
+        obstacle4.position = CGPoint(x: obstacle4.position.x, y: obstacle4.position.y-4-acc+CGFloat(zCount/10))
         
-        moveZSprite(zspriteright: zsprite1right, zspritemiddle: zsprite1middle, zspriteleft: zsprite1left, obstacle: obstacle1)
-        moveZSprite(zspriteright: zsprite2right, zspritemiddle: zsprite2middle, zspriteleft: zsprite2left, obstacle: obstacle2)
-        moveZSprite(zspriteright: zsprite3right, zspritemiddle: zsprite3middle, zspriteleft: zsprite3left, obstacle: obstacle3)
-        moveZSprite(zspriteright: zsprite4right, zspritemiddle: zsprite4middle, zspriteleft: zsprite4left, obstacle: obstacle4)
+        moveZSprite(zSpriteRight: zSprite1Right, zSpriteMiddle: zSprite1Middle, zSpriteLeft: zSprite1Left, obstacle: obstacle1)
+        moveZSprite(zSpriteRight: zSprite2Right, zSpriteMiddle: zSprite2Middle, zSpriteLeft: zSprite2Left, obstacle: obstacle2)
+        moveZSprite(zSpriteRight: zSprite3Right, zSpriteMiddle: zSprite3Middle, zSpriteLeft: zSprite3Left, obstacle: obstacle3)
+        moveZSprite(zSpriteRight: zSprite4Right, zSpriteMiddle: zSprite4Middle, zSpriteLeft: zSprite4Left, obstacle: obstacle4)
         
-        moveRandomZSprite(zsprite: zspriterandom1, position: zspriterandom1.position)
-        moveRandomZSprite(zsprite: zspriterandom2, position: zspriterandom2.position)
-        moveRandomZSprite(zsprite: zspriterandom3, position: zspriterandom3.position)
-        moveRandomZSprite(zsprite: zspriterandom4, position: zspriterandom4.position)
+        moveRandomZSprite(zSprite: zSpriteRandom1, position: zSpriteRandom1.position)
+        moveRandomZSprite(zSprite: zSpriteRandom2, position: zSpriteRandom2.position)
+        moveRandomZSprite(zSprite: zSpriteRandom3, position: zSpriteRandom3.position)
+        moveRandomZSprite(zSprite: zSpriteRandom4, position: zSpriteRandom4.position)
     }
     
     func getHighScore() -> Int {
-        return (HighScoreDefault.integer(forKey: "HighScore"))
+        return (highScoreDefault.integer(forKey: "HighScore"))
     }
     
     func getFinishZCount() -> Int {
-        return ZCountDefault.integer(forKey: "FinalZCount")
+        return zCountDefault.integer(forKey: "FinalZCount")
     }
     
     func setHighScore(zcount: Int){
-        if(HighScore > (HighScoreDefault.integer(forKey: "HighScore"))){
-            HighScoreDefault.set(HighScore, forKey: "HighScore")
+        if(highScore > (highScoreDefault.integer(forKey: "HighScore"))){
+            highScoreDefault.set(highScore, forKey: "HighScore")
         }
-        HighScoreDefault.synchronize()
+        highScoreDefault.synchronize()
     }
     
     func setFinishZCount(zcount: Int){
-        ZCountDefault.set(zcount, forKey: "FinalZCount")
-        ZCountDefault.synchronize()
+        zCountDefault.set(zcount, forKey: "FinalZCount")
+        zCountDefault.synchronize()
     }
     
     override func didMove(to view: SKView) {
         
-        timelabel = UILabel(frame: CGRect(x: 0, y: 20, width: self.frame.width/2 , height: 20))
-        highscorelabel = UILabel(frame: CGRect(x: 0, y: 40, width: self.frame.width/2 , height: 20))
-        zcountlabel = UILabel(frame: CGRect(x: 0, y: 60, width: self.frame.width/2 , height: 20))
+        timeLabel = UILabel(frame: CGRect(x: 0, y: 20, width: self.frame.width/2 , height: 20))
+        highScoreLabel = UILabel(frame: CGRect(x: 0, y: 40, width: self.frame.width/2 , height: 20))
+        zCountLabel = UILabel(frame: CGRect(x: 0, y: 60, width: self.frame.width/2 , height: 20))
         
-        widthframe = UInt32(self.frame.width)
-        halfwidthframe = widthframe/2
-        heightframe = UInt32(self.frame.height)
-        halfheightframe = heightframe/2
+        widthFrame = UInt32(self.frame.width)
+        halfWidthFrame = widthFrame/2
+        heightFrame = UInt32(self.frame.height)
+        halfHeightFrame = heightFrame/2
         
-        randomNumberx1 = (Int(arc4random_uniform(widthframe)))
-        rangex1 = Int(randomNumberx1 - Int(halfwidthframe))
+        randomNumberx1 = (Int(arc4random_uniform(widthFrame)))
+        rangex1 = Int(randomNumberx1 - Int(halfWidthFrame))
         
-        randomNumberx2 = (Int(arc4random_uniform(widthframe)))
-        rangex2 = Int(randomNumberx2 - Int(halfwidthframe))
+        randomNumberx2 = (Int(arc4random_uniform(widthFrame)))
+        rangex2 = Int(randomNumberx2 - Int(halfWidthFrame))
         
-        randomNumberx3 = (Int(arc4random_uniform(widthframe)))
-        rangex3 = Int(randomNumberx3 - Int(halfwidthframe))
+        randomNumberx3 = (Int(arc4random_uniform(widthFrame)))
+        rangex3 = Int(randomNumberx3 - Int(halfWidthFrame))
         
-        randomNumberx4 = (Int(arc4random_uniform(widthframe)))
-        rangex4 = Int(randomNumberx4 - Int(halfwidthframe))
+        randomNumberx4 = (Int(arc4random_uniform(widthFrame)))
+        rangex4 = Int(randomNumberx4 - Int(halfWidthFrame))
         
-        randomNumbery1 = (Int(arc4random_uniform(heightframe)))
-        rangey1 = Int(randomNumbery1 + Int(halfheightframe))
+        randomNumbery1 = (Int(arc4random_uniform(heightFrame)))
+        rangey1 = Int(randomNumbery1 + Int(halfHeightFrame))
         
-        randomNumbery2 = (Int(arc4random_uniform(heightframe)))
-        rangey2 = Int(randomNumbery2 + Int(halfheightframe))
+        randomNumbery2 = (Int(arc4random_uniform(heightFrame)))
+        rangey2 = Int(randomNumbery2 + Int(halfHeightFrame))
         
-        randomNumbery3 = (Int(arc4random_uniform(heightframe)))
-        rangey3 = Int(randomNumbery3 + Int(halfheightframe))
+        randomNumbery3 = (Int(arc4random_uniform(heightFrame)))
+        rangey3 = Int(randomNumbery3 + Int(halfHeightFrame))
         
-        randomNumbery4 = (Int(arc4random_uniform(heightframe)))
-        rangey4 = Int(randomNumbery4 + Int(halfheightframe))
+        randomNumbery4 = (Int(arc4random_uniform(heightFrame)))
+        rangey4 = Int(randomNumbery4 + Int(halfHeightFrame))
         
         gameViewController.playMusic(file: "GameStartSound")
         
-        if(HighScoreDefault.value(forKey: "HighScore") != nil){
-            HighScore = HighScoreDefault.value(forKey: "HighScore") as! NSInteger!
-            highscorelabel.text = String(HighScore)
-            self.view?.addSubview(highscorelabel)
+        if(highScoreDefault.value(forKey: "HighScore") != nil){
+            highScore = highScoreDefault.value(forKey: "HighScore") as! NSInteger!
+            highScoreLabel.text = String(highScore)
+            self.view?.addSubview(highScoreLabel)
         }
-        ZCountDefault.set(0, forKey: "FinalTime")
+        zCountDefault.set(0, forKey: "FinalTime")
         
         let swLeft:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(_:)))
         swLeft.direction = .left
@@ -315,8 +315,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
         
         resetButtonNode = self.childNode(withName: "resetButton") as! SKSpriteNode
-        HomeLabelNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
-        HomeLabelNode.texture = SKTexture(imageNamed: "HomeIcon")
+        homeLabelNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
+        homeLabelNode.texture = SKTexture(imageNamed: "HomeIcon")
         
         addLeftWall()
         addRightWall()
@@ -331,54 +331,54 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         addCar(car: car)
         
-        addRandomZSprite(zsprite: zspriterandom1, position: CGPoint(x: rangex1, y: rangey1), name: "zspriterandom1")
-        addRandomZSprite(zsprite: zspriterandom2, position: CGPoint(x: rangex2, y: rangey2), name: "zspriterandom2")
-        addRandomZSprite(zsprite: zspriterandom3, position: CGPoint(x: rangex3, y: rangey3), name: "zspriterandom3")
-        addRandomZSprite(zsprite: zspriterandom4, position: CGPoint(x: rangex4, y: rangey4), name: "zspriterandom4")
+        addRandomZSprite(zSprite: zSpriteRandom1, position: CGPoint(x: rangex1, y: rangey1), name: "zspriterandom1")
+        addRandomZSprite(zSprite: zSpriteRandom2, position: CGPoint(x: rangex2, y: rangey2), name: "zspriterandom2")
+        addRandomZSprite(zSprite: zSpriteRandom3, position: CGPoint(x: rangex3, y: rangey3), name: "zspriterandom3")
+        addRandomZSprite(zSprite: zSpriteRandom4, position: CGPoint(x: rangex4, y: rangey4), name: "zspriterandom4")
         
         
-        timelabel.textAlignment = NSTextAlignment.right
-        highscorelabel.textAlignment = NSTextAlignment.right
-        zcountlabel.textAlignment = NSTextAlignment.right
+        timeLabel.textAlignment = NSTextAlignment.right
+        highScoreLabel.textAlignment = NSTextAlignment.right
+        zCountLabel.textAlignment = NSTextAlignment.right
     }
     override func update(_ currentTime: TimeInterval) {
         
-        randomNumberx1 = (Int(arc4random_uniform(widthframe)))
-        rangex1 = Int(randomNumberx1 - Int(halfwidthframe))
-        randomNumbery1 = (Int(arc4random_uniform(heightframe)))
-        rangey1 = Int(randomNumbery1 + Int(halfheightframe))
-        randomNumberx2 = (Int(arc4random_uniform(widthframe)))
-        rangex2 = Int(randomNumberx2 - Int(halfwidthframe))
-        randomNumbery2 = (Int(arc4random_uniform(heightframe)))
-        rangey2 = Int(randomNumbery2 + Int(halfheightframe))
-        randomNumberx3 = (Int(arc4random_uniform(widthframe)))
-        rangex3 = Int(randomNumberx3 - Int(halfwidthframe))
-        randomNumbery3 = (Int(arc4random_uniform(heightframe)))
-        rangey3 = Int(randomNumbery3 + Int(halfheightframe))
-        randomNumberx4 = (Int(arc4random_uniform(widthframe)))
-        rangex4 = Int(randomNumberx4 - Int(halfwidthframe))
-        randomNumbery4 = (Int(arc4random_uniform(heightframe)))
-        rangey4 = Int(randomNumbery4 + Int(halfheightframe))
+        randomNumberx1 = (Int(arc4random_uniform(widthFrame)))
+        rangex1 = Int(randomNumberx1 - Int(halfWidthFrame))
+        randomNumbery1 = (Int(arc4random_uniform(heightFrame)))
+        rangey1 = Int(randomNumbery1 + Int(halfHeightFrame))
+        randomNumberx2 = (Int(arc4random_uniform(widthFrame)))
+        rangex2 = Int(randomNumberx2 - Int(halfWidthFrame))
+        randomNumbery2 = (Int(arc4random_uniform(heightFrame)))
+        rangey2 = Int(randomNumbery2 + Int(halfHeightFrame))
+        randomNumberx3 = (Int(arc4random_uniform(widthFrame)))
+        rangex3 = Int(randomNumberx3 - Int(halfWidthFrame))
+        randomNumbery3 = (Int(arc4random_uniform(heightFrame)))
+        rangey3 = Int(randomNumbery3 + Int(halfHeightFrame))
+        randomNumberx4 = (Int(arc4random_uniform(widthFrame)))
+        rangex4 = Int(randomNumberx4 - Int(halfWidthFrame))
+        randomNumbery4 = (Int(arc4random_uniform(heightFrame)))
+        rangey4 = Int(randomNumbery4 + Int(halfHeightFrame))
         
         if(!gameViewController.isPlayingMusic()){
             gameViewController.playMusic(file: "GameContinueSound")
         }
         
-        if(ztruecount >= HighScore){
-            HighScore = ztruecount
+        if(zTrueCount >= highScore){
+            highScore = zTrueCount
         }
         
-        highscorelabel.attributedText = NSAttributedString(string: String(HighScore), attributes: [NSForegroundColorAttributeName : UIColor.white])
-        self.view?.addSubview(highscorelabel)
+        highScoreLabel.attributedText = NSAttributedString(string: String(highScore), attributes: [NSForegroundColorAttributeName : UIColor.white])
+        self.view?.addSubview(highScoreLabel)
         
-        timelabel.attributedText = NSAttributedString(string: String(time), attributes: [NSForegroundColorAttributeName : UIColor.white])
-        self.view?.addSubview(timelabel)
+        timeLabel.attributedText = NSAttributedString(string: String(time), attributes: [NSForegroundColorAttributeName : UIColor.white])
+        self.view?.addSubview(timeLabel)
         
-        zcountlabel.attributedText = NSAttributedString(string: String(ztruecount), attributes: [NSForegroundColorAttributeName : UIColor.white])
-        self.view?.addSubview(zcountlabel)
+        zCountLabel.attributedText = NSAttributedString(string: String(zTrueCount), attributes: [NSForegroundColorAttributeName : UIColor.white])
+        self.view?.addSubview(zCountLabel)
         
-        let randomNumber = (Int(arc4random_uniform(Upper + Upper)))
-        let range : Int = Int(randomNumber - Int(Upper))
+        let randomNumber = (Int(arc4random_uniform(upper + upper)))
+        let range : Int = Int(randomNumber - Int(upper))
         
         if(road1.position.y < -road1.size.height-0){
             road1.position = CGPoint(x: road1.position.x, y: road2.position.y + road2.size.height)
@@ -390,32 +390,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if(obstacle1.position.y < -1080){
             obstacle1.position = CGPoint(x: range , y: 700)
-            resetZSprite(zsprite: zsprite1right)
-            resetZSprite(zsprite: zsprite1middle)
-            resetZSprite(zsprite: zsprite1left)
+            resetZSprite(zsprite: zSprite1Right)
+            resetZSprite(zsprite: zSprite1Middle)
+            resetZSprite(zsprite: zSprite1Left)
         }
         if(obstacle2.position.y < -1080){
             obstacle2.position = CGPoint(x: range, y: 700)
-            resetZSprite(zsprite: zsprite2right)
-            resetZSprite(zsprite: zsprite2middle)
-            resetZSprite(zsprite: zsprite2left)
+            resetZSprite(zsprite: zSprite2Right)
+            resetZSprite(zsprite: zSprite2Middle)
+            resetZSprite(zsprite: zSprite2Left)
         }
         if(obstacle3.position.y < -1080){
             obstacle3.position = CGPoint(x: range, y: 700)
-            resetZSprite(zsprite: zsprite3right)
-            resetZSprite(zsprite: zsprite3middle)
-            resetZSprite(zsprite: zsprite3left)
+            resetZSprite(zsprite: zSprite3Right)
+            resetZSprite(zsprite: zSprite3Middle)
+            resetZSprite(zsprite: zSprite3Left)
         }
         if(obstacle4.position.y < -1080){
             obstacle4.position = CGPoint(x: range, y: 700)
-            resetZSprite(zsprite: zsprite4right)
-            resetZSprite(zsprite: zsprite4middle)
-            resetZSprite(zsprite: zsprite4left)
+            resetZSprite(zsprite: zSprite4Right)
+            resetZSprite(zsprite: zSprite4Middle)
+            resetZSprite(zsprite: zSprite4Left)
         }
-        checkRandomZ(zsprite: zspriterandom1)
-        checkRandomZ(zsprite: zspriterandom2)
-        checkRandomZ(zsprite: zspriterandom3)
-        checkRandomZ(zsprite: zspriterandom4)
+        checkRandomZ(zSprite: zSpriteRandom1)
+        checkRandomZ(zSprite: zSpriteRandom2)
+        checkRandomZ(zSprite: zSpriteRandom3)
+        checkRandomZ(zSprite: zSpriteRandom4)
         
         checkCar()
         movingBackground()
@@ -434,52 +434,52 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             secondBody = contact.bodyA
         }
         if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite1right"){
-            removeZSprite(zsprite: zsprite1right)
+            removeZSprite(zSprite: zSprite1Right)
         }
         else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite1middle"){
-            removeZSprite(zsprite: zsprite1middle)
+            removeZSprite(zSprite: zSprite1Middle)
         }
         else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite1left"){
-            removeZSprite(zsprite: zsprite1left)
+            removeZSprite(zSprite: zSprite1Left)
         }
         else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite2right"){
-            removeZSprite(zsprite: zsprite2right)
+            removeZSprite(zSprite: zSprite2Right)
         }
         else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite2middle"){
-            removeZSprite(zsprite: zsprite2middle)
+            removeZSprite(zSprite: zSprite2Middle)
         }
         else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite2left"){
-            removeZSprite(zsprite: zsprite2left)
+            removeZSprite(zSprite: zSprite2Left)
         }
         else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite3right"){
-            removeZSprite(zsprite: zsprite3right)
+            removeZSprite(zSprite: zSprite3Right)
         }
         else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite3middle"){
-            removeZSprite(zsprite: zsprite3middle)
+            removeZSprite(zSprite: zSprite3Middle)
         }
         else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite3left"){
-            removeZSprite(zsprite: zsprite3left)
+            removeZSprite(zSprite: zSprite3Left)
         }
         else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite4right"){
-            removeZSprite(zsprite: zsprite4right)
+            removeZSprite(zSprite: zSprite4Right)
         }
         else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite4middle"){
-            removeZSprite(zsprite: zsprite4middle)
+            removeZSprite(zSprite: zSprite4Middle)
         }
         else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite4left"){
-            removeZSprite(zsprite: zsprite4left)
+            removeZSprite(zSprite: zSprite4Left)
         }
         else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zspriterandom1"){
-            removeZSprite(zsprite: zspriterandom1)
+            removeZSprite(zSprite: zSpriteRandom1)
         }
         else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zspriterandom2"){
-            removeZSprite(zsprite: zspriterandom2)
+            removeZSprite(zSprite: zSpriteRandom2)
         }
         else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zspriterandom3"){
-            removeZSprite(zsprite: zspriterandom3)
+            removeZSprite(zSprite: zSpriteRandom3)
         }
         else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zspriterandom4"){
-            removeZSprite(zsprite: zspriterandom4)
+            removeZSprite(zSprite: zSpriteRandom4)
         }
         
         if(contact.bodyA.node?.name == "obstacle1"){
@@ -491,16 +491,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             secondBody = contact.bodyA
         }
         if(firstBody.node?.name == "obstacle1" && secondBody.node?.name == "zspriterandom1"){
-            zspriterandom1.isHidden = true
+            zSpriteRandom1.isHidden = true
         }
         else if(firstBody.node?.name == "obstacle1" && secondBody.node?.name == "zspriterandom2"){
-            zspriterandom2.isHidden = true
+            zSpriteRandom2.isHidden = true
         }
         else if(firstBody.node?.name == "obstacle1" && secondBody.node?.name == "zspriterandom3"){
-            zspriterandom3.isHidden = true
+            zSpriteRandom3.isHidden = true
         }
         else if(firstBody.node?.name == "obstacle1" && secondBody.node?.name == "zspriterandom4"){
-            zspriterandom4.isHidden = true
+            zSpriteRandom4.isHidden = true
         }
         
         if(contact.bodyA.node?.name == "obstacle2"){
@@ -512,16 +512,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             secondBody = contact.bodyA
         }
         if(firstBody.node?.name == "obstacle2" && secondBody.node?.name == "zspriterandom1"){
-            zspriterandom1.isHidden = true
+            zSpriteRandom1.isHidden = true
         }
         else if(firstBody.node?.name == "obstacle2" && secondBody.node?.name == "zspriterandom2"){
-            zspriterandom2.isHidden = true
+            zSpriteRandom2.isHidden = true
         }
         else if(firstBody.node?.name == "obstacle2" && secondBody.node?.name == "zspriterandom3"){
-            zspriterandom3.isHidden = true
+            zSpriteRandom3.isHidden = true
         }
         else if(firstBody.node?.name == "obstacle2" && secondBody.node?.name == "zspriterandom4"){
-            zspriterandom4.isHidden = true
+            zSpriteRandom4.isHidden = true
         }
         
         if(contact.bodyA.node?.name == "obstacle3"){
@@ -533,16 +533,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             secondBody = contact.bodyA
         }
         if(firstBody.node?.name == "obstacle3" && secondBody.node?.name == "zspriterandom1"){
-            zspriterandom1.isHidden = true
+            zSpriteRandom1.isHidden = true
         }
         else if(firstBody.node?.name == "obstacle3" && secondBody.node?.name == "zspriterandom2"){
-            zspriterandom2.isHidden = true
+            zSpriteRandom2.isHidden = true
         }
         else if(firstBody.node?.name == "obstacle3" && secondBody.node?.name == "zspriterandom3"){
-            zspriterandom3.isHidden = true
+            zSpriteRandom3.isHidden = true
         }
         else if(firstBody.node?.name == "obstacle3" && secondBody.node?.name == "zspriterandom4"){
-            zspriterandom4.isHidden = true
+            zSpriteRandom4.isHidden = true
         }
         
         if(contact.bodyA.node?.name == "obstacle4"){
@@ -554,30 +554,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             secondBody = contact.bodyA
         }
         if(firstBody.node?.name == "obstacle4" && secondBody.node?.name == "zspriterandom1"){
-            zspriterandom1.isHidden = true
+            zSpriteRandom1.isHidden = true
         }
         else if(firstBody.node?.name == "obstacle4" && secondBody.node?.name == "zspriterandom2"){
-            zspriterandom2.isHidden = true
+            zSpriteRandom2.isHidden = true
         }
         else if(firstBody.node?.name == "obstacle4" && secondBody.node?.name == "zspriterandom3"){
-            zspriterandom3.isHidden = true
+            zSpriteRandom3.isHidden = true
         }
         else if(firstBody.node?.name == "obstacle4" && secondBody.node?.name == "zspriterandom4"){
-            zspriterandom4.isHidden = true
+            zSpriteRandom4.isHidden = true
         }
         
     }
-    func checkRandomZ(zsprite: SKSpriteNode){
-        if(zsprite.position.y < -self.frame.height/2-zsprite.size.height/2){
-            zsprite.isHidden = true
-            moveRandomZSprite(zsprite: zsprite, position: zsprite.position)
+    func checkRandomZ(zSprite: SKSpriteNode){
+        if(zSprite.position.y < -self.frame.height/2-zSprite.size.height/2){
+            zSprite.isHidden = true
+            moveRandomZSprite(zSprite: zSprite, position: zSprite.position)
         }
     }
     
-    func removeZSprite(zsprite: SKSpriteNode){
-        zsprite.isHidden = true
-        ztruecount += 1
-        zcount += 1
+    func removeZSprite(zSprite: SKSpriteNode){
+        zSprite.isHidden = true
+        zTrueCount += 1
+        zCount += 1
     }
     
     func resetZSprite(zsprite: SKSpriteNode){
@@ -586,11 +586,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func checkCar(){
         if(car.position.y < 0 - self.frame.height/2 - car.size.height/2){
             gameViewController.stopMusic()
-            setHighScore(zcount: ztruecount)
-            setFinishZCount(zcount: ztruecount)
-            zcountlabel.isHidden = true
-            timelabel.isHidden = true
-            highscorelabel.isHidden = true
+            setHighScore(zcount: zTrueCount)
+            setFinishZCount(zcount: zTrueCount)
+            zCountLabel.isHidden = true
+            timeLabel.isHidden = true
+            highScoreLabel.isHidden = true
             let transition = SKTransition.push(with: SKTransitionDirection.up, duration: 1)
             let gameScene = DeathScene(fileNamed: "DeathScene")
             gameScene?.scaleMode = .aspectFill
@@ -607,11 +607,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             if nodesArray.first?.name == "HomeNode" {
                 gameViewController.stopMusic()
-                setHighScore(zcount: ztruecount)
-                setFinishZCount(zcount: ztruecount)
-                zcountlabel.isHidden = true
-                timelabel.isHidden = true
-                highscorelabel.isHidden = true
+                setHighScore(zcount: zTrueCount)
+                setFinishZCount(zcount: zTrueCount)
+                zCountLabel.isHidden = true
+                timeLabel.isHidden = true
+                highScoreLabel.isHidden = true
                 let transition = SKTransition.push(with: SKTransitionDirection.down, duration: 0.5)
                 let gameScene = DeathScene(fileNamed: "MenuScene")
                 gameScene?.scaleMode = .aspectFill
@@ -619,11 +619,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             if nodesArray.first?.name == "resetButton" {
                 gameViewController.stopMusic()
-                setHighScore(zcount: ztruecount)
-                setFinishZCount(zcount: ztruecount)
-                zcountlabel.isHidden = true
-                timelabel.isHidden = true
-                highscorelabel.isHidden = true
+                setHighScore(zcount: zTrueCount)
+                setFinishZCount(zcount: zTrueCount)
+                zCountLabel.isHidden = true
+                timeLabel.isHidden = true
+                highScoreLabel.isHidden = true
                 let transition = SKTransition.fade(withDuration: 1)
                 let gameScene = DeathScene(fileNamed: "GameScene")
                 gameScene?.scaleMode = .aspectFill

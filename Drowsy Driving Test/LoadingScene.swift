@@ -12,8 +12,8 @@ import UIKit
 
 class LoadingScene: SKScene {
     
-    var touchlabel = SKLabelNode(fontNamed: "Helvetica")
-    var animatelabel = SKAction.sequence([SKAction.fadeIn(withDuration: 0.8), SKAction.wait(forDuration: 0.5), SKAction.fadeOut(withDuration: 0.8)])
+    var touchLabel = SKLabelNode(fontNamed: "Helvetica")
+    var animateLabel = SKAction.sequence([SKAction.fadeIn(withDuration: 0.8), SKAction.wait(forDuration: 0.5), SKAction.fadeOut(withDuration: 0.8)])
     
     override func didMove(to view: SKView) {
         
@@ -23,14 +23,14 @@ class LoadingScene: SKScene {
         particle.targetNode = self
         addChild(particle)
         
-        touchlabel.text = "tap anywhere to begin"
-        touchlabel.position = CGPoint(x: 0, y: 400)
+        touchLabel.text = "tap anywhere to begin"
+        touchLabel.position = CGPoint(x: 0, y: 300)
 
         let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
-            self.addChild(self.touchlabel)
-            self.touchlabel.run(SKAction.fadeOut(withDuration: 0))
-            self.touchlabel.run(SKAction.repeatForever(self.animatelabel))
+            self.addChild(self.touchLabel)
+            self.touchLabel.run(SKAction.fadeOut(withDuration: 0))
+            self.touchLabel.run(SKAction.repeatForever(self.animateLabel))
         }
     }
 

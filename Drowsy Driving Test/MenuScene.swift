@@ -14,10 +14,10 @@ class MenuScene: SKScene {
     
     let gameViewController = GameViewController()
     
-    var PlayDRButtonNode:SKSpriteNode!
-    var LearnMoreButtonNode:SKSpriteNode!
+    var playDRButtonNode:SKSpriteNode!
+    var learnMoreButtonNode:SKSpriteNode!
     var factBar:SKSpriteNode!
-    var SettingsButtonNode: SKSpriteNode!
+    var settingsButtonNode: SKSpriteNode!
     
     let random = Int(arc4random_uniform(5))
     var sleepFactz = [String]()
@@ -27,7 +27,6 @@ class MenuScene: SKScene {
     let namelabel = UILabel(frame: CGRect(x: 6, y: -20, width: 300, height: 100))
     
     var fact : String!
-    
     var fact1 : UILabel!
     
     override func didMove(to view: SKView) {
@@ -53,11 +52,11 @@ class MenuScene: SKScene {
         namelabel.font = UIFont(name: "HelveticaNeue", size: 15)
         self.view?.addSubview(namelabel)
         
-        PlayDRButtonNode = self.childNode(withName: "PlayDRButton") as! SKSpriteNode
-        LearnMoreButtonNode = self.childNode(withName: "LearnMoreButton") as! SKSpriteNode
-        SettingsButtonNode = self.childNode(withName: "SettingsNodeImage") as! SKSpriteNode
-        SettingsButtonNode.texture = SKTexture(imageNamed: "SettingsButton")
-        SettingsButtonNode.color = .clear
+        playDRButtonNode = self.childNode(withName: "PlayDRButton") as! SKSpriteNode
+        learnMoreButtonNode = self.childNode(withName: "LearnMoreButton") as! SKSpriteNode
+        settingsButtonNode = self.childNode(withName: "SettingsNodeImage") as! SKSpriteNode
+        settingsButtonNode.texture = SKTexture(imageNamed: "SettingsButton")
+        settingsButtonNode.color = .clear
         
         let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
