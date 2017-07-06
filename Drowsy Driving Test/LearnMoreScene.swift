@@ -14,6 +14,7 @@ class LearnMoreScene: SKScene {
     
     var HomeButtonNode:SKSpriteNode!
     var GoogleButtonNode: SKSpriteNode!
+    var twitterButtonNode: SKSpriteNode!
 
     let welcomeScene = WelcomeScene()
     
@@ -28,6 +29,10 @@ class LearnMoreScene: SKScene {
         GoogleButtonNode = self.childNode(withName: "GoogleNode") as! SKSpriteNode
         GoogleButtonNode.texture = SKTexture(imageNamed: "GoogleIcon")
         GoogleButtonNode.color = .clear
+        
+        twitterButtonNode = self.childNode(withName: "TwitterNode") as! SKSpriteNode
+        twitterButtonNode.texture = SKTexture(imageNamed: "TwitterIcon")
+        twitterButtonNode.color = .clear
         
         let name = String(welcomeScene.getName())
         namelabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
@@ -56,6 +61,19 @@ class LearnMoreScene: SKScene {
                     UIApplication.shared.open(google as URL, options: [:], completionHandler: nil)
                 }
             }
+            if nodesArray.first?.name == "TwitterNode"{
+                namelabel.isHidden = true
+                    let screenName =  "@NOLO716"
+                    let appURL = NSURL(string: "twitter://user?screen_name=\(screenName)")!
+                    let webURL = NSURL(string: "https://twitter.com/\(screenName)")!
+    
+                    let application = UIApplication.shared
+                    if application.openURL(appURL as URL) {
+                    }
+                    else {
+                        application.openURL(webURL as URL)
+                    }
+                }
         }
     }
 }
