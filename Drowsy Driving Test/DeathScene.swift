@@ -30,9 +30,10 @@ class DeathScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        zCountLabel = UILabel(frame: CGRect(x: self.frame.width/6.5, y: self.frame.height/7, width: 200, height: 40))
+        zCountLabel = UILabel(frame: CGRect(x: self.frame.width/6.5, y: self.frame.height/7, width: 250, height: 40))
         
         highScoreLabel = UILabel(frame: CGRect(x: self.frame.width/8, y: self.frame.height/6, width: 200, height: 40))
+
         
         playAgainButtonNode = self.childNode(withName: "PlayAgainNode") as! SKSpriteNode
         homeButtonNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
@@ -52,10 +53,14 @@ class DeathScene: SKScene {
         fact1.textColor = .white
         fact1.textAlignment = NSTextAlignment.center
         
+//        HomeButtonNode = self.childNode(withName: "HomeNodeImage") as! SKSpriteNode
+//        HomeButtonNode.texture = SKTexture(imageNamed: "HomeIcon")
+//        HomeButtonNode.color = .clear
+        
         //zCountLabel.frame = CGRect(x: 100, y: 125, width: 200, height: 200)
         zCountLabel.textAlignment = NSTextAlignment.left
         zCountLabel.textColor = .white
-        zCountLabel.font = UIFont(name: "HelveticaNeue" , size: 30)
+        zCountLabel.font = UIFont(name: "HelveticaNeue-Italic" , size: 30)
         zCountLabel.text = "Z Count: " + String( gameScene.getFinishZCount())
         
         //highscorelabel.frame = CGRect(x: 100, y: 100, width: 200, height: 200)
@@ -63,6 +68,7 @@ class DeathScene: SKScene {
         highScoreLabel.textColor = .white
         highScoreLabel.font = UIFont(name: "HelveticaNeue" , size: 30)
         highScoreLabel.text = "Highscore: " + String( gameScene.getHighScore())
+
         
         let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
