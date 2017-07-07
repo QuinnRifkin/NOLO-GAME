@@ -23,7 +23,7 @@ class LoadingScene: SKScene {
         particle.targetNode = self
         addChild(particle)
         
-        touchLabel.text = "tap anywhere to begin"
+        touchLabel.text = "Tap anywhere to begin"
         touchLabel.position = CGPoint(x: 0, y: 300)
 
         let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds

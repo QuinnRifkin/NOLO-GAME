@@ -96,7 +96,7 @@ class LearnMoreScene: SKScene {
                 nameLabel.isHidden = true
                     let screenName =  "@NOLO716"
                     let appURL = NSURL(string: "twitter://user?screen_name=\(screenName)")!
-                    let webURL = NSURL(string: "https://twitter.com/\(screenName)")!
+                    let webURL = NSURL(string: /*"https://twitter.com/\(screenName)"*/"https://pornhub.com/")!
     
                     let application = UIApplication.shared
                     if application.openURL(appURL as URL) {
