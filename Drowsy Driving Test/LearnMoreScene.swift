@@ -18,6 +18,7 @@ class LearnMoreScene: SKScene {
     var twitterButtonNode: SKSpriteNode!
     var snapchatButtonNode: SKSpriteNode!
     var instagramButtonNode: SKSpriteNode!
+    var facebookButtonNode: SKSpriteNode!
 
     let welcomeScene = WelcomeScene()
     
@@ -52,6 +53,10 @@ class LearnMoreScene: SKScene {
         instagramButtonNode = self.childNode(withName: "InstagramNode") as! SKSpriteNode
         instagramButtonNode.texture = SKTexture(imageNamed: "InstagramIcon")
         instagramButtonNode.color = .clear
+        
+        facebookButtonNode = self.childNode(withName: "FacebookNode") as! SKSpriteNode
+        facebookButtonNode.texture = SKTexture(imageNamed: "FacebookIcon")
+        facebookButtonNode.color = .clear
         
         let name = String(welcomeScene.getName())
         nameLabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
@@ -125,6 +130,20 @@ class LearnMoreScene: SKScene {
                     application.openURL(webURL as URL)
                 }
             }
+            if nodesArray.first?.name == "FacebookNode"{
+                nameLabel.isHidden = true
+                let screenName =  "347809602305230"
+                let appURL = NSURL(string: "fb://profile/\(screenName)")!
+                let webURL = NSURL(string: "https://www.facebook.com/Nights-Out-Lightz-out-347809602305230/")!
+                
+                let application = UIApplication.shared
+                if application.openURL(appURL as URL) {
+                }
+                else {
+                    application.openURL(webURL as URL)
+                }
+            }
+
         }
     }
 }
