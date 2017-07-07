@@ -161,7 +161,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(car)
     }
     
-    
     func addRandomZSprite(zSprite: SKSpriteNode, position: CGPoint, name: String){
         zSprite.name = name
         zSprite.position = position
@@ -173,27 +172,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         zSprite.physicsBody?.mass = 0.1
         zSprite.physicsBody?.categoryBitMask = collisionType.zspritex
         addChild(zSprite)
-    }
-    
-    func moveZSprite(zSpriteRight: SKSpriteNode, zSpriteMiddle: SKSpriteNode, zSpriteLeft: SKSpriteNode, obstacle: SKSpriteNode){
-        if(zSpriteRight.isHidden){
-            zSpriteRight.position = CGPoint(x: 1000, y: 1000)
-        }
-        else {
-            zSpriteRight.position = CGPoint(x: obstacle.position.x + obstacle.size.width/3, y: obstacle.position.y - (obstacle.size.height/2) - 40)
-        }
-        if(zSpriteMiddle.isHidden){
-            zSpriteMiddle.position = CGPoint(x: 1000, y: 1000)
-        }
-        else {
-            zSpriteMiddle.position = CGPoint(x: obstacle.position.x , y: obstacle.position.y - (obstacle.size.height/2) - 40)
-        }
-        if(zSpriteLeft.isHidden){
-            zSpriteLeft.position = CGPoint(x: 1000, y: 1000)
-        }
-        else {
-            zSpriteLeft.position = CGPoint(x: obstacle.position.x - obstacle.size.width/3, y: obstacle.position.y - (obstacle.size.height/2) - 40)
-        }
     }
     
     func moveRandomZSprite(zSprite: SKSpriteNode, position: CGPoint){
@@ -225,11 +203,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         obstacle2.position = CGPoint(x: obstacle2.position.x, y: obstacle2.position.y-4-acc+CGFloat(zCount/10))
         obstacle3.position = CGPoint(x: obstacle3.position.x, y: obstacle3.position.y-4-acc+CGFloat(zCount/10))
         obstacle4.position = CGPoint(x: obstacle4.position.x, y: obstacle4.position.y-4-acc+CGFloat(zCount/10))
-        
-        moveZSprite(zSpriteRight: zSprite1Right, zSpriteMiddle: zSprite1Middle, zSpriteLeft: zSprite1Left, obstacle: obstacle1)
-        moveZSprite(zSpriteRight: zSprite2Right, zSpriteMiddle: zSprite2Middle, zSpriteLeft: zSprite2Left, obstacle: obstacle2)
-        moveZSprite(zSpriteRight: zSprite3Right, zSpriteMiddle: zSprite3Middle, zSpriteLeft: zSprite3Left, obstacle: obstacle3)
-        moveZSprite(zSpriteRight: zSprite4Right, zSpriteMiddle: zSprite4Middle, zSpriteLeft: zSprite4Left, obstacle: obstacle4)
         
         moveRandomZSprite(zSprite: zSpriteRandom1, position: zSpriteRandom1.position)
         moveRandomZSprite(zSprite: zSpriteRandom2, position: zSpriteRandom2.position)
@@ -335,7 +308,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addRandomZSprite(zSprite: zSpriteRandom2, position: CGPoint(x: rangex2, y: rangey2), name: "zspriterandom2")
         addRandomZSprite(zSprite: zSpriteRandom3, position: CGPoint(x: rangex3, y: rangey3), name: "zspriterandom3")
         addRandomZSprite(zSprite: zSpriteRandom4, position: CGPoint(x: rangex4, y: rangey4), name: "zspriterandom4")
-        
         
         timeLabel.textAlignment = NSTextAlignment.right
         highScoreLabel.textAlignment = NSTextAlignment.right
