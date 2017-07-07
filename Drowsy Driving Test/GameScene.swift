@@ -165,7 +165,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         zSprite.name = name
         zSprite.position = position
         zSprite.zPosition = 1
-        zSprite.size = CGSize(width: 50, height: 50)
+        zSprite.size = CGSize(width: 60, height: 60)
         zSprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: zSprite.size.width, height: zSprite.size.height))
         zSprite.physicsBody?.isDynamic = true
         zSprite.physicsBody?.allowsRotation = false
