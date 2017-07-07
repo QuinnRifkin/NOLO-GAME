@@ -30,9 +30,9 @@ class DeathScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        zCountLabel = UILabel(frame: CGRect(x: self.frame.width/6.5, y: self.frame.height/7, width: 250, height: 40))
+        zCountLabel = UILabel(frame: CGRect(x: self.frame.width/6.5, y: self.frame.height/6.5, width: 250, height: 40))
         
-        highScoreLabel = UILabel(frame: CGRect(x: self.frame.width/8, y: self.frame.height/6, width: 300, height: 40))
+        highScoreLabel = UILabel(frame: CGRect(x: self.frame.width/8, y: self.frame.height/5.5, width: 300, height: 40))
 
         
         playAgainButtonNode = self.childNode(withName: "PlayAgainNode") as! SKSpriteNode
