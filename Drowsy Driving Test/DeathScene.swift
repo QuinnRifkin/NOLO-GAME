@@ -30,9 +30,9 @@ class DeathScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        zCountLabel = UILabel(frame: CGRect(x: self.frame.width/6.5, y: self.frame.height/6.5, width: 250, height: 40))
+        zCountLabel = UILabel(frame: CGRect(x: self.frame.width/8, y: self.frame.height/6.5, width: 250, height: 40))
         
-        highScoreLabel = UILabel(frame: CGRect(x: self.frame.width/8, y: self.frame.height/5.5, width: 300, height: 40))
+        highScoreLabel = UILabel(frame: CGRect(x: self.frame.width/13, y: self.frame.height/5.5, width: 300, height: 40))
 
         
         playAgainButtonNode = self.childNode(withName: "PlayAgainNode") as! SKSpriteNode
@@ -55,12 +55,12 @@ class DeathScene: SKScene {
         
         zCountLabel.textAlignment = NSTextAlignment.left
         zCountLabel.textColor = .white
-        zCountLabel.font = UIFont(name: "HelveticaNeue-Italic" , size: 30)
+        zCountLabel.font = UIFont(name: "PressStart2P" , size: 20)
         zCountLabel.text = "Z Count: " + String( gameScene.getFinishZCount())
         
         highScoreLabel.textAlignment = NSTextAlignment.left
         highScoreLabel.textColor = .white
-        highScoreLabel.font = UIFont(name: "HelveticaNeue-Italic" , size: 30)
+        highScoreLabel.font = UIFont(name: "PressStart2P" , size: 20)
         highScoreLabel.text = "Highscore: " + String( gameScene.getHighScore())
 
         let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
