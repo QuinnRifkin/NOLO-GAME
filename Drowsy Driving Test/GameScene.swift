@@ -13,7 +13,7 @@ import AVFoundation
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameViewController = GameViewController()
     
-    var gameMusic = SKAudioNode!
+    var gameMusic : SKAudioNode!
     
     var highScoreDefault = UserDefaults.standard
     var highScore: Int = 0
