@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F58E01C1F13BCE6007193F3 /* PressStart2P.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F58E01B1F13BCE6007193F3 /* PressStart2P.ttf */; };
+		1F58E0201F13C394007193F3 /* Gradius.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 1F58E01F1F13C394007193F3 /* Gradius.TTF */; };
 		1F5CE6C71EFD660900002231 /* LearnMoreScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CE6C61EFD660900002231 /* LearnMoreScene.sks */; };
 		1F5CE6C91EFD66E900002231 /* LearnMoreScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5CE6C81EFD66E900002231 /* LearnMoreScene.swift */; };
 		1F5CE6CB1EFD6CDF00002231 /* DeathScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CE6CA1EFD6CDF00002231 /* DeathScene.sks */; };
@@ -36,6 +38,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F58E01B1F13BCE6007193F3 /* PressStart2P.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PressStart2P.ttf; sourceTree = "<group>"; };
+		1F58E01F1F13C394007193F3 /* Gradius.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = Gradius.TTF; sourceTree = "<group>"; };
 		1F5CE6C61EFD660900002231 /* LearnMoreScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LearnMoreScene.sks; sourceTree = "<group>"; };
 		1F5CE6C81EFD66E900002231 /* LearnMoreScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LearnMoreScene.swift; sourceTree = "<group>"; };
 		1F5CE6CA1EFD6CDF00002231 /* DeathScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DeathScene.sks; sourceTree = "<group>"; };
@@ -131,6 +135,8 @@
 				1F7230B81EFC3EE8001C62F4 /* Assets.xcassets */,
 				1FB590241F02F67B0097F7D1 /* GameStartSound.mp3 */,
 				1FB590261F02F7F10097F7D1 /* GameContinueSound.mp3 */,
+				1F58E01B1F13BCE6007193F3 /* PressStart2P.ttf */,
+				1F58E01F1F13C394007193F3 /* Gradius.TTF */,
 			);
 			path = "Drowsy Driving Test";
 			sourceTree = "<group>";
@@ -209,8 +215,10 @@
 				1F5CE6C71EFD660900002231 /* LearnMoreScene.sks in Resources */,
 				1FB590251F02F67B0097F7D1 /* GameStartSound.mp3 in Resources */,
 				1FF69D861EFAEEA9006140E2 /* MenuScene.sks in Resources */,
+				1F58E0201F13C394007193F3 /* Gradius.TTF in Resources */,
 				1FF69D4C1EF41AFE006140E2 /* Actions.sks in Resources */,
 				1FB590211F02E5F50097F7D1 /* SettingsScene.sks in Resources */,
+				1F58E01C1F13BCE6007193F3 /* PressStart2P.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

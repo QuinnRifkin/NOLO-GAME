@@ -237,8 +237,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         
         timeLabel = UILabel(frame: CGRect(x: 0, y: 20, width: self.frame.width/2 , height: 20))
+        timeLabel.font = UIFont.init(name: "PressStart2P", size: 13)
         highScoreLabel = UILabel(frame: CGRect(x: 0, y: 40, width: self.frame.width/2 , height: 20))
+        highScoreLabel.font = UIFont.init(name: "PressStart2P", size: 13)
         zCountLabel = UILabel(frame: CGRect(x: 0, y: 60, width: self.frame.width/2 , height: 20))
+        zCountLabel.font = UIFont.init(name: "PressStart2P", size: 13)
         
         widthFrame = UInt32(self.frame.width)
         halfWidthFrame = widthFrame/2
@@ -317,6 +320,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         highScoreLabel.textAlignment = NSTextAlignment.right
         zCountLabel.textAlignment = NSTextAlignment.right
     }
+    
     override func update(_ currentTime: TimeInterval) {
         
         randomNumberx1 = (Int(arc4random_uniform(widthFrame)))
