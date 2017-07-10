@@ -27,7 +27,7 @@ class MenuScene: SKScene {
     
     let welcomeScene = WelcomeScene()
     
-    let namelabel = UILabel(frame: CGRect(x: 6, y: -20, width: 300, height: 100))
+    let namelabel = UILabel(frame: CGRect(x: 6, y: -15, width: 300, height: 100))
     
     var fact : String!
     var fact1 : UILabel!
@@ -77,7 +77,7 @@ class MenuScene: SKScene {
         let name = String(welcomeScene.getName())
         namelabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
         namelabel.textAlignment = NSTextAlignment.left
-        namelabel.font = UIFont(name: "HelveticaNeue", size: 15)
+        namelabel.font = UIFont(name: "HelveticaNeue", size: 20)
         self.view?.addSubview(namelabel)
         
         playDRButtonNode = self.childNode(withName: "PlayDRButton") as! SKSpriteNode

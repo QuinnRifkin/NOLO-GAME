@@ -13,6 +13,8 @@ import AVFoundation
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameViewController = GameViewController()
     
+    var gameMusic = SKAudioNode!
+    
     var highScoreDefault = UserDefaults.standard
     var highScore: Int = 0
     
@@ -235,6 +237,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didMove(to view: SKView) {
+        
+        gameMusic.
         
         timeLabel = UILabel(frame: CGRect(x: 0, y: 20, width: self.frame.width/2 , height: 20))
         timeLabel.font = UIFont.init(name: "PressStart2P", size: 13)

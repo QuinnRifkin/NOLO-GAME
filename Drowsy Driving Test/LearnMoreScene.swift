@@ -24,7 +24,7 @@ class LearnMoreScene: SKScene {
 
     let welcomeScene = WelcomeScene()
     
-    let nameLabel = UILabel(frame: CGRect(x: 6, y: -20, width: 300, height: 100))
+    let nameLabel = UILabel(frame: CGRect(x: 6, y: -15, width: 300, height: 100))
     
     override func didMove(to view: SKView) {
         
@@ -62,11 +62,10 @@ class LearnMoreScene: SKScene {
         
         backButtonNode = self.childNode(withName: "BackNode") as! SKSpriteNode
         
-        
         let name = String(welcomeScene.getName())
         nameLabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
         nameLabel.textAlignment = NSTextAlignment.left
-        nameLabel.font = UIFont(name: "HelveticaNeue", size: 15)
+        nameLabel.font = UIFont(name: "HelveticaNeue", size: 20)
         self.view?.addSubview(nameLabel)
         
         let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds

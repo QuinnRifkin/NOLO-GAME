@@ -16,7 +16,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     let gameScene = GameScene()
     let gameViewController = GameViewController()
     
-    let nameLabel = UILabel(frame: CGRect(x: 6, y: -20, width: 300, height: 100))
+    let nameLabel = UILabel(frame: CGRect(x: 6, y: -15, width: 300, height: 100))
     
     var homeButtonNode : SKSpriteNode!
     
@@ -75,7 +75,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         let name = String(welcomeScene.getName())
         nameLabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
         nameLabel.textAlignment = NSTextAlignment.left
-        nameLabel.font = UIFont(name: "HelveticaNeue", size: 15)
+        nameLabel.font = UIFont(name: "HelveticaNeue", size: 20)
         self.view?.addSubview(nameLabel)
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(WelcomeScene.donePressed(sender:)))
