@@ -19,6 +19,8 @@ class LearnMoreScene: SKScene {
     var snapchatButtonNode: SKSpriteNode!
     var instagramButtonNode: SKSpriteNode!
     var facebookButtonNode: SKSpriteNode!
+    
+    var backButtonNode: SKSpriteNode!
 
     let welcomeScene = WelcomeScene()
     
@@ -58,6 +60,9 @@ class LearnMoreScene: SKScene {
         facebookButtonNode.texture = SKTexture(imageNamed: "FacebookIcon")
         facebookButtonNode.color = .clear
         
+        backButtonNode = self.childNode(withName: "BackNode") as! SKSpriteNode
+        
+        
         let name = String(welcomeScene.getName())
         nameLabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
         nameLabel.textAlignment = NSTextAlignment.left
@@ -86,6 +91,15 @@ class LearnMoreScene: SKScene {
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)
             }
+            if nodesArray.first?.name == "BackNode" {
+                infoLabel.isHidden = true
+                nameLabel.isHidden = true
+                let transition = SKTransition.reveal(with: SKTransitionDirection.right, duration: 0.5)
+                let gameScene = MenuScene(fileNamed: "MenuScene")
+                gameScene?.scaleMode = .aspectFill
+                self.view?.presentScene(gameScene!, transition: transition)
+            }
+
             if nodesArray.first?.name == "GoogleNode"{
                 nameLabel.isHidden = true
                 if let google = NSURL(string: "http://www.google.com"){
