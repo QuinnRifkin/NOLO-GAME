@@ -79,7 +79,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         self.view?.addSubview(nameLabel)
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(WelcomeScene.donePressed(sender:)))
-        let filler = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
+        let flexButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
         
         nameInput.attributedPlaceholder = NSAttributedString(string: welcomeScene.getName() + "...", attributes: [NSForegroundColorAttributeName : UIColor.black])
         nameInput.font = UIFont(name: "HelveticaNeue-Light", size: 15)
@@ -91,7 +91,6 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         nameInput.contentVerticalAlignment = UIControlContentVerticalAlignment.center
         nameInput.delegate = self as UITextFieldDelegate
         nameInput.backgroundColor = .white
-        
         
         numberInput.font = UIFont(name: "HelveticaNeue-Light", size: 15)
         numberInput.attributedPlaceholder = NSAttributedString(string: "Change Age...", attributes: [NSForegroundColorAttributeName : UIColor.black])
@@ -111,7 +110,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         
         toolbar.barStyle = UIBarStyle.blackTranslucent
         toolbar.tintColor = UIColor.blue
-        toolbar.setItems([doneButton], animated: true)
+        toolbar.setItems([flexButton, doneButton], animated: true)
         numberInput.inputAccessoryView = toolbar
         
         let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds

@@ -68,7 +68,7 @@ class GameViewController: UIViewController {
             }
         }
         else{
-            if let scene = SKScene(fileNamed: "LoadingScene"){
+            if let scene = SKScene(fileNamed: "WelcomeScene"){
                 scene.scaleMode = .aspectFill
                 view!.presentScene(scene)
                 view!.ignoresSiblingOrder = false

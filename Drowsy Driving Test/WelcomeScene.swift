@@ -74,9 +74,10 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
         numberInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/4, width: self.frame.width/3, height: 30))
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(WelcomeScene.donePressed(sender:)))
+        let flexButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
         
         nameInput.attributedPlaceholder = NSAttributedString(string: "Enter Name...", attributes: [NSForegroundColorAttributeName : UIColor.black])
-        nameInput.font = UIFont(name: "HelveticaNeue-UltraLight", size: 15)
+        nameInput.font = UIFont(name: "HelveticaNeue-Light", size: 15)
         nameInput.borderStyle = UITextBorderStyle.roundedRect
         nameInput.autocorrectionType = UITextAutocorrectionType.no
         nameInput.keyboardType = UIKeyboardType.default
@@ -87,7 +88,7 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
         nameInput.backgroundColor = .white
         self.view?.addSubview(nameInput)
         
-        numberInput.font = UIFont(name: "HelveticaNeue-UltraLight", size: 15)
+        numberInput.font = UIFont(name: "HelveticaNeue-Light", size: 15)
         numberInput.attributedPlaceholder = NSAttributedString(string: "Enter Age...", attributes: [NSForegroundColorAttributeName : UIColor.black])
         numberInput.borderStyle = UITextBorderStyle.roundedRect
         numberInput.autocorrectionType = UITextAutocorrectionType.no
@@ -107,7 +108,7 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
         
         toolbar.barStyle = UIBarStyle.blackTranslucent
         toolbar.tintColor = UIColor.blue
-        toolbar.setItems([doneButton], animated: true)
+        toolbar.setItems([flexButton, doneButton], animated: true)
         numberInput.inputAccessoryView = toolbar
     }
     
