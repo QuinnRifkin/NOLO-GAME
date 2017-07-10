@@ -79,9 +79,10 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         self.view?.addSubview(nameLabel)
         
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(WelcomeScene.donePressed(sender:)))
+        let filler = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
         
         nameInput.attributedPlaceholder = NSAttributedString(string: welcomeScene.getName() + "...", attributes: [NSForegroundColorAttributeName : UIColor.black])
-        nameInput.font = UIFont(name: "HelveticaNeue-UltraLight", size: 15)
+        nameInput.font = UIFont(name: "HelveticaNeue-Light", size: 15)
         nameInput.borderStyle = UITextBorderStyle.roundedRect
         nameInput.autocorrectionType = UITextAutocorrectionType.no
         nameInput.keyboardType = UIKeyboardType.default
@@ -92,7 +93,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         nameInput.backgroundColor = .white
         
         
-        numberInput.font = UIFont(name: "HelveticaNeue-UltraLight", size: 15)
+        numberInput.font = UIFont(name: "HelveticaNeue-Light", size: 15)
         numberInput.attributedPlaceholder = NSAttributedString(string: "Change Age...", attributes: [NSForegroundColorAttributeName : UIColor.black])
         numberInput.borderStyle = UITextBorderStyle.roundedRect
         numberInput.autocorrectionType = UITextAutocorrectionType.no
@@ -148,13 +149,13 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        moveTextField(textField: nameInput, moveDistace: -50, up: true)
-        moveTextField(textField: numberInput, moveDistace: -50, up: true)
+        moveTextField(textField: nameInput, moveDistace: -20, up: true)
+        moveTextField(textField: numberInput, moveDistace: -20, up: true)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        moveTextField(textField: nameInput, moveDistace: -50, up: false)
-        moveTextField(textField: numberInput, moveDistace: -50, up: false)
+        moveTextField(textField: nameInput, moveDistace: -20, up: false)
+        moveTextField(textField: numberInput, moveDistace: -20, up: false)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -204,16 +205,23 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
             }
             
             if nodesArray.first?.name == "ResetNode" {
-                let alert = UIAlertController(title: "WARNING", message: "Your highscore is " + String(highScore) + "\n There is no going back...", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
-                alert.addAction(UIAlertAction(title: "RESET", style: UIAlertActionStyle.destructive, handler: { action in
-                    self.gameScene.resetHighScore()}))
+                if(highScore != 0){
+                    let alert = UIAlertController(title: "WARNING", message: "Your highscore is " + String(highScore) + "\n There is no going back...", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+                    alert.addAction(UIAlertAction(title: "RESET", style: UIAlertActionStyle.destructive, handler: { action in
+                        self.gameScene.resetHighScore()}))
                 
-                if let vc = self.view?.window?.rootViewController {
-                    vc.present(alert, animated: true, completion: nil)
+                    if let vc = self.view?.window?.rootViewController {
+                        vc.present(alert, animated: true, completion: nil)
+                    }
                 }
-
-                
+                else{
+                    let alert = UIAlertController(title: "Nice Try", message: "Your highscore is already 0", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil))
+                    if let vc = self.view?.window?.rootViewController {
+                        vc.present(alert, animated: true, completion: nil)
+                    }
+                }
             }
         }
     }

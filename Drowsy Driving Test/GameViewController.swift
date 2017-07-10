@@ -34,7 +34,7 @@ class GameViewController: UIViewController {
     }
     
     func isPlayingMusic() -> Bool {
-        return audioPlayer.isPlaying
+        return (audioPlayer.isPlaying)
     }
     
     func stopMusic(){
@@ -68,7 +68,7 @@ class GameViewController: UIViewController {
             }
         }
         else{
-            if let scene = SKScene(fileNamed: "WelcomeScene"){
+            if let scene = SKScene(fileNamed: "LoadingScene"){
                 scene.scaleMode = .aspectFill
                 view!.presentScene(scene)
                 view!.ignoresSiblingOrder = false
