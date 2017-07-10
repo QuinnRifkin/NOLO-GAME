@@ -16,7 +16,6 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     let gameScene = GameScene()
     let gameViewController = GameViewController()
     
-    
     let nameLabel = UILabel(frame: CGRect(x: 6, y: -20, width: 300, height: 100))
     
     var homeButtonNode : SKSpriteNode!
@@ -188,7 +187,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
+        let highScore = gameScene.getHighScore()
         let touch = touches.first
         
         if let location = touch?.location(in: self){
@@ -205,7 +204,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
             }
             
             if nodesArray.first?.name == "ResetNode" {
-                let alert = UIAlertController(title: "WARNING", message: "There is no going back...", preferredStyle: UIAlertControllerStyle.alert)
+                let alert = UIAlertController(title: "WARNING", message: "Your highscore is " + String(highScore) + "\n There is no going back...", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
                 alert.addAction(UIAlertAction(title: "RESET", style: UIAlertActionStyle.destructive, handler: { action in
                     self.gameScene.resetHighScore()}))
