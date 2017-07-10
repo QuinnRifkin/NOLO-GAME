@@ -12,6 +12,9 @@ import UIKit
 
 class MenuScene: SKScene {
     
+    var date = UserDefaults.standard
+    var nightShiftNotified = UserDefaults.standard
+    
     let gameViewController = GameViewController()
     
     var playDRButtonNode:SKSpriteNode!
@@ -29,7 +32,33 @@ class MenuScene: SKScene {
     var fact : String!
     var fact1 : UILabel!
     
+    var timeOfDay = Date()
+    var calendar = Calendar.current
+    
     override func didMove(to view: SKView) {
+        var day = calendar.component(.day, from: timeOfDay)
+        var hour = calendar.component(.hour, from: timeOfDay)
+        var minute = calendar.component(.minute, from: timeOfDay)
+        
+        if(date.value(forKey: "date") == nil){
+            date.set(day, forKey: "date")
+        }
+        if(nightShiftNotified.value(forKey: "nightshift") == nil){
+            nightShiftNotified.set(false, forKey: "nightshift")
+        }
+        
+        if(date.integer(forKey: "date") != day){
+            date.set(day, forKey: "date")
+            nightShiftNotified.set(false, forKey: "nightshift")
+        }
+
+        if(!(nightShiftNotified.bool(forKey: "nightshift")) && hour >= 21){
+            nightShiftNotified.set(true, forKey: "nightshift")
+            let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
+            DispatchQueue.main.asyncAfter(deadline: when) {
+                self.alertShow()
+            }
+        }
         
         factBar = self.childNode(withName: "factBar") as! SKSpriteNode
 
@@ -61,6 +90,15 @@ class MenuScene: SKScene {
         let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.view?.addSubview(self.fact1)
+        }
+    }
+    
+    func alertShow(){
+        let alert = UIAlertController(title: "Hey", message: "You should turn on Nightshift", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "I Have it on", style: UIAlertActionStyle.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+        if let vc = self.view?.window?.rootViewController {
+            vc.present(alert, animated: true, completion: nil)
         }
     }
     

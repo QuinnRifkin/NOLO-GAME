@@ -17,6 +17,9 @@ class GameViewController: UIViewController {
     
     var audioPlayer = AVAudioPlayer()
     
+    var timeOfDay = Date()
+    var calendar = Calendar.current
+    
     func playMusic(file: String){
         
         do {
@@ -45,6 +48,14 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let view = self.view as! SKView?
+        
+        var hours = calendar.component(.hour, from: timeOfDay)
+        var minutes = calendar.component(.minute, from: timeOfDay)
+        if(hours > 12){
+        print(String(hours) + ":" + String(minutes) + " PM")
+        } else{
+            print(String(hours) + ":" + String(minutes) + " AM")
+        }
         
         if(launchDefault.value(forKey: "Launch") == nil || launchDefault.integer(forKey: "Launch" ) == 0 ){
             launchDefault.set(0, forKey: "Launch")
@@ -87,13 +98,5 @@ class GameViewController: UIViewController {
 
     override var prefersStatusBarHidden: Bool {
         return true
-    }
-    
-    func alertShow(){
-        let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
-        if let vc = self.view?.window?.rootViewController {
-            vc.present(alert, animated: true, completion: nil)
-        }
     }
 }
