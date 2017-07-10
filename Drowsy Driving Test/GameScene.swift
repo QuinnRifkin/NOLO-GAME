@@ -270,7 +270,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if(highScoreDefault.value(forKey: "HighScore") != nil){
             highScore = highScoreDefault.value(forKey: "HighScore") as! NSInteger!
             highScoreLabel.text = String(highScore)
-            self.view?.addSubview(highScoreLabel)
         }
         zCountDefault.set(0, forKey: "FinalTime")
         
@@ -341,13 +340,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         highScoreLabel.attributedText = NSAttributedString(string: String(highScore), attributes: [NSForegroundColorAttributeName : UIColor.white])
-        self.view?.addSubview(highScoreLabel)
         
         timeLabel.attributedText = NSAttributedString(string: String(time), attributes: [NSForegroundColorAttributeName : UIColor.white])
-        self.view?.addSubview(timeLabel)
         
         zCountLabel.attributedText = NSAttributedString(string: String(zTrueCount), attributes: [NSForegroundColorAttributeName : UIColor.white])
-        self.view?.addSubview(zCountLabel)
+        
+        if(time >= 1){
+            self.view?.addSubview(highScoreLabel)
+            self.view?.addSubview(timeLabel)
+            self.view?.addSubview(zCountLabel)
+        }
         
         let randomNumber = (Int(arc4random_uniform(upper + upper)))
         let range : Int = Int(randomNumber - Int(upper))
