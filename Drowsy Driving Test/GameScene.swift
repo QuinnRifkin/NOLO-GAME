@@ -230,6 +230,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         zCountDefault.synchronize()
     }
     
+    func resetHighScore(){
+        highScoreDefault.set(0, forKey: "HighScore")
+    }
+    
     override func didMove(to view: SKView) {
         
         timeLabel = UILabel(frame: CGRect(x: 0, y: 20, width: self.frame.width/2 , height: 20))

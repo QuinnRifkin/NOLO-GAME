@@ -13,10 +13,15 @@ import UIKit
 class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource{
     
     let welcomeScene = WelcomeScene()
+    let gameScene = GameScene()
+    let gameViewController = GameViewController()
+    
     
     let nameLabel = UILabel(frame: CGRect(x: 6, y: -20, width: 300, height: 100))
     
     var homeButtonNode : SKSpriteNode!
+    
+    var resetButtonNode : SKSpriteNode!
     
     var nameInput : UITextField!
     var numberInput : UITextField!
@@ -59,12 +64,14 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     
     override func didMove(to view: SKView) {
         
-        nameInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/5, width: self.frame.width/3, height: 30))
-        numberInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/4, width: self.frame.width/3, height: 30))
+        nameInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/9, width: self.frame.width/3, height: 30))
+        numberInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/6.5, width: self.frame.width/3, height: 30))
         
         homeButtonNode = self.childNode(withName: "HomeNodeImage") as! SKSpriteNode
         homeButtonNode.texture = SKTexture(imageNamed: "HomeIcon")
         homeButtonNode.color = .clear
+        
+        resetButtonNode = self.childNode(withName: "ResetNode") as! SKSpriteNode
         
         let name = String(welcomeScene.getName())
         nameLabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
@@ -195,6 +202,19 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
                 let gameScene = MenuScene(fileNamed: "MenuScene")
                 gameScene?.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene!, transition: transition)
+            }
+            
+            if nodesArray.first?.name == "ResetNode" {
+                let alert = UIAlertController(title: "WARNING", message: "There is no going back...", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
+                alert.addAction(UIAlertAction(title: "RESET", style: UIAlertActionStyle.destructive, handler: { action in
+                    self.gameScene.resetHighScore()}))
+                
+                if let vc = self.view?.window?.rootViewController {
+                    vc.present(alert, animated: true, completion: nil)
+                }
+
+                
             }
         }
     }

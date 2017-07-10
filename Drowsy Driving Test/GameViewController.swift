@@ -42,7 +42,6 @@ class GameViewController: UIViewController {
         return launchDefault.integer(forKey: "Launch")
     }
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         let view = self.view as! SKView?
@@ -67,7 +66,6 @@ class GameViewController: UIViewController {
             }
         }
         launchDefault.set(launchDefault.integer(forKey: "Launch") + 1, forKey: "Launch")
-    
     }
     
     override var shouldAutorotate: Bool {
@@ -89,5 +87,13 @@ class GameViewController: UIViewController {
 
     override var prefersStatusBarHidden: Bool {
         return true
+    }
+    
+    func alertShow(){
+        let alert = UIAlertController(title: "Alert", message: "Message", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.default, handler: nil))
+        if let vc = self.view?.window?.rootViewController {
+            vc.present(alert, animated: true, completion: nil)
+        }
     }
 }
