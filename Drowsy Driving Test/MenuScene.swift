@@ -36,9 +36,8 @@ class MenuScene: SKScene {
     var calendar = Calendar.current
     
     override func didMove(to view: SKView) {
-        var day = calendar.component(.day, from: timeOfDay)
-        var hour = calendar.component(.hour, from: timeOfDay)
-        var minute = calendar.component(.minute, from: timeOfDay)
+        let day = calendar.component(.day, from: timeOfDay)
+        let hour = calendar.component(.hour, from: timeOfDay)
         
         if(date.value(forKey: "date") == nil){
             date.set(day, forKey: "date")

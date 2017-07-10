@@ -9,14 +9,15 @@
 import SpriteKit
 import GameplayKit
 import UIKit
+import AVFoundation
 
 class LoadingScene: SKScene {
+    var gameViewController = GameViewController()
     
     var touchLabel = SKLabelNode(fontNamed: "Helvetica")
     var animateLabel = SKAction.sequence([SKAction.fadeIn(withDuration: 0.8), SKAction.wait(forDuration: 0.5), SKAction.fadeOut(withDuration: 0.8)])
     
     override func didMove(to view: SKView) {
-        
         let particlePath = Bundle.main.path(forResource: "SparkEmitter", ofType: "sks")!
         let particle = NSKeyedUnarchiver.unarchiveObject(withFile: particlePath) as! SKEmitterNode
         particle.position = CGPoint.zero

@@ -9,8 +9,11 @@
 import SpriteKit
 import GameplayKit
 import UIKit
+import AVFoundation
 
 class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource{
+    
+    var gameViewController = GameViewController()
     
     let name1 = UserDefaults.standard
     
@@ -136,16 +139,16 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        moveTextField(textField: nameInput, moveDistace: -50, up: true)
-        moveTextField(textField: numberInput, moveDistace: -50, up: true)
+        moveTextField(textField: nameInput, moveDistace: -30, up: true)
+        moveTextField(textField: numberInput, moveDistace: -30, up: true)
         if(textField == numberInput){
             numberInput.text = month + " " + day + ", " + year
         }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        moveTextField(textField: nameInput, moveDistace: -50, up: false)
-        moveTextField(textField: numberInput, moveDistace: -50, up: false)
+        moveTextField(textField: nameInput, moveDistace: -30, up: false)
+        moveTextField(textField: numberInput, moveDistace: -30, up: false)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
