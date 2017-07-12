@@ -20,11 +20,13 @@ class LearnMoreScene: SKScene {
     var instagramButtonNode: SKSpriteNode!
     var facebookButtonNode: SKSpriteNode!
     
+    var goHomeLabelNode: SKLabelNode!
+    
     var backButtonNode: SKSpriteNode!
 
     let welcomeScene = WelcomeScene()
     
-    let nameLabel = UILabel(frame: CGRect(x: 6, y: -15, width: 300, height: 100))
+    let nameLabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
     
     override func didMove(to view: SKView) {
         
@@ -36,9 +38,7 @@ class LearnMoreScene: SKScene {
         infoLabel.textColor = .white
         infoLabel.textAlignment = NSTextAlignment.left
         
-        homeButtonNode = self.childNode(withName: "HomeNodeImage") as! SKSpriteNode
-        homeButtonNode.texture = SKTexture(imageNamed: "HomeIcon")
-        homeButtonNode.color = .clear
+        goHomeLabelNode = self.childNode(withName: "GoHomeLabel") as! SKLabelNode
         
         googleButtonNode = self.childNode(withName: "GoogleNode") as! SKSpriteNode
         googleButtonNode.texture = SKTexture(imageNamed: "GoogleIcon")
@@ -62,10 +62,24 @@ class LearnMoreScene: SKScene {
         
         backButtonNode = self.childNode(withName: "BackNode") as! SKSpriteNode
         
+        
         let name = String(welcomeScene.getName())
+        if(name!.characters.count >= 25)
+        {
+            nameLabel.font = UIFont(name: "HelveticaNeue", size: 10)
+        } else if(name!.characters.count >= 20){
+            nameLabel.font = UIFont(name: "HelveticaNeue", size: 12)
+        } else if(name!.characters.count >= 15){
+            nameLabel.font = UIFont(name: "HelveticaNeue", size: 14)
+        } else if(name!.characters.count >= 10){
+            nameLabel.font = UIFont(name: "HelveticaNeue", size: 16)
+        } else {
+            nameLabel.font = UIFont(name: "HelveticaNeue", size: 18)
+        }
+        
         nameLabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
         nameLabel.textAlignment = NSTextAlignment.left
-        nameLabel.font = UIFont(name: "HelveticaNeue", size: 20)
+
         self.view?.addSubview(nameLabel)
         
         let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
@@ -83,12 +97,20 @@ class LearnMoreScene: SKScene {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "HomeNode" {
-                infoLabel.isHidden = true
-                nameLabel.isHidden = true
-                let transition = SKTransition.reveal(with: SKTransitionDirection.right, duration: 0.5)
+                goHomeLabelNode.fontColor = UIColor.lightGray
+                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                    self.goHomeLabelNode.fontColor = UIColor.white
+                }
+                let transition = SKTransition.push(with: SKTransitionDirection.right, duration: 0.5)
                 let gameScene = MenuScene(fileNamed: "MenuScene")
                 gameScene?.scaleMode = .aspectFill
-                self.view?.presentScene(gameScene!, transition: transition)
+                let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when2) {
+                    self.infoLabel.isHidden = true
+                    self.nameLabel.isHidden = true
+                    self.view?.presentScene(gameScene!, transition: transition)
+                }
             }
             if nodesArray.first?.name == "BackNode" {
                 infoLabel.isHidden = true

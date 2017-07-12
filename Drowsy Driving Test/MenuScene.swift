@@ -12,6 +12,9 @@ import UIKit
 
 class MenuScene: SKScene {
     
+    var playLabelNode : SKLabelNode!
+    var learnLabelNode : SKLabelNode!
+    
     var date = UserDefaults.standard
     var nightShiftNotified = UserDefaults.standard
     
@@ -27,7 +30,7 @@ class MenuScene: SKScene {
     
     let welcomeScene = WelcomeScene()
     
-    let namelabel = UILabel(frame: CGRect(x: 6, y: -15, width: 300, height: 100))
+    let namelabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
     
     var fact : String!
     var fact1 : UILabel!
@@ -36,6 +39,7 @@ class MenuScene: SKScene {
     var calendar = Calendar.current
     
     override func didMove(to view: SKView) {
+
         let day = calendar.component(.day, from: timeOfDay)
         let hour = calendar.component(.hour, from: timeOfDay)
         
@@ -61,7 +65,7 @@ class MenuScene: SKScene {
         
         factBar = self.childNode(withName: "factBar") as! SKSpriteNode
 
-        sleepFactz = ["Sleep deprivation can result in obesity and poor diet quality.", "Sleep deprivation causes heart disease.", "Sleep deprivation increases the risk of diabetes.", "Not getting enough sleep can result in rash decision making.", "Drowsy driving can be as dangerous as drunk driving.", "Getting more sleep is proven to increase performance in school.", "Putting your phone away before bed will result in a much better sleep.", "Beauty Sleep is real; Going to bed earlier can improve your physical appearance.", "An average of 83,000 car crashes occur each year due to drowsy driving.", "Less than 30% of highschool students get sufficient sleep (8-10hrs)", "Humans are the only mammals that delay their sleep on purpose", "Exercising on a regular basis makes it easier to fall asleep", "12% of people dream in black and white", "Sleep deprivation can kill you faster than food deprivaton", "If falling asleep takes less than 10 minutes, chances are you are sleep deprived"]
+        sleepFactz = ["Sleep deprivation can result in obesity and poor diet quality.", "Sleep deprivation causes heart disease.", "Sleep deprivation increases the risk of diabetes.", "Not getting enough sleep can result in rash decision making.", "Drowsy driving can be as dangerous as drunk driving.", "Getting more sleep is proven to increase performance in school.", "Putting your phone away before bed will result in a much better sleep.", "Beauty Sleep is real; Going to bed earlier can improve your physical appearance.", "An average of 83,000 car crashes occur each year due to drowsy driving.", "Less than 30% of highschool students get sufficient sleep (8-10hrs).", "Humans are the only mammals that delay their sleep on purpose.", "Exercising on a regular basis makes it easier to fall asleep.", "12% of people dream in black and white.", "Sleep deprivation can kill you faster than food deprivaton.", "If falling asleep takes less than 10 minutes, chances are you are sleep deprived."]
 
         fact = (String) (sleepFactz[Int(arc4random_uniform(15))])
         
@@ -75,9 +79,21 @@ class MenuScene: SKScene {
         fact1.textAlignment = NSTextAlignment.center
         
         let name = String(welcomeScene.getName())
+        if(name!.characters.count >= 25)
+        {
+            namelabel.font = UIFont(name: "HelveticaNeue", size: 10)
+        } else if(name!.characters.count >= 20){
+            namelabel.font = UIFont(name: "HelveticaNeue", size: 12)
+        } else if(name!.characters.count >= 15){
+            namelabel.font = UIFont(name: "HelveticaNeue", size: 14)
+        } else if(name!.characters.count >= 10){
+            namelabel.font = UIFont(name: "HelveticaNeue", size: 16)
+        } else {
+            namelabel.font = UIFont(name: "HelveticaNeue", size: 18)
+        }
+        
         namelabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
         namelabel.textAlignment = NSTextAlignment.left
-        namelabel.font = UIFont(name: "HelveticaNeue", size: 20)
         self.view?.addSubview(namelabel)
         
         playDRButtonNode = self.childNode(withName: "PlayDRButton") as! SKSpriteNode
@@ -85,7 +101,10 @@ class MenuScene: SKScene {
         settingsButtonNode = self.childNode(withName: "SettingsNodeImage") as! SKSpriteNode
         settingsButtonNode.texture = SKTexture(imageNamed: "SettingsButton")
         settingsButtonNode.color = .clear
+        playLabelNode = self.childNode(withName: "PlayDRLabel") as! SKLabelNode
+        learnLabelNode = self.childNode(withName: "LearnMoreLabel") as! SKLabelNode
         
+
         let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.view?.addSubview(self.fact1)
@@ -110,37 +129,69 @@ class MenuScene: SKScene {
             
             if nodesArray.first?.name == "PlayDRButton" {
                 if(Int(gameViewController.getDefault()) == 1){
-                    namelabel.isHidden = true
-                    fact1.isHidden = true
+                    playLabelNode.fontColor = UIColor.gray
+                    let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+                    DispatchQueue.main.asyncAfter(deadline: when) {
+                        self.playLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)
+                    }
                     let transition = SKTransition.crossFade(withDuration: 0.5)
                     let gameScene = MenuScene(fileNamed: "InstructionScene1")
                     gameScene?.scaleMode = .aspectFill
-                    self.view?.presentScene(gameScene!, transition: transition)
+                    let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+                    DispatchQueue.main.asyncAfter(deadline: when2) {
+                        self.namelabel.isHidden = true
+                        self.fact1.isHidden = true
+                        self.view?.presentScene(gameScene!, transition: transition)
+                    }
                 }
                 else{
-                    namelabel.isHidden = true
-                    fact1.isHidden = true
+                    playLabelNode.fontColor = UIColor.gray
+                    let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+                    DispatchQueue.main.asyncAfter(deadline: when) {
+                        self.playLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)
+                    }
                     let transition = SKTransition.doorsOpenVertical(withDuration: 1)
                     let gameScene = GameScene(fileNamed: "GameScene")
                     gameScene?.scaleMode = .aspectFill
-                    self.view?.presentScene(gameScene!, transition: transition)
+                    let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+                    DispatchQueue.main.asyncAfter(deadline: when2) {
+                        self.namelabel.isHidden = true
+                        self.fact1.isHidden = true
+                        self.view?.presentScene(gameScene!, transition: transition)
+                    }
                 }
             }
             if nodesArray.first?.name == "LearnMoreButton" {
-                namelabel.isHidden = true
-                fact1.isHidden = true
+                learnLabelNode.fontColor = UIColor.gray
+                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                    self.learnLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)
+                }
                 let transition = SKTransition.reveal(with: SKTransitionDirection.left, duration: 0.5)
                 let gameScene = MenuScene(fileNamed: "LearnMoreScene")
                 gameScene?.scaleMode = .aspectFill
-                self.view?.presentScene(gameScene!, transition: transition)
+                let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when2) {
+                    self.namelabel.isHidden = true
+                    self.fact1.isHidden = true
+                    self.view?.presentScene(gameScene!, transition: transition)
+                }
             }
             if nodesArray.first?.name == "SettingsNode" {
-                namelabel.isHidden = true
-                fact1.isHidden = true
+                settingsButtonNode.texture = SKTexture(imageNamed: "SettingsButton2")
+                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                    self.settingsButtonNode.texture = SKTexture(imageNamed: "SettingsButton")
+                }
                 let transition = SKTransition.reveal(with: SKTransitionDirection.left, duration: 0.5)
                 let gameScene = MenuScene(fileNamed: "SettingsScene")
+                let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
                 gameScene?.scaleMode = .aspectFill
-                self.view?.presentScene(gameScene!, transition: transition)
+                DispatchQueue.main.asyncAfter(deadline: when2) {
+                    self.namelabel.isHidden = true
+                    self.fact1.isHidden = true
+                    self.view?.presentScene(gameScene!, transition: transition)
+                }
             }
         }
     }

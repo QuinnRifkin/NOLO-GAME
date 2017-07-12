@@ -25,8 +25,16 @@ class GameViewController: UIViewController {
         do {
             audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: file, ofType: "mp3")!))
             audioPlayer.prepareToPlay()
-        }
             
+            var audioSession = AVAudioSession.sharedInstance()
+            
+            do{
+                try audioSession.setCategory(AVAudioSessionCategorySoloAmbient)
+            }
+            catch{
+                print (error)
+            }
+        }
         catch {
             print(error)
         }
@@ -34,11 +42,27 @@ class GameViewController: UIViewController {
     }
     
     func isPlayingMusic() -> Bool {
-        return (audioPlayer.isPlaying)
+        if(audioPlayer.isPlaying){
+            return true
+        }
+        return false
     }
     
     func stopMusic(){
         audioPlayer.stop()
+    }
+    
+    func setLoops(loops: Int){
+        audioPlayer.numberOfLoops = loops
+    }
+    
+    func volume(){
+        audioPlayer.setVolume(0, fadeDuration: 0)
+    }
+    
+    public func audioPlayerBeginInterruption(_ player: AVAudioPlayer)
+    {
+        
     }
     
     func getDefault() -> Int {

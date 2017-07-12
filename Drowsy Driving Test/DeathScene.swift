@@ -16,6 +16,9 @@ class DeathScene: SKScene {
     var homeButtonNode: SKSpriteNode!
     var factBar:SKSpriteNode!
     
+    var playLabelNode: SKLabelNode!
+    var homeLabelNode: SKLabelNode!
+    
     var gameScene = GameScene()
     
     var timeLabel : UILabel!
@@ -32,15 +35,17 @@ class DeathScene: SKScene {
         
         zCountLabel = UILabel(frame: CGRect(x: self.frame.width/8, y: self.frame.height/6.5, width: 250, height: 40))
         
-        highScoreLabel = UILabel(frame: CGRect(x: self.frame.width/13, y: self.frame.height/5.5, width: 300, height: 40))
+        highScoreLabel = UILabel(frame: CGRect(x: self.frame.width/14, y: self.frame.height/5.5, width: 300, height: 40))
 
         
         playAgainButtonNode = self.childNode(withName: "PlayAgainNode") as! SKSpriteNode
         homeButtonNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
+        playLabelNode = self.childNode(withName: "PlayAgainLabel") as! SKLabelNode
+        homeLabelNode = self.childNode(withName: "HomeLabel") as! SKLabelNode
         
         factBar = self.childNode(withName: "factBar") as! SKSpriteNode
        
-        sleepFactz = ["Sleep deprivation can result in obesity and poor diet quality.", "Sleep deprivation causes heart disease.", "Sleep deprivation increases the risk of diabetes.", "Not getting enough sleep can result in rash decision making.", "Drowsy driving can be as dangerous as drunk driving.", "Getting more sleep is proven to increase performance in school.", "Putting your phone away before bed will result in a much better sleep.", "Beauty Sleep is real; Going to bed earlier can improve your physical appearance.", "An average of 83,000 car crashes occur each year due to drowsy driving.", "Less than 30% of highschool students get sufficient sleep (8-10hrs)", "Humans are the only mammals that delay their sleep on purpose", "Exercising on a regular basis makes it easier to fall asleep", "12% of people dream in black and white", "Sleep deprivation can kill you faster than food deprivaton", "If falling asleep takes less than 10 minutes, chances are you are sleep deprived"]
+        sleepFactz = ["Sleep deprivation can result in obesity and poor diet quality.", "Sleep deprivation causes heart disease.", "Sleep deprivation increases the risk of diabetes.", "Not getting enough sleep can result in rash decision making.", "Drowsy driving can be as dangerous as drunk driving.", "Getting more sleep is proven to increase performance in school.", "Putting your phone away before bed will result in a much better sleep.", "Beauty Sleep is real; Going to bed earlier can improve your physical appearance.", "An average of 83,000 car crashes occur each year due to drowsy driving.", "Less than 30% of highschool students get sufficient sleep (8-10hrs).", "Humans are the only mammals that delay their sleep on purpose.", "Exercising on a regular basis makes it easier to fall asleep.", "12% of people dream in black and white.", "Sleep deprivation can kill you faster than food deprivaton.", "If falling asleep takes less than 10 minutes, chances are you are sleep deprived."]
         
         fact = (String) (sleepFactz[Int(arc4random_uniform(15))])
         
@@ -79,22 +84,38 @@ class DeathScene: SKScene {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "HomeNode" {
-                zCountLabel.isHidden = true
-                fact1.isHidden = true
-                highScoreLabel.isHidden = true
+                homeLabelNode.fontColor = UIColor.gray
+                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                    self.homeLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)
+                }
                 let transition = SKTransition.reveal(with: SKTransitionDirection.down, duration: 0.5)
                 let gameScene = DeathScene(fileNamed: "MenuScene")
                 gameScene?.scaleMode = .aspectFill
-                self.view?.presentScene(gameScene!, transition: transition)
+                let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when2) {
+                    self.zCountLabel.isHidden = true
+                    self.fact1.isHidden = true
+                    self.highScoreLabel.isHidden = true
+                    self.view?.presentScene(gameScene!, transition: transition)
+                }
             }
             if nodesArray.first?.name == "PlayAgainNode" {
-                zCountLabel.isHidden = true
-                fact1.isHidden = true
-                highScoreLabel.isHidden = true
+                playLabelNode.fontColor = UIColor.gray
+                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                    self.playLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)
+                }
                 let transition = SKTransition.push(with: SKTransitionDirection.down, duration: 1)
                 let gameScene = DeathScene(fileNamed: "GameScene")
                 gameScene?.scaleMode = .aspectFill
-                self.view?.presentScene(gameScene!, transition: transition)
+                let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when2) {
+                    self.zCountLabel.isHidden = true
+                    self.fact1.isHidden = true
+                    self.highScoreLabel.isHidden = true
+                    self.view?.presentScene(gameScene!, transition: transition)
+                }
             }
         }
     }

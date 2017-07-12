@@ -16,7 +16,9 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     let gameScene = GameScene()
     let gameViewController = GameViewController()
     
-    let nameLabel = UILabel(frame: CGRect(x: 6, y: -15, width: 300, height: 100))
+    var goHomeLabelNode : SKLabelNode!
+    
+    let nameLabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
     
     var homeButtonNode : SKSpriteNode!
     
@@ -27,11 +29,12 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     let agePicker = UIPickerView()
     
     let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
+    let toolbarName = UIToolbar(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
     
     var database = [
         ["January","February","March","April","May","June","July","August","September","October","November","December"],
         ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"],
-        ["2017","2016","2015","2014","2013","2012","2011","2010","2009","2008","2007","2006","2005","2004","2003","2002","2001","2000","1999","1998","1997","1996","1995","1994","1993","1992","1991","1990","1989","1988","1987","1986","1985","1984","1983","1982","1981","1980"]
+        ["2017","2016","2015","2014","2013","2012","2011","2010","2009","2008","2007","2006","2005","2004","2003","2002","2001","2000","1999","1998","1997","1996","1995","1994","1993","1992","1991","1990","1989","1988","1987","1986","1985","1984","1983","1982","1981","1980","1979","1978","1977","1976","1975","1974","1973","1972","1971","1970","1969","1968","1967","1966","1965","1964","1963","1962","1961","1960","1959","1958","1957","1956","1955","1954","1953","1952","1951","1950","1949","1948","1947","1946","1945","1944","1943","1942","1941","1940","1939","1938","1937","1936","1935","1934","1933","1932","1931","1930","1929","1928","1927","1926","1925","1924","1923","1922","1921","1920","1919","1918","1917","1916","1915","1914","1913","1912","1911","1910","1909","1908","1907","1906","1905","1904","1903","1902","1901","1900"]
     ]
     var month = ""
     var day = ""
@@ -63,25 +66,42 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     
     override func didMove(to view: SKView) {
         
-        nameInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/9, width: self.frame.width/3, height: 30))
-        numberInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/6.5, width: self.frame.width/3, height: 30))
+        nameInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/8, width: self.frame.width/3, height: 30))
+        numberInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/6, width: self.frame.width/3, height: 30))
         
         homeButtonNode = self.childNode(withName: "HomeNodeImage") as! SKSpriteNode
-        homeButtonNode.texture = SKTexture(imageNamed: "HomeIcon")
+        //homeButtonNode.texture = SKTexture(imageNamed: "HomeIcon")
         homeButtonNode.color = .clear
         
         resetButtonNode = self.childNode(withName: "ResetNode") as! SKSpriteNode
+        goHomeLabelNode = self.childNode(withName: "GoHomeLabel") as! SKLabelNode
         
         let name = String(welcomeScene.getName())
+        if(name!.characters.count >= 25)
+        {
+            nameLabel.font = UIFont(name: "HelveticaNeue", size: 10)
+        } else if(name!.characters.count >= 20){
+            nameLabel.font = UIFont(name: "HelveticaNeue", size: 12)
+        } else if(name!.characters.count >= 15){
+            nameLabel.font = UIFont(name: "HelveticaNeue", size: 14)
+        } else if(name!.characters.count >= 10){
+            nameLabel.font = UIFont(name: "HelveticaNeue", size: 16)
+        } else {
+            nameLabel.font = UIFont(name: "HelveticaNeue", size: 18)
+        }
+        
         nameLabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
         nameLabel.textAlignment = NSTextAlignment.left
-        nameLabel.font = UIFont(name: "HelveticaNeue", size: 20)
+
         self.view?.addSubview(nameLabel)
         
-        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(WelcomeScene.donePressed(sender:)))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(SettingsScene.donePressed(sender:)))
         let flexButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(SettingsScene.cancelPressed(sender:)))
         
-        nameInput.attributedPlaceholder = NSAttributedString(string: welcomeScene.getName() + "...", attributes: [NSForegroundColorAttributeName : UIColor.black])
+        let cancelNameButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(SettingsScene.cancelNamePressed(sender:)))
+        
+        nameInput.attributedPlaceholder = NSAttributedString(string: welcomeScene.getName(), attributes: [NSForegroundColorAttributeName : UIColor.black])
         nameInput.font = UIFont(name: "HelveticaNeue-Light", size: 15)
         nameInput.borderStyle = UITextBorderStyle.roundedRect
         nameInput.autocorrectionType = UITextAutocorrectionType.no
@@ -93,7 +113,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         nameInput.backgroundColor = .white
         
         numberInput.font = UIFont(name: "HelveticaNeue-Light", size: 15)
-        numberInput.attributedPlaceholder = NSAttributedString(string: "Change Age...", attributes: [NSForegroundColorAttributeName : UIColor.black])
+        numberInput.attributedPlaceholder = NSAttributedString(string: welcomeScene.getBirthMonth() + " " + welcomeScene.getBirthDay() + ", " + welcomeScene.getBirthYear(), attributes: [NSForegroundColorAttributeName : UIColor.black])
         numberInput.borderStyle = UITextBorderStyle.roundedRect
         numberInput.autocorrectionType = UITextAutocorrectionType.no
         numberInput.keyboardType = UIKeyboardType.numberPad
@@ -103,15 +123,21 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         numberInput.delegate = self as UITextFieldDelegate
         numberInput.backgroundColor = .white
         
-        
         agePicker.delegate = self
         agePicker.dataSource = self
         numberInput.inputView = agePicker
         
         toolbar.barStyle = UIBarStyle.blackTranslucent
         toolbar.tintColor = UIColor.blue
-        toolbar.setItems([flexButton, doneButton], animated: true)
+        toolbar.setItems([cancelButton, flexButton, doneButton], animated: true)
         numberInput.inputAccessoryView = toolbar
+        
+        toolbarName.barStyle = UIBarStyle.blackTranslucent
+        toolbarName.tintColor = UIColor.blue
+        toolbarName.setItems([cancelNameButton], animated: true)
+        nameInput.inputAccessoryView = toolbarName
+
+        
         
         let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
@@ -144,10 +170,13 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         }
         
         numberInput.text = month + " " + day + ", " + year
-        setBirthday(month: month, day: day, year: year)
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        if(textField == nameInput){
+            nameInput.text = welcomeScene.getName()
+
+        }
         moveTextField(textField: nameInput, moveDistace: -20, up: true)
         moveTextField(textField: numberInput, moveDistace: -20, up: true)
     }
@@ -162,6 +191,18 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
             nameInput.resignFirstResponder()
             setName(name: nameInput.text!)
             nameLabel.attributedText = NSAttributedString(string: nameInput.text!, attributes: [NSForegroundColorAttributeName : UIColor.white])
+            if(nameInput.text!.characters.count >= 25)
+            {
+                nameLabel.font = UIFont(name: "HelveticaNeue", size: 10)
+            } else if(nameInput.text!.characters.count >= 20){
+                nameLabel.font = UIFont(name: "HelveticaNeue", size: 12)
+            } else if(nameInput.text!.characters.count >= 15){
+                nameLabel.font = UIFont(name: "HelveticaNeue", size: 14)
+            } else if(nameInput.text!.characters.count >= 10){
+                nameLabel.font = UIFont(name: "HelveticaNeue", size: 16)
+            } else {
+                nameLabel.font = UIFont(name: "HelveticaNeue", size: 18)
+            }
         }
         else{
             numberInput.resignFirstResponder()
@@ -184,6 +225,19 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     func donePressed(sender: UIBarButtonItem){
         numberInput.resignFirstResponder()
         self.view?.endEditing(true)
+        setBirthday(month: month, day: day, year: year)
+    }
+
+    func cancelPressed(sender:UIBarButtonItem){
+        numberInput.resignFirstResponder()
+        self.view?.endEditing(true)
+        numberInput.text! = welcomeScene.getBirthMonth() + " " + welcomeScene.getBirthDay() + ", " + welcomeScene.getBirthYear()
+    }
+    
+    func cancelNamePressed(sender: UIBarButtonItem){
+        nameInput.resignFirstResponder()
+        self.view?.endEditing(true)
+        nameInput.text! = welcomeScene.getName()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -194,13 +248,21 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "HomeNode" {
-                nameLabel.isHidden = true
-                nameInput.isHidden = true
-                numberInput.isHidden = true
-                let transition = SKTransition.reveal(with: SKTransitionDirection.right, duration: 0.5)
+                goHomeLabelNode.fontColor = UIColor.lightGray
+                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                    self.goHomeLabelNode.fontColor = UIColor.white
+                }
+                let transition = SKTransition.push(with: SKTransitionDirection.right, duration: 0.5)
                 let gameScene = MenuScene(fileNamed: "MenuScene")
                 gameScene?.scaleMode = .aspectFill
-                self.view?.presentScene(gameScene!, transition: transition)
+                let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when2) {
+                    self.nameLabel.isHidden = true
+                    self.nameInput.isHidden = true
+                    self.numberInput.isHidden = true
+                    self.view?.presentScene(gameScene!, transition: transition)
+                }
             }
             
             if nodesArray.first?.name == "ResetNode" {
