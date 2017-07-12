@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
         //this is where personal info (SS Numbers, credit card info, etc.) is taken from user device (and sold on black market)(this is how we pay for ad-free)
+        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         self.window?.rootViewController = storyboard.instantiateInitialViewController()
     }

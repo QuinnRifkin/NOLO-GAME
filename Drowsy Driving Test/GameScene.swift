@@ -13,8 +13,6 @@ import AVFoundation
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameViewController = GameViewController()
     
-    var gameMusic : SKAudioNode!
-    
     var highScoreDefault = UserDefaults.standard
     var highScore: Int = 0
     
@@ -58,6 +56,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var resetButtonNode: SKSpriteNode!
     var homeLabelNode: SKSpriteNode!
+    
+    var resetLabelNode: SKLabelNode!
     
     var timeLabel : UILabel!
     var highScoreLabel : UILabel!
@@ -238,8 +238,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         
-        
-        
         timeLabel = UILabel(frame: CGRect(x: 0, y: 20, width: self.frame.width/2 , height: 20))
         timeLabel.font = UIFont.init(name: "PressStart2P", size: 13)
         highScoreLabel = UILabel(frame: CGRect(x: 0, y: 40, width: self.frame.width/2 , height: 20))
@@ -276,7 +274,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         randomNumbery4 = (Int(arc4random_uniform(heightFrame)))
         rangey4 = Int(randomNumbery4 + Int(halfHeightFrame))
         
-        gameViewController.playMusic(file: "GameStartSound")
+        gameViewController.playMusic(file: "GameContinueSound")
+        gameViewController.setLoops(loops: -1)
         
         if(highScoreDefault.value(forKey: "HighScore") != nil){
             highScore = highScoreDefault.value(forKey: "HighScore") as! NSInteger!
@@ -300,6 +299,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         resetButtonNode = self.childNode(withName: "resetButton") as! SKSpriteNode
         homeLabelNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
         homeLabelNode.texture = SKTexture(imageNamed: "HomeIcon")
+        resetLabelNode = self.childNode(withName: "ResetLabel") as! SKLabelNode
         
         addLeftWall()
         addRightWall()
@@ -342,10 +342,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         rangex4 = Int(randomNumberx4 - Int(halfWidthFrame))
         randomNumbery4 = (Int(arc4random_uniform(heightFrame)))
         rangey4 = Int(randomNumbery4 + Int(halfHeightFrame))
-        
-        if(!gameViewController.isPlayingMusic()){
-            gameViewController.playMusic(file: "GameContinueSound")
-        }
         
         if(zTrueCount >= highScore){
             highScore = zTrueCount
@@ -571,7 +567,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     func checkCar(){
         if(car.position.y < 0 - self.frame.height/2 - car.size.height/2){
-            gameViewController.stopMusic()
+            if(gameViewController.isPlayingMusic()){
+                gameViewController.stopMusic()
+            }
             setHighScore(zcount: zTrueCount)
             setFinishZCount(zcount: zTrueCount)
             zCountLabel.isHidden = true
@@ -592,28 +590,48 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "HomeNode" {
-                gameViewController.stopMusic()
+                if(gameViewController.isPlayingMusic()){
+                    gameViewController.stopMusic()
+                }
                 setHighScore(zcount: zTrueCount)
                 setFinishZCount(zcount: zTrueCount)
-                zCountLabel.isHidden = true
-                timeLabel.isHidden = true
-                highScoreLabel.isHidden = true
-                let transition = SKTransition.push(with: SKTransitionDirection.down, duration: 0.5)
+                homeLabelNode.texture = SKTexture(imageNamed: "HomeIcon2")
+                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                    self.homeLabelNode.texture = SKTexture(imageNamed: "HomeIcon")
+                }
+                let transition = SKTransition.doorsCloseVertical(withDuration: 0.5)
                 let gameScene = DeathScene(fileNamed: "MenuScene")
                 gameScene?.scaleMode = .aspectFill
-                self.view?.presentScene(gameScene!, transition: transition)
+                let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when2) {
+                    self.zCountLabel.isHidden = true
+                    self.timeLabel.isHidden = true
+                    self.highScoreLabel.isHidden = true
+                    self.view?.presentScene(gameScene!, transition: transition)
+                }
             }
             if nodesArray.first?.name == "resetButton" {
-                gameViewController.stopMusic()
+                if(gameViewController.isPlayingMusic()){
+                    gameViewController.stopMusic()
+                }
                 setHighScore(zcount: zTrueCount)
                 setFinishZCount(zcount: zTrueCount)
-                zCountLabel.isHidden = true
-                timeLabel.isHidden = true
-                highScoreLabel.isHidden = true
+                resetLabelNode.fontColor = UIColor.lightGray
+                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                    self.resetLabelNode.fontColor = UIColor.white
+                }
                 let transition = SKTransition.fade(withDuration: 1)
                 let gameScene = DeathScene(fileNamed: "GameScene")
                 gameScene?.scaleMode = .aspectFill
-                self.view?.presentScene(gameScene!, transition: transition)
+                let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when2) {
+                    self.zCountLabel.isHidden = true
+                    self.timeLabel.isHidden = true
+                    self.highScoreLabel.isHidden = true
+                    self.view?.presentScene(gameScene!, transition: transition)
+                }
             }
         }
     }
