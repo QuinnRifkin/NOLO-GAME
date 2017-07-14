@@ -19,7 +19,8 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
     
     let birthday = UserDefaults.standard
     
-    var continueButtonNode: SKSpriteNode!
+    var continueButtonNode : SKSpriteNode!
+    var continueLabelNode : SKLabelNode!
     
     var nameInput : UITextField!
     var numberInput : UITextField!
@@ -101,6 +102,7 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
         self.view?.addSubview(numberInput)
         
         continueButtonNode = self.childNode(withName: "ContinueNode") as! SKSpriteNode
+        continueLabelNode = self.childNode(withName: "ContinueLabel") as! SKLabelNode
 
         agePicker.delegate = self
         agePicker.dataSource = self
@@ -188,12 +190,20 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "ContinueNode" {
-                nameInput.isHidden = true
-                numberInput.isHidden = true
+                continueLabelNode.fontColor = UIColor.lightGray
+                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                    self.continueLabelNode.fontColor = UIColor.white
+                }
                 let transition = SKTransition.crossFade(withDuration: 0.05)
                 let gameScene = MenuScene(fileNamed: "LoadingScene")
                 gameScene?.scaleMode = .aspectFill
-                self.view?.presentScene(gameScene!, transition: transition)
+                let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when2) {
+                    self.nameInput.isHidden = true
+                    self.numberInput.isHidden = true
+                    self.view?.presentScene(gameScene!, transition: transition)
+                }
             }
         }
     }

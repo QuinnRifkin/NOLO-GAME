@@ -20,6 +20,38 @@ class GameViewController: UIViewController {
     var timeOfDay = Date()
     var calendar = Calendar.current
     
+    func labelTransition(node: String, label: SKLabelNode, color: UIColor, scene: SKScene, transitionScene: String){
+        label.fontColor = UIColor.lightGray
+        let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            //scene.label.fontColor = color
+        }
+        let transition = SKTransition.reveal(with: SKTransitionDirection.left, duration: 0.5)
+        let gameScene = MenuScene(fileNamed: transitionScene)
+        gameScene?.scaleMode = .aspectFill
+        let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when2) {
+            scene.view?.presentScene(gameScene!, transition: transition)
+        }
+
+    }
+    
+    func buttonTransition(node: String, button: SKSpriteNode, button2: String, scene: SKScene, transitionScene: String){
+        button.texture = SKTexture(imageNamed: "SettingsButton2")
+        let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            //scene.button.texture = SKTexture(imageNamed: button2)
+        }
+        let transition = SKTransition.reveal(with: SKTransitionDirection.left, duration: 0.5)
+        let gameScene = MenuScene(fileNamed: transitionScene)
+        let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+        gameScene?.scaleMode = .aspectFill
+        DispatchQueue.main.asyncAfter(deadline: when2) {
+            scene.view?.presentScene(gameScene!, transition: transition)
+        }
+
+    }
+    
     func playMusic(file: String){
         
         do {

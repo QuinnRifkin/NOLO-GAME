@@ -23,6 +23,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     var homeButtonNode : SKSpriteNode!
     
     var resetButtonNode : SKSpriteNode!
+    var resetLabelNode : SKLabelNode!
     
     var nameInput : UITextField!
     var numberInput : UITextField!
@@ -74,6 +75,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         homeButtonNode.color = .clear
         
         resetButtonNode = self.childNode(withName: "ResetNode") as! SKSpriteNode
+        resetLabelNode = self.childNode(withName: "ResetLabel") as! SKLabelNode
         goHomeLabelNode = self.childNode(withName: "GoHomeLabel") as! SKLabelNode
         
         let name = String(welcomeScene.getName())
@@ -136,8 +138,6 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         toolbarName.tintColor = UIColor.blue
         toolbarName.setItems([cancelNameButton], animated: true)
         nameInput.inputAccessoryView = toolbarName
-
-        
         
         let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
@@ -175,6 +175,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if(textField == nameInput){
             nameInput.text = welcomeScene.getName()
+            nameInput.placeholder = ""
 
         }
         moveTextField(textField: nameInput, moveDistace: -20, up: true)
@@ -238,6 +239,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         nameInput.resignFirstResponder()
         self.view?.endEditing(true)
         nameInput.text! = welcomeScene.getName()
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -266,6 +268,11 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
             }
             
             if nodesArray.first?.name == "ResetNode" {
+                resetLabelNode.fontColor = UIColor.lightGray
+                let when = DispatchTime.now() + 0.07 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                    self.resetLabelNode.fontColor = UIColor.init(colorLiteralRed: 1.0, green: 0.0, blue: 0.0, alpha: 1)
+                }
                 if(highScore != 0){
                     let alert = UIAlertController(title: "WARNING", message: "Your highscore is " + String(highScore) + "\n There is no going back...", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))

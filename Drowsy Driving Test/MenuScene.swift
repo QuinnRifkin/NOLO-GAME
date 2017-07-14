@@ -129,7 +129,7 @@ class MenuScene: SKScene {
             
             if nodesArray.first?.name == "PlayDRButton" {
                 if(Int(gameViewController.getDefault()) == 1){
-                    playLabelNode.fontColor = UIColor.gray
+                    playLabelNode.fontColor = UIColor.lightGray
                     let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
                     DispatchQueue.main.asyncAfter(deadline: when) {
                         self.playLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)
@@ -145,7 +145,7 @@ class MenuScene: SKScene {
                     }
                 }
                 else{
-                    playLabelNode.fontColor = UIColor.gray
+                    playLabelNode.fontColor = UIColor.lightGray
                     let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
                     DispatchQueue.main.asyncAfter(deadline: when) {
                         self.playLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)
@@ -162,7 +162,7 @@ class MenuScene: SKScene {
                 }
             }
             if nodesArray.first?.name == "LearnMoreButton" {
-                learnLabelNode.fontColor = UIColor.gray
+                learnLabelNode.fontColor = UIColor.lightGray
                 let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
                 DispatchQueue.main.asyncAfter(deadline: when) {
                     self.learnLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)

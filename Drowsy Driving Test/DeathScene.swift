@@ -84,7 +84,7 @@ class DeathScene: SKScene {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "HomeNode" {
-                homeLabelNode.fontColor = UIColor.gray
+                homeLabelNode.fontColor = UIColor.lightGray
                 let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
                 DispatchQueue.main.asyncAfter(deadline: when) {
                     self.homeLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)
@@ -101,7 +101,7 @@ class DeathScene: SKScene {
                 }
             }
             if nodesArray.first?.name == "PlayAgainNode" {
-                playLabelNode.fontColor = UIColor.gray
+                playLabelNode.fontColor = UIColor.lightGray
                 let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
                 DispatchQueue.main.asyncAfter(deadline: when) {
                     self.playLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)

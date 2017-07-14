@@ -94,6 +94,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let zSpriteRandom3 = SKSpriteNode(imageNamed: "ZSprite")
     let zSpriteRandom4 = SKSpriteNode(imageNamed: "ZSprite")
     
+    var zSprites : [SKSpriteNode]!
+    var obstacles : [SKSpriteNode]!
+    
     let leftWall = SKSpriteNode(imageNamed: "FieldLines")
     let rightWall = SKSpriteNode(imageNamed: "FieldLines")
     
@@ -322,6 +325,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         timeLabel.textAlignment = NSTextAlignment.right
         highScoreLabel.textAlignment = NSTextAlignment.right
         zCountLabel.textAlignment = NSTextAlignment.right
+        
+        zSprites = [zSpriteRandom1, zSpriteRandom2, zSpriteRandom3, zSpriteRandom4]
+        obstacles = [obstacle1,obstacle2,obstacle3,obstacle4]
+
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -411,143 +418,163 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             firstBody = contact.bodyA
             secondBody = contact.bodyB
         }
-        else{
+        else if(contact.bodyB.node?.name == "Car"){
             firstBody = contact.bodyB
             secondBody = contact.bodyA
         }
-        if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite1right"){
-            removeZSprite(zSprite: zSprite1Right)
+//        if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite1right"){
+//            removeZSprite(zSprite: zSprite1Right)
+//        }
+//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite1middle"){
+//            removeZSprite(zSprite: zSprite1Middle)
+//        }
+//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite1left"){
+//            removeZSprite(zSprite: zSprite1Left)
+//        }
+//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite2right"){
+//            removeZSprite(zSprite: zSprite2Right)
+//        }
+//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite2middle"){
+//            removeZSprite(zSprite: zSprite2Middle)
+//        }
+//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite2left"){
+//            removeZSprite(zSprite: zSprite2Left)
+//        }
+//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite3right"){
+//            removeZSprite(zSprite: zSprite3Right)
+//        }
+//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite3middle"){
+//            removeZSprite(zSprite: zSprite3Middle)
+//        }
+//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite3left"){
+//            removeZSprite(zSprite: zSprite3Left)
+//        }
+//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite4right"){
+//            removeZSprite(zSprite: zSprite4Right)
+//        }
+//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite4middle"){
+//            removeZSprite(zSprite: zSprite4Middle)
+//        }
+//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite4left"){
+//            removeZSprite(zSprite: zSprite4Left)
+//        }
+        for zSprite in zSprites{
+            if(firstBody.node?.name == "Car" && secondBody.node?.name == zSprite.name){
+                removeZSprite(zSprite: zSprite)
+            }
         }
-        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite1middle"){
-            removeZSprite(zSprite: zSprite1Middle)
-        }
-        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite1left"){
-            removeZSprite(zSprite: zSprite1Left)
-        }
-        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite2right"){
-            removeZSprite(zSprite: zSprite2Right)
-        }
-        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite2middle"){
-            removeZSprite(zSprite: zSprite2Middle)
-        }
-        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite2left"){
-            removeZSprite(zSprite: zSprite2Left)
-        }
-        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite3right"){
-            removeZSprite(zSprite: zSprite3Right)
-        }
-        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite3middle"){
-            removeZSprite(zSprite: zSprite3Middle)
-        }
-        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite3left"){
-            removeZSprite(zSprite: zSprite3Left)
-        }
-        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite4right"){
-            removeZSprite(zSprite: zSprite4Right)
-        }
-        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite4middle"){
-            removeZSprite(zSprite: zSprite4Middle)
-        }
-        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite4left"){
-            removeZSprite(zSprite: zSprite4Left)
-        }
-        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zspriterandom1"){
-            removeZSprite(zSprite: zSpriteRandom1)
-        }
-        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zspriterandom2"){
-            removeZSprite(zSprite: zSpriteRandom2)
-        }
-        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zspriterandom3"){
-            removeZSprite(zSprite: zSpriteRandom3)
-        }
-        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zspriterandom4"){
-            removeZSprite(zSprite: zSpriteRandom4)
-        }
-        
-        if(contact.bodyA.node?.name == "obstacle1"){
-            firstBody = contact.bodyA
-            secondBody = contact.bodyB
-        }
-        else{
-            firstBody = contact.bodyB
-            secondBody = contact.bodyA
-        }
-        if(firstBody.node?.name == "obstacle1" && secondBody.node?.name == "zspriterandom1"){
-            zSpriteRandom1.isHidden = true
-        }
-        else if(firstBody.node?.name == "obstacle1" && secondBody.node?.name == "zspriterandom2"){
-            zSpriteRandom2.isHidden = true
-        }
-        else if(firstBody.node?.name == "obstacle1" && secondBody.node?.name == "zspriterandom3"){
-            zSpriteRandom3.isHidden = true
-        }
-        else if(firstBody.node?.name == "obstacle1" && secondBody.node?.name == "zspriterandom4"){
-            zSpriteRandom4.isHidden = true
-        }
-        
-        if(contact.bodyA.node?.name == "obstacle2"){
-            firstBody = contact.bodyA
-            secondBody = contact.bodyB
-        }
-        else{
-            firstBody = contact.bodyB
-            secondBody = contact.bodyA
-        }
-        if(firstBody.node?.name == "obstacle2" && secondBody.node?.name == "zspriterandom1"){
-            zSpriteRandom1.isHidden = true
-        }
-        else if(firstBody.node?.name == "obstacle2" && secondBody.node?.name == "zspriterandom2"){
-            zSpriteRandom2.isHidden = true
-        }
-        else if(firstBody.node?.name == "obstacle2" && secondBody.node?.name == "zspriterandom3"){
-            zSpriteRandom3.isHidden = true
-        }
-        else if(firstBody.node?.name == "obstacle2" && secondBody.node?.name == "zspriterandom4"){
-            zSpriteRandom4.isHidden = true
+//        if(firstBody.node?.name == "Car" && secondBody.node?.name == "zspriterandom1"){
+//            removeZSprite(zSprite: zSpriteRandom1)
+//        }
+//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zspriterandom2"){
+//            removeZSprite(zSprite: zSpriteRandom2)
+//        }
+//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zspriterandom3"){
+//            removeZSprite(zSprite: zSpriteRandom3)
+//        }
+//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zspriterandom4"){
+//            removeZSprite(zSprite: zSpriteRandom4)
+//        }
+        for obstacle in obstacles{
+            if(contact.bodyA.node?.name == obstacle.name){
+                firstBody = contact.bodyA
+                secondBody = contact.bodyB
+            }
+            else if(contact.bodyB.node?.name == obstacle.name){
+                firstBody = contact.bodyB
+                secondBody = contact.bodyA
+            for zSprite in zSprites{
+                if(firstBody.node?.name == obstacle.name && secondBody.node?.name == zSprite.name){
+                        zSprite.isHidden = true
+                    }
+                }
+            }
         }
         
-        if(contact.bodyA.node?.name == "obstacle3"){
-            firstBody = contact.bodyA
-            secondBody = contact.bodyB
-        }
-        else{
-            firstBody = contact.bodyB
-            secondBody = contact.bodyA
-        }
-        if(firstBody.node?.name == "obstacle3" && secondBody.node?.name == "zspriterandom1"){
-            zSpriteRandom1.isHidden = true
-        }
-        else if(firstBody.node?.name == "obstacle3" && secondBody.node?.name == "zspriterandom2"){
-            zSpriteRandom2.isHidden = true
-        }
-        else if(firstBody.node?.name == "obstacle3" && secondBody.node?.name == "zspriterandom3"){
-            zSpriteRandom3.isHidden = true
-        }
-        else if(firstBody.node?.name == "obstacle3" && secondBody.node?.name == "zspriterandom4"){
-            zSpriteRandom4.isHidden = true
-        }
-        
-        if(contact.bodyA.node?.name == "obstacle4"){
-            firstBody = contact.bodyA
-            secondBody = contact.bodyB
-        }
-        else{
-            firstBody = contact.bodyB
-            secondBody = contact.bodyA
-        }
-        if(firstBody.node?.name == "obstacle4" && secondBody.node?.name == "zspriterandom1"){
-            zSpriteRandom1.isHidden = true
-        }
-        else if(firstBody.node?.name == "obstacle4" && secondBody.node?.name == "zspriterandom2"){
-            zSpriteRandom2.isHidden = true
-        }
-        else if(firstBody.node?.name == "obstacle4" && secondBody.node?.name == "zspriterandom3"){
-            zSpriteRandom3.isHidden = true
-        }
-        else if(firstBody.node?.name == "obstacle4" && secondBody.node?.name == "zspriterandom4"){
-            zSpriteRandom4.isHidden = true
-        }
-        
+//        if(contact.bodyA.node?.name == "obstacle1"){
+//            firstBody = contact.bodyA
+//            secondBody = contact.bodyB
+//        }
+//        else{
+//            firstBody = contact.bodyB
+//            secondBody = contact.bodyA
+//        }
+//        if(firstBody.node?.name == "obstacle1" && secondBody.node?.name == "zspriterandom1"){
+//            zSpriteRandom1.isHidden = true
+//        }
+//        else if(firstBody.node?.name == "obstacle1" && secondBody.node?.name == "zspriterandom2"){
+//            zSpriteRandom2.isHidden = true
+//        }
+//        else if(firstBody.node?.name == "obstacle1" && secondBody.node?.name == "zspriterandom3"){
+//            zSpriteRandom3.isHidden = true
+//        }
+//        else if(firstBody.node?.name == "obstacle1" && secondBody.node?.name == "zspriterandom4"){
+//            zSpriteRandom4.isHidden = true
+//        }
+//        
+//        if(contact.bodyA.node?.name == "obstacle2"){
+//            firstBody = contact.bodyA
+//            secondBody = contact.bodyB
+//        }
+//        else{
+//            firstBody = contact.bodyB
+//            secondBody = contact.bodyA
+//        }
+//        if(firstBody.node?.name == "obstacle2" && secondBody.node?.name == "zspriterandom1"){
+//            zSpriteRandom1.isHidden = true
+//        }
+//        else if(firstBody.node?.name == "obstacle2" && secondBody.node?.name == "zspriterandom2"){
+//            zSpriteRandom2.isHidden = true
+//        }
+//        else if(firstBody.node?.name == "obstacle2" && secondBody.node?.name == "zspriterandom3"){
+//            zSpriteRandom3.isHidden = true
+//        }
+//        else if(firstBody.node?.name == "obstacle2" && secondBody.node?.name == "zspriterandom4"){
+//            zSpriteRandom4.isHidden = true
+//        }
+//        
+//        if(contact.bodyA.node?.name == "obstacle3"){
+//            firstBody = contact.bodyA
+//            secondBody = contact.bodyB
+//        }
+//        else{
+//            firstBody = contact.bodyB
+//            secondBody = contact.bodyA
+//        }
+//        if(firstBody.node?.name == "obstacle3" && secondBody.node?.name == "zspriterandom1"){
+//            zSpriteRandom1.isHidden = true
+//        }
+//        else if(firstBody.node?.name == "obstacle3" && secondBody.node?.name == "zspriterandom2"){
+//            zSpriteRandom2.isHidden = true
+//        }
+//        else if(firstBody.node?.name == "obstacle3" && secondBody.node?.name == "zspriterandom3"){
+//            zSpriteRandom3.isHidden = true
+//        }
+//        else if(firstBody.node?.name == "obstacle3" && secondBody.node?.name == "zspriterandom4"){
+//            zSpriteRandom4.isHidden = true
+//        }
+//        
+//        if(contact.bodyA.node?.name == "obstacle4"){
+//            firstBody = contact.bodyA
+//            secondBody = contact.bodyB
+//        }
+//        else{
+//            firstBody = contact.bodyB
+//            secondBody = contact.bodyA
+//        }
+//        if(firstBody.node?.name == "obstacle4" && secondBody.node?.name == "zspriterandom1"){
+//            zSpriteRandom1.isHidden = true
+//        }
+//        else if(firstBody.node?.name == "obstacle4" && secondBody.node?.name == "zspriterandom2"){
+//            zSpriteRandom2.isHidden = true
+//        }
+//        else if(firstBody.node?.name == "obstacle4" && secondBody.node?.name == "zspriterandom3"){
+//            zSpriteRandom3.isHidden = true
+//        }
+//        else if(firstBody.node?.name == "obstacle4" && secondBody.node?.name == "zspriterandom4"){
+//            zSpriteRandom4.isHidden = true
+//        }
+//        
     }
     func checkRandomZ(zSprite: SKSpriteNode){
         if(zSprite.position.y < -self.frame.height/2-zSprite.size.height/2){

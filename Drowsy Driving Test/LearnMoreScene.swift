@@ -22,8 +22,6 @@ class LearnMoreScene: SKScene {
     
     var goHomeLabelNode: SKLabelNode!
     
-    var backButtonNode: SKSpriteNode!
-
     let welcomeScene = WelcomeScene()
     
     let nameLabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
@@ -59,9 +57,6 @@ class LearnMoreScene: SKScene {
         facebookButtonNode = self.childNode(withName: "FacebookNode") as! SKSpriteNode
         facebookButtonNode.texture = SKTexture(imageNamed: "FacebookIcon")
         facebookButtonNode.color = .clear
-        
-        backButtonNode = self.childNode(withName: "BackNode") as! SKSpriteNode
-        
         
         let name = String(welcomeScene.getName())
         if(name!.characters.count >= 25)
@@ -112,15 +107,6 @@ class LearnMoreScene: SKScene {
                     self.view?.presentScene(gameScene!, transition: transition)
                 }
             }
-            if nodesArray.first?.name == "BackNode" {
-                infoLabel.isHidden = true
-                nameLabel.isHidden = true
-                let transition = SKTransition.reveal(with: SKTransitionDirection.right, duration: 0.5)
-                let gameScene = MenuScene(fileNamed: "MenuScene")
-                gameScene?.scaleMode = .aspectFill
-                self.view?.presentScene(gameScene!, transition: transition)
-            }
-
             if nodesArray.first?.name == "GoogleNode"{
                 nameLabel.isHidden = true
                 if let google = NSURL(string: "http://www.google.com"){
