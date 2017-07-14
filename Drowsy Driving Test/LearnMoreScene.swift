@@ -169,7 +169,7 @@ class LearnMoreScene: SKScene {
                 nameLabel.isHidden = true
                 let screenName =  "347809602305230"
                 let appURL = NSURL(string: "fb://profile/\(screenName)")!
-                let webURL = NSURL(string: "https://www.facebook.com/Nights-Out-Lightz-out-347809602305230/")!
+                let webURL = NSURL(string: "https://www.facebook.com/Nightz-Out-Lightz-out-347809602305230/")!
                 
                 let application = UIApplication.shared
                 if application.openURL(appURL as URL) {
