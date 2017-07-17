@@ -11,90 +11,76 @@ import SpriteKit
 import GameplayKit
 import AVFoundation
 
-class GameViewController: UIViewController {
-    
-    var launchDefault = UserDefaults.standard
-    
-    var audioPlayer = AVAudioPlayer()
-    
-    var timeOfDay = Date()
-    var calendar = Calendar.current
-    
-    func labelTransition(node: String, label: SKLabelNode, color: UIColor, scene: SKScene, transitionScene: String){
-        label.fontColor = UIColor.lightGray
-        let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            //scene.label.fontColor = color
-        }
-        let transition = SKTransition.reveal(with: SKTransitionDirection.left, duration: 0.5)
-        let gameScene = MenuScene(fileNamed: transitionScene)
-        gameScene?.scaleMode = .aspectFill
-        let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
-        DispatchQueue.main.asyncAfter(deadline: when2) {
-            scene.view?.presentScene(gameScene!, transition: transition)
-        }
+class Player:NSObject {
+    static var sharedPlayer = Player()
+    var aPlayer:AVAudioPlayer?
 
-    }
-    
-    func buttonTransition(node: String, button: SKSpriteNode, button2: String, scene: SKScene, transitionScene: String){
-        button.texture = SKTexture(imageNamed: "SettingsButton2")
-        let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            //scene.button.texture = SKTexture(imageNamed: button2)
-        }
-        let transition = SKTransition.reveal(with: SKTransitionDirection.left, duration: 0.5)
-        let gameScene = MenuScene(fileNamed: transitionScene)
-        let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
-        gameScene?.scaleMode = .aspectFill
-        DispatchQueue.main.asyncAfter(deadline: when2) {
-            scene.view?.presentScene(gameScene!, transition: transition)
-        }
-
-    }
-    
-    func playMusic(file: String){
-        
+    func playMusic(file: String) {
         do {
-            audioPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: file, ofType: "mp3")!))
-            audioPlayer.prepareToPlay()
-            
-            var audioSession = AVAudioSession.sharedInstance()
-            
-            do{
-                try audioSession.setCategory(AVAudioSessionCategorySoloAmbient)
-            }
-            catch{
-                print (error)
-            }
+            Player.sharedPlayer.aPlayer = try AVAudioPlayer(contentsOf: URL.init(fileURLWithPath: Bundle.main.path(forResource: file, ofType: "mp3")!))
+            Player.sharedPlayer.aPlayer?.prepareToPlay()
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
         }
         catch {
             print(error)
         }
-        audioPlayer.play()
+        Player.sharedPlayer.aPlayer?.play()
     }
-    
-    func isPlayingMusic() -> Bool {
-        if(audioPlayer.isPlaying){
-            return true
-        }
-        return false
-    }
-    
-    func stopMusic(){
-        audioPlayer.stop()
-    }
-    
+
     func setLoops(loops: Int){
-        audioPlayer.numberOfLoops = loops
+        Player.sharedPlayer.aPlayer?.numberOfLoops = loops
     }
-    
-    func volume(){
-        audioPlayer.setVolume(0, fadeDuration: 0)
+
+    func stopMusic() {
+        if Player.sharedPlayer.aPlayer?.isPlaying ?? false {
+            Player.sharedPlayer.aPlayer?.stop()
+        }
     }
+}
+
+class GameViewController: UIViewController {
     
-    public func audioPlayerBeginInterruption(_ player: AVAudioPlayer)
-    {
-        
+    var launchDefault = UserDefaults.standard
+    
+    var timeOfDay = Date()
+    var calendar = Calendar.current
+    
+//    func labelTransition(node: String, label: SKLabelNode, color: UIColor, scene: SKScene, transitionScene: String){
+//        if scene is MenuScene {
+//            label.fontColor = UIColor.lightGray
+//            let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+//            DispatchQueue.main.asyncAfter(deadline: when) {
+//                    MenuScene.label.fontColor = color
+//            }
+//            let transition = SKTransition.reveal(with: SKTransitionDirection.left, duration: 0.5)
+//            let gameScene = MenuScene(fileNamed: transitionScene)
+//            gameScene?.scaleMode = .aspectFill
+//            let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+//            DispatchQueue.main.asyncAfter(deadline: when2) {
+//                scene.view?.presentScene(gameScene!, transition: transition)
+//            }
+//        }
+//    }
+//    
+//    func buttonTransition(node: String, button: SKSpriteNode, button2: String, scene: SKScene, transitionScene: String){
+//        button.texture = SKTexture(imageNamed: "SettingsButton2")
+//        let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+//        DispatchQueue.main.asyncAfter(deadline: when) {
+//            MenuScene.button.texture = SKTexture(imageNamed: button2)
+//        }
+//        let transition = SKTransition.reveal(with: SKTransitionDirection.left, duration: 0.5)
+//        let gameScene = MenuScene(fileNamed: transitionScene)
+//        let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+//        gameScene?.scaleMode = .aspectFill
+//        DispatchQueue.main.asyncAfter(deadline: when2) {
+//            scene.view?.presentScene(gameScene!, transition: transition)
+//        }
+//
+//    }
+    
+    func volume() {
+        Player.sharedPlayer.aPlayer?.setVolume(0, fadeDuration: 0)
     }
     
     func getDefault() -> Int {
@@ -105,8 +91,8 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         let view = self.view as! SKView?
         
-        var hours = calendar.component(.hour, from: timeOfDay)
-        var minutes = calendar.component(.minute, from: timeOfDay)
+        let hours = calendar.component(.hour, from: timeOfDay)
+        let minutes = calendar.component(.minute, from: timeOfDay)
         if(hours > 12){
         print(String(hours) + ":" + String(minutes) + " PM")
         } else{

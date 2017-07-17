@@ -11,8 +11,6 @@ import GameplayKit
 import AVFoundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    var gameViewController = GameViewController()
-    
     var highScoreDefault = UserDefaults.standard
     var highScore: Int = 0
     
@@ -277,8 +275,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         randomNumbery4 = (Int(arc4random_uniform(heightFrame)))
         rangey4 = Int(randomNumbery4 + Int(halfHeightFrame))
         
-        gameViewController.playMusic(file: "GameContinueSound")
-        gameViewController.setLoops(loops: -1)
+        Player.sharedPlayer.playMusic(file: "GameContinueSound")
+        Player.sharedPlayer.setLoops(loops: -1)
         
         if(highScoreDefault.value(forKey: "HighScore") != nil){
             highScore = highScoreDefault.value(forKey: "HighScore") as! NSInteger!
@@ -594,9 +592,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     func checkCar(){
         if(car.position.y < 0 - self.frame.height/2 - car.size.height/2){
-            if(gameViewController.isPlayingMusic()){
-                gameViewController.stopMusic()
-            }
+            Player.sharedPlayer.stopMusic()
             setHighScore(zcount: zTrueCount)
             setFinishZCount(zcount: zTrueCount)
             zCountLabel.isHidden = true
@@ -617,9 +613,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "HomeNode" {
-                if(gameViewController.isPlayingMusic()){
-                    gameViewController.stopMusic()
-                }
+                Player.sharedPlayer.stopMusic()
                 setHighScore(zcount: zTrueCount)
                 setFinishZCount(zcount: zTrueCount)
                 homeLabelNode.texture = SKTexture(imageNamed: "HomeIcon2")
@@ -639,9 +633,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
             if nodesArray.first?.name == "resetButton" {
-                if(gameViewController.isPlayingMusic()){
-                    gameViewController.stopMusic()
-                }
+                Player.sharedPlayer.stopMusic()
                 setHighScore(zcount: zTrueCount)
                 setFinishZCount(zcount: zTrueCount)
                 resetLabelNode.fontColor = UIColor.lightGray
