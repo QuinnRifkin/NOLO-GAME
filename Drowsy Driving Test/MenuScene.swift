@@ -19,6 +19,7 @@ class MenuScene: SKScene {
     var nightShiftNotified = UserDefaults.standard
     
     let gameViewController = GameViewController()
+    let playViewController = PlayViewController()
     
     var playDRButtonNode:SKSpriteNode!
     var learnMoreButtonNode:SKSpriteNode!
@@ -38,7 +39,10 @@ class MenuScene: SKScene {
     var timeOfDay = Date()
     var calendar = Calendar.current
     
+    
     override func didMove(to view: SKView) {
+        
+        playViewController.tabBarController?.tabBar.isHidden = false
 
         let day = calendar.component(.day, from: timeOfDay)
         let hour = calendar.component(.hour, from: timeOfDay)
@@ -69,7 +73,7 @@ class MenuScene: SKScene {
 
         fact = (String) (sleepFactz[Int(arc4random_uniform(15))])
         
-        fact1 = UILabel(frame: CGRect(x: 50 , y: -(factBar.position.y) - 20, width: 270, height: 150))
+        fact1 = UILabel(frame: CGRect(x: 50 , y: -(factBar.position.y) + 30, width: 270, height: 150))
         
         fact1.text = fact
         fact1.font = UIFont(name: "HelveticaNeue-ThinItalic", size: 20)

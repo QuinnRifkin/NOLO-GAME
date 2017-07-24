@@ -11,8 +11,11 @@ import GameplayKit
 import AVFoundation
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    
     var highScoreDefault = UserDefaults.standard
     var highScore: Int = 0
+    
+    var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
     
     struct collisionType{
         static let carx : UInt32 = 1
@@ -239,6 +242,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         
+        playViewController.tabBarController?.tabBar.isHidden = true
         timeLabel = UILabel(frame: CGRect(x: 0, y: 20, width: self.frame.width/2 , height: 20))
         timeLabel.font = UIFont.init(name: "PressStart2P", size: 13)
         highScoreLabel = UILabel(frame: CGRect(x: 0, y: 40, width: self.frame.width/2 , height: 20))
@@ -275,8 +279,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         randomNumbery4 = (Int(arc4random_uniform(heightFrame)))
         rangey4 = Int(randomNumbery4 + Int(halfHeightFrame))
         
-        Player.sharedPlayer.playMusic(file: "GameContinueSound")
-        Player.sharedPlayer.setLoops(loops: -1)
+        playViewController.playMusic(file: "GameContinueSound")
+        playViewController.setLoops(loops: -1)
         
         if(highScoreDefault.value(forKey: "HighScore") != nil){
             highScore = highScoreDefault.value(forKey: "HighScore") as! NSInteger!
@@ -420,6 +424,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             firstBody = contact.bodyB
             secondBody = contact.bodyA
         }
+        for zSprite in zSprites{
+            if(firstBody.node?.name == "Car" && secondBody.node?.name == zSprite.name){
+                removeZSprite(zSprite: zSprite)
+                car.position = CGPoint(x: car.position.x, y: CGFloat(-463.043))
+            }
+        }
 //        if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite1right"){
 //            removeZSprite(zSprite: zSprite1Right)
 //        }
@@ -456,11 +466,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite4left"){
 //            removeZSprite(zSprite: zSprite4Left)
 //        }
-        for zSprite in zSprites{
-            if(firstBody.node?.name == "Car" && secondBody.node?.name == zSprite.name){
-                removeZSprite(zSprite: zSprite)
-            }
-        }
 //        if(firstBody.node?.name == "Car" && secondBody.node?.name == "zspriterandom1"){
 //            removeZSprite(zSprite: zSpriteRandom1)
 //        }
@@ -592,16 +597,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     func checkCar(){
         if(car.position.y < 0 - self.frame.height/2 - car.size.height/2){
-            Player.sharedPlayer.stopMusic()
+            if(playViewController.isPlayingMusic()){
+                playViewController.stopMusic()
+            }
             setHighScore(zcount: zTrueCount)
             setFinishZCount(zcount: zTrueCount)
             zCountLabel.isHidden = true
             timeLabel.isHidden = true
             highScoreLabel.isHidden = true
-            let transition = SKTransition.push(with: SKTransitionDirection.up, duration: 1)
-            let gameScene = DeathScene(fileNamed: "DeathScene")
-            gameScene?.scaleMode = .aspectFill
-            self.view?.presentScene(gameScene!, transition: transition)
+            playViewController.sceneTransition(scene: self, transitionScene: "DeathScene", transitionType: SKTransition.push(with: SKTransitionDirection.up, duration: 1))
+            let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
+            DispatchQueue.main.asyncAfter(deadline: when) {
+                self.playViewController.tabBarController?.tabBar.isHidden = false
+            }
         }
     }
     
@@ -612,28 +620,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let location = touch?.location(in: self){
             let nodesArray = self.nodes(at: location)
             
-            if nodesArray.first?.name == "HomeNode" {
-                Player.sharedPlayer.stopMusic()
-                setHighScore(zcount: zTrueCount)
-                setFinishZCount(zcount: zTrueCount)
-                homeLabelNode.texture = SKTexture(imageNamed: "HomeIcon2")
-                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
-                DispatchQueue.main.asyncAfter(deadline: when) {
-                    self.homeLabelNode.texture = SKTexture(imageNamed: "HomeIcon")
-                }
-                let transition = SKTransition.doorsCloseVertical(withDuration: 0.5)
-                let gameScene = DeathScene(fileNamed: "MenuScene")
-                gameScene?.scaleMode = .aspectFill
-                let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
-                DispatchQueue.main.asyncAfter(deadline: when2) {
-                    self.zCountLabel.isHidden = true
-                    self.timeLabel.isHidden = true
-                    self.highScoreLabel.isHidden = true
-                    self.view?.presentScene(gameScene!, transition: transition)
-                }
-            }
+//            if nodesArray.first?.name == "HomeNode" {
+//                Player.sharedPlayer.stopMusic()
+//                setHighScore(zcount: zTrueCount)
+//                setFinishZCount(zcount: zTrueCount)
+//                homeLabelNode.texture = SKTexture(imageNamed: "HomeIcon2")
+//                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+//                DispatchQueue.main.asyncAfter(deadline: when) {
+//                    self.homeLabelNode.texture = SKTexture(imageNamed: "HomeIcon")
+//                }
+//                let transition = SKTransition.doorsCloseVertical(withDuration: 0.5)
+//                let gameScene = DeathScene(fileNamed: "MenuScene")
+//                gameScene?.scaleMode = .aspectFill
+//                let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+//                DispatchQueue.main.asyncAfter(deadline: when2) {
+//                    self.zCountLabel.isHidden = true
+//                    self.timeLabel.isHidden = true
+//                    self.highScoreLabel.isHidden = true
+//                    self.view?.presentScene(gameScene!, transition: transition)
+//                }
+//            }
             if nodesArray.first?.name == "resetButton" {
-                Player.sharedPlayer.stopMusic()
+                if(playViewController.isPlayingMusic()){
+                    playViewController.stopMusic()
+                }
                 setHighScore(zcount: zTrueCount)
                 setFinishZCount(zcount: zTrueCount)
                 resetLabelNode.fontColor = UIColor.lightGray

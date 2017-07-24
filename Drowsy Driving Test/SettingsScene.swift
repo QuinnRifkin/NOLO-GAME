@@ -15,11 +15,13 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     let welcomeScene = WelcomeScene()
     let gameScene = GameScene()
     let gameViewController = GameViewController()
+    let settingsViewController = SettingsViewController()
+    //var playViewController = PlayViewController()
     
     var goHomeLabelNode : SKLabelNode!
     
     let nameLabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
-    
+
     var homeButtonNode : SKSpriteNode!
     
     var resetButtonNode : SKSpriteNode!
@@ -32,11 +34,6 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
     let toolbarName = UIToolbar(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
     
-    var database = [
-        ["January","February","March","April","May","June","July","August","September","October","November","December"],
-        ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"],
-        ["2017","2016","2015","2014","2013","2012","2011","2010","2009","2008","2007","2006","2005","2004","2003","2002","2001","2000","1999","1998","1997","1996","1995","1994","1993","1992","1991","1990","1989","1988","1987","1986","1985","1984","1983","1982","1981","1980","1979","1978","1977","1976","1975","1974","1973","1972","1971","1970","1969","1968","1967","1966","1965","1964","1963","1962","1961","1960","1959","1958","1957","1956","1955","1954","1953","1952","1951","1950","1949","1948","1947","1946","1945","1944","1943","1942","1941","1940","1939","1938","1937","1936","1935","1934","1933","1932","1931","1930","1929","1928","1927","1926","1925","1924","1923","1922","1921","1920","1919","1918","1917","1916","1915","1914","1913","1912","1911","1910","1909","1908","1907","1906","1905","1904","1903","1902","1901","1900"]
-    ]
     var month = ""
     var day = ""
     var year = ""
@@ -64,7 +61,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     func getBirthYear() -> String {
         return welcomeScene.getBirthYear()
     }
-    
+
     override func didMove(to view: SKView) {
         
         nameInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/8, width: self.frame.width/3, height: 30))
@@ -139,7 +136,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         toolbarName.setItems([cancelNameButton], animated: true)
         nameInput.inputAccessoryView = toolbarName
         
-        let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
+        let when = DispatchTime.now() + 0.0 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.view?.addSubview(self.nameInput)
             self.view?.addSubview(self.numberInput)
@@ -147,25 +144,25 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return database.count
+        return gameViewController.database.count
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return database[component].count
+        return gameViewController.database[component].count
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return database[component][row]
+        return gameViewController.database[component][row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         switch(component){
         case 0:
-            month = database[component][pickerView.selectedRow(inComponent: 0)]
+            month = gameViewController.database[component][pickerView.selectedRow(inComponent: 0)]
         case 1:
-            day = database[component][pickerView.selectedRow(inComponent: 1)]
+            day = gameViewController.database[component][pickerView.selectedRow(inComponent: 1)]
         case 2:
-            year = database[component][pickerView.selectedRow(inComponent: 2)]
+            year = gameViewController.database[component][pickerView.selectedRow(inComponent: 2)]
         default: break
         }
         
@@ -249,23 +246,23 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         if let location = touch?.location(in: self){
             let nodesArray = self.nodes(at: location)
             
-            if nodesArray.first?.name == "HomeNode" {
-                goHomeLabelNode.fontColor = UIColor.lightGray
-                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
-                DispatchQueue.main.asyncAfter(deadline: when) {
-                    self.goHomeLabelNode.fontColor = UIColor.white
-                }
-                let transition = SKTransition.push(with: SKTransitionDirection.right, duration: 0.5)
-                let gameScene = MenuScene(fileNamed: "MenuScene")
-                gameScene?.scaleMode = .aspectFill
-                let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
-                DispatchQueue.main.asyncAfter(deadline: when2) {
-                    self.nameLabel.isHidden = true
-                    self.nameInput.isHidden = true
-                    self.numberInput.isHidden = true
-                    self.view?.presentScene(gameScene!, transition: transition)
-                }
-            }
+//            if nodesArray.first?.name == "HomeNode" {
+//                goHomeLabelNode.fontColor = UIColor.lightGray
+//                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+//                DispatchQueue.main.asyncAfter(deadline: when) {
+//                    self.goHomeLabelNode.fontColor = UIColor.white
+//                }
+//                let transition = SKTransition.push(with: SKTransitionDirection.right, duration: 0.5)
+//                let gameScene = MenuScene(fileNamed: "MenuScene")
+//                gameScene?.scaleMode = .aspectFill
+//                let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+//                DispatchQueue.main.asyncAfter(deadline: when2) {
+//                    self.nameLabel.isHidden = true
+//                    self.nameInput.isHidden = true
+//                    self.numberInput.isHidden = true
+//                    self.view?.presentScene(gameScene!, transition: transition)
+//                }
+//            }
             
             if nodesArray.first?.name == "ResetNode" {
                 resetLabelNode.fontColor = UIColor.lightGray
