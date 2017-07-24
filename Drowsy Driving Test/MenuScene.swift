@@ -19,6 +19,7 @@ class MenuScene: SKScene {
     var nightShiftNotified = UserDefaults.standard
     
     let gameViewController = GameViewController()
+    let playViewController = PlayViewController()
     
     var playDRButtonNode:SKSpriteNode!
     var learnMoreButtonNode:SKSpriteNode!
@@ -38,7 +39,10 @@ class MenuScene: SKScene {
     var timeOfDay = Date()
     var calendar = Calendar.current
     
+    
     override func didMove(to view: SKView) {
+        
+        playViewController.tabBarController?.tabBar.isHidden = false
 
         let day = calendar.component(.day, from: timeOfDay)
         let hour = calendar.component(.hour, from: timeOfDay)
@@ -69,7 +73,7 @@ class MenuScene: SKScene {
 
         fact = (String) (sleepFactz[Int(arc4random_uniform(15))])
         
-        fact1 = UILabel(frame: CGRect(x: 50 , y: -(factBar.position.y) - 20, width: 270, height: 150))
+        fact1 = UILabel(frame: CGRect(x: 50 , y: -(factBar.position.y) + 30, width: 270, height: 150))
         
         fact1.text = fact
         fact1.font = UIFont(name: "HelveticaNeue-ThinItalic", size: 20)
@@ -129,7 +133,7 @@ class MenuScene: SKScene {
             
             if nodesArray.first?.name == "PlayDRButton" {
                 if(Int(gameViewController.getDefault()) == 1){
-                    playLabelNode.fontColor = UIColor.gray
+                    playLabelNode.fontColor = UIColor.lightGray
                     let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
                     DispatchQueue.main.asyncAfter(deadline: when) {
                         self.playLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)
@@ -145,7 +149,7 @@ class MenuScene: SKScene {
                     }
                 }
                 else{
-                    playLabelNode.fontColor = UIColor.gray
+                    playLabelNode.fontColor = UIColor.lightGray
                     let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
                     DispatchQueue.main.asyncAfter(deadline: when) {
                         self.playLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)
@@ -162,7 +166,7 @@ class MenuScene: SKScene {
                 }
             }
             if nodesArray.first?.name == "LearnMoreButton" {
-                learnLabelNode.fontColor = UIColor.gray
+                learnLabelNode.fontColor = UIColor.lightGray
                 let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
                 DispatchQueue.main.asyncAfter(deadline: when) {
                     self.learnLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)

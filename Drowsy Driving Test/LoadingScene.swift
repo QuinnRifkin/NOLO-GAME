@@ -12,7 +12,10 @@ import UIKit
 import AVFoundation
 
 class LoadingScene: SKScene {
-    var gameViewController = GameViewController()
+    
+//    var gameViewController = GameViewController()
+    let loadingViewController = LoadingViewController()
+    let tabBarViewController = TabBarViewController()
     
     var touchLabel = SKLabelNode(fontNamed: "Helvetica")
     var animateLabel = SKAction.sequence([SKAction.fadeIn(withDuration: 0.8), SKAction.wait(forDuration: 0.5), SKAction.fadeOut(withDuration: 0.8)])
@@ -36,10 +39,11 @@ class LoadingScene: SKScene {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
-        let transition = SKTransition.crossFade(withDuration: 0.5)
-        let gameScene = MenuScene(fileNamed: "MenuScene")
-        gameScene?.scaleMode = .aspectFill
-        self.view?.presentScene(gameScene!, transition: transition)
+//        loadingViewController.touched()
+//        print("stop touching me")
+//        let transition = SKTransition.crossFade(withDuration: 0.5)
+//        let gameScene = MenuScene(fileNamed: "MenuScene")
+//        gameScene?.scaleMode = .aspectFill
+//        self.view?.presentScene(gameScene!, transition: transition)
     }
 }

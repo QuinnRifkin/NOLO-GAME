@@ -13,6 +13,9 @@ import UIKit
 
 class InstructionScene1: SKScene {
     
+    var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
+    var gameViewController = GameViewController()
+    
     var instructionBanner1Node: SKSpriteNode!
     var carNode: SKSpriteNode!
     var rightArrowBaseNode: SKSpriteNode!
@@ -145,11 +148,14 @@ class InstructionScene1: SKScene {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "PlayButtonNode" {
-                let transition = SKTransition.doorsOpenVertical(withDuration: 1)
-                let gameScene = GameScene(fileNamed: "GameScene")
-                gameScene?.scaleMode = .aspectFill
-                self.view?.presentScene(gameScene!, transition: transition)
+                playViewController.sceneTransition(scene: self, transitionScene: "GameScene", transitionType: SKTransition.doorsOpenVertical(withDuration: 1))
             }
         }
     }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        let transition = SKTransition.crossFade(withDuration: 0.5)
+//        let gameScene = MenuScene(fileNamed: "GameScene")
+//        gameScene?.scaleMode = .aspectFill
+//        self.view?.presentScene(gameScene!, transition: transition)
+//    }
 }
