@@ -12,8 +12,11 @@ import UIKit
 
 class MenuScene: SKScene {
     
+    let bouncingText = SKAction.sequence([SKAction.moveBy(x: 0, y: -10, duration: 0.6), SKAction.wait(forDuration: 0.1), SKAction.moveBy(x: 0, y: 10, duration: 0.6), SKAction.wait(forDuration: 0.1)])
+    
     var playLabelNode : SKLabelNode!
     var learnLabelNode : SKLabelNode!
+    var titleNode : SKSpriteNode!
     
     var date = UserDefaults.standard
     var nightShiftNotified = UserDefaults.standard
@@ -43,6 +46,10 @@ class MenuScene: SKScene {
     override func didMove(to view: SKView) {
         
         playViewController.tabBarController?.tabBar.isHidden = false
+        
+        titleNode = self.childNode(withName: "TitleNode") as! SKSpriteNode
+        
+        titleNode.run(SKAction.repeatForever(bouncingText))
 
         let day = calendar.component(.day, from: timeOfDay)
         let hour = calendar.component(.hour, from: timeOfDay)
