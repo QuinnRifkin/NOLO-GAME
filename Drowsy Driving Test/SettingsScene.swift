@@ -171,13 +171,16 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         }
         
         numberInput.text = month + " " + day + ", " + year
+        
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if(textField == nameInput){
             nameInput.text = welcomeScene.getName()
             nameInput.placeholder = ""
-
+        }
+        if(textField == numberInput){
+            numberInput.attributedText = NSAttributedString(string: welcomeScene.getBirthMonth() + " " + welcomeScene.getBirthDay() + ", " + welcomeScene.getBirthYear(), attributes: [NSForegroundColorAttributeName : UIColor.black])
         }
         moveTextField(textField: nameInput, moveDistace: -20, up: true)
         moveTextField(textField: numberInput, moveDistace: -20, up: true)

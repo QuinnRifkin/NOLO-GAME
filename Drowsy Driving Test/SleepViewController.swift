@@ -12,11 +12,16 @@ import SpriteKit
 
 class SleepViewController: UIViewController {
     
+    var gameViewController = GameViewController()
+    
     var longestDurationDefault = UserDefaults.standard
     var longestStartDefault = UserDefaults.standard
     var longestEndDefault = UserDefaults.standard
     var currentStartDefault = UserDefaults.standard
     var currentEndDefault = UserDefaults.standard
+    
+    var longestInHours = UserDefaults.standard
+    var longestInMinutes = UserDefaults.standard
     
     var longestDuration : Int = 0 // in seconds
     var longestStart : Date!
@@ -37,10 +42,14 @@ class SleepViewController: UIViewController {
     
     var now = Date()
     
-//    func setLongestDuration(timeInterval: TimeInterval){
-//        
-//    }
-//    
+    func getLongestDuration() -> Int{
+        return longestInHours.integer(forKey: "Hours")
+    }
+    
+    func getLongestDurationMin() -> Int{
+        return longestInMinutes.integer(forKey: "Hours")
+    }
+    
 //    func setLongestStart(date: Date){
 //        
 //    }
@@ -55,10 +64,10 @@ class SleepViewController: UIViewController {
 //    
     
     override func viewDidLoad() {
-
         
         super.viewDidLoad()
-        self.view?.backgroundColor = UIColor.blue
+        self.view = SKView()
+        //self.view?.backgroundColor = UIColor.blue
         
         var timeSlept : Int = 0
         var hoursSlept : Int = 0
@@ -111,18 +120,23 @@ class SleepViewController: UIViewController {
             timeSlept -= 60
         }
         
-        hoursSleptLabel.text = "You Slept " + String(hoursSlept) + " hours and " + String(minutesSlept) + " minutes last night."
-        hoursSleptLabel.textColor = UIColor.orange
-        hoursSleptLabel.numberOfLines = 0
-        hoursSleptLabel.textAlignment = .center
-
+        longestInHours.set(hoursSlept, forKey: "Hours")
+        longestInMinutes.set(minutesSlept, forKey: "Minutes")
         
-        print(hoursSleptLabel.text ?? "you boofed it")
+        gameViewController.viewControllerScene(scene: "SleepScene", viewController: self)
         
-        let cloudImageView = UIImageView(image: cloudImage)
-        cloudImageView.frame = CGRect(x: 30, y: 100, width: cloudImageView.frame.width, height: cloudImageView.frame.height)
-        self.view?.addSubview(cloudImageView)
-        self.view?.addSubview(hoursSleptLabel)
+//        hoursSleptLabel.text = "You Slept " + String(hoursSlept) + " hours and " + String(minutesSlept) + " minutes last night."
+//        hoursSleptLabel.textColor = UIColor.orange
+//        hoursSleptLabel.numberOfLines = 0
+//        hoursSleptLabel.textAlignment = .center
+//
+//        
+//        print(hoursSleptLabel.text ?? "you boofed it")
+//        
+//        let cloudImageView = UIImageView(image: cloudImage)
+//        cloudImageView.frame = CGRect(x: 30, y: 100, width: cloudImageView.frame.width, height: cloudImageView.frame.height)
+//        self.view?.addSubview(cloudImageView)
+//        self.view?.addSubview(hoursSleptLabel)
         
         let typesToRead : Set<HKObjectType> = [HKObjectType.categoryType(forIdentifier: HKCategoryTypeIdentifier.sleepAnalysis)!]
         

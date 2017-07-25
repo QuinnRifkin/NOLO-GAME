@@ -80,7 +80,7 @@ class PlayViewController: UIViewController {
         delegate2.playViewController = self
 
         self.view = SKView()
-        gameViewController.viewControllerScene(scene: "MenuScene", viewController: self)
+        gameViewController.viewControllerScene(scene: "WelcomeScene", viewController: self)
         
     }
     
