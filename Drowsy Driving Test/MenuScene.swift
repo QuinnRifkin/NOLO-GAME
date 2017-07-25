@@ -47,7 +47,7 @@ class MenuScene: SKScene {
         
         playViewController.tabBarController?.tabBar.isHidden = false
         
-        titleNode = self.childNode(withName: "TitleNode") as! SKSpriteNode
+        titleNode = self.childNode(withName: "PlayNode") as! SKSpriteNode
         
         titleNode.run(SKAction.repeatForever(bouncingText))
 
@@ -83,10 +83,10 @@ class MenuScene: SKScene {
         fact1 = UILabel(frame: CGRect(x: 50 , y: -(factBar.position.y) + 30, width: 270, height: 150))
         
         fact1.text = fact
-        fact1.font = UIFont(name: "HelveticaNeue-ThinItalic", size: 20)
+        fact1.font = UIFont(name: "ChalkboardSE-Regular", size: 20)
         fact1.lineBreakMode = NSLineBreakMode.byWordWrapping
         fact1.numberOfLines = 0
-        fact1.textColor = .white
+        fact1.textColor = .black
         fact1.textAlignment = NSTextAlignment.center
         
         let name = String(welcomeScene.getName())
