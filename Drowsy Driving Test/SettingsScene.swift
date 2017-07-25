@@ -18,6 +18,8 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     let settingsViewController = SettingsViewController()
     //var playViewController = PlayViewController()
     
+    var resetPulse = SKAction.sequence([SKAction.scale(by: 1.1, duration: 0.5), SKAction.wait(forDuration: 0.05), SKAction.scale(by: (1/1.1), duration: 0.5), SKAction.wait(forDuration: 0.05)])
+    
     var goHomeLabelNode : SKLabelNode!
     
     let nameLabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
@@ -25,7 +27,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     var homeButtonNode : SKSpriteNode!
     
     var resetButtonNode : SKSpriteNode!
-    var resetLabelNode : SKLabelNode!
+    var resetLabel : SKSpriteNode!
     
     var nameInput : UITextField!
     var numberInput : UITextField!
@@ -64,16 +66,18 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
 
     override func didMove(to view: SKView) {
         
-        nameInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/8, width: self.frame.width/3, height: 30))
-        numberInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/6, width: self.frame.width/3, height: 30))
+        nameInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/8.4, width: self.frame.width/3, height: 30))
+        numberInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/4.7, width: self.frame.width/3, height: 30))
         
         homeButtonNode = self.childNode(withName: "HomeNodeImage") as! SKSpriteNode
         //homeButtonNode.texture = SKTexture(imageNamed: "HomeIcon")
         homeButtonNode.color = .clear
         
         resetButtonNode = self.childNode(withName: "ResetNode") as! SKSpriteNode
-        resetLabelNode = self.childNode(withName: "ResetLabel") as! SKLabelNode
+        resetLabel = self.childNode(withName: "Reset") as! SKSpriteNode
         goHomeLabelNode = self.childNode(withName: "GoHomeLabel") as! SKLabelNode
+        
+        resetLabel.run(SKAction.repeatForever(resetPulse))
         
         let name = String(welcomeScene.getName())
         if(name!.characters.count >= 25)
@@ -265,11 +269,11 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
 //            }
             
             if nodesArray.first?.name == "ResetNode" {
-                resetLabelNode.fontColor = UIColor.lightGray
-                let when = DispatchTime.now() + 0.07 // change 2 to desired number of seconds
-                DispatchQueue.main.asyncAfter(deadline: when) {
-                    self.resetLabelNode.fontColor = UIColor.init(colorLiteralRed: 1.0, green: 0.0, blue: 0.0, alpha: 1)
-                }
+//                resetLabelNode.fontColor = UIColor.lightGray
+//                let when = DispatchTime.now() + 0.07 // change 2 to desired number of seconds
+//                DispatchQueue.main.asyncAfter(deadline: when) {
+//                    self.resetLabelNode.fontColor = UIColor.init(colorLiteralRed: 1.0, green: 0.0, blue: 0.0, alpha: 1)
+//                }
                 if(highScore != 0){
                     let alert = UIAlertController(title: "WARNING", message: "Your highscore is " + String(highScore) + "\n There is no going back...", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))

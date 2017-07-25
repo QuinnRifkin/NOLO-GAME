@@ -104,6 +104,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let left = SKAction.moveBy(x: -175, y: 0, duration: 0.2)
     let right = SKAction.moveBy(x: 175, y: 0, duration: 0.2)
     
+//    let labelAdjust10 = SKAction.moveBy(x: -15, y: 0, duration: 0)
+//    let labelAdjust100 = SKAction.moveBy(x: -30, y: 0, duration: 0)
+    var timeCartoon : SKSpriteNode!
+    var scoreCartoon : SKSpriteNode!
+    var highscoreCartoon : SKSpriteNode!
+    
     func swipeLeft(_ gestureRecognizer: UITapGestureRecognizer){
         car.run(left)
     }
@@ -242,13 +248,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         
+        timeCartoon = self.childNode(withName: "TimeCartoon") as! SKSpriteNode
+        scoreCartoon = self.childNode(withName: "ScoreCartoon") as! SKSpriteNode
+        highscoreCartoon = self.childNode(withName: "HighscoreCartoon") as! SKSpriteNode
+        timeCartoon.position = CGPoint(x: 270, y: 595)
+        scoreCartoon.position = CGPoint(x: 250, y: 540)
+        highscoreCartoon.position = CGPoint(x: 210, y: 485)
+        
         playViewController.tabBarController?.tabBar.isHidden = true
-        timeLabel = UILabel(frame: CGRect(x: 0, y: 20, width: self.frame.width/2 , height: 20))
-        timeLabel.font = UIFont.init(name: "PressStart2P", size: 13)
-        highScoreLabel = UILabel(frame: CGRect(x: 0, y: 40, width: self.frame.width/2 , height: 20))
-        highScoreLabel.font = UIFont.init(name: "PressStart2P", size: 13)
-        zCountLabel = UILabel(frame: CGRect(x: 0, y: 60, width: self.frame.width/2 , height: 20))
-        zCountLabel.font = UIFont.init(name: "PressStart2P", size: 13)
+        timeLabel = UILabel(frame: CGRect(x: 0, y: 27, width: self.frame.width/2 , height: 20))
+        timeLabel.font = UIFont.init(name: "PressStart2P", size: 15)
+        highScoreLabel = UILabel(frame: CGRect(x: 0, y: 83, width: self.frame.width/2 , height: 20))
+        highScoreLabel.font = UIFont.init(name: "PressStart2P", size: 15)
+        zCountLabel = UILabel(frame: CGRect(x: 0, y: 55, width: self.frame.width/2 , height: 20))
+        zCountLabel.font = UIFont.init(name: "PressStart2P", size: 15)
         
         widthFrame = UInt32(self.frame.width)
         halfWidthFrame = widthFrame/2
@@ -334,6 +347,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
+        
+        if(time >= 100){
+            timeCartoon.position = CGPoint(x: 230, y: 595)
+        }else if(time >= 10){
+            timeCartoon.position = CGPoint(x: 250, y: 595)
+        }
+        
+        if(zTrueCount >= 100){
+            scoreCartoon.position = CGPoint(x: 210, y: 540)
+        }else if(zTrueCount >= 10){
+            scoreCartoon.position = CGPoint(x: 230, y: 540)
+        }
+        
+        if(highScore >= 100){
+            highscoreCartoon.position = CGPoint(x: 170, y: 485)
+        }else if(highScore >= 10){
+            highscoreCartoon.position = CGPoint(x: 190, y: 485)
+        }
         
         randomNumberx1 = (Int(arc4random_uniform(widthFrame)))
         rangex1 = Int(randomNumberx1 - Int(halfWidthFrame))

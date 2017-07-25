@@ -46,7 +46,7 @@ class LearnMoreScene: SKScene {
         infoLabel.numberOfLines = 0
         infoLabel.font = UIFont(name: "HelveticaNeue-Light", size: 20)
         infoLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
-        infoLabel.textColor = .white
+        infoLabel.textColor = .black
         infoLabel.textAlignment = NSTextAlignment.left
         
         goHomeLabelNode = self.childNode(withName: "GoHomeLabel") as! SKLabelNode

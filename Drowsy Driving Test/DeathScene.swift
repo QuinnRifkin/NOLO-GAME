@@ -12,12 +12,15 @@ import UIKit
 
 class DeathScene: SKScene {
     
+    let bouncingText = SKAction.sequence([SKAction.moveBy(x: 0, y: -10, duration: 0.6), SKAction.wait(forDuration: 0.1), SKAction.moveBy(x: 0, y: 10, duration: 0.6), SKAction.wait(forDuration: 0.1)])
+    
     var playAgainButtonNode:SKSpriteNode!
     var homeButtonNode: SKSpriteNode!
     var factBar:SKSpriteNode!
     var screenNode:SKSpriteNode!
     var screenHandleNode:SKSpriteNode!
     var popLabelBar:SKSpriteNode!
+    var playAgain:SKSpriteNode!
     
     var playLabelNode: SKLabelNode!
     var homeLabelNode: SKLabelNode!
@@ -102,9 +105,9 @@ class DeathScene: SKScene {
         swDown.direction = .down
         view.addGestureRecognizer(swDown)
         
-        zCountLabel = UILabel(frame: CGRect(x: self.frame.width/8, y: self.frame.height/6.5, width: 250, height: 40))
+        zCountLabel = UILabel(frame: CGRect(x: self.frame.width/7.7, y: self.frame.height/7.1, width: 250, height: 40))
         
-        highScoreLabel = UILabel(frame: CGRect(x: self.frame.width/14, y: self.frame.height/5.5, width: 300, height: 40))
+        highScoreLabel = UILabel(frame: CGRect(x: self.frame.width/7.7, y: self.frame.height/5.6, width: 300, height: 40))
 
         playAgainButtonNode = self.childNode(withName: "PlayAgainNode") as! SKSpriteNode
         homeButtonNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
@@ -117,6 +120,9 @@ class DeathScene: SKScene {
         popLabel2 = self.childNode(withName: "PopupLabel2") as! SKLabelNode
         popLabel3 = self.childNode(withName: "PopupLabel3") as! SKLabelNode
         popLabel4 = self.childNode(withName: "PopupLabel4") as! SKLabelNode
+        playAgain = self.childNode(withName: "PlayAgain") as! SKSpriteNode
+        
+        playAgain.run(SKAction.repeatForever(bouncingText))
         
         factBar = self.childNode(withName: "factBar") as! SKSpriteNode
         
@@ -142,22 +148,22 @@ class DeathScene: SKScene {
         fact1 = UILabel(frame: CGRect(x: 50 , y: -(factBar.position.y) + 30, width: 270, height: 150))
         
         fact1.text = fact
-        fact1.font = UIFont(name: "HelveticaNeue-Light", size: 20)
+        fact1.font = UIFont(name: "ChalkboardSE-Regular", size: 20)
         fact1.lineBreakMode = NSLineBreakMode.byWordWrapping
         fact1.numberOfLines = 0
-        fact1.textColor = .white
+        fact1.textColor = .black
         fact1.textAlignment = NSTextAlignment.center
         
         zCountLabel.textAlignment = NSTextAlignment.left
         zCountLabel.textColor = .white
         zCountLabel.font = UIFont(name: "PressStart2P" , size: 20)
-        zCountLabel.text = "Z Count: " + String( gameScene.getFinishZCount())
+        zCountLabel.text = "        " + String( gameScene.getFinishZCount())
         
         highScoreLabel.textAlignment = NSTextAlignment.left
         highScoreLabel.textColor = .white
         highScoreLabel.font = UIFont(name: "PressStart2P" , size: 20)
-        highScoreLabel.text = "Highscore: " + String( gameScene.getHighScore())
-        
+        highScoreLabel.text = "        " + String( gameScene.getHighScore())
+
         bounceCheck(time: 8.0)
         bounceCheck(time: 10.0)
         bounceCheck(time: 12.0)
