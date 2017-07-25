@@ -105,7 +105,7 @@ class GameViewController: UIViewController {
             viewControllerScene(scene: "WelcomeScene", viewController: self)
         }
         else{
-            viewControllerScene(scene: "LoadingScene", viewController: self)
+            viewControllerScene(scene: "WelcomeScene", viewController: self)
         }
         launchDefault.set(launchDefault.integer(forKey: "Launch") + 1, forKey: "Launch")
     }
