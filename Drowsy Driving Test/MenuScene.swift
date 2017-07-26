@@ -139,23 +139,23 @@ class MenuScene: SKScene {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "PlayDRButton" {
-                if(Int(playViewController.getDefault()) == 1){
-                    playLabelNode.fontColor = UIColor.lightGray
-                    let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
-                    DispatchQueue.main.asyncAfter(deadline: when) {
-                        self.playLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)
-                    }
-                    let transition = SKTransition.crossFade(withDuration: 0.5)
-                    let gameScene = MenuScene(fileNamed: "InstructionScene1")
-                    gameScene?.scaleMode = .aspectFill
-                    let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
-                    DispatchQueue.main.asyncAfter(deadline: when2) {
-                        self.namelabel.isHidden = true
-                        self.fact1.isHidden = true
-                        self.view?.presentScene(gameScene!, transition: transition)
-                    }
-                }
-                else{
+//                if(Int(playViewController.getDefault()) == 1){
+//                    playLabelNode.fontColor = UIColor.lightGray
+//                    let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+//                    DispatchQueue.main.asyncAfter(deadline: when) {
+//                        self.playLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)
+//                    }
+//                    let transition = SKTransition.crossFade(withDuration: 0.5)
+//                    let gameScene = MenuScene(fileNamed: "InstructionScene1")
+//                    gameScene?.scaleMode = .aspectFill
+//                    let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+//                    DispatchQueue.main.asyncAfter(deadline: when2) {
+//                        self.namelabel.isHidden = true
+//                        self.fact1.isHidden = true
+//                        self.view?.presentScene(gameScene!, transition: transition)
+//                    }
+//                }
+//                else{
                     playLabelNode.fontColor = UIColor.lightGray
                     let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
                     DispatchQueue.main.asyncAfter(deadline: when) {
@@ -170,6 +170,22 @@ class MenuScene: SKScene {
                         self.fact1.isHidden = true
                         self.view?.presentScene(gameScene!, transition: transition)
                     }
+                //}
+            }
+            if nodesArray.first?.name == "HowToNode" {
+                playLabelNode.fontColor = UIColor.lightGray
+                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                    self.playLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)
+                }
+                let transition = SKTransition.push(with: SKTransitionDirection.left, duration: 1)
+                let gameScene = GameScene(fileNamed: "InstructionScene1")
+                gameScene?.scaleMode = .aspectFill
+                let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when2) {
+                    self.namelabel.isHidden = true
+                    self.fact1.isHidden = true
+                    self.view?.presentScene(gameScene!, transition: transition)
                 }
             }
         }

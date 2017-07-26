@@ -35,85 +35,85 @@ class InstructionScene1: SKScene {
     var playButtonNode: SKSpriteNode!
     var instructionHeaderNode: SKSpriteNode!
     
-    let leftShow = SKAction.moveBy(x: -175, y: 0, duration: 1)
-    let rightShow = SKAction.moveBy(x: 175, y: 0, duration: 1)
-    let left = SKAction.moveBy(x: -750, y: 0, duration: 0.5)
-    let right = SKAction.moveBy(x: 750, y: 0, duration: 0.5)
-    let pause = SKAction.moveBy(x: 0, y: 0, duration: 0.5)
-    
-    var Directions: Bool!
-    
-    func swipeLeft(_ gestureRecognizer: UITapGestureRecognizer){
-        if(carNode.position.x < -750){
-            return;
-        }
-        
-        if(carNode.position.x < 0){
-            scrollingMiddleNode.texture = SKTexture(imageNamed: "ScrollingIcon")
-            scrollingRightNode.texture = SKTexture(imageNamed: "ScrollingIconSelect")
-            instructionHeaderNode.run(left)
-        }
-        else if(carNode.position.x == 0){
-            scrollingLeftNode.texture = SKTexture(imageNamed: "ScrollingIcon")
-            scrollingMiddleNode.texture = SKTexture(imageNamed: "ScrollingIconSelect")
-        }
-        
-        instructionBanner1Node.run(left)
-        carNode.run(left)
-        rightArrowBaseNode.run(left)
-        rightArrowBottomNode.run(left)
-        rightArrowTopNode.run(left)
-        leftArrowBaseNode.run(left)
-        leftArrowBottomNode.run(left)
-        leftArrowTopNode.run(left)
-        instructionBanner2Node.run(left)
-        wallNode.run(left)
-        zLeftNode.run(left)
-        zRightNode.run(left)
-        zMiddleNode.run(left)
-        playButtonNode.run(left)
-    }
-    func swipeRight(_ gestureRecognizer: UITapGestureRecognizer){
-        if(carNode.position.x == 0){
-            return;
-        }
-        
-        if(carNode.position.x < -750){
-            scrollingRightNode.texture = SKTexture(imageNamed: "ScrollingIcon")
-            scrollingMiddleNode.texture = SKTexture(imageNamed: "ScrollingIconSelect")
-            instructionHeaderNode.run(right)
-        }
-        else if(carNode.position.x < 0){
-            scrollingMiddleNode.texture = SKTexture(imageNamed: "ScrollingIcon")
-            scrollingLeftNode.texture = SKTexture(imageNamed: "ScrollingIconSelect")
-        }
-        
-        instructionBanner1Node.run(right)
-        carNode.run(right)
-        rightArrowBaseNode.run(right)
-        rightArrowBottomNode.run(right)
-        rightArrowTopNode.run(right)
-        leftArrowBaseNode.run(right)
-        leftArrowBottomNode.run(right)
-        leftArrowTopNode.run(right)
-        instructionBanner2Node.run(right)
-        wallNode.run(right)
-        zLeftNode.run(right)
-        zRightNode.run(right)
-        zMiddleNode.run(right)
-        playButtonNode.run(right)
-    }
+//    let leftShow = SKAction.moveBy(x: -175, y: 0, duration: 1)
+//    let rightShow = SKAction.moveBy(x: 175, y: 0, duration: 1)
+//    let left = SKAction.moveBy(x: -750, y: 0, duration: 0.5)
+//    let right = SKAction.moveBy(x: 750, y: 0, duration: 0.5)
+//    let pause = SKAction.moveBy(x: 0, y: 0, duration: 0.5)
+//    
+//    var Directions: Bool!
+//    
+//    func swipeLeft(_ gestureRecognizer: UITapGestureRecognizer){
+//        if(carNode.position.x < -750){
+//            return;
+//        }
+//        
+//        if(carNode.position.x < 0){
+//            scrollingMiddleNode.texture = SKTexture(imageNamed: "ScrollingIcon")
+//            scrollingRightNode.texture = SKTexture(imageNamed: "ScrollingIconSelect")
+//            instructionHeaderNode.run(left)
+//        }
+//        else if(carNode.position.x == 0){
+//            scrollingLeftNode.texture = SKTexture(imageNamed: "ScrollingIcon")
+//            scrollingMiddleNode.texture = SKTexture(imageNamed: "ScrollingIconSelect")
+//        }
+//        
+//        instructionBanner1Node.run(left)
+//        carNode.run(left)
+//        rightArrowBaseNode.run(left)
+//        rightArrowBottomNode.run(left)
+//        rightArrowTopNode.run(left)
+//        leftArrowBaseNode.run(left)
+//        leftArrowBottomNode.run(left)
+//        leftArrowTopNode.run(left)
+//        instructionBanner2Node.run(left)
+//        wallNode.run(left)
+//        zLeftNode.run(left)
+//        zRightNode.run(left)
+//        zMiddleNode.run(left)
+//        playButtonNode.run(left)
+//    }
+//    func swipeRight(_ gestureRecognizer: UITapGestureRecognizer){
+//        if(carNode.position.x == 0){
+//            return;
+//        }
+//        
+//        if(carNode.position.x < -750){
+//            scrollingRightNode.texture = SKTexture(imageNamed: "ScrollingIcon")
+//            scrollingMiddleNode.texture = SKTexture(imageNamed: "ScrollingIconSelect")
+//            instructionHeaderNode.run(right)
+//        }
+//        else if(carNode.position.x < 0){
+//            scrollingMiddleNode.texture = SKTexture(imageNamed: "ScrollingIcon")
+//            scrollingLeftNode.texture = SKTexture(imageNamed: "ScrollingIconSelect")
+//        }
+//        
+//        instructionBanner1Node.run(right)
+//        carNode.run(right)
+//        rightArrowBaseNode.run(right)
+//        rightArrowBottomNode.run(right)
+//        rightArrowTopNode.run(right)
+//        leftArrowBaseNode.run(right)
+//        leftArrowBottomNode.run(right)
+//        leftArrowTopNode.run(right)
+//        instructionBanner2Node.run(right)
+//        wallNode.run(right)
+//        zLeftNode.run(right)
+//        zRightNode.run(right)
+//        zMiddleNode.run(right)
+//        playButtonNode.run(right)
+//    }
 
     override func didMove(to view: SKView) {
         self.backgroundColor = .clear
         
-        let swLeft:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(_:)))
-        swLeft.direction = .left
-        view.addGestureRecognizer(swLeft)
-        
-        let swRight:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight(_:)))
-        swLeft.direction = .left
-        view.addGestureRecognizer(swRight)
+//        let swLeft:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(_:)))
+//        swLeft.direction = .left
+//        view.addGestureRecognizer(swLeft)
+//        
+//        let swRight:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight(_:)))
+//        swLeft.direction = .left
+//        view.addGestureRecognizer(swRight)
         
         instructionBanner1Node = self.childNode(withName: "InstructionBanner1Node") as! SKSpriteNode
         instructionHeaderNode = self.childNode(withName: "InstructionHeaderNode") as! SKSpriteNode
@@ -150,6 +150,10 @@ class InstructionScene1: SKScene {
             if nodesArray.first?.name == "PlayButtonNode" {
                 playViewController.sceneTransition(scene: self, transitionScene: "GameScene", transitionType: SKTransition.doorsOpenVertical(withDuration: 1))
             }
+            if nodesArray.first?.name == "BackNode" {
+                playViewController.sceneTransition(scene: self, transitionScene: "MenuScene", transitionType: SKTransition.push(with: SKTransitionDirection.right, duration: 1))
+            }
+
         }
     }
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
