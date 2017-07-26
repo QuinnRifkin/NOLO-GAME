@@ -139,7 +139,7 @@ class MenuScene: SKScene {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "PlayDRButton" {
-                if(Int(gameViewController.getDefault()) == 1){
+                if(Int(playViewController.getDefault()) == 1){
                     playLabelNode.fontColor = UIColor.lightGray
                     let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
                     DispatchQueue.main.asyncAfter(deadline: when) {
@@ -170,38 +170,6 @@ class MenuScene: SKScene {
                         self.fact1.isHidden = true
                         self.view?.presentScene(gameScene!, transition: transition)
                     }
-                }
-            }
-            if nodesArray.first?.name == "LearnMoreButton" {
-                learnLabelNode.fontColor = UIColor.lightGray
-                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
-                DispatchQueue.main.asyncAfter(deadline: when) {
-                    self.learnLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)
-                }
-                let transition = SKTransition.reveal(with: SKTransitionDirection.left, duration: 0.5)
-                let gameScene = MenuScene(fileNamed: "LearnMoreScene")
-                gameScene?.scaleMode = .aspectFill
-                let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
-                DispatchQueue.main.asyncAfter(deadline: when2) {
-                    self.namelabel.isHidden = true
-                    self.fact1.isHidden = true
-                    self.view?.presentScene(gameScene!, transition: transition)
-                }
-            }
-            if nodesArray.first?.name == "SettingsNode" {
-                settingsButtonNode.texture = SKTexture(imageNamed: "SettingsButton2")
-                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
-                DispatchQueue.main.asyncAfter(deadline: when) {
-                    self.settingsButtonNode.texture = SKTexture(imageNamed: "SettingsButton")
-                }
-                let transition = SKTransition.reveal(with: SKTransitionDirection.left, duration: 0.5)
-                let gameScene = MenuScene(fileNamed: "SettingsScene")
-                let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
-                gameScene?.scaleMode = .aspectFill
-                DispatchQueue.main.asyncAfter(deadline: when2) {
-                    self.namelabel.isHidden = true
-                    self.fact1.isHidden = true
-                    self.view?.presentScene(gameScene!, transition: transition)
                 }
             }
         }

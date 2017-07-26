@@ -13,8 +13,6 @@ import AVFoundation
 
 class GameViewController: UIViewController {
     
-    var launchDefault = UserDefaults.standard
-    
     var timeOfDay = Date()
     var calendar = Calendar.current
     
@@ -53,10 +51,6 @@ class GameViewController: UIViewController {
             scene.view?.presentScene(gameScene!, transition: transition)
         }
 
-    }
-    
-       func getDefault() -> Int {
-        return launchDefault.integer(forKey: "Launch")
     }
     
     func socialMediaLink(appLink: String, webLink: String){
@@ -99,15 +93,6 @@ class GameViewController: UIViewController {
         } else{
             print(String(hours) + ":" + String(minutes) + " AM")
         }
-        
-        if(launchDefault.value(forKey: "Launch") == nil || launchDefault.integer(forKey: "Launch" ) == 0 ){
-            launchDefault.set(0, forKey: "Launch")
-            viewControllerScene(scene: "WelcomeScene", viewController: self)
-        }
-        else{
-            viewControllerScene(scene: "WelcomeScene", viewController: self)
-        }
-        launchDefault.set(launchDefault.integer(forKey: "Launch") + 1, forKey: "Launch")
     }
     
     override var shouldAutorotate: Bool {

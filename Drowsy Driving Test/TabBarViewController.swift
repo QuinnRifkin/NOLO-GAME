@@ -38,12 +38,11 @@ class TabBarViewController: UITabBarController {
                 //three.tabBarItem.image = UIImage(named: "SettingsButton2")
         //four.tabBarItem.title = "four"
        
+        
+        
         self.tabBarController?.selectedViewController = home
         self.tabBarController?.selectedIndex = 1
         self.viewControllers = [play, sleep, home, settings, learnMore ]
-
-        
-
         
     }
 

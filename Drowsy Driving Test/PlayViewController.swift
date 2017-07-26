@@ -13,6 +13,8 @@ import AVFoundation
 
 class PlayViewController: UIViewController {
     
+    var launchDefault = UserDefaults.standard
+    
     var audioPlayer = AVAudioPlayer()
     var gameViewController = GameViewController()
     
@@ -71,16 +73,30 @@ class PlayViewController: UIViewController {
         
     }
     
+    func getDefault() -> Int {
+        return launchDefault.integer(forKey: "Launch")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view = SKView()
         self.tabBarController?.tabBar.isHidden = false
         
         let delegate2 = UIApplication.shared.delegate as! AppDelegate
         delegate2.playViewController = self
+        
+        if(launchDefault.value(forKey: "Launch") == nil || launchDefault.integer(forKey: "Launch" ) == 0 ){
+            launchDefault.set(0, forKey: "Launch")
+            self.tabBarController?.tabBar.isHidden = true
+            gameViewController.viewControllerScene(scene: "WelcomeScene", viewController: self)
+        }
+        else{
+            gameViewController.viewControllerScene(scene: "MenuScene", viewController: self)
+        }
+        launchDefault.set(launchDefault.integer(forKey: "Launch") + 1, forKey: "Launch")
 
-        self.view = SKView()
-        gameViewController.viewControllerScene(scene: "MenuScene", viewController: self)
+        
+//        gameViewController.viewControllerScene(scene: "MenuScene", viewController: self)
         
     }
     
