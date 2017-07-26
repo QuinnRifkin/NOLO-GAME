@@ -95,15 +95,15 @@ class MenuScene: SKScene {
         let name = String(welcomeScene.getName())
         if(name!.characters.count >= 25)
         {
-            namelabel.font = UIFont(name: "HelveticaNeue", size: 10)
+            namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 10)
         } else if(name!.characters.count >= 20){
-            namelabel.font = UIFont(name: "HelveticaNeue", size: 12)
+            namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 12)
         } else if(name!.characters.count >= 15){
-            namelabel.font = UIFont(name: "HelveticaNeue", size: 14)
+            namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 14)
         } else if(name!.characters.count >= 10){
-            namelabel.font = UIFont(name: "HelveticaNeue", size: 16)
+            namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 16)
         } else {
-            namelabel.font = UIFont(name: "HelveticaNeue", size: 18)
+            namelabel.font = UIFont(name: ""ChalkboardSE-Regular"HelveticaNeue", size: 18)
         }
         
         namelabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
