@@ -35,6 +35,11 @@ class InstructionScene1: SKScene {
     var playButtonNode: SKSpriteNode!
     var instructionHeaderNode: SKSpriteNode!
     
+    var backLabel: SKSpriteNode!
+    
+    let left = SKAction.moveBy(x: -175, y: 0, duration: 0.2)
+    let right = SKAction.moveBy(x: 175, y: 0, duration: 0.2)
+    
 //    let leftShow = SKAction.moveBy(x: -175, y: 0, duration: 1)
 //    let rightShow = SKAction.moveBy(x: 175, y: 0, duration: 1)
 //    let left = SKAction.moveBy(x: -750, y: 0, duration: 0.5)
@@ -43,7 +48,8 @@ class InstructionScene1: SKScene {
 //    
 //    var Directions: Bool!
 //    
-//    func swipeLeft(_ gestureRecognizer: UITapGestureRecognizer){
+    func swipeLeft(_ gestureRecognizer: UITapGestureRecognizer){
+        carNode.run(left)
 //        if(carNode.position.x < -750){
 //            return;
 //        }
@@ -72,8 +78,9 @@ class InstructionScene1: SKScene {
 //        zRightNode.run(left)
 //        zMiddleNode.run(left)
 //        playButtonNode.run(left)
-//    }
-//    func swipeRight(_ gestureRecognizer: UITapGestureRecognizer){
+    }
+    func swipeRight(_ gestureRecognizer: UITapGestureRecognizer){
+        carNode.run(right)
 //        if(carNode.position.x == 0){
 //            return;
 //        }
@@ -102,18 +109,18 @@ class InstructionScene1: SKScene {
 //        zRightNode.run(right)
 //        zMiddleNode.run(right)
 //        playButtonNode.run(right)
-//    }
+    }
 
     override func didMove(to view: SKView) {
         self.backgroundColor = .clear
         
-//        let swLeft:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(_:)))
-//        swLeft.direction = .left
-//        view.addGestureRecognizer(swLeft)
-//        
-//        let swRight:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight(_:)))
-//        swLeft.direction = .left
-//        view.addGestureRecognizer(swRight)
+        let swLeft:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(_:)))
+        swLeft.direction = .left
+        view.addGestureRecognizer(swLeft)
+        
+        let swRight:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight(_:)))
+        swLeft.direction = .left
+        view.addGestureRecognizer(swRight)
         
         instructionBanner1Node = self.childNode(withName: "InstructionBanner1Node") as! SKSpriteNode
         instructionHeaderNode = self.childNode(withName: "InstructionHeaderNode") as! SKSpriteNode
@@ -138,9 +145,35 @@ class InstructionScene1: SKScene {
         playButtonNode = self.childNode(withName: "PlayButtonNode") as! SKSpriteNode
         playButtonNode.texture = SKTexture(imageNamed: "PlayButtonNew")
         playButtonNode.color = .clear
+        
+        backLabel = self.childNode(withName: "BackLabel") as! SKSpriteNode
 
     }
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
+        let touch = touches.first
+        
+        if let location = touch?.location(in: self){
+            let nodesArray = self.nodes(at: location)
+            
+            if nodesArray.first?.name == "BackNode" {
+                backLabel.scale(to: CGSize(width: 267, height: 100))
+            }
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        
+        if let location = touch?.location(in: self){
+            let nodesArray = self.nodes(at: location)
+            
+            if nodesArray.first?.name == "BackNode" {
+                backLabel.scale(to: CGSize(width: 320, height: 122))
+            }
+        }
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         let touch = touches.first
         
@@ -151,7 +184,8 @@ class InstructionScene1: SKScene {
                 playViewController.sceneTransition(scene: self, transitionScene: "GameScene", transitionType: SKTransition.doorsOpenVertical(withDuration: 1))
             }
             if nodesArray.first?.name == "BackNode" {
-                playViewController.sceneTransition(scene: self, transitionScene: "MenuScene", transitionType: SKTransition.push(with: SKTransitionDirection.right, duration: 1))
+                backLabel.scale(to: CGSize(width: 320, height: 122))
+                playViewController.sceneTransition(scene: self, transitionScene: "MenuScene", transitionType: SKTransition.push(with: SKTransitionDirection.right, duration: 0.5))
             }
 
         }
