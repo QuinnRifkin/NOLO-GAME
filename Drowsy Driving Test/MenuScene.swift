@@ -103,7 +103,7 @@ class MenuScene: SKScene {
         } else if(name!.characters.count >= 10){
             namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 16)
         } else {
-            namelabel.font = UIFont(name: ""ChalkboardSE-Regular"HelveticaNeue", size: 18)
+            namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 18)
         }
         
         namelabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
