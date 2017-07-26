@@ -22,9 +22,9 @@ class TabBarViewController: UITabBarController {
         
         //UIImage.init(data: "HomeIconWhenPressedcopy", scale: 0.5)
         
-        home.tabBarItem.title = "Home"
-        home.tabBarItem.image = UIImage(named: "HomeIconWhenPressed copy")
-        home.tabBarItem.index(ofAccessibilityElement: 0)
+//        home.tabBarItem.title = "Home"
+//        home.tabBarItem.image = UIImage(named: "HomeIconWhenPressed copy")
+//        home.tabBarItem.index(ofAccessibilityElement: 0)
         learnMore.tabBarItem.title = "Learn More"
         learnMore.tabBarItem.image = UIImage(named: "InfoTabItem-2")
         learnMore.tabBarItem.index(ofAccessibilityElement: 1)
@@ -40,7 +40,7 @@ class TabBarViewController: UITabBarController {
        
         self.tabBarController?.selectedViewController = home
         self.tabBarController?.selectedIndex = 1
-        self.viewControllers = [play, sleep, home, settings, learnMore ]
+        self.viewControllers = [play, sleep, settings, learnMore ]
 
         
 
