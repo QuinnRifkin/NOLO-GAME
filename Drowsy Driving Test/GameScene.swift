@@ -95,6 +95,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let zSpriteRandom3 = SKSpriteNode(imageNamed: "ZSprite")
     let zSpriteRandom4 = SKSpriteNode(imageNamed: "ZSprite")
     
+    var resetButton : SKSpriteNode!
+    var homeButton : SKSpriteNode!
+    
     var zSprites : [SKSpriteNode]!
     var obstacles : [SKSpriteNode]!
     
@@ -247,6 +250,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func didMove(to view: SKView) {
+        
+        resetButton = self.childNode(withName: "Reset") as! SKSpriteNode
+        //homeButton = self.childNode(withName: "Home") as! SKSpriteNode
         
         timeCartoon = self.childNode(withName: "TimeCartoon") as! SKSpriteNode
         scoreCartoon = self.childNode(withName: "ScoreCartoon") as! SKSpriteNode
@@ -512,6 +518,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        
+        if let location = touch?.location(in: self){
+            let nodesArray = self.nodes(at: location)
+            
+            if nodesArray.first?.name == "resetButton" {
+                resetButton.scale(to: CGSize(width: 133, height: 67))
+            }
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        
+        if let location = touch?.location(in: self){
+            let nodesArray = self.nodes(at: location)
+            
+            if nodesArray.first?.name == "resetButton" {
+                resetButton.scale(to: CGSize(width: 160, height: 80))
+            }
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         let touch = touches.first
         
@@ -519,6 +549,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "resetButton" {
+                resetButton.scale(to: CGSize(width: 160, height: 80))
                 if(playViewController.isPlayingMusic()){
                     playViewController.stopMusic()
                 }

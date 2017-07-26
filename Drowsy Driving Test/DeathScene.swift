@@ -169,8 +169,31 @@ class DeathScene: SKScene {
         bounceCheck(time: 12.0)
         
     }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        
+        if let location = touch?.location(in: self){
+            let nodesArray = self.nodes(at: location)
+            
+            if nodesArray.first?.name == "PlayAgainNode" {
+                playAgain.scale(to: CGSize(width: 400, height: 117))
+            }
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        
+        if let location = touch?.location(in: self){
+            let nodesArray = self.nodes(at: location)
+            
+            if nodesArray.first?.name == "PlayAgainNode" {
+                playAgain.scale(to: CGSize(width: 480, height: 140))
+            }
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         let touch = touches.first
         
@@ -178,10 +201,10 @@ class DeathScene: SKScene {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "PlayAgainNode" {
+                playAgain.scale(to: CGSize(width: 480, height: 140))
                 playViewController.tabBarController?.tabBar.isHidden = true
                 gameViewController.labelTransition(label: playLabelNode, color: UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1), scene: self, transitionScene: "GameScene", transitionType: SKTransition.push(with: SKTransitionDirection.down, duration: 1) )
                 hideLabels()
             }
         }
-    }
-}
+    }}

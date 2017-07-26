@@ -29,6 +29,9 @@ class MenuScene: SKScene {
     var factBar:SKSpriteNode!
     var settingsButtonNode: SKSpriteNode!
     
+    var playButton: SKSpriteNode!
+    var howToPlayButton: SKSpriteNode!
+    
     let random = Int(arc4random_uniform(5))
     var sleepFactz = [String]()
     
@@ -49,7 +52,7 @@ class MenuScene: SKScene {
         
         titleNode = self.childNode(withName: "PlayNode") as! SKSpriteNode
         
-        titleNode.run(SKAction.repeatForever(bouncingText))
+        //titleNode.run(SKAction.repeatForever(bouncingText))
 
         let day = calendar.component(.day, from: timeOfDay)
         let hour = calendar.component(.hour, from: timeOfDay)
@@ -115,6 +118,10 @@ class MenuScene: SKScene {
         playLabelNode = self.childNode(withName: "PlayDRLabel") as! SKLabelNode
         learnLabelNode = self.childNode(withName: "LearnMoreLabel") as! SKLabelNode
         
+        playButton = self.childNode(withName: "PlayNode") as! SKSpriteNode
+        howToPlayButton = self.childNode(withName: "HowToPlayNode") as! SKSpriteNode
+        
+        
 
         let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
@@ -128,6 +135,36 @@ class MenuScene: SKScene {
         alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
         if let vc = self.view?.window?.rootViewController {
             vc.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        
+        if let location = touch?.location(in: self){
+            let nodesArray = self.nodes(at: location)
+            
+            if nodesArray.first?.name == "PlayDRButton" {
+                playButton.scale(to: CGSize(width: 200, height: 117))
+            }
+            if nodesArray.first?.name == "HowToNode" {
+                howToPlayButton.scale(to: CGSize(width: 480, height: 117))
+            }
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        
+        if let location = touch?.location(in: self){
+            let nodesArray = self.nodes(at: location)
+            
+            if nodesArray.first?.name == "PlayDRButton" {
+                playButton.scale(to: CGSize(width: 240, height: 140))
+            }
+            if nodesArray.first?.name == "HowToNode" {
+                howToPlayButton.scale(to: CGSize(width: 576, height: 140))
+            }
         }
     }
     
@@ -156,6 +193,7 @@ class MenuScene: SKScene {
 //                    }
 //                }
 //                else{
+                    playButton.scale(to: CGSize(width: 240, height: 140))
                     playLabelNode.fontColor = UIColor.lightGray
                     let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
                     DispatchQueue.main.asyncAfter(deadline: when) {
@@ -173,6 +211,7 @@ class MenuScene: SKScene {
                 //}
             }
             if nodesArray.first?.name == "HowToNode" {
+                howToPlayButton.scale(to: CGSize(width: 576, height: 140))
                 playLabelNode.fontColor = UIColor.lightGray
                 let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
                 DispatchQueue.main.asyncAfter(deadline: when) {
