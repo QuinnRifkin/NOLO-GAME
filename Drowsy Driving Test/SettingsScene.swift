@@ -16,7 +16,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     let gameScene = GameScene()
     let gameViewController = GameViewController()
     let settingsViewController = SettingsViewController()
-    //var playViewController = PlayViewController()
+    
     
     var resetPulse = SKAction.sequence([SKAction.scale(by: 1.1, duration: 0.5), SKAction.wait(forDuration: 0.05), SKAction.scale(by: (1/1.1), duration: 0.5), SKAction.wait(forDuration: 0.05)])
     
@@ -74,7 +74,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         numberInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/4.7, width: self.frame.width/3, height: 30))
         
         homeButtonNode = self.childNode(withName: "HomeNodeImage") as! SKSpriteNode
-        //homeButtonNode.texture = SKTexture(imageNamed: "HomeIcon")
+        
         homeButtonNode.color = .clear
         
         resetButtonNode = self.childNode(withName: "ResetNode") as! SKSpriteNode
@@ -296,30 +296,8 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         if let location = touch?.location(in: self){
             let nodesArray = self.nodes(at: location)
             
-//            if nodesArray.first?.name == "HomeNode" {
-//                goHomeLabelNode.fontColor = UIColor.lightGray
-//                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
-//                DispatchQueue.main.asyncAfter(deadline: when) {
-//                    self.goHomeLabelNode.fontColor = UIColor.white
-//                }
-//                let transition = SKTransition.push(with: SKTransitionDirection.right, duration: 0.5)
-//                let gameScene = MenuScene(fileNamed: "MenuScene")
-//                gameScene?.scaleMode = .aspectFill
-//                let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
-//                DispatchQueue.main.asyncAfter(deadline: when2) {
-//                    self.nameLabel.isHidden = true
-//                    self.nameInput.isHidden = true
-//                    self.numberInput.isHidden = true
-//                    self.view?.presentScene(gameScene!, transition: transition)
-//                }
-//            }
-            
             if nodesArray.first?.name == "ResetNode" {
-//                resetLabelNode.fontColor = UIColor.lightGray
-//                let when = DispatchTime.now() + 0.07 // change 2 to desired number of seconds
-//                DispatchQueue.main.asyncAfter(deadline: when) {
-//                    self.resetLabelNode.fontColor = UIColor.init(colorLiteralRed: 1.0, green: 0.0, blue: 0.0, alpha: 1)
-//                }
+
                 if(highScore != 0){
                     let alert = UIAlertController(title: "WARNING", message: "Your highscore is " + String(highScore) + "\n There is no going back...", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))

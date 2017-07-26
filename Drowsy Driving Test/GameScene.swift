@@ -461,54 +461,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 car.position = CGPoint(x: car.position.x, y: CGFloat(-463.043))
             }
         }
-//        if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite1right"){
-//            removeZSprite(zSprite: zSprite1Right)
-//        }
-//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite1middle"){
-//            removeZSprite(zSprite: zSprite1Middle)
-//        }
-//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite1left"){
-//            removeZSprite(zSprite: zSprite1Left)
-//        }
-//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite2right"){
-//            removeZSprite(zSprite: zSprite2Right)
-//        }
-//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite2middle"){
-//            removeZSprite(zSprite: zSprite2Middle)
-//        }
-//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite2left"){
-//            removeZSprite(zSprite: zSprite2Left)
-//        }
-//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite3right"){
-//            removeZSprite(zSprite: zSprite3Right)
-//        }
-//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite3middle"){
-//            removeZSprite(zSprite: zSprite3Middle)
-//        }
-//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite3left"){
-//            removeZSprite(zSprite: zSprite3Left)
-//        }
-//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite4right"){
-//            removeZSprite(zSprite: zSprite4Right)
-//        }
-//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite4middle"){
-//            removeZSprite(zSprite: zSprite4Middle)
-//        }
-//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zsprite4left"){
-//            removeZSprite(zSprite: zSprite4Left)
-//        }
-//        if(firstBody.node?.name == "Car" && secondBody.node?.name == "zspriterandom1"){
-//            removeZSprite(zSprite: zSpriteRandom1)
-//        }
-//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zspriterandom2"){
-//            removeZSprite(zSprite: zSpriteRandom2)
-//        }
-//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zspriterandom3"){
-//            removeZSprite(zSprite: zSpriteRandom3)
-//        }
-//        else if(firstBody.node?.name == "Car" && secondBody.node?.name == "zspriterandom4"){
-//            removeZSprite(zSprite: zSpriteRandom4)
-//        }
         for obstacle in obstacles{
             if(contact.bodyA.node?.name == obstacle.name){
                 firstBody = contact.bodyA
@@ -524,91 +476,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
-        
-//        if(contact.bodyA.node?.name == "obstacle1"){
-//            firstBody = contact.bodyA
-//            secondBody = contact.bodyB
-//        }
-//        else{
-//            firstBody = contact.bodyB
-//            secondBody = contact.bodyA
-//        }
-//        if(firstBody.node?.name == "obstacle1" && secondBody.node?.name == "zspriterandom1"){
-//            zSpriteRandom1.isHidden = true
-//        }
-//        else if(firstBody.node?.name == "obstacle1" && secondBody.node?.name == "zspriterandom2"){
-//            zSpriteRandom2.isHidden = true
-//        }
-//        else if(firstBody.node?.name == "obstacle1" && secondBody.node?.name == "zspriterandom3"){
-//            zSpriteRandom3.isHidden = true
-//        }
-//        else if(firstBody.node?.name == "obstacle1" && secondBody.node?.name == "zspriterandom4"){
-//            zSpriteRandom4.isHidden = true
-//        }
-//        
-//        if(contact.bodyA.node?.name == "obstacle2"){
-//            firstBody = contact.bodyA
-//            secondBody = contact.bodyB
-//        }
-//        else{
-//            firstBody = contact.bodyB
-//            secondBody = contact.bodyA
-//        }
-//        if(firstBody.node?.name == "obstacle2" && secondBody.node?.name == "zspriterandom1"){
-//            zSpriteRandom1.isHidden = true
-//        }
-//        else if(firstBody.node?.name == "obstacle2" && secondBody.node?.name == "zspriterandom2"){
-//            zSpriteRandom2.isHidden = true
-//        }
-//        else if(firstBody.node?.name == "obstacle2" && secondBody.node?.name == "zspriterandom3"){
-//            zSpriteRandom3.isHidden = true
-//        }
-//        else if(firstBody.node?.name == "obstacle2" && secondBody.node?.name == "zspriterandom4"){
-//            zSpriteRandom4.isHidden = true
-//        }
-//        
-//        if(contact.bodyA.node?.name == "obstacle3"){
-//            firstBody = contact.bodyA
-//            secondBody = contact.bodyB
-//        }
-//        else{
-//            firstBody = contact.bodyB
-//            secondBody = contact.bodyA
-//        }
-//        if(firstBody.node?.name == "obstacle3" && secondBody.node?.name == "zspriterandom1"){
-//            zSpriteRandom1.isHidden = true
-//        }
-//        else if(firstBody.node?.name == "obstacle3" && secondBody.node?.name == "zspriterandom2"){
-//            zSpriteRandom2.isHidden = true
-//        }
-//        else if(firstBody.node?.name == "obstacle3" && secondBody.node?.name == "zspriterandom3"){
-//            zSpriteRandom3.isHidden = true
-//        }
-//        else if(firstBody.node?.name == "obstacle3" && secondBody.node?.name == "zspriterandom4"){
-//            zSpriteRandom4.isHidden = true
-//        }
-//        
-//        if(contact.bodyA.node?.name == "obstacle4"){
-//            firstBody = contact.bodyA
-//            secondBody = contact.bodyB
-//        }
-//        else{
-//            firstBody = contact.bodyB
-//            secondBody = contact.bodyA
-//        }
-//        if(firstBody.node?.name == "obstacle4" && secondBody.node?.name == "zspriterandom1"){
-//            zSpriteRandom1.isHidden = true
-//        }
-//        else if(firstBody.node?.name == "obstacle4" && secondBody.node?.name == "zspriterandom2"){
-//            zSpriteRandom2.isHidden = true
-//        }
-//        else if(firstBody.node?.name == "obstacle4" && secondBody.node?.name == "zspriterandom3"){
-//            zSpriteRandom3.isHidden = true
-//        }
-//        else if(firstBody.node?.name == "obstacle4" && secondBody.node?.name == "zspriterandom4"){
-//            zSpriteRandom4.isHidden = true
-//        }
-//        
     }
     func checkRandomZ(zSprite: SKSpriteNode){
         if(zSprite.position.y < -self.frame.height/2-zSprite.size.height/2){
@@ -651,26 +518,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let location = touch?.location(in: self){
             let nodesArray = self.nodes(at: location)
             
-//            if nodesArray.first?.name == "HomeNode" {
-//                Player.sharedPlayer.stopMusic()
-//                setHighScore(zcount: zTrueCount)
-//                setFinishZCount(zcount: zTrueCount)
-//                homeLabelNode.texture = SKTexture(imageNamed: "HomeIcon2")
-//                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
-//                DispatchQueue.main.asyncAfter(deadline: when) {
-//                    self.homeLabelNode.texture = SKTexture(imageNamed: "HomeIcon")
-//                }
-//                let transition = SKTransition.doorsCloseVertical(withDuration: 0.5)
-//                let gameScene = DeathScene(fileNamed: "MenuScene")
-//                gameScene?.scaleMode = .aspectFill
-//                let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
-//                DispatchQueue.main.asyncAfter(deadline: when2) {
-//                    self.zCountLabel.isHidden = true
-//                    self.timeLabel.isHidden = true
-//                    self.highScoreLabel.isHidden = true
-//                    self.view?.presentScene(gameScene!, transition: transition)
-//                }
-//            }
             if nodesArray.first?.name == "resetButton" {
                 if(playViewController.isPlayingMusic()){
                     playViewController.stopMusic()

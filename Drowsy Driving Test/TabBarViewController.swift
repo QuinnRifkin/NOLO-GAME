@@ -11,20 +11,14 @@ import SpriteKit
 
 class TabBarViewController: UITabBarController {
 
-       override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
     
-        let home = GameViewController()
         let learnMore = LearnMoreViewController()
         let play = PlayViewController()
         let settings = SettingsViewController()
         let sleep = SleepViewController()
         
-        //UIImage.init(data: "HomeIconWhenPressedcopy", scale: 0.5)
-        
-//        home.tabBarItem.title = "Home"
-//        home.tabBarItem.image = UIImage(named: "HomeIconWhenPressed copy")
-//        home.tabBarItem.index(ofAccessibilityElement: 0)
         learnMore.tabBarItem.title = "Learn More"
         learnMore.tabBarItem.image = UIImage(named: "InfoTabItem-2")
         learnMore.tabBarItem.index(ofAccessibilityElement: 1)
@@ -44,22 +38,12 @@ class TabBarViewController: UITabBarController {
         self.tabBarController?.selectedIndex = 1
         self.viewControllers = [play, sleep, home, settings, learnMore ]
         
+        self.tabBarController?.selectedIndex = 1
+        self.viewControllers = [play, sleep, settings, learnMore]
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

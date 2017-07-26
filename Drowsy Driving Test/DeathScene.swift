@@ -31,7 +31,7 @@ class DeathScene: SKScene {
     
     var gameScene = GameScene()
     var gameViewController = GameViewController()
-    var playViewController = PlayViewController() //(UIApplication.shared.delegate as! AppDelegate).playViewController!
+    var playViewController = PlayViewController()
     
     var timeLabel : UILabel!
     var highScoreLabel : UILabel!
@@ -99,7 +99,7 @@ class DeathScene: SKScene {
     }
     
     override func didMove(to view: SKView) {
-        //playViewController.tabBarController?.tabBar.isHidden = false
+        
         
         let swDown:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeDown(_:)))
         swDown.direction = .down
@@ -177,23 +177,6 @@ class DeathScene: SKScene {
         if let location = touch?.location(in: self){
             let nodesArray = self.nodes(at: location)
             
-//            if nodesArray.first?.name == "HomeNode" {
-//                homeLabelNode.fontColor = UIColor.lightGray
-//                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
-//                DispatchQueue.main.asyncAfter(deadline: when) {
-//                    self.homeLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)
-//                }
-//                let transition = SKTransition.reveal(with: SKTransitionDirection.down, duration: 0.5)
-//                let gameScene = DeathScene(fileNamed: "MenuScene")
-//                gameScene?.scaleMode = .aspectFill
-//                let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
-//                DispatchQueue.main.asyncAfter(deadline: when2) {
-//                    self.zCountLabel.isHidden = true
-//                    self.fact1.isHidden = true
-//                    self.highScoreLabel.isHidden = true
-//                    self.view?.presentScene(gameScene!, transition: transition)
-//                }
-//            }
             if nodesArray.first?.name == "PlayAgainNode" {
                 playViewController.tabBarController?.tabBar.isHidden = true
                 gameViewController.labelTransition(label: playLabelNode, color: UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1), scene: self, transitionScene: "GameScene", transitionType: SKTransition.push(with: SKTransitionDirection.down, duration: 1) )
