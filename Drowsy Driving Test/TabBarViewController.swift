@@ -29,14 +29,6 @@ class TabBarViewController: UITabBarController {
         settings.tabBarItem.image = UIImage(named: "GearSmall")
         sleep.tabBarItem.title = "Sleep"
         sleep.tabBarItem.image = UIImage(named: "SleepTabIcon-1")
-                //three.tabBarItem.image = UIImage(named: "SettingsButton2")
-        //four.tabBarItem.title = "four"
-       
-        
-        
-        self.tabBarController?.selectedViewController = home
-        self.tabBarController?.selectedIndex = 1
-        self.viewControllers = [play, sleep, home, settings, learnMore ]
         
         self.tabBarController?.selectedIndex = 1
         self.viewControllers = [play, sleep, settings, learnMore]
