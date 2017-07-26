@@ -14,6 +14,7 @@ import AVFoundation
 class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource{
     
     var gameViewController = GameViewController()
+    var playViewController = PlayViewController()
     
     let name1 = UserDefaults.standard
     
@@ -199,14 +200,14 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
                     self.continueLabelNode.fontColor = UIColor.white
                 }
                 let transition = SKTransition.crossFade(withDuration: 0.05)
-                let gameScene = MenuScene(fileNamed: "LoadingScene")
+                let gameScene = LoadingScene(fileNamed: "MenuScene")
                 gameScene?.scaleMode = .aspectFill
                 let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
                 DispatchQueue.main.asyncAfter(deadline: when2) {
                     self.nameInput.isHidden = true
                     self.numberInput.isHidden = true
                     self.view?.presentScene(gameScene!, transition: transition)
-                    print("it should work")
+                    self.playViewController.tabBarController?.tabBar.isHidden = false
                 }
             }
         }
