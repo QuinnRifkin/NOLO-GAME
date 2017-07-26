@@ -32,6 +32,8 @@ class DeathScene: SKScene {
     var gameScene = GameScene()
     var gameViewController = GameViewController()
     var playViewController = PlayViewController()
+    let welcomeScene = WelcomeScene()
+    let namelabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
     
     var timeLabel : UILabel!
     var highScoreLabel : UILabel!
@@ -167,6 +169,24 @@ class DeathScene: SKScene {
         bounceCheck(time: 8.0)
         bounceCheck(time: 10.0)
         bounceCheck(time: 12.0)
+        
+        let name = String(welcomeScene.getName())
+        if(name!.characters.count >= 25)
+        {
+            namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 10)
+        } else if(name!.characters.count >= 20){
+            namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 12)
+        } else if(name!.characters.count >= 15){
+            namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 14)
+        } else if(name!.characters.count >= 10){
+            namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 16)
+        } else {
+            namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 18)
+        }
+        
+        namelabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
+        namelabel.textAlignment = NSTextAlignment.left
+        self.view?.addSubview(namelabel)
         
     }
     

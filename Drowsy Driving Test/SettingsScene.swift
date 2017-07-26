@@ -86,15 +86,15 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         let name = String(welcomeScene.getName())
         if(name!.characters.count >= 25)
         {
-            nameLabel.font = UIFont(name: "HelveticaNeue", size: 10)
+            nameLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 10)
         } else if(name!.characters.count >= 20){
-            nameLabel.font = UIFont(name: "HelveticaNeue", size: 12)
+            nameLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 12)
         } else if(name!.characters.count >= 15){
-            nameLabel.font = UIFont(name: "HelveticaNeue", size: 14)
+            nameLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 14)
         } else if(name!.characters.count >= 10){
-            nameLabel.font = UIFont(name: "HelveticaNeue", size: 16)
+            nameLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 16)
         } else {
-            nameLabel.font = UIFont(name: "HelveticaNeue", size: 18)
+            nameLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 18)
         }
         
         nameLabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])

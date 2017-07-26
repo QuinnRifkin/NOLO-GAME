@@ -15,6 +15,8 @@ class InstructionScene1: SKScene {
     
     var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
     var gameViewController = GameViewController()
+    var welcomeScene = WelcomeScene()
+    let namelabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
     
     var instructionBanner1Node: SKSpriteNode!
     var carNode: SKSpriteNode!
@@ -147,6 +149,24 @@ class InstructionScene1: SKScene {
         playButtonNode.color = .clear
         
         backLabel = self.childNode(withName: "BackLabel") as! SKSpriteNode
+        let name = String(welcomeScene.getName())
+        if(name!.characters.count >= 25)
+        {
+            namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 10)
+        } else if(name!.characters.count >= 20){
+            namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 12)
+        } else if(name!.characters.count >= 15){
+            namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 14)
+        } else if(name!.characters.count >= 10){
+            namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 16)
+        } else {
+            namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 18)
+        }
+        
+        namelabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
+        namelabel.textAlignment = NSTextAlignment.left
+        self.view?.addSubview(namelabel)
+
 
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
