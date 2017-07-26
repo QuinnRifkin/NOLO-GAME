@@ -49,8 +49,7 @@ class LearnMoreScene: SKScene {
         
         goHomeLabelNode = self.childNode(withName: "GoHomeLabel") as! SKLabelNode
         
-        googleButtonNode = self.childNode(withName: "GoogleNode") as! SKSpriteNode
-        googleButtonNode.texture = SKTexture(imageNamed: "GoogleIcon")
+        googleButtonNode = self.childNode(withName: "WebsiteNode") as! SKSpriteNode
         googleButtonNode.color = .clear
         
         twitterButtonNode = self.childNode(withName: "TwitterNode") as! SKSpriteNode
@@ -97,10 +96,10 @@ class LearnMoreScene: SKScene {
         if let location = touch?.location(in: self){
             let nodesArray = self.nodes(at: location)
             
-            if nodesArray.first?.name == "GoogleNode"{
+            if nodesArray.first?.name == "WebsiteNode"{
                 nameLabel.isHidden = true
-                if let google = NSURL(string: "http://www.google.com"){
-                    UIApplication.shared.open(google as URL, options: [:], completionHandler: nil)
+                if let website = NSURL(string: "http://nolo716.org"){
+                    UIApplication.shared.open(website as URL, options: [:], completionHandler: nil)
                 }
             }
             if nodesArray.first?.name == "TwitterNode"{
