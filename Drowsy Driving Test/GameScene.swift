@@ -192,7 +192,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             zSprite.position = CGPoint(x: rangex1, y: rangey1)
         }
         else{
-            zSprite.position = CGPoint(x: zSprite.position.x, y: zSprite.position.y-4-acc+CGFloat(zCount/10))
+            zSprite.position = CGPoint(x: zSprite.position.x, y: zSprite.position.y-6-acc+CGFloat(zCount/10))
         }
     }
     
@@ -208,13 +208,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func movingBackground(){
         
-        road1.position = CGPoint(x: road1.position.x, y: road1.position.y-4-acc+CGFloat(zCount/10))
-        road2.position = CGPoint(x: road2.position.x, y: road2.position.y-4-acc+CGFloat(zCount/10))
+        road1.position = CGPoint(x: road1.position.x, y: road1.position.y-6-acc+CGFloat(zCount/10))
+        road2.position = CGPoint(x: road2.position.x, y: road2.position.y-6-acc+CGFloat(zCount/10))
         
-        obstacle1.position = CGPoint(x: obstacle1.position.x, y: obstacle1.position.y-4-acc+CGFloat(zCount/10))
-        obstacle2.position = CGPoint(x: obstacle2.position.x, y: obstacle2.position.y-4-acc+CGFloat(zCount/10))
-        obstacle3.position = CGPoint(x: obstacle3.position.x, y: obstacle3.position.y-4-acc+CGFloat(zCount/10))
-        obstacle4.position = CGPoint(x: obstacle4.position.x, y: obstacle4.position.y-4-acc+CGFloat(zCount/10))
+        obstacle1.position = CGPoint(x: obstacle1.position.x, y: obstacle1.position.y-6-acc+CGFloat(zCount/10))
+        obstacle2.position = CGPoint(x: obstacle2.position.x, y: obstacle2.position.y-6-acc+CGFloat(zCount/10))
+        obstacle3.position = CGPoint(x: obstacle3.position.x, y: obstacle3.position.y-6-acc+CGFloat(zCount/10))
+        obstacle4.position = CGPoint(x: obstacle4.position.x, y: obstacle4.position.y-6-acc+CGFloat(zCount/10))
         
         moveRandomZSprite(zSprite: zSpriteRandom1, position: zSpriteRandom1.position)
         moveRandomZSprite(zSprite: zSpriteRandom2, position: zSpriteRandom2.position)
@@ -325,10 +325,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addRoad(road: road1, y: 0)
         addRoad(road: road2, y: road1.size.height-1)
         
-        addObstacle(obstacle: obstacle1, location: CGPoint(x:127.908, y: 1350), name: "obstacle1")
-        addObstacle(obstacle: obstacle2, location: CGPoint(x:-128.339, y: 900), name: "obstacle2")
-        addObstacle(obstacle: obstacle3, location: CGPoint(x:127.908, y: 450), name: "obstacle3")
-        addObstacle(obstacle: obstacle4, location: CGPoint(x:-128.339, y: 0), name: "obstacle4")
+        addObstacle(obstacle: obstacle1, location: CGPoint(x:127.908, y: 2100), name: "obstacle1")
+        addObstacle(obstacle: obstacle2, location: CGPoint(x:-128.339, y: 1550), name: "obstacle2")
+        addObstacle(obstacle: obstacle3, location: CGPoint(x:127.908, y: 1000), name: "obstacle3")
+        addObstacle(obstacle: obstacle4, location: CGPoint(x:-128.339, y: 450), name: "obstacle4")
         
         addCar(car: car)
         
@@ -411,25 +411,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if(obstacle1.position.y < -1080){
-            obstacle1.position = CGPoint(x: range , y: 700)
+            obstacle1.position = CGPoint(x: range , y: 1100)
             resetZSprite(zsprite: zSprite1Right)
             resetZSprite(zsprite: zSprite1Middle)
             resetZSprite(zsprite: zSprite1Left)
         }
         if(obstacle2.position.y < -1080){
-            obstacle2.position = CGPoint(x: range, y: 700)
+            obstacle2.position = CGPoint(x: range, y: 1100)
             resetZSprite(zsprite: zSprite2Right)
             resetZSprite(zsprite: zSprite2Middle)
             resetZSprite(zsprite: zSprite2Left)
         }
         if(obstacle3.position.y < -1080){
-            obstacle3.position = CGPoint(x: range, y: 700)
+            obstacle3.position = CGPoint(x: range, y: 1100)
             resetZSprite(zsprite: zSprite3Right)
             resetZSprite(zsprite: zSprite3Middle)
             resetZSprite(zsprite: zSprite3Left)
         }
         if(obstacle4.position.y < -1080){
-            obstacle4.position = CGPoint(x: range, y: 700)
+            obstacle4.position = CGPoint(x: range, y: 1100)
             resetZSprite(zsprite: zSprite4Right)
             resetZSprite(zsprite: zSprite4Middle)
             resetZSprite(zsprite: zSprite4Left)

@@ -44,7 +44,7 @@ class SleepScene: SKScene {
         sleepLabel.textAlignment = .center
         sleepLabel.numberOfLines = 0
         sleepLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 20)
-        sleepLabel.text = "You got " + String(todaySleepHours) + " hours and " + String(todaySleepMinutes) + " minutes last night."
+        sleepLabel.text = "You got " + String(todaySleepHours) + " hours and " + String(todaySleepMinutes) + " minutes of sleep last night."
         self.view?.addSubview(sleepLabel)
 
         year = welcomeScene.getBirthYear()
