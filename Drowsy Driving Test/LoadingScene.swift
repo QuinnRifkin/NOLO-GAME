@@ -13,7 +13,6 @@ import AVFoundation
 
 class LoadingScene: SKScene {
     
-//    var gameViewController = GameViewController()
     let loadingViewController = LoadingViewController()
     let tabBarViewController = TabBarViewController()
     
@@ -39,11 +38,5 @@ class LoadingScene: SKScene {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        loadingViewController.touched()
-//        print("stop touching me")
-//        let transition = SKTransition.crossFade(withDuration: 0.5)
-//        let gameScene = MenuScene(fileNamed: "MenuScene")
-//        gameScene?.scaleMode = .aspectFill
-//        self.view?.presentScene(gameScene!, transition: transition)
     }
 }

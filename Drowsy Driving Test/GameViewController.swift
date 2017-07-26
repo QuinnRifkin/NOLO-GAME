@@ -14,7 +14,7 @@ import AVFoundation
 class GameViewController: UIViewController {
     
     var launchDefault = UserDefaults.standard
-    
+
     var timeOfDay = Date()
     var calendar = Calendar.current
     
@@ -89,9 +89,7 @@ class GameViewController: UIViewController {
         let delegate = UIApplication.shared.delegate as! AppDelegate
         delegate.gameViewController = self
 
-        self.view = SKView()
-//        let view = self.view as! SKView?
-        
+        self.view = SKView()        
         let hours = calendar.component(.hour, from: timeOfDay)
         let minutes = calendar.component(.minute, from: timeOfDay)
         if(hours > 12){
