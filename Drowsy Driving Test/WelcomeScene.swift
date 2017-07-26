@@ -199,13 +199,14 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
                     self.continueLabelNode.fontColor = UIColor.white
                 }
                 let transition = SKTransition.crossFade(withDuration: 0.05)
-                let gameScene = SKScene(fileNamed: "LoadingScene")
+                let gameScene = MenuScene(fileNamed: "LoadingScene")
                 gameScene?.scaleMode = .aspectFill
                 let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
                 DispatchQueue.main.asyncAfter(deadline: when2) {
                     self.nameInput.isHidden = true
                     self.numberInput.isHidden = true
                     self.view?.presentScene(gameScene!, transition: transition)
+                    print("it should work")
                 }
             }
         }

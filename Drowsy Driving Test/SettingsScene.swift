@@ -36,6 +36,10 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
     let toolbarName = UIToolbar(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
     
+    var birthMonth : String!
+    var birthDay : String!
+    var birthYear : String!
+    
     var month = ""
     var day = ""
     var year = ""
@@ -140,10 +144,47 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         toolbarName.setItems([cancelNameButton], animated: true)
         nameInput.inputAccessoryView = toolbarName
         
+        birthMonth = welcomeScene.getBirthMonth()
+        birthDay = welcomeScene.getBirthDay()
+        birthYear = welcomeScene.getBirthYear()
+        let birthYearInt = 2017 - (Int(birthYear))!
+        let birthDayInt = (-1 + Int(birthDay)!)
+        var birthMonthInt = 0
+        switch(birthMonth){
+        case "January":
+            birthMonthInt = 0
+        case "Febuary":
+            birthMonthInt = 1
+        case "March":
+            birthMonthInt = 2
+        case "April":
+            birthMonthInt = 3
+        case "May":
+            birthMonthInt = 4
+        case "June":
+            birthMonthInt = 5
+        case "July":
+            birthMonthInt = 6
+        case "August":
+            birthMonthInt = 7
+        case "September":
+            birthMonthInt = 8
+        case "October":
+            birthMonthInt = 9
+        case "November":
+            birthMonthInt = 10
+        case "December":
+            birthMonthInt = 11
+        default: birthMonthInt = 0
+        }
+        
         let when = DispatchTime.now() + 0.0 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.view?.addSubview(self.nameInput)
             self.view?.addSubview(self.numberInput)
+            self.agePicker.selectRow(birthMonthInt, inComponent: 0, animated: true)
+            self.agePicker.selectRow(birthDayInt, inComponent: 1, animated: true)
+            self.agePicker.selectRow(birthYearInt, inComponent: 2, animated: true)
         }
     }
     
@@ -163,15 +204,16 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         switch(component){
         case 0:
             month = gameViewController.database[component][pickerView.selectedRow(inComponent: 0)]
+            birthMonth = gameViewController.database[component][pickerView.selectedRow(inComponent: 0)]
         case 1:
             day = gameViewController.database[component][pickerView.selectedRow(inComponent: 1)]
+            birthDay = gameViewController.database[component][pickerView.selectedRow(inComponent: 1)]
         case 2:
             year = gameViewController.database[component][pickerView.selectedRow(inComponent: 2)]
+            birthYear = gameViewController.database[component][pickerView.selectedRow(inComponent: 2)]
         default: break
         }
-        
-        numberInput.text = month + " " + day + ", " + year
-        
+        numberInput.text = birthMonth + " " + birthDay + ", " + birthYear
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -180,7 +222,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
             nameInput.placeholder = ""
         }
         if(textField == numberInput){
-            numberInput.attributedText = NSAttributedString(string: welcomeScene.getBirthMonth() + " " + welcomeScene.getBirthDay() + ", " + welcomeScene.getBirthYear(), attributes: [NSForegroundColorAttributeName : UIColor.black])
+            numberInput.text = birthMonth + " " + birthDay + ", " + birthYear
         }
         moveTextField(textField: nameInput, moveDistace: -20, up: true)
         moveTextField(textField: numberInput, moveDistace: -20, up: true)
@@ -230,7 +272,8 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     func donePressed(sender: UIBarButtonItem){
         numberInput.resignFirstResponder()
         self.view?.endEditing(true)
-        setBirthday(month: month, day: day, year: year)
+        setBirthday(month: birthMonth, day: birthDay, year: birthYear)
+        numberInput.text = birthMonth + " " + birthDay + ", " + birthYear
     }
 
     func cancelPressed(sender:UIBarButtonItem){
