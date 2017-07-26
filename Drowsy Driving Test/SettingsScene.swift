@@ -290,6 +290,30 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        
+        if let location = touch?.location(in: self){
+            let nodesArray = self.nodes(at: location)
+            
+            if nodesArray.first?.name == "ResetNode" {
+                resetLabel.scale(to: CGSize(width: 213, height: 108))
+            }
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        
+        if let location = touch?.location(in: self){
+            let nodesArray = self.nodes(at: location)
+            
+            if nodesArray.first?.name == "ResetNode" {
+                resetLabel.scale(to: CGSize(width: 256, height: 130))
+            }
+        }
+    }
+
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let highScore = gameScene.getHighScore()
         let touch = touches.first
         
@@ -297,7 +321,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "ResetNode" {
-
+                resetLabel.scale(to: CGSize(width: 256, height: 130))
                 if(highScore != 0){
                     let alert = UIAlertController(title: "WARNING", message: "Your highscore is " + String(highScore) + "\n There is no going back...", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))

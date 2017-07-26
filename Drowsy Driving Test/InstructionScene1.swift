@@ -200,10 +200,8 @@ class InstructionScene1: SKScene {
         if let location = touch?.location(in: self){
             let nodesArray = self.nodes(at: location)
             
-            if nodesArray.first?.name == "PlayButtonNode" {
-                playViewController.sceneTransition(scene: self, transitionScene: "GameScene", transitionType: SKTransition.doorsOpenVertical(withDuration: 1))
-            }
             if nodesArray.first?.name == "BackNode" {
+                namelabel.isHidden = true
                 backLabel.scale(to: CGSize(width: 320, height: 122))
                 playViewController.sceneTransition(scene: self, transitionScene: "MenuScene", transitionType: SKTransition.push(with: SKTransitionDirection.right, duration: 0.5))
             }

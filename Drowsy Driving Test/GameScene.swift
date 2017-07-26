@@ -95,6 +95,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let zSpriteRandom3 = SKSpriteNode(imageNamed: "ZSprite")
     let zSpriteRandom4 = SKSpriteNode(imageNamed: "ZSprite")
     
+    var reset : SKSpriteNode!
+    var home : SKSpriteNode!
+    
     var zSprites : [SKSpriteNode]!
     var obstacles : [SKSpriteNode]!
     
@@ -248,6 +251,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         
+        reset = self.childNode(withName: "Reset") as! SKSpriteNode
+        home = self.childNode(withName: "Home") as! SKSpriteNode
+        
         timeCartoon = self.childNode(withName: "TimeCartoon") as! SKSpriteNode
         scoreCartoon = self.childNode(withName: "ScoreCartoon") as! SKSpriteNode
         highscoreCartoon = self.childNode(withName: "HighscoreCartoon") as! SKSpriteNode
@@ -314,10 +320,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
         
-        resetButtonNode = self.childNode(withName: "resetButton") as! SKSpriteNode
-        homeLabelNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
-        homeLabelNode.texture = SKTexture(imageNamed: "HomeIcon")
-        resetLabelNode = self.childNode(withName: "ResetLabel") as! SKLabelNode
+        //resetButtonNode = self.childNode(withName: "resetButton") as! SKSpriteNode
+        //homeLabelNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
+        //homeLabelNode.texture = SKTexture(imageNamed: "HomeIcon")
+        //resetLabelNode = self.childNode(withName: "ResetLabel") as! SKLabelNode
         
         addLeftWall()
         addRightWall()
@@ -512,6 +518,38 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        
+        if let location = touch?.location(in: self){
+            let nodesArray = self.nodes(at: location)
+            
+            if nodesArray.first?.name == "resetButton" {
+                reset.scale(to: CGSize(width: 133, height: 67))
+            }
+            
+            if nodesArray.first?.name == "HomeButton" {
+                home.scale(to: CGSize(width: 133, height: 67))
+            }
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        
+        if let location = touch?.location(in: self){
+            let nodesArray = self.nodes(at: location)
+            
+            if nodesArray.first?.name == "resetButton" {
+                reset.scale(to: CGSize(width: 160, height: 80))
+            }
+            
+            if nodesArray.first?.name == "HomeButton" {
+                home.scale(to: CGSize(width: 160, height: 80))
+            }
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         let touch = touches.first
         
@@ -519,18 +557,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "resetButton" {
+                reset.scale(to: CGSize(width: 160, height: 80))
                 if(playViewController.isPlayingMusic()){
                     playViewController.stopMusic()
                 }
                 setHighScore(zcount: zTrueCount)
                 setFinishZCount(zcount: zTrueCount)
-                resetLabelNode.fontColor = UIColor.lightGray
+                //resetLabelNode.fontColor = UIColor.lightGray
                 let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
                 DispatchQueue.main.asyncAfter(deadline: when) {
-                    self.resetLabelNode.fontColor = UIColor.white
+                    //self.resetLabelNode.fontColor = UIColor.white
                 }
                 let transition = SKTransition.fade(withDuration: 1)
                 let gameScene = DeathScene(fileNamed: "GameScene")
+                gameScene?.scaleMode = .aspectFill
+                let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when2) {
+                    self.zCountLabel.isHidden = true
+                    self.timeLabel.isHidden = true
+                    self.highScoreLabel.isHidden = true
+                    self.view?.presentScene(gameScene!, transition: transition)
+                }
+            }
+            if nodesArray.first?.name == "HomeButton" {
+                home.scale(to: CGSize(width: 160, height: 80))
+                if(playViewController.isPlayingMusic()){
+                    playViewController.stopMusic()
+                }
+                setHighScore(zcount: zTrueCount)
+                setFinishZCount(zcount: zTrueCount)
+                //resetLabelNode.fontColor = UIColor.lightGray
+                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                    //self.resetLabelNode.fontColor = UIColor.white
+                }
+                let transition = SKTransition.fade(withDuration: 1)
+                let gameScene = DeathScene(fileNamed: "MenuScene")
                 gameScene?.scaleMode = .aspectFill
                 let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
                 DispatchQueue.main.asyncAfter(deadline: when2) {
