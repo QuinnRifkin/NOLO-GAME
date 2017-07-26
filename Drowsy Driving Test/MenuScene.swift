@@ -131,7 +131,7 @@ class MenuScene: SKScene {
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         let touch = touches.first
         
@@ -178,7 +178,7 @@ class MenuScene: SKScene {
                 DispatchQueue.main.asyncAfter(deadline: when) {
                     self.playLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)
                 }
-                let transition = SKTransition.push(with: SKTransitionDirection.left, duration: 1)
+                let transition = SKTransition.push(with: SKTransitionDirection.left, duration: 0.5)
                 let gameScene = GameScene(fileNamed: "InstructionScene1")
                 gameScene?.scaleMode = .aspectFill
                 let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
