@@ -50,6 +50,7 @@ class SleepScene: SKScene {
         year = welcomeScene.getBirthYear()
         birthYear = Int(year)!
         thisYear = calendar.component(.year, from: now)
+        
         if(thisYear - birthYear >= 19){
             adultLabel.isHidden = false
             teenLabel.isHidden = true
