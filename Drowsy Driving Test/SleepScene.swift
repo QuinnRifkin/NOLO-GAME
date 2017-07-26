@@ -23,6 +23,8 @@ class SleepScene: SKScene {
     
     var now = Date()
     var calendar = Calendar.current
+    let namelabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
+
     
     var year : String!
     var birthYear : Int!
@@ -50,6 +52,24 @@ class SleepScene: SKScene {
         year = welcomeScene.getBirthYear()
         birthYear = Int(year)!
         thisYear = calendar.component(.year, from: now)
+        
+        let name = String(welcomeScene.getName())
+        if(name!.characters.count >= 25)
+        {
+            namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 10)
+        } else if(name!.characters.count >= 20){
+            namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 12)
+        } else if(name!.characters.count >= 15){
+            namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 14)
+        } else if(name!.characters.count >= 10){
+            namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 16)
+        } else {
+            namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 18)
+        }
+        
+        namelabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
+        namelabel.textAlignment = NSTextAlignment.left
+        self.view?.addSubview(namelabel)
         
         if(thisYear - birthYear >= 19){
             adultLabel.isHidden = false
