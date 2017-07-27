@@ -40,7 +40,7 @@ class LearnMoreScene: SKScene {
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.checkLabel), userInfo: nil, repeats: true)
     
         infoLabel = UILabel(frame: CGRect(x: 10, y: 40, width: self.frame.width/2.1, height: 270))
-        infoLabel.text = "NOLO is a non-for-profit organization striding to spread awareness and knowledge of the causes and impact of insufficient sleep. NOLO’s ultimate goal is to make sleep a priority amongst teenagers."
+        infoLabel.text = "NOLO is a campaign developed by teens, for teens, that strides to spread awareness and knowledge of the causes and impacts of insufficient sleep. NOLO’s ultimate goal is to make sleep a priority amongst teenagers."
         infoLabel.numberOfLines = 0
         infoLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 20)
         infoLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
