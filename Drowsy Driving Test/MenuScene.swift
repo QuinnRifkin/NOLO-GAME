@@ -133,6 +133,12 @@ class MenuScene: SKScene {
         }
     }
     
+    override func update(_ currentTime: TimeInterval) {
+        if(playViewController.tabBarController?.tabBar.isHidden == true){
+            playViewController.tabBarController?.tabBar.isHidden = false
+        }
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
         
