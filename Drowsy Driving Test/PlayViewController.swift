@@ -28,6 +28,7 @@ class PlayViewController: UIViewController {
         let transition = transitionType
         let gameScene = DeathScene(fileNamed: transitionScene)
         gameScene?.scaleMode = .aspectFill
+        
         scene.view?.presentScene(gameScene!, transition: transition)
     }
     

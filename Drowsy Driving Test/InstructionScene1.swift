@@ -201,11 +201,13 @@ class InstructionScene1: SKScene {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "BackNode" {
-                namelabel.isHidden = true
                 backLabel.scale(to: CGSize(width: 320, height: 122))
-                playViewController.sceneTransition(scene: self, transitionScene: "MenuScene", transitionType: SKTransition.push(with: SKTransitionDirection.right, duration: 0.5))
+                namelabel.isHidden = true
+                let when = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                    self.playViewController.sceneTransition(scene: self, transitionScene: "MenuScene", transitionType: SKTransition.push(with: SKTransitionDirection.right, duration: 0.5))
+                }
             }
-
         }
     }
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
