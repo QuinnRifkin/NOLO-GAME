@@ -29,6 +29,13 @@ class DeathScene: SKScene {
     var popLabel3:SKLabelNode!
     var popLabel4:SKLabelNode!
     
+    //var moveBlur = UIA
+    var blur = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+    var popUpView = UIView()
+    var popUpLabel = UILabel()
+    var dismissPopUp = UILabel()
+    var dismissPopUpNode = UIButton()
+    
     var gameScene = GameScene()
     var gameViewController = GameViewController()
     var playViewController = PlayViewController()
@@ -100,7 +107,45 @@ class DeathScene: SKScene {
         }
     }
     
+    func dismiss(_ Button: UIButton){
+        print("Dismissed")
+        blur.removeFromSuperview()
+        popUpView.removeFromSuperview()
+        popUpLabel.removeFromSuperview()
+        dismissPopUpNode.removeFromSuperview()
+        showLabels()
+    }
+    
     override func didMove(to view: SKView) {
+        
+        blur.frame = self.frame
+        
+        popUpView.layer.cornerRadius = 20
+        popUpView.bounds = CGRect(x: 0, y: 0, width: 300, height: 180)
+        popUpView.center = (self.view?.center)!
+        
+        dismissPopUpNode.bounds = CGRect(x: 0, y: 0, width: 100, height: 50)
+        dismissPopUpNode.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! + (60))
+        dismissPopUpNode.setTitle("Dismiss", for: .normal)
+        dismissPopUpNode.addTarget(self, action: #selector(self.dismiss(_:)), for: UIControlEvents.touchDown)
+        
+//        dismissPopUp.text = "Dismiss"
+//        dismissPopUp.textAlignment = .center
+//        dismissPopUp.numberOfLines = 0
+//        dismissPopUp.font = UIFont(name: "ChalkboardSE-Regular", size: 15)
+//        dismissPopUp.textColor = UIColor.white
+//        dismissPopUp.bounds = CGRect(x: 0, y: 0, width: 275, height: 150)
+//        dismissPopUp.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! + (60))
+        
+        popUpView.backgroundColor = UIColor.red
+        popUpView.layer.opacity = 0.6
+        
+        popUpLabel.text = "This is just a game, but the message is far from it. Drowsy driving is actually quite dangerous. Keep yourself from making this mistake and catch some more Zs!"
+        popUpLabel.textAlignment = .center
+        popUpLabel.numberOfLines = 0
+        popUpLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 15)
+        popUpLabel.bounds = CGRect(x: 0, y: 0, width: 275, height: 150)
+        popUpLabel.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (20))
         
         
         let swDown:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeDown(_:)))
@@ -141,7 +186,7 @@ class DeathScene: SKScene {
         screenElements = [screenNode, screenHandleNode, popLabelBar]
         screenLabels = [popLabel1, popLabel2, popLabel3, popLabel4]
         
-        screenShow()
+        //screenShow()
         
         sleepFactz = ["Sleep deprivation can result in obesity and poor diet quality.", "Sleep deprivation causes heart disease.", "Sleep deprivation increases the risk of diabetes.", "Not getting enough sleep can result in rash decision making.", "Drowsy driving can be as dangerous as drunk driving.", "Getting more sleep is proven to increase performance in school.", "Putting your phone away before bed will result in a much better sleep.", "Beauty Sleep is real; Going to bed earlier can improve your physical appearance.", "An average of 83,000 car crashes occur each year due to drowsy driving.", "Less than 30% of highschool students get sufficient sleep (8-10hrs).", "Humans are the only mammals that delay their sleep on purpose.", "Exercising on a regular basis makes it easier to fall asleep.", "12% of people dream in black and white.", "Sleep deprivation can kill you faster than food deprivaton.", "If falling asleep takes less than 10 minutes, chances are you are sleep deprived."]
         
@@ -188,6 +233,11 @@ class DeathScene: SKScene {
         namelabel.textAlignment = NSTextAlignment.left
         self.view?.addSubview(namelabel)
         
+        self.view?.addSubview(blur)
+        self.view?.addSubview(popUpView)
+        self.view?.addSubview(popUpLabel)
+        self.view?.addSubview(dismissPopUpNode)
+
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
@@ -197,6 +247,9 @@ class DeathScene: SKScene {
             
             if nodesArray.first?.name == "PlayAgainNode" {
                 playAgain.scale(to: CGSize(width: 400, height: 117))
+            }
+            if nodesArray.first?.name == "PlayAgainNode" {
+                dismissPopUp.isHidden = true
             }
         }
     }
