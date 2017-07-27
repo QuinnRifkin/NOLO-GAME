@@ -566,7 +566,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 //resetLabelNode.fontColor = UIColor.lightGray
                 let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
                 DispatchQueue.main.asyncAfter(deadline: when) {
-                    //self.resetLabelNode.fontColor = UIColor.white
+                    self.playViewController.tabBarController?.tabBar.isHidden = false
                 }
                 let transition = SKTransition.fade(withDuration: 1)
                 let gameScene = DeathScene(fileNamed: "GameScene")
@@ -587,9 +587,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 setHighScore(zcount: zTrueCount)
                 setFinishZCount(zcount: zTrueCount)
                 //resetLabelNode.fontColor = UIColor.lightGray
-                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
+                let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
                 DispatchQueue.main.asyncAfter(deadline: when) {
-                    //self.resetLabelNode.fontColor = UIColor.white
+                    self.playViewController.tabBarController?.tabBar.isHidden = false
                 }
                 let transition = SKTransition.fade(withDuration: 1)
                 let gameScene = DeathScene(fileNamed: "MenuScene")
