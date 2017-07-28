@@ -65,27 +65,6 @@ class DeathScene: SKScene {
     let screenDown = SKAction.moveBy(x: 0, y: -1334, duration: 0.5)
     let screenBounce = SKAction.sequence([SKAction.moveBy(x: 0, y: -40, duration: 0.4), SKAction.moveBy(x: 0, y: 40, duration: 0.2), SKAction.moveBy(x: 0, y: -15, duration: 0.2), SKAction.moveBy(x: 0, y: 15, duration: 0.1)])
     
-    func screenShow(){
-        for elements in screenElements{
-            elements.run(screenUp)
-        }
-        for labels in screenLabels{
-            labels.run(screenUp)
-        }    }
-    
-    func swipeDown(_ gestureRecognizer: UITapGestureRecognizer){
-        for elements in screenElements{
-            elements.run(screenDown)
-        }
-        for labels in screenLabels{
-            labels.run(screenDown)
-        }
-        let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
-        DispatchQueue.main.asyncAfter(deadline: when) {
-            self.showLabels()
-        }
-    }
-    
     func showLabels(){
         view?.addSubview(highScoreLabel)
         view?.addSubview(zCountLabel)
@@ -116,6 +95,10 @@ class DeathScene: SKScene {
         showLabels()
     }
     
+    func dismissColor(_ Button: UIButton){
+        
+    }
+    
     override func didMove(to view: SKView) {
         
         blur.frame = self.frame
@@ -124,10 +107,14 @@ class DeathScene: SKScene {
         popUpView.bounds = CGRect(x: 0, y: 0, width: 300, height: 180)
         popUpView.center = (self.view?.center)!
         
-        dismissPopUpNode.bounds = CGRect(x: 0, y: 0, width: 100, height: 50)
+        dismissPopUpNode.bounds = CGRect(x: 0, y: 0, width: 70, height: 20)
         dismissPopUpNode.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! + (60))
         dismissPopUpNode.setTitle("Dismiss", for: .normal)
-        dismissPopUpNode.addTarget(self, action: #selector(self.dismiss(_:)), for: UIControlEvents.touchDown)
+        //dismissPopUpNode.tintColor = .white
+        dismissPopUpNode.addTarget(self, action: #selector(self.dismiss(_:)), for: UIControlEvents.touchUpInside)
+        //dismissPopUpNode.addTarget(self, action: #selector(self.dismissColor(_:)), for: UIControlEvents.touchDown)
+        dismissPopUpNode.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
+        dismissPopUpNode.setTitleColor(UIColor.white, for: UIControlState.normal)
         
 //        dismissPopUp.text = "Dismiss"
 //        dismissPopUp.textAlignment = .center
@@ -146,11 +133,6 @@ class DeathScene: SKScene {
         popUpLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 15)
         popUpLabel.bounds = CGRect(x: 0, y: 0, width: 275, height: 150)
         popUpLabel.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (20))
-        
-        
-        let swDown:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeDown(_:)))
-        swDown.direction = .down
-        view.addGestureRecognizer(swDown)
         
         zCountLabel = UILabel(frame: CGRect(x: self.frame.width/7.7, y: self.frame.height/7.1, width: 250, height: 40))
         
@@ -247,9 +229,6 @@ class DeathScene: SKScene {
             
             if nodesArray.first?.name == "PlayAgainNode" {
                 playAgain.scale(to: CGSize(width: 400, height: 117))
-            }
-            if nodesArray.first?.name == "PlayAgainNode" {
-                dismissPopUp.isHidden = true
             }
         }
     }
