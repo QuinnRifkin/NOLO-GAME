@@ -20,6 +20,7 @@ class LearnMoreScene: SKScene {
     var instagramButtonNode: SKSpriteNode!
     var facebookButtonNode: SKSpriteNode!
     var goHomeLabelNode: SKLabelNode!
+    var websiteIconNode: SKSpriteNode!
     
     let welcomeScene = WelcomeScene()
     let gameViewController = GameViewController()
@@ -49,8 +50,12 @@ class LearnMoreScene: SKScene {
         
         goHomeLabelNode = self.childNode(withName: "GoHomeLabel") as! SKLabelNode
         
-        googleButtonNode = self.childNode(withName: "WebsiteNode") as! SKSpriteNode
-        googleButtonNode.color = .clear
+        //googleButtonNode = self.childNode(withName: "WebsiteNode") as! SKSpriteNode
+        //googleButtonNode.color = .clear
+        
+        websiteIconNode = self.childNode(withName: "WebsiteIcon") as! SKSpriteNode
+        //websiteIconNode.texture = SKTexture(imageNamed: "WebsiteIcon")
+        //websiteIconNode.color = .clear
         
         twitterButtonNode = self.childNode(withName: "TwitterNode") as! SKSpriteNode
         twitterButtonNode.texture = SKTexture(imageNamed: "TwitterIcon")
@@ -96,30 +101,85 @@ class LearnMoreScene: SKScene {
         if let location = touch?.location(in: self){
             let nodesArray = self.nodes(at: location)
             
+            if nodesArray.first?.name == "WebsiteNode" {
+                websiteIconNode.scale(to: CGSize(width: 364, height: 89))
+            }
+            if nodesArray.first?.name == "TwitterNode" {
+                twitterButtonNode.scale(to: CGSize(width: 90, height: 90))
+            }
+            if nodesArray.first?.name == "SnapchatNode" {
+                snapchatButtonNode.scale(to: CGSize(width: 90, height: 90))
+            }
+            if nodesArray.first?.name == "InstagramNode" {
+                instagramButtonNode.scale(to: CGSize(width: 90, height: 90))
+            }
+            if nodesArray.first?.name == "FacebookNode" {
+                facebookButtonNode.scale(to: CGSize(width: 90, height: 90))
+            }
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        let touch = touches.first
+        
+        if let location = touch?.location(in: self){
+            let nodesArray = self.nodes(at: location)
+            
+            if nodesArray.first?.name == "WebsiteNode" {
+                websiteIconNode.scale(to: CGSize(width: 404, height: 99))
+            }
+            if nodesArray.first?.name == "TwitterNode" {
+                twitterButtonNode.scale(to: CGSize(width: 100, height: 100))
+            }
+            if nodesArray.first?.name == "SnapchatNode" {
+                snapchatButtonNode.scale(to: CGSize(width: 100, height: 100))
+            }
+            if nodesArray.first?.name == "InstagramNode" {
+                instagramButtonNode.scale(to: CGSize(width: 100, height: 100))
+            }
+            if nodesArray.first?.name == "FacebookNode" {
+                facebookButtonNode.scale(to: CGSize(width: 100, height: 100))
+            }
+        }
+    }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        let touch = touches.first
+        
+        if let location = touch?.location(in: self){
+            let nodesArray = self.nodes(at: location)
+            
             if nodesArray.first?.name == "WebsiteNode"{
+                websiteIconNode.scale(to: CGSize(width: 404, height: 99))
                 nameLabel.isHidden = true
                 if let website = NSURL(string: "http://nolo716.org"){
                     UIApplication.shared.open(website as URL, options: [:], completionHandler: nil)
                 }
             }
             if nodesArray.first?.name == "TwitterNode"{
+                twitterButtonNode.scale(to: CGSize(width: 100, height: 100))
                 nameLabel.isHidden = true
                 gameViewController.socialMediaLink(appLink: "twitter://user?screen_name=@NOLO716", webLink: "https://twitter.com/@NOLO716")
             }
             if nodesArray.first?.name == "SnapchatNode"{
+                snapchatButtonNode.scale(to: CGSize(width: 100, height: 100))
                 nameLabel.isHidden = true
                 gameViewController.socialMediaLink(appLink: "snapchat://add/nolo716", webLink: "itms-apps://itunes.apple.com/app/snapchat/id447188370?mt=8")
             }
             if nodesArray.first?.name == "InstagramNode"{
+                instagramButtonNode.scale(to: CGSize(width: 100, height: 100))
                 nameLabel.isHidden = true
                 gameViewController.socialMediaLink(appLink: "Instagram://user?username=NOLO716", webLink: "itms-apps://itunes.apple.com/app/instagram/id389801252?mt=8")
             }
             if nodesArray.first?.name == "FacebookNode"{
+                facebookButtonNode.scale(to: CGSize(width: 100, height: 100))
                 nameLabel.isHidden = true
                 gameViewController.socialMediaLink(appLink: "fb://profile/347809602305230", webLink: "https://www.facebook.com/Nightz-Out-Lightz-out-347809602305230/")
-
+                
             }
-
+            
         }
     }
+
 }
