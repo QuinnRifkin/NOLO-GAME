@@ -86,14 +86,33 @@ class DeathScene: SKScene {
         }
     }
     
+    func showView(){
+        self.view?.addSubview(blur)
+        self.view?.addSubview(popUpView)
+        self.view?.addSubview(popUpLabel)
+        self.view?.addSubview(dismissPopUpNode)
+        
+        UIView.animate(withDuration: 0.8, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: { () -> Void in
+            
+            self.blur.frame = CGRect(x: self.blur.frame.origin.x, y: self.blur.frame.origin.y + 1000, width: self.blur.frame.size.width, height: self.blur.frame.size.height)
+            
+            self.popUpView.frame = CGRect(x: self.popUpView.frame.origin.x, y: self.popUpView.frame.origin.y + 1000, width: self.popUpView.frame.size.width, height: self.popUpView.frame.size.height)
+            
+            self.popUpLabel.frame = CGRect(x: self.popUpLabel.frame.origin.x, y: self.popUpLabel.frame.origin.y + 1000, width: self.popUpLabel.frame.size.width, height: self.popUpLabel.frame.size.height)
+            
+            self.dismissPopUpNode.frame = CGRect(x: self.dismissPopUpNode.frame.origin.x, y: self.dismissPopUpNode.frame.origin.y + 1000, width: self.dismissPopUpNode.frame.size.width, height: self.dismissPopUpNode.frame.size.height)
+            
+        }, completion: { (finished) -> Void in})
+    }
+    
     func dismiss(_ Button: UIButton){
         print("Dismissed")
         
-        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: { () -> Void in
+        UIView.animate(withDuration: 0.8, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: { () -> Void in
             
             self.blur.frame = CGRect(x: self.blur.frame.origin.x, y: -1000, width: self.blur.frame.size.width, height: self.blur.frame.size.height)
             
-            self.popUpView.frame = CGRect(x: self.popUpView.frame.origin.x, y: -1000, width: self.popUpView.frame.size.width, height: self.popUpView.frame.size.height)
+            self.popUpView.frame = CGRect(x: self.popUpView.frame.origin.x, y: self.popUpView.frame.origin.y - 1000, width: self.popUpView.frame.size.width, height: self.popUpView.frame.size.height)
             
             self.popUpLabel.frame = CGRect(x: self.popUpLabel.frame.origin.x, y: -1000, width: self.popUpLabel.frame.size.width, height: self.popUpLabel.frame.size.height)
             
@@ -115,14 +134,14 @@ class DeathScene: SKScene {
     override func didMove(to view: SKView) {
         
         blur.frame = (self.view?.bounds)!
-        //blur.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (300))
+        blur.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (1000))
         
         popUpView.layer.cornerRadius = 20
         popUpView.bounds = CGRect(x: 0, y: 0, width: 300, height: 180)
-        popUpView.center = (self.view?.center)!
+        popUpView.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (1000))
         
         dismissPopUpNode.bounds = CGRect(x: 0, y: 0, width: 70, height: 20)
-        dismissPopUpNode.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! + (60))
+        dismissPopUpNode.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (940))
         dismissPopUpNode.setTitle("Dismiss", for: .normal)
         //dismissPopUpNode.tintColor = .white
         dismissPopUpNode.addTarget(self, action: #selector(self.dismiss(_:)), for: UIControlEvents.touchUpInside)
@@ -146,7 +165,7 @@ class DeathScene: SKScene {
         popUpLabel.numberOfLines = 0
         popUpLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 15)
         popUpLabel.bounds = CGRect(x: 0, y: 0, width: 275, height: 150)
-        popUpLabel.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (20))
+        popUpLabel.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (1020))
         
         zCountLabel = UILabel(frame: CGRect(x: self.frame.width/7.7, y: self.frame.height/7.1, width: 250, height: 40))
         
@@ -229,10 +248,10 @@ class DeathScene: SKScene {
         namelabel.textAlignment = NSTextAlignment.left
         self.view?.addSubview(namelabel)
         
-        self.view?.addSubview(blur)
-        self.view?.addSubview(popUpView)
-        self.view?.addSubview(popUpLabel)
-        self.view?.addSubview(dismissPopUpNode)
+        let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.showView()
+        }
 
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
