@@ -88,11 +88,24 @@ class DeathScene: SKScene {
     
     func dismiss(_ Button: UIButton){
         print("Dismissed")
-        blur.removeFromSuperview()
-        popUpView.removeFromSuperview()
-        popUpLabel.removeFromSuperview()
-        dismissPopUpNode.removeFromSuperview()
-        showLabels()
+        
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: { () -> Void in
+            
+            self.blur.frame = CGRect(x: self.blur.frame.origin.x, y: -1000, width: self.blur.frame.size.width, height: self.blur.frame.size.height)
+            
+            self.popUpView.frame = CGRect(x: self.popUpView.frame.origin.x, y: -1000, width: self.popUpView.frame.size.width, height: self.popUpView.frame.size.height)
+            
+            self.popUpLabel.frame = CGRect(x: self.popUpLabel.frame.origin.x, y: -1000, width: self.popUpLabel.frame.size.width, height: self.popUpLabel.frame.size.height)
+            
+            self.dismissPopUpNode.frame = CGRect(x: self.dismissPopUpNode.frame.origin.x, y: -1000, width: self.dismissPopUpNode.frame.size.width, height: self.dismissPopUpNode.frame.size.height)
+            
+        }, completion: { (finished) -> Void in
+            self.blur.removeFromSuperview()
+            self.popUpView.removeFromSuperview()
+            self.popUpLabel.removeFromSuperview()
+            self.dismissPopUpNode.removeFromSuperview()
+            self.showLabels()
+        })
     }
     
     func dismissColor(_ Button: UIButton){
@@ -101,7 +114,8 @@ class DeathScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        blur.frame = self.frame
+        blur.frame = (self.view?.bounds)!
+        //blur.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (300))
         
         popUpView.layer.cornerRadius = 20
         popUpView.bounds = CGRect(x: 0, y: 0, width: 300, height: 180)
