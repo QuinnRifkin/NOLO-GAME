@@ -17,11 +17,16 @@ class PlayViewController: UIViewController {
     
     var audioPlayer = AVAudioPlayer()
     var gameViewController = GameViewController()
+    //var playViewController = PlayViewController()
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         //audioPlayer.stop()
+    }
+    
+    func showTabBar(){
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     func sceneTransition(scene: SKScene, transitionScene: String, transitionType: SKTransition){
@@ -81,7 +86,7 @@ class PlayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = SKView()
-        self.tabBarController?.tabBar.isHidden = false
+        self.tabBarController?.tabBar.isHidden = true
         
         let delegate2 = UIApplication.shared.delegate as! AppDelegate
         delegate2.playViewController = self

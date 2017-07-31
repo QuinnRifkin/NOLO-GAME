@@ -23,7 +23,7 @@ class MenuScene: SKScene {
     var nightShiftNotified = UserDefaults.standard
     
     let gameViewController = GameViewController()
-    let playViewController = PlayViewController()
+    var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
     
     var playDRButtonNode:SKSpriteNode!
     var learnMoreButtonNode:SKSpriteNode!

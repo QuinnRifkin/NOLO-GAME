@@ -13,16 +13,10 @@ class LoadingViewController: UIViewController {
     let gameViewController = GameViewController()
     let tabBarViewController = TabBarViewController()
     
-    func touched(){
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let view = storyboard.instantiateViewController(withIdentifier: "PlayViewController") as UIViewController
-        self.present(view, animated: true, completion: nil)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = SKView()
-        gameViewController.viewControllerScene(scene: "LoadingScene", viewController: self)
+        gameViewController.viewControllerScene(scene: "WelcomeScene", viewController: self)
     }
 
     override func didReceiveMemoryWarning() {
