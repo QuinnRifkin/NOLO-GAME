@@ -14,8 +14,7 @@ import AVFoundation
 class LoadingScene: SKScene {
     
     let loadingViewController = LoadingViewController()
-    let tabBarViewController = TabBarViewController()
-    
+        
     var touchLabel = SKLabelNode(fontNamed: "Helvetica")
     var animateLabel = SKAction.sequence([SKAction.fadeIn(withDuration: 0.8), SKAction.wait(forDuration: 0.5), SKAction.fadeOut(withDuration: 0.8)])
     

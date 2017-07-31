@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1F58E01C1F13BCE6007193F3 /* PressStart2P.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F58E01B1F13BCE6007193F3 /* PressStart2P.ttf */; };
 		1F58E0201F13C394007193F3 /* Gradius.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 1F58E01F1F13C394007193F3 /* Gradius.TTF */; };
-		1F58E0261F1CF4E9007193F3 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58E0251F1CF4E9007193F3 /* TabBarViewController.swift */; };
 		1F58E0281F1D06E1007193F3 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58E0271F1D06E1007193F3 /* MenuViewController.swift */; };
 		1F58E02A1F1D3F25007193F3 /* LearnMoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58E0291F1D3F25007193F3 /* LearnMoreViewController.swift */; };
 		1F58E02C1F1D4F72007193F3 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58E02B1F1D4F72007193F3 /* SettingsViewController.swift */; };
@@ -38,7 +37,6 @@
 		1FF69D4C1EF41AFE006140E2 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D4B1EF41AFE006140E2 /* Actions.sks */; };
 		1FF69D4E1EF41AFE006140E2 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF69D4D1EF41AFE006140E2 /* GameScene.swift */; };
 		1FF69D501EF41AFE006140E2 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF69D4F1EF41AFE006140E2 /* GameViewController.swift */; };
-		1FF69D531EF41AFE006140E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D511EF41AFE006140E2 /* Main.storyboard */; };
 		1FF69D581EF41AFE006140E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D561EF41AFE006140E2 /* LaunchScreen.storyboard */; };
 		1FF69D6C1EFAA377006140E2 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF69D6B1EFAA377006140E2 /* MenuScene.swift */; };
 		1FF69D6E1EFAAF0A006140E2 /* LoadingScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D6D1EFAAF0A006140E2 /* LoadingScene.sks */; };
@@ -46,12 +44,12 @@
 		1FF69D721EFAAF49006140E2 /* SparkEmitter.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D711EFAAF49006140E2 /* SparkEmitter.sks */; };
 		1FF69D861EFAEEA9006140E2 /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D831EFAEEA9006140E2 /* MenuScene.sks */; };
 		1FF69D881EFAEEA9006140E2 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D851EFAEEA9006140E2 /* GameScene.sks */; };
+		8F6C95E71F2F7F6C003CE1C1 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6C95E61F2F7F6C003CE1C1 /* WelcomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1F58E01B1F13BCE6007193F3 /* PressStart2P.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PressStart2P.ttf; sourceTree = "<group>"; };
 		1F58E01F1F13C394007193F3 /* Gradius.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = Gradius.TTF; sourceTree = "<group>"; };
-		1F58E0251F1CF4E9007193F3 /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		1F58E0271F1D06E1007193F3 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		1F58E0291F1D3F25007193F3 /* LearnMoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LearnMoreViewController.swift; sourceTree = "<group>"; };
 		1F58E02B1F1D4F72007193F3 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -82,7 +80,6 @@
 		1FF69D4B1EF41AFE006140E2 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		1FF69D4D1EF41AFE006140E2 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		1FF69D4F1EF41AFE006140E2 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
-		1FF69D521EF41AFE006140E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1FF69D571EF41AFE006140E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1FF69D591EF41AFE006140E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FF69D6B1EFAA377006140E2 /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
@@ -91,6 +88,7 @@
 		1FF69D711EFAAF49006140E2 /* SparkEmitter.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SparkEmitter.sks; sourceTree = "<group>"; };
 		1FF69D831EFAEEA9006140E2 /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		1FF69D851EFAEEA9006140E2 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		8F6C95E61F2F7F6C003CE1C1 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				1FF69D471EF41AFE006140E2 /* AppDelegate.swift */,
-				1FF69D511EF41AFE006140E2 /* Main.storyboard */,
 				1FF69D4B1EF41AFE006140E2 /* Actions.sks */,
 				1FF69D591EF41AFE006140E2 /* Info.plist */,
 			);
@@ -169,11 +166,11 @@
 				1F58E0291F1D3F25007193F3 /* LearnMoreViewController.swift */,
 				1FB5901C1F017F000097F7D1 /* WelcomeScene.sks */,
 				1FB5901E1F017F1A0097F7D1 /* WelcomeScene.swift */,
+				8F6C95E61F2F7F6C003CE1C1 /* WelcomeViewController.swift */,
 				1F58E02F1F1E45E2007193F3 /* SleepScene.sks */,
 				1F58E0311F1E4609007193F3 /* SleepScene.swift */,
 				1F58E0391F1E46A3007193F3 /* SleepViewController.swift */,
 				1FF69D4F1EF41AFE006140E2 /* GameViewController.swift */,
-				1F58E0251F1CF4E9007193F3 /* TabBarViewController.swift */,
 				1FF69D561EF41AFE006140E2 /* LaunchScreen.storyboard */,
 				1FF69D711EFAAF49006140E2 /* SparkEmitter.sks */,
 				1F7230B81EFC3EE8001C62F4 /* Assets.xcassets */,
@@ -260,7 +257,6 @@
 				1F5CE6CB1EFD6CDF00002231 /* DeathScene.sks in Resources */,
 				1FB590271F02F7F10097F7D1 /* GameContinueSound.mp3 in Resources */,
 				1F58E0401F214A51007193F3 /* CountDownScene.sks in Resources */,
-				1FF69D531EF41AFE006140E2 /* Main.storyboard in Resources */,
 				1F7230B91EFC3EE8001C62F4 /* Assets.xcassets in Resources */,
 				1FF69D881EFAEEA9006140E2 /* GameScene.sks in Resources */,
 				1F5CE6CF1EFD8BFB00002231 /* InstructionScene1.sks in Resources */,
@@ -286,11 +282,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FF69D4E1EF41AFE006140E2 /* GameScene.swift in Sources */,
+				8F6C95E71F2F7F6C003CE1C1 /* WelcomeViewController.swift in Sources */,
 				1F58E02E1F1D4F85007193F3 /* PlayViewController.swift in Sources */,
 				1F58E0321F1E4609007193F3 /* SleepScene.swift in Sources */,
 				1F5CE6C91EFD66E900002231 /* LearnMoreScene.swift in Sources */,
 				1F58E02A1F1D3F25007193F3 /* LearnMoreViewController.swift in Sources */,
-				1F58E0261F1CF4E9007193F3 /* TabBarViewController.swift in Sources */,
 				1FF69D701EFAAF1B006140E2 /* LoadingScene.swift in Sources */,
 				1FF69D501EF41AFE006140E2 /* GameViewController.swift in Sources */,
 				1F58E03A1F1E46A3007193F3 /* SleepViewController.swift in Sources */,
@@ -310,14 +306,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		1FF69D511EF41AFE006140E2 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1FF69D521EF41AFE006140E2 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		1FF69D561EF41AFE006140E2 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

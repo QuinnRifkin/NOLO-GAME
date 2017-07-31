@@ -251,6 +251,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         
+        playViewController.tabBarController?.tabBar.isHidden = true
+        playViewController.tabBarController?.tabBar.isHidden = true
+        
+        
         reset = self.childNode(withName: "Reset") as! SKSpriteNode
         home = self.childNode(withName: "Home") as! SKSpriteNode
         
