@@ -14,7 +14,7 @@ import AVFoundation
 class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource{
     
     var gameViewController = GameViewController()
-    var playViewController = PlayViewController()
+    var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
     
     let name1 = UserDefaults.standard
     
@@ -54,21 +54,21 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
     
     func getBirthMonth() -> String {
         if(birthday.value(forKey: "Month") == nil){
-            return ""
+            return "January"
         }
         return (birthday.string(forKey: "Month")!)
     }
 
     func getBirthDay() -> String {
         if(birthday.value(forKey: "Day") == nil){
-            return ""
+            return "1"
         }
         return (birthday.string(forKey: "Day")!)
     }
     
     func getBirthYear() -> String {
         if(birthday.value(forKey: "Year") == nil){
-            return ""
+            return "2017"
         }
         return (birthday.string(forKey: "Year")!)
     }
