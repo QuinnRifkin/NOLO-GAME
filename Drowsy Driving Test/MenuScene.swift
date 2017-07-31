@@ -23,7 +23,7 @@ class MenuScene: SKScene {
     var nightShiftNotified = UserDefaults.standard
     
     let gameViewController = GameViewController()
-    let playViewController = PlayViewController()
+    var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
     
     var playDRButtonNode:SKSpriteNode!
     var learnMoreButtonNode:SKSpriteNode!
@@ -179,29 +179,9 @@ class MenuScene: SKScene {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "PlayDRButton" {
-//                if(Int(playViewController.getDefault()) == 1){
-//                    playLabelNode.fontColor = UIColor.lightGray
-//                    let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
-//                    DispatchQueue.main.asyncAfter(deadline: when) {
-//                        self.playLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)
-//                    }
-//                    let transition = SKTransition.crossFade(withDuration: 0.5)
-//                    let gameScene = MenuScene(fileNamed: "InstructionScene1")
-//                    gameScene?.scaleMode = .aspectFill
-//                    let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
-//                    DispatchQueue.main.asyncAfter(deadline: when2) {
-//                        self.namelabel.isHidden = true
-//                        self.fact1.isHidden = true
-//                        self.view?.presentScene(gameScene!, transition: transition)
-//                    }
-//                }
-//                else{
                     titleNode.scale(to: CGSize(width: 240, height: 135))
-                    playLabelNode.fontColor = UIColor.lightGray
-                    let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
-                    DispatchQueue.main.asyncAfter(deadline: when) {
-                        self.playLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)
-                    }
+                    playViewController.hideTabBar()
+                    playViewController.tabBarController?.tabBar.isHidden = true
                     let transition = SKTransition.doorsOpenVertical(withDuration: 1)
                     let gameScene = GameScene(fileNamed: "GameScene")
                     gameScene?.scaleMode = .aspectFill

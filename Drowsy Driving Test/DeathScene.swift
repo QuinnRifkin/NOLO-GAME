@@ -38,7 +38,7 @@ class DeathScene: SKScene {
     
     var gameScene = GameScene()
     var gameViewController = GameViewController()
-    var playViewController = PlayViewController()
+    var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
     let welcomeScene = WelcomeScene()
     let namelabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
     

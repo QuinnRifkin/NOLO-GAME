@@ -353,6 +353,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
+        if(playViewController.tabBarController?.tabBar.isHidden == false){
+            playViewController.tabBarController?.tabBar.isHidden = true
+        }
         
         if(time >= 100){
             timeCartoon.position = CGPoint(x: 230, y: 595)
