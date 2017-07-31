@@ -17,7 +17,6 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     let gameViewController = GameViewController()
     let settingsViewController = SettingsViewController()
     
-    
     var resetPulse = SKAction.sequence([SKAction.scale(by: 1.1, duration: 0.5), SKAction.wait(forDuration: 0.05), SKAction.scale(by: (1/1.1), duration: 0.5), SKAction.wait(forDuration: 0.05)])
     
     var goHomeLabelNode : SKLabelNode!

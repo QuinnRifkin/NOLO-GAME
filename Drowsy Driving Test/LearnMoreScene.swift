@@ -40,7 +40,7 @@ class LearnMoreScene: SKScene {
         
         timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.checkLabel), userInfo: nil, repeats: true)
     
-        infoLabel = UILabel(frame: CGRect(x: 10, y: 40, width: self.frame.width/2.1, height: 270))
+        infoLabel = UILabel(frame: CGRect(x: 15, y: 40, width: self.frame.width/2.1, height: 270))
         infoLabel.text = "NOLO is a campaign developed by teens, for teens, that strides to spread awareness and knowledge of the causes and impacts of insufficient sleep. NOLO’s ultimate goal is to make sleep a priority amongst teenagers."
         infoLabel.numberOfLines = 0
         infoLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 20)
@@ -102,7 +102,7 @@ class LearnMoreScene: SKScene {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "WebsiteNode" {
-                websiteIconNode.scale(to: CGSize(width: 364, height: 89))
+                websiteIconNode.scale(to: CGSize(width: 310, height: 90))
             }
             if nodesArray.first?.name == "TwitterNode" {
                 twitterButtonNode.scale(to: CGSize(width: 90, height: 90))
@@ -127,7 +127,7 @@ class LearnMoreScene: SKScene {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "WebsiteNode" {
-                websiteIconNode.scale(to: CGSize(width: 404, height: 99))
+                websiteIconNode.scale(to: CGSize(width: 344, height: 100))
             }
             if nodesArray.first?.name == "TwitterNode" {
                 twitterButtonNode.scale(to: CGSize(width: 100, height: 100))
@@ -151,7 +151,7 @@ class LearnMoreScene: SKScene {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "WebsiteNode"{
-                websiteIconNode.scale(to: CGSize(width: 404, height: 99))
+                websiteIconNode.scale(to: CGSize(width: 344, height: 100))
                 nameLabel.isHidden = true
                 if let website = NSURL(string: "http://nolo716.org"){
                     UIApplication.shared.open(website as URL, options: [:], completionHandler: nil)
