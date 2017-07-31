@@ -11,8 +11,7 @@ import SpriteKit
 
 class LoadingViewController: UIViewController {
     let gameViewController = GameViewController()
-    let tabBarViewController = TabBarViewController()
-    
+        
     func touched(){
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let view = storyboard.instantiateViewController(withIdentifier: "PlayViewController") as UIViewController

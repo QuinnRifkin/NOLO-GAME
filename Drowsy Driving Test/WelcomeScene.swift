@@ -14,14 +14,14 @@ import AVFoundation
 class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource{
     
     var gameViewController = GameViewController()
-    var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
+    //var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
     
     let name1 = UserDefaults.standard
     
     let birthday = UserDefaults.standard
     
     var continueButtonNode : SKSpriteNode!
-    var continueLabelNode : SKLabelNode!
+    //var continueLabelNode : SKLabelNode!
     
     var nameInput : UITextField!
     var numberInput : UITextField!
@@ -75,6 +75,8 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
     
     override func didMove(to view: SKView){
         
+        continueButtonNode = self.childNode(withName: "Continue") as? SKSpriteNode
+        
         nameInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/5, width: self.frame.width/3, height: 30))
         numberInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/4, width: self.frame.width/3, height: 30))
         
@@ -105,8 +107,8 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
         numberInput.backgroundColor = .white
         self.view?.addSubview(numberInput)
         
-        continueButtonNode = self.childNode(withName: "ContinueNode") as! SKSpriteNode
-        continueLabelNode = self.childNode(withName: "ContinueLabel") as! SKLabelNode
+        
+        //continueLabelNode = self.childNode(withName: "ContinueLabel") as! SKLabelNode
 
         agePicker.delegate = self
         agePicker.dataSource = self
@@ -194,11 +196,30 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "ContinueNode" {
-                continueLabelNode.fontColor = UIColor.lightGray
-                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
-                DispatchQueue.main.asyncAfter(deadline: when) {
-                    self.continueLabelNode.fontColor = UIColor.white
+                continueButtonNode.scale(to: CGSize(width: 240 * (9/10), height: 76.5 * (9/10)))
+
                 }
+            }
+        }
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        
+        if let location = touch?.location(in: self){
+            let nodesArray = self.nodes(at: location)
+            
+            if nodesArray.first?.name == "ContinueNode"{
+                continueButtonNode.scale(to: CGSize(width: 240, height: 76.5))
+            }
+        }
+    }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first
+        
+        if let location = touch?.location(in: self){
+            let nodesArray = self.nodes(at: location)
+            
+            if nodesArray.first?.name == "ContinueNode"{
+                continueButtonNode.scale(to: CGSize(width: 240, height: 76.5))
                 let transition = SKTransition.crossFade(withDuration: 0.05)
                 let gameScene = LoadingScene(fileNamed: "MenuScene")
                 gameScene?.scaleMode = .aspectFill
@@ -207,9 +228,12 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
                     self.nameInput.isHidden = true
                     self.numberInput.isHidden = true
                     self.view?.presentScene(gameScene!, transition: transition)
-                    self.playViewController.tabBarController?.tabBar.isHidden = false
+                    
+                    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.window?.rootViewController = appDelegate.tabBarController
                 }
             }
         }
     }
 }
+
