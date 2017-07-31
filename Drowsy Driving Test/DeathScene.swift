@@ -127,10 +127,6 @@ class DeathScene: SKScene {
         })
     }
     
-    func dismissColor(_ Button: UIButton){
-        
-    }
-    
     override func didMove(to view: SKView) {
         
         blur.frame = (self.view?.bounds)!
@@ -143,19 +139,9 @@ class DeathScene: SKScene {
         dismissPopUpNode.bounds = CGRect(x: 0, y: 0, width: 70, height: 20)
         dismissPopUpNode.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (940))
         dismissPopUpNode.setTitle("Dismiss", for: .normal)
-        //dismissPopUpNode.tintColor = .white
         dismissPopUpNode.addTarget(self, action: #selector(self.dismiss(_:)), for: UIControlEvents.touchUpInside)
-        //dismissPopUpNode.addTarget(self, action: #selector(self.dismissColor(_:)), for: UIControlEvents.touchDown)
         dismissPopUpNode.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
         dismissPopUpNode.setTitleColor(UIColor.white, for: UIControlState.normal)
-        
-//        dismissPopUp.text = "Dismiss"
-//        dismissPopUp.textAlignment = .center
-//        dismissPopUp.numberOfLines = 0
-//        dismissPopUp.font = UIFont(name: "ChalkboardSE-Regular", size: 15)
-//        dismissPopUp.textColor = UIColor.white
-//        dismissPopUp.bounds = CGRect(x: 0, y: 0, width: 275, height: 150)
-//        dismissPopUp.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! + (60))
         
         popUpView.backgroundColor = UIColor.red
         popUpView.layer.opacity = 0.6
