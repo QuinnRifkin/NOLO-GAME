@@ -120,12 +120,12 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         agePicker.dataSource = self
         numberInput.inputView = agePicker
         
-        toolbar.barStyle = UIBarStyle.blackTranslucent
+        toolbar.barStyle = UIBarStyle.default
         toolbar.tintColor = UIColor.blue
         toolbar.setItems([cancelButton, flexButton, doneButton], animated: true)
         numberInput.inputAccessoryView = toolbar
         
-        toolbarName.barStyle = UIBarStyle.blackTranslucent
+        toolbarName.barStyle = UIBarStyle.default
         toolbarName.tintColor = UIColor.blue
         toolbarName.setItems([cancelNameButton], animated: true)
         nameInput.inputAccessoryView = toolbarName
@@ -226,15 +226,15 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
             nameLabel.attributedText = NSAttributedString(string: nameInput.text!, attributes: [NSForegroundColorAttributeName : UIColor.white])
             if(nameInput.text!.characters.count >= 25)
             {
-                nameLabel.font = UIFont(name: "HelveticaNeue", size: 10)
+                nameLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 10)
             } else if(nameInput.text!.characters.count >= 20){
-                nameLabel.font = UIFont(name: "HelveticaNeue", size: 12)
+                nameLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 12)
             } else if(nameInput.text!.characters.count >= 15){
-                nameLabel.font = UIFont(name: "HelveticaNeue", size: 14)
+                nameLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 14)
             } else if(nameInput.text!.characters.count >= 10){
-                nameLabel.font = UIFont(name: "HelveticaNeue", size: 16)
+                nameLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 16)
             } else {
-                nameLabel.font = UIFont(name: "HelveticaNeue", size: 18)
+                nameLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 18)
             }
         }
         else{

@@ -12,6 +12,8 @@ import UIKit
 
 class LearnMoreScene: SKScene {
     
+    var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
+    
     var infoLabel : UILabel!
     var googleButtonNode: SKSpriteNode!
     var twitterButtonNode: SKSpriteNode!
@@ -25,17 +27,7 @@ class LearnMoreScene: SKScene {
 
     let nameLabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
     
-    var timer = Timer()
-    
-    func checkLabel(){
-        if(nameLabel.text != String(welcomeScene.getName())){
-            nameLabel.attributedText = NSAttributedString(string: String(welcomeScene.getName()), attributes: [NSForegroundColorAttributeName : UIColor.white])
-        }
-    }
-    
     override func didMove(to view: SKView) {
-        
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.checkLabel), userInfo: nil, repeats: true)
     
         infoLabel = UILabel(frame: CGRect(x: 15, y: 40, width: self.frame.width/2.1, height: 270))
         infoLabel.text = "NOLO is a campaign developed by teens, for teens, that strides to spread awareness and knowledge of the causes and impacts of insufficient sleep. NOLO’s ultimate goal is to make sleep a priority amongst teenagers."
@@ -84,7 +76,7 @@ class LearnMoreScene: SKScene {
         self.view?.addSubview(infoLabel)
     }
     override func update(_ currentTime: TimeInterval) {
-        nameLabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
+        playViewController.checkNameLabel(namelabel: nameLabel)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
