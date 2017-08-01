@@ -112,7 +112,7 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
         agePicker.dataSource = self
         numberInput.inputView = agePicker
         
-        toolbar.barStyle = UIBarStyle.blackTranslucent
+        toolbar.barStyle = UIBarStyle.default
         toolbar.tintColor = UIColor.blue
         toolbar.setItems([flexButton, doneButton], animated: true)
         numberInput.inputAccessoryView = toolbar

@@ -60,7 +60,15 @@ class InstructionScene1: SKScene {
         
         namelabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
         namelabel.textAlignment = NSTextAlignment.left
-        self.view?.addSubview(namelabel)
+        
+        let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.view?.addSubview(self.namelabel)
+        }
+
+    }
+    override func update(_ currentTime: TimeInterval) {
+        playViewController.checkNameLabel(namelabel : namelabel)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){

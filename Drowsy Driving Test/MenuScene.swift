@@ -39,7 +39,6 @@ class MenuScene: SKScene {
     var timeOfDay = Date()
     var calendar = Calendar.current
     
-    
     override func didMove(to view: SKView) {
         
         playViewController.tabBarController?.tabBar.isHidden = false
@@ -101,15 +100,13 @@ class MenuScene: SKScene {
         
         namelabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
         namelabel.textAlignment = NSTextAlignment.left
-        self.view?.addSubview(namelabel)
         
         playDRButtonNode = self.childNode(withName: "PlayDRButton") as! SKSpriteNode
         
-        
-
         let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.view?.addSubview(self.fact1)
+            self.view?.addSubview(self.namelabel)
         }
     }
     
@@ -126,7 +123,7 @@ class MenuScene: SKScene {
         if(playViewController.tabBarController?.tabBar.isHidden == true){
             playViewController.tabBarController?.tabBar.isHidden = false
         }
-        namelabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
+        playViewController.checkNameLabel(namelabel : namelabel)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -189,7 +186,7 @@ class MenuScene: SKScene {
                     gameScene?.scaleMode = .aspectFill
                     let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
                     DispatchQueue.main.asyncAfter(deadline: when2) {
-                        self.namelabel.isHidden = true
+                        //self.namelabel.isHidden = true
                         self.fact1.isHidden = true
                         self.view?.presentScene(gameScene!, transition: transition)
                 }

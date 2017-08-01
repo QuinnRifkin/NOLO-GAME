@@ -17,6 +17,7 @@ class PlayViewController: UIViewController {
     
     var audioPlayer = AVAudioPlayer()
     var gameViewController = GameViewController()
+    var welcomeScene = WelcomeScene()
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -32,6 +33,24 @@ class PlayViewController: UIViewController {
         gameScene?.scaleMode = .aspectFill
         
         scene.view?.presentScene(gameScene!, transition: transition)
+    }
+    
+    func checkNameLabel(namelabel : UILabel){
+        if(namelabel.text != String(welcomeScene.getName())){
+            namelabel.attributedText = NSAttributedString(string: String(welcomeScene.getName()), attributes: [NSForegroundColorAttributeName : UIColor.white])
+            if(String(welcomeScene.getName()).characters.count >= 25)
+            {
+                namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 10)
+            } else if(String(welcomeScene.getName()).characters.count >= 20){
+                namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 12)
+            } else if(String(welcomeScene.getName()).characters.count >= 15){
+                namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 14)
+            } else if(String(welcomeScene.getName()).characters.count >= 10){
+                namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 16)
+            } else {
+                namelabel.font = UIFont(name: "ChalkboardSE-Regular", size: 18)
+            }
+        }
     }
     
     func playMusic(file: String){

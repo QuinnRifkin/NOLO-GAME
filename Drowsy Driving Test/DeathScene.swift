@@ -185,6 +185,10 @@ class DeathScene: SKScene {
         }
     }
     
+    override func update(_ currentTime: TimeInterval) {
+        playViewController.checkNameLabel(namelabel : namelabel)
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
         

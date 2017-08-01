@@ -15,6 +15,7 @@ class SleepScene: SKScene {
 
     var welcomeScene = WelcomeScene()
     var sleepViewController = SleepViewController()
+    var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
     
     var adultLabel: SKSpriteNode!
     var teenLabel: SKSpriteNode!
@@ -103,5 +104,6 @@ class SleepScene: SKScene {
             teenLabel.isHidden = false
             adultLabel.isHidden = true
         }
+        playViewController.checkNameLabel(namelabel: namelabel)
     }
 }
