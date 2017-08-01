@@ -50,25 +50,10 @@ class SleepViewController: UIViewController {
         return longestInMinutes.integer(forKey: "Hours")
     }
     
-//    func setLongestStart(date: Date){
-//        
-//    }
-//    
-//    func setLongestEnd(date: Date){
-//        
-//    }
-//    
-//    func setCurrentStart(date: Date){
-//        
-//    }
-//    
-    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         self.view = SKView()
-        //self.view?.backgroundColor = UIColor.blue
-        
         var timeSlept : Int = 0
         var hoursSlept : Int = 0
         var minutesSlept : Int = 0
@@ -125,19 +110,6 @@ class SleepViewController: UIViewController {
         
         gameViewController.viewControllerScene(scene: "SleepScene", viewController: self)
         
-//        hoursSleptLabel.text = "You Slept " + String(hoursSlept) + " hours and " + String(minutesSlept) + " minutes last night."
-//        hoursSleptLabel.textColor = UIColor.orange
-//        hoursSleptLabel.numberOfLines = 0
-//        hoursSleptLabel.textAlignment = .center
-//
-//        
-//        print(hoursSleptLabel.text ?? "you boofed it")
-//        
-//        let cloudImageView = UIImageView(image: cloudImage)
-//        cloudImageView.frame = CGRect(x: 30, y: 100, width: cloudImageView.frame.width, height: cloudImageView.frame.height)
-//        self.view?.addSubview(cloudImageView)
-//        self.view?.addSubview(hoursSleptLabel)
-        
         let typesToRead : Set<HKObjectType> = [HKObjectType.categoryType(forIdentifier: HKCategoryTypeIdentifier.sleepAnalysis)!]
         
         let typesToShare : Set<HKSampleType> = [HKSampleType.categoryType(forIdentifier: HKCategoryTypeIdentifier.sleepAnalysis)!]
@@ -149,9 +121,6 @@ class SleepViewController: UIViewController {
                 print("Display Allowed")
             }
         }
-//        if(healthStore.authorizationStatus(for: HKObjectType.categoryType(forIdentifier: HKCategoryTypeIdentifier.sleepAnalysis)!) == HKAuthorizationStatus.sharingAuthorized){
-//            
-//        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -45,10 +45,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.tabBarController!.setViewControllers([play, sleep, settings, learnMore], animated: false)
         window = UIWindow(frame: UIScreen.main.bounds)
         if(checkUserDefault() == 0){
-            window?.rootViewController = self.tabBarController
+            window?.rootViewController = WelcomeViewController()
         }
         else{
-            window?.rootViewController = WelcomeViewController()
+            window?.rootViewController = self.tabBarController
             }
         
         window?.makeKeyAndVisible()

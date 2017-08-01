@@ -14,14 +14,12 @@ import AVFoundation
 class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource{
     
     var gameViewController = GameViewController()
-    //var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
     
     let name1 = UserDefaults.standard
     
     let birthday = UserDefaults.standard
     
     var continueButtonNode : SKSpriteNode!
-    //var continueLabelNode : SKLabelNode!
     
     var nameInput : UITextField!
     var numberInput : UITextField!
@@ -221,7 +219,7 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
             if nodesArray.first?.name == "ContinueNode"{
                 continueButtonNode.scale(to: CGSize(width: 240, height: 76.5))
                 let transition = SKTransition.crossFade(withDuration: 0.05)
-                let gameScene = LoadingScene(fileNamed: "MenuScene")
+                let gameScene = SettingsScene(fileNamed: "MenuScene")
                 gameScene?.scaleMode = .aspectFill
                 let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
                 DispatchQueue.main.asyncAfter(deadline: when2) {
