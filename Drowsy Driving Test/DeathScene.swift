@@ -221,6 +221,10 @@ class DeathScene: SKScene {
                 namelabel.isHidden = true
                 playViewController.tabBarController?.tabBar.isHidden = true
                 hideLabels()
+                let when = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                    self.playViewController.sceneTransition(scene: self, transitionScene: "GameScene", transitionType: SKTransition.push(with: .down, duration: 1.0))
+                }
             }
         }
     }
