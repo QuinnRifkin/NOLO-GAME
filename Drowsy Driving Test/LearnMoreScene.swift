@@ -83,6 +83,9 @@ class LearnMoreScene: SKScene {
         self.view?.addSubview(nameLabel)
         self.view?.addSubview(infoLabel)
     }
+    override func update(_ currentTime: TimeInterval) {
+        nameLabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
+    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
