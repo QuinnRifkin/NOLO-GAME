@@ -21,8 +21,8 @@ class InstructionScene1: SKScene {
     var carNode: SKSpriteNode!
     var backLabel: SKSpriteNode!
     
-    let left = SKAction.moveBy(x: -175, y: 0, duration: 0.2)
-    let right = SKAction.moveBy(x: 175, y: 0, duration: 0.2)
+    let left = SKAction.moveBy(x: -120, y: 0, duration: 0.2)
+    let right = SKAction.moveBy(x: 120, y: 0, duration: 0.2)
     func swipeLeft(_ gestureRecognizer: UITapGestureRecognizer){
         carNode.run(left)
     }
