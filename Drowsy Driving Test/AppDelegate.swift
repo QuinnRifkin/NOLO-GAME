@@ -17,10 +17,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var gameViewController:GameViewController!
     var playViewController:PlayViewController!
     
+    var tabBarController: UITabBarController?
+    
+    var userDefault = UserDefaults.standard
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        window?.rootViewController = TabBarViewController()
         
+        
+        let learnMore = LearnMoreViewController()
+        let play = PlayViewController()
+        let settings = SettingsViewController()
+        let sleep = SleepViewController()
+        
+        learnMore.tabBarItem.title = "Learn More"
+        learnMore.tabBarItem.image = UIImage(named: "InfoTabItem-2")
+        play.tabBarItem.title = "Play"
+        play.tabBarItem.image = UIImage(named: "PlayTabItemSmall")
+        settings.tabBarItem.title = "Settings"
+        settings.tabBarItem.image = UIImage(named: "GearSmall")
+        sleep.tabBarItem.title = "Sleep"
+        sleep.tabBarItem.image = UIImage(named: "SleepTabIcon-1")
+        
+        
+        self.tabBarController = UITabBarController()
+        
+        
+        self.tabBarController!.setViewControllers([play, sleep, settings, learnMore], animated: false)
+        window = UIWindow(frame: UIScreen.main.bounds)
+        if(checkUserDefault() == 0){
+            window?.rootViewController = self.tabBarController
+        }
+        else{
+            window?.rootViewController = WelcomeViewController()
+            }
+        
+        window?.makeKeyAndVisible()
         return true
     }
 
@@ -32,14 +63,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        let storyboard = UIStoryboard(name: "LaunchScreen", bundle: nil)
-        self.window?.rootViewController = storyboard.instantiateInitialViewController()
+        //self.tabBarController = UITabBarController()
+        //self.window?.rootViewController = self.tabBarController
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
         //window?.rootViewController = TabBarViewController()
-        window?.rootViewController = TabBarViewController()
+        //window?.rootViewController = TabBarViewController()
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -51,6 +82,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:
         let storyboard = UIStoryboard(name: "LaunchScreen", bundle: nil)
         self.window?.rootViewController = storyboard.instantiateInitialViewController()
+    }
+    
+    
+    func checkUserDefault() -> Int{
+        var user : Int
+        if(userDefault.value(forKey: "Launch") == nil || userDefault.integer(forKey: "Launch" ) == 0 ){
+            user = 0
+        }
+        else{
+        user = 1
+        }
+        return user
     }
     
 //    func registerforDeviceLockNotification() {

@@ -251,6 +251,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         
+        playViewController.tabBarController?.tabBar.isHidden = true
+        playViewController.tabBarController?.tabBar.isHidden = true
+        
+        
         reset = self.childNode(withName: "Reset") as! SKSpriteNode
         home = self.childNode(withName: "Home") as! SKSpriteNode
         
@@ -353,6 +357,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
+        if(playViewController.tabBarController?.tabBar.isHidden == false){
+            playViewController.tabBarController?.tabBar.isHidden = true
+        }
         
         if(time >= 100){
             timeCartoon.position = CGPoint(x: 230, y: 595)
