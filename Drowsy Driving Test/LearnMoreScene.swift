@@ -13,19 +13,16 @@ import UIKit
 class LearnMoreScene: SKScene {
     
     var infoLabel : UILabel!
-    var homeButtonNode:SKSpriteNode!
     var googleButtonNode: SKSpriteNode!
     var twitterButtonNode: SKSpriteNode!
     var snapchatButtonNode: SKSpriteNode!
     var instagramButtonNode: SKSpriteNode!
     var facebookButtonNode: SKSpriteNode!
-    var goHomeLabelNode: SKLabelNode!
     var websiteIconNode: SKSpriteNode!
     
     let welcomeScene = WelcomeScene()
     let gameViewController = GameViewController()
-    let learnMoreViewController = LearnMoreViewController()
-    
+
     let nameLabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
     
     var timer = Timer()
@@ -47,15 +44,8 @@ class LearnMoreScene: SKScene {
         infoLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         infoLabel.textColor = .black
         infoLabel.textAlignment = NSTextAlignment.left
-        
-        goHomeLabelNode = self.childNode(withName: "GoHomeLabel") as! SKLabelNode
-        
-        //googleButtonNode = self.childNode(withName: "WebsiteNode") as! SKSpriteNode
-        //googleButtonNode.color = .clear
-        
         websiteIconNode = self.childNode(withName: "WebsiteIcon") as! SKSpriteNode
-        //websiteIconNode.texture = SKTexture(imageNamed: "WebsiteIcon")
-        //websiteIconNode.color = .clear
+        
         
         twitterButtonNode = self.childNode(withName: "TwitterNode") as! SKSpriteNode
         twitterButtonNode.texture = SKTexture(imageNamed: "TwitterIcon")

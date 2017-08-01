@@ -20,8 +20,6 @@ class PlayViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
-        //audioPlayer.stop()
     }
     
     func hideTabBar(){
@@ -73,11 +71,6 @@ class PlayViewController: UIViewController {
         audioPlayer.setVolume(0, fadeDuration: 0)
     }
     
-    public func audioPlayerBeginInterruption(_ player: AVAudioPlayer)
-    {
-        
-    }
-    
     func getDefault() -> Int {
         return launchDefault.integer(forKey: "Launch")
     }
@@ -85,8 +78,6 @@ class PlayViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = SKView()
-        //self.tabBarController?.tabBar.isHidden = false
-        
         let delegate2 = UIApplication.shared.delegate as! AppDelegate
         delegate2.playViewController = self
         
@@ -99,10 +90,6 @@ class PlayViewController: UIViewController {
             gameViewController.viewControllerScene(scene: "MenuScene", viewController: self)
         }
         launchDefault.set(launchDefault.integer(forKey: "Launch") + 1, forKey: "Launch")
-
-        
-//        gameViewController.viewControllerScene(scene: "MenuScene", viewController: self)
-        
     }
     
     override func didReceiveMemoryWarning() {

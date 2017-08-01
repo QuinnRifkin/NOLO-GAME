@@ -12,10 +12,6 @@ import UIKit
 
 class MenuScene: SKScene {
     
-    let bouncingText = SKAction.sequence([SKAction.moveBy(x: 0, y: -10, duration: 0.6), SKAction.wait(forDuration: 0.1), SKAction.moveBy(x: 0, y: 10, duration: 0.6), SKAction.wait(forDuration: 0.1)])
-    
-    var playLabelNode : SKLabelNode!
-    var learnLabelNode : SKLabelNode!
     var titleNode : SKSpriteNode!
     var howToNode : SKSpriteNode!
     
@@ -51,8 +47,6 @@ class MenuScene: SKScene {
         titleNode = self.childNode(withName: "PlayNode") as! SKSpriteNode
         howToNode = self.childNode(withName: "HowTo") as! SKSpriteNode
         
-        //titleNode.run(SKAction.repeatForever(bouncingText))
-
         let day = calendar.component(.day, from: timeOfDay)
         let hour = calendar.component(.hour, from: timeOfDay)
         
@@ -110,12 +104,7 @@ class MenuScene: SKScene {
         self.view?.addSubview(namelabel)
         
         playDRButtonNode = self.childNode(withName: "PlayDRButton") as! SKSpriteNode
-        learnMoreButtonNode = self.childNode(withName: "LearnMoreButton") as! SKSpriteNode
-        settingsButtonNode = self.childNode(withName: "SettingsNodeImage") as! SKSpriteNode
-        settingsButtonNode.texture = SKTexture(imageNamed: "SettingsButton")
-        settingsButtonNode.color = .clear
-        playLabelNode = self.childNode(withName: "PlayDRLabel") as! SKLabelNode
-        learnLabelNode = self.childNode(withName: "LearnMoreLabel") as! SKLabelNode
+        
         
 
         let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
@@ -191,23 +180,17 @@ class MenuScene: SKScene {
                         self.fact1.isHidden = true
                         self.view?.presentScene(gameScene!, transition: transition)
                     }
-                //}
             }
             if nodesArray.first?.name == "HowToNode" {
                 howToNode.scale(to: CGSize(width: 576, height: 140))
-                playLabelNode.fontColor = UIColor.lightGray
-                let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
-                DispatchQueue.main.asyncAfter(deadline: when) {
-                    self.playLabelNode.fontColor = UIColor.init(colorLiteralRed: 0.0, green: 0.980, blue: 0.575, alpha: 1)
-                }
-                let transition = SKTransition.push(with: SKTransitionDirection.left, duration: 0.5)
-                let gameScene = GameScene(fileNamed: "InstructionScene1")
-                gameScene?.scaleMode = .aspectFill
-                let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
-                DispatchQueue.main.asyncAfter(deadline: when2) {
-                    self.namelabel.isHidden = true
-                    self.fact1.isHidden = true
-                    self.view?.presentScene(gameScene!, transition: transition)
+                    let transition = SKTransition.push(with: SKTransitionDirection.left, duration: 0.5)
+                    let gameScene = GameScene(fileNamed: "InstructionScene1")
+                    gameScene?.scaleMode = .aspectFill
+                    let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
+                    DispatchQueue.main.asyncAfter(deadline: when2) {
+                        self.namelabel.isHidden = true
+                        self.fact1.isHidden = true
+                        self.view?.presentScene(gameScene!, transition: transition)
                 }
             }
         }

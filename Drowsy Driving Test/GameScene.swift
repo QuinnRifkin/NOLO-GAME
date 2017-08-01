@@ -2,7 +2,7 @@
 //  GameScene.swift
 //  Drowsy Driving Test
 //
-//  Created by Tannay Chandhok on 6/16/17.
+//  Created by Quinn Rifkin on 6/16/17.
 //  Copyright © 2017 NoLo. All rights reserved.
 //
 
@@ -549,7 +549,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if nodesArray.first?.name == "resetButton" {
                 reset.scale(to: CGSize(width: 160, height: 80))
             }
-            
             if nodesArray.first?.name == "HomeButton" {
                 home.scale(to: CGSize(width: 160, height: 80))
             }
