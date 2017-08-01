@@ -39,7 +39,7 @@ class SleepScene: SKScene {
         let todaySleepHours = sleepViewController.getLongestDuration()
         let todaySleepMinutes = sleepViewController.getLongestDurationMin()
         
-        let sleepLabel = UILabel(frame: CGRect(x: self.frame.width/9, y: self.frame.height/7, width: 200, height: 200 ))
+        let sleepLabel = UILabel(frame: CGRect(x: self.frame.width/9, y: self.frame.height/7.2, width: 200, height: 200 ))
         
         sleepLabel.textColor = UIColor.black
         sleepLabel.textAlignment = .center
