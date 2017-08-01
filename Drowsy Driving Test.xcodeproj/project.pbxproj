@@ -17,9 +17,6 @@
 		1F58E0321F1E4609007193F3 /* SleepScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58E0311F1E4609007193F3 /* SleepScene.swift */; };
 		1F58E0381F1E4688007193F3 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F58E0371F1E4688007193F3 /* HealthKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		1F58E03A1F1E46A3007193F3 /* SleepViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58E0391F1E46A3007193F3 /* SleepViewController.swift */; };
-		1F58E0401F214A51007193F3 /* CountDownScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F58E03F1F214A51007193F3 /* CountDownScene.sks */; };
-		1F58E0421F214A67007193F3 /* CountDownScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58E0411F214A67007193F3 /* CountDownScene.swift */; };
-		1F58E0441F263790007193F3 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58E0431F263790007193F3 /* LoadingViewController.swift */; };
 		1F5CE6C71EFD660900002231 /* LearnMoreScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CE6C61EFD660900002231 /* LearnMoreScene.sks */; };
 		1F5CE6C91EFD66E900002231 /* LearnMoreScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5CE6C81EFD66E900002231 /* LearnMoreScene.swift */; };
 		1F5CE6CB1EFD6CDF00002231 /* DeathScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1F5CE6CA1EFD6CDF00002231 /* DeathScene.sks */; };
@@ -39,8 +36,6 @@
 		1FF69D501EF41AFE006140E2 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF69D4F1EF41AFE006140E2 /* GameViewController.swift */; };
 		1FF69D581EF41AFE006140E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D561EF41AFE006140E2 /* LaunchScreen.storyboard */; };
 		1FF69D6C1EFAA377006140E2 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF69D6B1EFAA377006140E2 /* MenuScene.swift */; };
-		1FF69D6E1EFAAF0A006140E2 /* LoadingScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D6D1EFAAF0A006140E2 /* LoadingScene.sks */; };
-		1FF69D701EFAAF1B006140E2 /* LoadingScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF69D6F1EFAAF1B006140E2 /* LoadingScene.swift */; };
 		1FF69D721EFAAF49006140E2 /* SparkEmitter.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D711EFAAF49006140E2 /* SparkEmitter.sks */; };
 		1FF69D861EFAEEA9006140E2 /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D831EFAEEA9006140E2 /* MenuScene.sks */; };
 		1FF69D881EFAEEA9006140E2 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D851EFAEEA9006140E2 /* GameScene.sks */; };
@@ -59,9 +54,6 @@
 		1F58E0331F1E4672007193F3 /* Drowsy Driving Test.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Drowsy Driving Test.entitlements"; sourceTree = "<group>"; };
 		1F58E0371F1E4688007193F3 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		1F58E0391F1E46A3007193F3 /* SleepViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SleepViewController.swift; sourceTree = "<group>"; };
-		1F58E03F1F214A51007193F3 /* CountDownScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CountDownScene.sks; sourceTree = "<group>"; };
-		1F58E0411F214A67007193F3 /* CountDownScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountDownScene.swift; sourceTree = "<group>"; };
-		1F58E0431F263790007193F3 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		1F5CE6C61EFD660900002231 /* LearnMoreScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LearnMoreScene.sks; sourceTree = "<group>"; };
 		1F5CE6C81EFD66E900002231 /* LearnMoreScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LearnMoreScene.swift; sourceTree = "<group>"; };
 		1F5CE6CA1EFD6CDF00002231 /* DeathScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = DeathScene.sks; sourceTree = "<group>"; };
@@ -83,8 +75,6 @@
 		1FF69D571EF41AFE006140E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1FF69D591EF41AFE006140E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FF69D6B1EFAA377006140E2 /* MenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
-		1FF69D6D1EFAAF0A006140E2 /* LoadingScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LoadingScene.sks; sourceTree = "<group>"; };
-		1FF69D6F1EFAAF1B006140E2 /* LoadingScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingScene.swift; sourceTree = "<group>"; };
 		1FF69D711EFAAF49006140E2 /* SparkEmitter.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SparkEmitter.sks; sourceTree = "<group>"; };
 		1FF69D831EFAEEA9006140E2 /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		1FF69D851EFAEEA9006140E2 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -151,11 +141,6 @@
 				1F58E02D1F1D4F85007193F3 /* PlayViewController.swift */,
 				1F5CE6CE1EFD8BFB00002231 /* InstructionScene1.sks */,
 				1F5CE6D01EFD8C1700002231 /* InstructionScene1.swift */,
-				1F58E03F1F214A51007193F3 /* CountDownScene.sks */,
-				1F58E0411F214A67007193F3 /* CountDownScene.swift */,
-				1FF69D6D1EFAAF0A006140E2 /* LoadingScene.sks */,
-				1FF69D6F1EFAAF1B006140E2 /* LoadingScene.swift */,
-				1F58E0431F263790007193F3 /* LoadingViewController.swift */,
 				1F5CE6CA1EFD6CDF00002231 /* DeathScene.sks */,
 				1F5CE6CC1EFD6CFC00002231 /* DeathScene.swift */,
 				1FB590201F02E5F50097F7D1 /* SettingsScene.sks */,
@@ -256,11 +241,9 @@
 				1FB5901D1F017F000097F7D1 /* WelcomeScene.sks in Resources */,
 				1F5CE6CB1EFD6CDF00002231 /* DeathScene.sks in Resources */,
 				1FB590271F02F7F10097F7D1 /* GameContinueSound.mp3 in Resources */,
-				1F58E0401F214A51007193F3 /* CountDownScene.sks in Resources */,
 				1F7230B91EFC3EE8001C62F4 /* Assets.xcassets in Resources */,
 				1FF69D881EFAEEA9006140E2 /* GameScene.sks in Resources */,
 				1F5CE6CF1EFD8BFB00002231 /* InstructionScene1.sks in Resources */,
-				1FF69D6E1EFAAF0A006140E2 /* LoadingScene.sks in Resources */,
 				1FF69D721EFAAF49006140E2 /* SparkEmitter.sks in Resources */,
 				1FF69D581EF41AFE006140E2 /* LaunchScreen.storyboard in Resources */,
 				1F5CE6C71EFD660900002231 /* LearnMoreScene.sks in Resources */,
@@ -287,14 +270,11 @@
 				1F58E0321F1E4609007193F3 /* SleepScene.swift in Sources */,
 				1F5CE6C91EFD66E900002231 /* LearnMoreScene.swift in Sources */,
 				1F58E02A1F1D3F25007193F3 /* LearnMoreViewController.swift in Sources */,
-				1FF69D701EFAAF1B006140E2 /* LoadingScene.swift in Sources */,
 				1FF69D501EF41AFE006140E2 /* GameViewController.swift in Sources */,
 				1F58E03A1F1E46A3007193F3 /* SleepViewController.swift in Sources */,
 				1FF69D6C1EFAA377006140E2 /* MenuScene.swift in Sources */,
 				1FF69D481EF41AFE006140E2 /* AppDelegate.swift in Sources */,
-				1F58E0441F263790007193F3 /* LoadingViewController.swift in Sources */,
 				1F5CE6D11EFD8C1700002231 /* InstructionScene1.swift in Sources */,
-				1F58E0421F214A67007193F3 /* CountDownScene.swift in Sources */,
 				1F58E02C1F1D4F72007193F3 /* SettingsViewController.swift in Sources */,
 				1FB590231F02E6130097F7D1 /* SettingsScene.swift in Sources */,
 				1FB5901F1F017F1A0097F7D1 /* WelcomeScene.swift in Sources */,

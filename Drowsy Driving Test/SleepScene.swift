@@ -25,7 +25,6 @@ class SleepScene: SKScene {
     var calendar = Calendar.current
     let namelabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
 
-    
     var year : String!
     var birthYear : Int!
     var thisYear : Int!

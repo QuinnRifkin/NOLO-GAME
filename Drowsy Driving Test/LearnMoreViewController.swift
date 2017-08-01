@@ -18,7 +18,6 @@ class LearnMoreViewController: UIViewController {
     override func viewDidLoad() {
 
         self.tabBarController?.tabBar.isHidden = false
-        
         super.viewDidLoad()
         self.view = SKView()
         gameViewController.viewControllerScene(scene: "LearnMoreScene", viewController: self)
