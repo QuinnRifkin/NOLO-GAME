@@ -126,6 +126,7 @@ class MenuScene: SKScene {
         if(playViewController.tabBarController?.tabBar.isHidden == true){
             playViewController.tabBarController?.tabBar.isHidden = false
         }
+        namelabel.attributedText = NSAttributedString(string: name!, attributes: [NSForegroundColorAttributeName : UIColor.white])
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

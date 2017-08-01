@@ -111,6 +111,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var scoreCartoon : SKSpriteNode!
     var highscoreCartoon : SKSpriteNode!
     
+    
+    
     func swipeLeft(_ gestureRecognizer: UITapGestureRecognizer){
         car.run(left)
     }
@@ -255,12 +257,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func didMove(to view: SKView) {
         
-        playViewController.tabBarController?.tabBar.isHidden = true
+        let swLeft:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(_:)))
+        let swRight:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight(_:)))
+        
+        physicsWorld.gravity = CGVector.zero
+        physicsWorld.contactDelegate = self
+        
+        swLeft.direction = .left
+        view.addGestureRecognizer(swLeft)
+        swRight.direction = .right
+        view.addGestureRecognizer(swRight)
+
         playViewController.tabBarController?.tabBar.isHidden = true
         
         reset = self.childNode(withName: "Reset") as! SKSpriteNode
         home = self.childNode(withName: "Home") as! SKSpriteNode
-        
         timeCartoon = self.childNode(withName: "TimeCartoon") as! SKSpriteNode
         scoreCartoon = self.childNode(withName: "ScoreCartoon") as! SKSpriteNode
         highscoreCartoon = self.childNode(withName: "HighscoreCartoon") as! SKSpriteNode
@@ -268,7 +279,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreCartoon.position = CGPoint(x: 250, y: 540)
         highscoreCartoon.position = CGPoint(x: 210, y: 485)
         
-        playViewController.tabBarController?.tabBar.isHidden = true
         timeLabel = UILabel(frame: CGRect(x: 0, y: 27, width: self.frame.width/2 , height: 20))
         timeLabel.font = UIFont.init(name: "PressStart2P", size: 15)
         highScoreLabel = UILabel(frame: CGRect(x: 0, y: 83, width: self.frame.width/2 , height: 20))
@@ -305,6 +315,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         randomNumbery4 = (Int(arc4random_uniform(heightFrame)))
         rangey4 = Int(randomNumbery4 + Int(halfHeightFrame))
         
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
+
+        
         playViewController.playMusic(file: "GameContinueSound")
         playViewController.setLoops(loops: -1)
         
@@ -323,20 +336,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }else if(highScore >= 10){
             highscoreCartoon.position = CGPoint(x: 190, y: 485)
         }
-        
-        let swLeft:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(_:)))
-        swLeft.direction = .left
-        view.addGestureRecognizer(swLeft)
-        
-        let swRight:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight(_:)))
-        swRight.direction = .right
-        view.addGestureRecognizer(swRight)
-        
-        physicsWorld.gravity = CGVector.zero
-        physicsWorld.contactDelegate = self
-        
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
-        
+    
         addLeftWall()
         addRightWall()
         
@@ -451,7 +451,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for zSprite in zSprites{
             if(firstBody.node?.name == "Car" && secondBody.node?.name == zSprite.name){
                 removeZSprite(zSprite: zSprite)
-                car.position = CGPoint(x: car.position.x, y: CGFloat(-463.043))
             }
         }
         for obstacle in obstacles{
@@ -568,7 +567,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
                 setHighScore(zcount: zTrueCount)
                 setFinishZCount(zcount: zTrueCount)
-                //resetLabelNode.fontColor = UIColor.lightGray
                 let when = DispatchTime.now() + 0.1 // change 2 to desired number of seconds
                 DispatchQueue.main.asyncAfter(deadline: when) {
                     self.playViewController.tabBarController?.tabBar.isHidden = false

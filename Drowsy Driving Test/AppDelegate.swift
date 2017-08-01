@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        
         let learnMore = LearnMoreViewController()
         let play = PlayViewController()
         let settings = SettingsViewController()
@@ -38,9 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         sleep.tabBarItem.title = "Sleep"
         sleep.tabBarItem.image = UIImage(named: "SleepTabIcon-1")
         
-        
         self.tabBarController = UITabBarController()
-        
         
         self.tabBarController!.setViewControllers([play, sleep, settings, learnMore], animated: false)
         window = UIWindow(frame: UIScreen.main.bounds)
