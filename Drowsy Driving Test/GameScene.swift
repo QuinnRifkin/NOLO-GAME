@@ -107,8 +107,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let left = SKAction.moveBy(x: -175, y: 0, duration: 0.2)
     let right = SKAction.moveBy(x: 175, y: 0, duration: 0.2)
     
-//    let labelAdjust10 = SKAction.moveBy(x: -15, y: 0, duration: 0)
-//    let labelAdjust100 = SKAction.moveBy(x: -30, y: 0, duration: 0)
     var timeCartoon : SKSpriteNode!
     var scoreCartoon : SKSpriteNode!
     var highscoreCartoon : SKSpriteNode!
@@ -201,11 +199,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func updateTime(){
         time += 1;
+        timeLabel.attributedText = NSAttributedString(string: String(time), attributes: [NSForegroundColorAttributeName : UIColor.white])
         acc += 0.15
         zBackCount += 1;
         if(zBackCount >= 5 && zCount > 0){
             zCount -= 1;
             zBackCount -= 5
+        }
+        if(time >= 100){
+            timeCartoon.position = CGPoint(x: 230, y: 595)
+        }else if(time >= 10){
+            timeCartoon.position = CGPoint(x: 250, y: 595)
         }
     }
     
@@ -253,7 +257,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         playViewController.tabBarController?.tabBar.isHidden = true
         playViewController.tabBarController?.tabBar.isHidden = true
-        
         
         reset = self.childNode(withName: "Reset") as! SKSpriteNode
         home = self.childNode(withName: "Home") as! SKSpriteNode
@@ -311,6 +314,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         zCountDefault.set(0, forKey: "FinalTime")
         
+        highScoreLabel.attributedText = NSAttributedString(string: String(highScore), attributes: [NSForegroundColorAttributeName : UIColor.white])
+        
+        zCountLabel.attributedText = NSAttributedString(string: String(zTrueCount), attributes: [NSForegroundColorAttributeName : UIColor.white])
+        
+        if(highScore >= 100){
+            highscoreCartoon.position = CGPoint(x: 170, y: 485)
+        }else if(highScore >= 10){
+            highscoreCartoon.position = CGPoint(x: 190, y: 485)
+        }
+        
         let swLeft:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(_:)))
         swLeft.direction = .left
         view.addGestureRecognizer(swLeft)
@@ -323,11 +336,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
-        
-        //resetButtonNode = self.childNode(withName: "resetButton") as! SKSpriteNode
-        //homeLabelNode = self.childNode(withName: "HomeNode") as! SKSpriteNode
-        //homeLabelNode.texture = SKTexture(imageNamed: "HomeIcon")
-        //resetLabelNode = self.childNode(withName: "ResetLabel") as! SKLabelNode
         
         addLeftWall()
         addRightWall()
@@ -353,30 +361,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         zSprites = [zSpriteRandom1, zSpriteRandom2, zSpriteRandom3, zSpriteRandom4]
         obstacles = [obstacle1,obstacle2,obstacle3,obstacle4]
-
+        
+        let when = DispatchTime.now() + 1 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.view?.addSubview(self.highScoreLabel)
+            self.view?.addSubview(self.timeLabel)
+            self.view?.addSubview(self.zCountLabel)
+        }
     }
     
     override func update(_ currentTime: TimeInterval) {
         if(playViewController.tabBarController?.tabBar.isHidden == false){
             playViewController.tabBarController?.tabBar.isHidden = true
-        }
-        
-        if(time >= 100){
-            timeCartoon.position = CGPoint(x: 230, y: 595)
-        }else if(time >= 10){
-            timeCartoon.position = CGPoint(x: 250, y: 595)
-        }
-        
-        if(zTrueCount >= 100){
-            scoreCartoon.position = CGPoint(x: 210, y: 540)
-        }else if(zTrueCount >= 10){
-            scoreCartoon.position = CGPoint(x: 230, y: 540)
-        }
-        
-        if(highScore >= 100){
-            highscoreCartoon.position = CGPoint(x: 170, y: 485)
-        }else if(highScore >= 10){
-            highscoreCartoon.position = CGPoint(x: 190, y: 485)
         }
         
         randomNumberx1 = (Int(arc4random_uniform(widthFrame)))
@@ -395,22 +391,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         rangex4 = Int(randomNumberx4 - Int(halfWidthFrame))
         randomNumbery4 = (Int(arc4random_uniform(heightFrame)))
         rangey4 = Int(randomNumbery4 + Int(halfHeightFrame))
-        
-        if(zTrueCount >= highScore){
-            highScore = zTrueCount
-        }
-        
-        highScoreLabel.attributedText = NSAttributedString(string: String(highScore), attributes: [NSForegroundColorAttributeName : UIColor.white])
-
-        timeLabel.attributedText = NSAttributedString(string: String(time), attributes: [NSForegroundColorAttributeName : UIColor.white])
-
-        zCountLabel.attributedText = NSAttributedString(string: String(zTrueCount), attributes: [NSForegroundColorAttributeName : UIColor.white])
-        
-        if(time >= 1){
-            self.view?.addSubview(highScoreLabel)
-            self.view?.addSubview(timeLabel)
-            self.view?.addSubview(zCountLabel)
-        }
         
         let randomNumber = (Int(arc4random_uniform(upper + upper)))
         let range : Int = Int(randomNumber - Int(upper))
@@ -501,6 +481,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         zSprite.isHidden = true
         zTrueCount += 1
         zCount += 1
+        zCountLabel.attributedText = NSAttributedString(string: String(zTrueCount), attributes: [NSForegroundColorAttributeName : UIColor.white])
+
+        if(zTrueCount >= 100){
+            scoreCartoon.position = CGPoint(x: 210, y: 540)
+        }else if(zTrueCount >= 10){
+            scoreCartoon.position = CGPoint(x: 230, y: 540)
+        }
+        
+        if(zTrueCount >= highScore){
+            highScore = zTrueCount
+        }
+        
+        highScoreLabel.attributedText = NSAttributedString(string: String(highScore), attributes: [NSForegroundColorAttributeName : UIColor.white])
+        
+        if(highScore >= 100){
+            highscoreCartoon.position = CGPoint(x: 170, y: 485)
+        }else if(highScore >= 10){
+            highscoreCartoon.position = CGPoint(x: 190, y: 485)
+        }
     }
     
     func resetZSprite(zsprite: SKSpriteNode){
