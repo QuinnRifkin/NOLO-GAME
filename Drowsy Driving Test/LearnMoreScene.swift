@@ -142,34 +142,27 @@ class LearnMoreScene: SKScene {
             
             if nodesArray.first?.name == "WebsiteNode"{
                 websiteIconNode.scale(to: CGSize(width: 344, height: 100))
-                nameLabel.isHidden = true
                 if let website = NSURL(string: "http://nolo716.org"){
                     UIApplication.shared.open(website as URL, options: [:], completionHandler: nil)
                 }
             }
             if nodesArray.first?.name == "TwitterNode"{
                 twitterButtonNode.scale(to: CGSize(width: 100, height: 100))
-                nameLabel.isHidden = true
                 gameViewController.socialMediaLink(appLink: "twitter://user?screen_name=@NOLO716", webLink: "https://twitter.com/@NOLO716")
             }
             if nodesArray.first?.name == "SnapchatNode"{
                 snapchatButtonNode.scale(to: CGSize(width: 100, height: 100))
-                nameLabel.isHidden = true
                 gameViewController.socialMediaLink(appLink: "snapchat://add/nolo716", webLink: "itms-apps://itunes.apple.com/app/snapchat/id447188370?mt=8")
             }
             if nodesArray.first?.name == "InstagramNode"{
                 instagramButtonNode.scale(to: CGSize(width: 100, height: 100))
-                nameLabel.isHidden = true
                 gameViewController.socialMediaLink(appLink: "Instagram://user?username=NOLO716", webLink: "itms-apps://itunes.apple.com/app/instagram/id389801252?mt=8")
             }
             if nodesArray.first?.name == "FacebookNode"{
                 facebookButtonNode.scale(to: CGSize(width: 100, height: 100))
-                nameLabel.isHidden = true
                 gameViewController.socialMediaLink(appLink: "fb://profile/347809602305230", webLink: "https://www.facebook.com/Nightz-Out-Lightz-out-347809602305230/")
                 
             }
-            
         }
     }
-
 }
