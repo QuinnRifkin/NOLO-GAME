@@ -202,7 +202,7 @@
 				TargetAttributes = {
 					1FF69D431EF41AFE006140E2 = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = UKCKXJ2U6Z;
+						DevelopmentTeam = 9V7DZRU433;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -397,11 +397,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Drowsy Driving Test/Drowsy Driving Test.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = UKCKXJ2U6Z;
+				DEVELOPMENT_TEAM = 9V7DZRU433;
 				INFOPLIST_FILE = "Drowsy Driving Test/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "UserFreedom.Dowsy-Driving-Test";
+				PRODUCT_BUNDLE_IDENTIFIER = "UserFreedom.Dowsy-Driving-Test2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
@@ -416,11 +416,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Drowsy Driving Test/Drowsy Driving Test.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = UKCKXJ2U6Z;
+				DEVELOPMENT_TEAM = 9V7DZRU433;
 				INFOPLIST_FILE = "Drowsy Driving Test/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "UserFreedom.Dowsy-Driving-Test";
+				PRODUCT_BUNDLE_IDENTIFIER = "UserFreedom.Dowsy-Driving-Test2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
