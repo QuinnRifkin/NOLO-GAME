@@ -86,6 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var user : Int
         if(userDefault.value(forKey: "Launch") == nil || userDefault.integer(forKey: "Launch" ) == 0 ){
             user = 0
+            userDefault.set(1, forKey: "Launch")
         }
         else{
         user = 1
