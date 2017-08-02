@@ -160,8 +160,8 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if(textField == nameInput){
-            numberInput.becomeFirstResponder()
             setName(name: nameInput.text!)
+            numberInput.becomeFirstResponder()
         }
         else{
             numberInput.resignFirstResponder()
@@ -183,6 +183,7 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
     
     func donePressed(sender: UIBarButtonItem){
         numberInput.resignFirstResponder()
+        setName(name: nameInput.text!)
         self.view?.endEditing(true)
     }
     
