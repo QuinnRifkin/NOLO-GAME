@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         else{
             window?.rootViewController = self.tabBarController
             }
-        
+    
         window?.makeKeyAndVisible()
         return true
     }
@@ -86,6 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var user : Int
         if(userDefault.value(forKey: "Launch") == nil || userDefault.integer(forKey: "Launch" ) == 0 ){
             user = 0
+            userDefault.set(1, forKey: "Launch")
         }
         else{
         user = 1
