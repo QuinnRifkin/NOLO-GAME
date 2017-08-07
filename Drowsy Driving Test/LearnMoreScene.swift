@@ -9,6 +9,7 @@
 import SpriteKit
 import GameplayKit
 import UIKit
+import SafariServices
 
 class LearnMoreScene: SKScene {
     
@@ -137,9 +138,15 @@ class LearnMoreScene: SKScene {
             
             if nodesArray.first?.name == "WebsiteNode"{
                 websiteIconNode.scale(to: CGSize(width: 344, height: 100))
-                if let website = NSURL(string: "http://nolo716.org"){
-                    UIApplication.shared.open(website as URL, options: [:], completionHandler: nil)
+                //if let website = NSURL(string: "http://nolo716.org"){
+                 //   UIApplication.shared.open(website as URL, options: [:], completionHandler: nil)
+                //}
+                if let vc = self.view?.window?.rootViewController{
+                    let safariVC = SFSafariViewController(url: NSURL(string: "http://nolo716.org")! as URL)
+                    vc.present(safariVC, animated: true, completion: nil)
+                    safariVC.delegate = self as? SFSafariViewControllerDelegate
                 }
+                
             }
             if nodesArray.first?.name == "TwitterNode"{
                 twitterButtonNode.scale(to: CGSize(width: 100, height: 100))
