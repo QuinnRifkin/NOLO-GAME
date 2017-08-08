@@ -102,6 +102,21 @@ class DeathScene: SKScene {
     
     override func didMove(to view: SKView) {
         
+        print("")
+        print("")
+        print("")
+        print("x:")
+        print((self.view?.center.x)!)
+        print("")
+        print("y:")
+        print((self.view?.center.y)!)
+        print("")
+        print("")
+        print("")
+        print((self.view?.center)!)
+        print("")
+        print("")
+        
         blur.frame = (self.view?.bounds)!
         blur.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (1000))
         
@@ -109,9 +124,9 @@ class DeathScene: SKScene {
         popUpView.bounds = CGRect(x: 0, y: 0, width: 300, height: 180)
         popUpView.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (1000))
         
-        dismissPopUpNode.bounds = CGRect(x: 0, y: 0, width: 70, height: 20)
+        dismissPopUpNode.bounds = CGRect(x: 0, y: 0, width: 170, height: 20)
         dismissPopUpNode.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (940))
-        dismissPopUpNode.setTitle("Dismiss", for: .normal)
+        dismissPopUpNode.setTitle("Swipe Up To Dismiss", for: .normal)
         dismissPopUpNode.addTarget(self, action: #selector(self.dismiss(_:)), for: UIControlEvents.touchUpInside)
         dismissPopUpNode.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
         dismissPopUpNode.setTitleColor(UIColor.white, for: UIControlState.normal)

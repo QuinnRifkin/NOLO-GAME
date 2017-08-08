@@ -8,9 +8,10 @@
 
 import UIKit
 import AVFoundation
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
     
@@ -21,7 +22,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var userDefault = UserDefaults.standard
     
+    var nightShiftBool = true
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        //UIApplication.shared.isIdleTimerDisabled = false
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
+            if(granted){
+                print("Notifications allowed")
+            }else {
+                print("Notifications denied")
+            }
+        }
+        
+        UNUserNotificationCenter.current().delegate = self
+        
+        let nightShiftContent = UNMutableNotificationContent()
+        nightShiftContent.title = "Hey there"
+        nightShiftContent.body = "You should turn on Night Shift"
+        let noThanks = UNNotificationAction(identifier: "noThanks", title: "No Thanks", options: .destructive)
+        let goToSettings = UNNotificationAction(identifier: "goToSettings", title: "SETTINGS", options: .authenticationRequired)
+        let nightShiftCategory = UNNotificationCategory(identifier: "nightShiftCategory", actions: [noThanks, goToSettings], intentIdentifiers: [], options: [])
+        nightShiftContent.categoryIdentifier = "nightShiftCategory"
+        UNUserNotificationCenter.current().setNotificationCategories([nightShiftCategory])
+        let nightShiftTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
+        let nightShiftRequest = UNNotificationRequest(identifier: "nightShift", content: nightShiftContent, trigger: nightShiftTrigger)
+        
+        UNUserNotificationCenter.current().add(nightShiftRequest) { (error) in
+            print(error ?? "Notification failed")
+        }
+        
+        let calendar = Calendar.current
+        let time = Date()
+        
+        //let hours = calendar.component(.hour, from: time)
         
         let learnMore = LearnMoreViewController()
         let play = PlayViewController()
@@ -49,9 +84,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         
         window?.makeKeyAndVisible()
+    
         return true
     }
-
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        if (response.actionIdentifier == "noThanks"){
+            print("No Thanks")
+        }else{
+            print("Go To Settings")
+            UIApplication.shared.open(URL(string:"App-Prefs:root=Brightness&path=NIGHT_SHIFT")!, options: [:], completionHandler: nil)
+        }
+    }
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -128,6 +176,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print("LOCK STATUS CHANGED")
 //        }
 //    }
+    
+    //let nc = NotificationCenter.default
+    //nc.addObserver(forName:Notification.Name(rawValue:"MyNotification"),
+    //object:nil, queue:nil,
+    //using:catchNotification)
 
 }
 

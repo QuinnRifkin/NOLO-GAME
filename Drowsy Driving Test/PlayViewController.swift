@@ -10,10 +10,16 @@ import UIKit
 import SpriteKit
 import GameplayKit
 import AVFoundation
+import GameKit
 
-class PlayViewController: UIViewController {
+class PlayViewController: UIViewController, GKGameCenterControllerDelegate {
     
     var launchDefault = UserDefaults.standard
+    
+    let LEADERBOARD_ID = "UserFreedom.Dowsy-Driving-TestF"
+    
+    var gcEnabled = Bool() // Check if the user has Game Center enabled
+    var gcDefaultLeaderBoard = String() // Check the default leaderboardID
     
     var audioPlayer = AVAudioPlayer()
     var gameViewController = GameViewController()
@@ -92,10 +98,52 @@ class PlayViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        authenticateLocalPlayer()
+        checkGCLeaderboard()
+        
         self.view = SKView()
         let delegate2 = UIApplication.shared.delegate as! AppDelegate
         delegate2.playViewController = self
         gameViewController.viewControllerScene(scene: "MenuScene", viewController: self)
+    }
+    
+    func authenticateLocalPlayer() {
+        let localPlayer: GKLocalPlayer = GKLocalPlayer.localPlayer()
+        
+        localPlayer.authenticateHandler = {(PlayViewController, error) -> Void in
+            if((PlayViewController) != nil) {
+                // 1. Show login if player is not logged in
+                self.present(PlayViewController!, animated: true, completion: nil)
+            } else if (localPlayer.isAuthenticated) {
+                // 2. Player is already authenticated & logged in, load game center
+                self.gcEnabled = true
+                
+                // Get the default leaderboard ID
+                localPlayer.loadDefaultLeaderboardIdentifier(completionHandler: { (leaderboardIdentifer, error) in
+                    if error != nil { print("error")
+                    } else { self.gcDefaultLeaderBoard = leaderboardIdentifer! }
+                })
+                
+            } else {
+                // 3. Game center is not enabled on the users device
+                self.gcEnabled = false
+                print("Local player could not be authenticated!")
+                print("error")
+            }
+        }
+    }
+    
+    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        gameCenterViewController.dismiss(animated: true, completion: nil)
+    }
+    
+    func checkGCLeaderboard() {
+        let gcVC = GKGameCenterViewController()
+        gcVC.gameCenterDelegate = self
+        gcVC.viewState = .leaderboards
+        gcVC.leaderboardIdentifier = LEADERBOARD_ID
+        present(gcVC, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
