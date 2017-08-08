@@ -488,13 +488,13 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         //.resignFirstResponder()
         endTimeInput.becomeFirstResponder()
         sleepInputKeyboardEnd.becomeFirstResponder()
-        inputHours = startTimeInput.text!
+        //inputHours = startTimeInput.text!
         //self.view?.endEditing(true)
     }
     
     func doneMinPressed(sender: UIBarButtonItem){
         endTimeInput.resignFirstResponder()
-        inputMinutes = endTimeInput.text!
+        //inputMinutes = endTimeInput.text!
         self.view?.endEditing(true)
     }
     
@@ -535,13 +535,13 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
             }
             
             if nodesArray.first?.name == "StartRecordingButton"{
-                startRecordingButton.scale(to: CGSize(width: 350, height: 180))
-                startRecordingNode.scale(to: CGSize(width: 334, height: 161))
+                startRecordingButton.scale(to: CGSize(width: 350 * 9/10, height: 180 * 9/10))
+                startRecordingNode.scale(to: CGSize(width: 334 * 9/10 , height: 161 * 9/10))
             }
             
             if nodesArray.first?.name == "StopRecordingButton"{
-                stopRecordingButton.scale(to: CGSize(width: 350, height: 180))
-                stopRecordingNode.scale(to: CGSize(width: 334, height: 161))
+                stopRecordingButton.scale(to: CGSize(width: 315, height: 162))
+                stopRecordingNode.scale(to: CGSize(width: 300, height: 145))
             }
         }
     }
