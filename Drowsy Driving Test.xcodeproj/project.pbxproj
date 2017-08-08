@@ -30,6 +30,7 @@
 		1FB590231F02E6130097F7D1 /* SettingsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB590221F02E6130097F7D1 /* SettingsScene.swift */; };
 		1FB590251F02F67B0097F7D1 /* GameStartSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1FB590241F02F67B0097F7D1 /* GameStartSound.mp3 */; };
 		1FB590271F02F7F10097F7D1 /* GameContinueSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1FB590261F02F7F10097F7D1 /* GameContinueSound.mp3 */; };
+		1FD179F91F324EC300B46311 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FD179F81F324EC300B46311 /* GameKit.framework */; };
 		1FF69D481EF41AFE006140E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF69D471EF41AFE006140E2 /* AppDelegate.swift */; };
 		1FF69D4C1EF41AFE006140E2 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D4B1EF41AFE006140E2 /* Actions.sks */; };
 		1FF69D4E1EF41AFE006140E2 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FF69D4D1EF41AFE006140E2 /* GameScene.swift */; };
@@ -67,6 +68,7 @@
 		1FB590221F02E6130097F7D1 /* SettingsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsScene.swift; sourceTree = "<group>"; };
 		1FB590241F02F67B0097F7D1 /* GameStartSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GameStartSound.mp3; sourceTree = "<group>"; };
 		1FB590261F02F7F10097F7D1 /* GameContinueSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GameContinueSound.mp3; sourceTree = "<group>"; };
+		1FD179F81F324EC300B46311 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		1FF69D441EF41AFE006140E2 /* Drowsy Driving Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Drowsy Driving Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FF69D471EF41AFE006140E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FF69D4B1EF41AFE006140E2 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1F58E0381F1E4688007193F3 /* HealthKit.framework in Frameworks */,
+				1FD179F91F324EC300B46311 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +99,7 @@
 		1F58E0341F1E4672007193F3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1FD179F81F324EC300B46311 /* GameKit.framework */,
 				1F58E0371F1E4688007193F3 /* HealthKit.framework */,
 			);
 			name = Frameworks;
@@ -208,7 +212,13 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
 							com.apple.HealthKit = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 						};
