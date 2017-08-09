@@ -77,7 +77,9 @@ class DeathScene: SKScene {
 //
 //            self.dismissPopUpNode.frame = CGRect(x: self.dismissPopUpNode.frame.origin.x, y: self.dismissPopUpNode.frame.origin.y + 1000, width: self.dismissPopUpNode.frame.size.width, height: self.dismissPopUpNode.frame.size.height)
 //
-        }, completion: { (finished) -> Void in})
+        }, completion: { (finished) -> Void in
+            print(self.popUp.center)
+        })
     }
     
     func dismiss(){
@@ -99,27 +101,42 @@ class DeathScene: SKScene {
 //            self.popUp.popUpView.removeFromSuperview()
 //            self.popUp.popUpLabel.removeFromSuperview()
 //            self.popUp.dismissPopUpNode.removeFromSuperview()
-//            self.popUp.showLabels()
+            self.showLabels()
         })
     }
     
-    @IBAction func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
+    func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
         if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
-            
-            let translation = gestureRecognizer.translation(in: self.view)
-            // note: 'view' is optional and need to be unwrapped
-            gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x, y: gestureRecognizer.view!.center.y + translation.y)
-            gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
-            print(gestureRecognizer.view!.center)
+            if(self.popUp.center.y <= 1001){
+                let translation = gestureRecognizer.translation(in: self.view)
+                // note: 'view' is optional and need to be unwrapped
+                self.popUp.center = CGPoint(x: self.popUp.center.x, y: self.popUp.center.y + translation.y)
+                gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+                print(self.popUp.center)
+            }else if(self.popUp.center.y > 1001){
+                UIView.animate(withDuration: 0.1, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: { () -> Void in
+                    self.popUp.center = CGPoint(x: self.popUp.center.x, y: 1000.5)
+                }, completion: { (finished) -> Void in
+                    print("reset")
+                })
+                let when = DispatchTime.now() + 0.05 // change 2 to desired number of seconds
+                DispatchQueue.main.asyncAfter(deadline: when) {
+                    UIView.animate(withDuration: 0.1, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: { () -> Void in
+                        self.popUp.center = CGPoint(x: self.popUp.center.x, y: 1000.5)
+                    }, completion: { (finished) -> Void in
+                        print("reset2")
+                    })
+                }
+            }
         }
-        if(popUp.center.y <= 160){
+        if(popUp.center.y <= 750){
             dismiss()
         }
     }
     
     override func didMove(to view: SKView) {
         let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-        self.popUp.addGestureRecognizer(gestureRecognizer)
+        view.addGestureRecognizer(gestureRecognizer)
         
         print("")
         print("")
@@ -162,9 +179,7 @@ class DeathScene: SKScene {
         popUpLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 15)
         popUpLabel.bounds = CGRect(x: 0, y: 0, width: 275, height: 150)
         popUpLabel.center = CGPoint(x: ((self.popUp.center.x)), y: (self.popUp.center.y) - 30)
-        
-        showView()
-        
+
         zCountLabel = UILabel(frame: CGRect(x: self.frame.width/7.7, y: self.frame.height/7.1, width: 250, height: 40))
         
         highScoreLabel = UILabel(frame: CGRect(x: self.frame.width/7.7, y: self.frame.height/5.6, width: 300, height: 40))
@@ -222,6 +237,8 @@ class DeathScene: SKScene {
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.showView()
             self.showView()
+            print(self.popUp.center)
+            print("lolz")
         }
     }
     
