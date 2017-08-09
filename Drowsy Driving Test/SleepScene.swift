@@ -12,10 +12,15 @@ import GameplayKit
 import AVFoundation
 
 class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource{
+    
+    
 
     var welcomeScene = WelcomeScene()
     var sleepViewController = SleepViewController()
     var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
+    
+    var isRecordingSleep: Bool = false
+    var isRecordingStopped: Bool = false
     
     var adultLabel: SKSpriteNode!
     var teenLabel: SKSpriteNode!
@@ -141,6 +146,32 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
             vc.present(alert, animated: true, completion: nil)
         }
     }
+    
+    
+    func monitoringAlert(title: String, message: String, cancelTitle: String, okTitle: String){
+        
+        let alert = UIAlertController(title: title , message: message,  preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: cancelTitle, style: UIAlertActionStyle.destructive, handler: { action in
+           print("do nothing")}))
+        alert.addAction(UIAlertAction(title: okTitle, style: UIAlertActionStyle.default, handler: { action in
+            self.isRecordingSleep = !self.isRecordingSleep}))
+
+        if let vc = self.view?.window?.rootViewController {
+            vc.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func monitoringAlertS(title: String, message: String, okTitle: String){
+        
+        let alert = UIAlertController(title: title , message: message,  preferredStyle: UIAlertControllerStyle.alert)
+        
+        alert.addAction(UIAlertAction(title: okTitle, style: UIAlertActionStyle.default, handler: { action in print("do nothing")}))
+        
+        if let vc = self.view?.window?.rootViewController {
+            vc.present(alert, animated: true, completion: nil)
+        }
+    }
+
     
     func preSaveCleaning(){
         if(startAmPm == "PM"){
@@ -288,7 +319,7 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         sleepLabel.numberOfLines = 0
         sleepLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 20)
         sleepLabel.text = "You got " + String(todaySleepHours) + " hours and " + String(todaySleepMinutes) + " minutes of sleep last night."
-        self.view?.addSubview(sleepLabel)
+        //self.view?.addSubview(sleepLabel)
 
         year = welcomeScene.getBirthYear()
         birthYear = Int(year)!
@@ -584,11 +615,28 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
             if nodesArray.first?.name == "StartRecordingButton"{
                 startRecordingButton.scale(to: CGSize(width: 350, height: 180))
                 startRecordingNode.scale(to: CGSize(width: 334, height: 161))
+                if(isRecordingSleep){
+                    monitoringAlertS(title: "Oops", message: "You are already recording!", okTitle: "Ok")
+                    
+                }
+                else{
+                    monitoringAlert(title: "Hey", message: "Do you want to start recording your sleep?", cancelTitle: "No", okTitle: "Yes")
+                    
+                    
+                }
             }
             
             if nodesArray.first?.name == "StopRecordingButton"{
                 stopRecordingButton.scale(to: CGSize(width: 350, height: 180))
                 stopRecordingNode.scale(to: CGSize(width: 334, height: 161))
+                if(isRecordingSleep){
+                    monitoringAlert(title: "Hey", message: "Do you want to stop recording your sleep?" , cancelTitle: "No", okTitle: "Yes")
+                    
+                }
+                else{
+                    monitoringAlertS(title: "Oops", message: "You are not currently recording", okTitle: "Ok")
+                }
+                
             }
         }
     }
