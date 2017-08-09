@@ -19,8 +19,11 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
     var sleepViewController = SleepViewController()
     var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
     
+    var counter = 0
+    var timer = Timer()
+    var isPlaying = false
+    
     var isRecordingSleep: Bool = false
-    var isRecordingStopped: Bool = false
     
     var adultLabel: SKSpriteNode!
     var teenLabel: SKSpriteNode!
@@ -154,8 +157,14 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         alert.addAction(UIAlertAction(title: cancelTitle, style: UIAlertActionStyle.destructive, handler: { action in
            print("do nothing")}))
         alert.addAction(UIAlertAction(title: okTitle, style: UIAlertActionStyle.default, handler: { action in
-            self.isRecordingSleep = !self.isRecordingSleep}))
-
+            if(self.isRecordingSleep){
+                self.resetTimer()
+            }
+            self.isRecordingSleep = !self.isRecordingSleep;
+            if(self.isRecordingSleep){
+                self.sleepTimer()
+            }
+        }))
         if let vc = self.view?.window?.rootViewController {
             vc.present(alert, animated: true, completion: nil)
         }
@@ -383,6 +392,7 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         toolbarMinutes.setItems([cancelButtonMin, flexButton, doneButtonMin], animated: true)
         endTimeInput.inputAccessoryView = toolbarMinutes
 
+        
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -553,8 +563,35 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
             adultLabel.isHidden = true
         }
         playViewController.checkNameLabel(namelabel: namelabel)
+        
+        
     }
     
+    
+    func updateTimer() {
+        counter = counter + 1
+        
+        print(counter)
+        
+    }
+    
+    func resetTimer(){
+        timer.invalidate()
+        isPlaying = false
+        
+    }
+    
+    func sleepTimer(){
+        counter = 0
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        isPlaying = true
+        
+    }
+    
+    func getCounter() -> Int{
+        return counter
+    }
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
         
@@ -622,7 +659,6 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
                 else{
                     monitoringAlert(title: "Hey", message: "Do you want to start recording your sleep?", cancelTitle: "No", okTitle: "Yes")
                     
-                    
                 }
             }
             
@@ -631,7 +667,6 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
                 stopRecordingNode.scale(to: CGSize(width: 334, height: 161))
                 if(isRecordingSleep){
                     monitoringAlert(title: "Hey", message: "Do you want to stop recording your sleep?" , cancelTitle: "No", okTitle: "Yes")
-                    
                 }
                 else{
                     monitoringAlertS(title: "Oops", message: "You are not currently recording", okTitle: "Ok")

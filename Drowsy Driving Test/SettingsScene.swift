@@ -15,6 +15,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     let welcomeScene = WelcomeScene()
     let gameScene = GameScene()
     let gameViewController = GameViewController()
+    let sleepScene = SleepScene()
     
     var resetPulse = SKAction.sequence([SKAction.scale(by: 1.1, duration: 0.5), SKAction.wait(forDuration: 0.05), SKAction.scale(by: (1/1.1), duration: 0.5), SKAction.wait(forDuration: 0.05)])
     
@@ -61,6 +62,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     }
 
     override func didMove(to view: SKView) {
+        
         
         nameInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/8.4, width: self.frame.width/3, height: 30))
         numberInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/4.7, width: self.frame.width/3, height: 30))
