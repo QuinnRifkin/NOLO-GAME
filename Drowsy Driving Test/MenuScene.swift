@@ -19,6 +19,7 @@ class MenuScene: SKScene {
     var nightShiftNotified = UserDefaults.standard
     
     let gameViewController = GameViewController()
+    
     var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
     
     var playDRButtonNode:SKSpriteNode!
@@ -40,6 +41,7 @@ class MenuScene: SKScene {
     var calendar = Calendar.current
     
     override func didMove(to view: SKView) {
+        
         
         playViewController.tabBarController?.tabBar.isHidden = false
         
