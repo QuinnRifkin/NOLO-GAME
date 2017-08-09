@@ -18,6 +18,7 @@ class DeathScene: SKScene {
     var factBar:SKSpriteNode!
     var playAgain:SKSpriteNode!
     
+    var popUp = UIView()
     var blur = UIVisualEffectView(effect: UIBlurEffect(style: .light))
     var popUpView = UIView()
     var popUpLabel = UILabel()
@@ -60,47 +61,65 @@ class DeathScene: SKScene {
     }
     
     func showView(){
-        self.view?.addSubview(blur)
-        self.view?.addSubview(popUpView)
-        self.view?.addSubview(popUpLabel)
-        self.view?.addSubview(dismissPopUpNode)
+        self.view?.addSubview(popUp)
+        self.popUp.addSubview(blur)
+        self.popUp.addSubview(popUpView)
+        self.popUp.addSubview(popUpLabel)
+        self.popUp.addSubview(dismissPopUpNode)
         
         UIView.animate(withDuration: 0.8, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: { () -> Void in
-            
-            self.blur.frame = CGRect(x: self.blur.frame.origin.x, y: self.blur.frame.origin.y + 1000, width: self.blur.frame.size.width, height: self.blur.frame.size.height)
-            
-            self.popUpView.frame = CGRect(x: self.popUpView.frame.origin.x, y: self.popUpView.frame.origin.y + 1000, width: self.popUpView.frame.size.width, height: self.popUpView.frame.size.height)
-            
-            self.popUpLabel.frame = CGRect(x: self.popUpLabel.frame.origin.x, y: self.popUpLabel.frame.origin.y + 1000, width: self.popUpLabel.frame.size.width, height: self.popUpLabel.frame.size.height)
-            
-            self.dismissPopUpNode.frame = CGRect(x: self.dismissPopUpNode.frame.origin.x, y: self.dismissPopUpNode.frame.origin.y + 1000, width: self.dismissPopUpNode.frame.size.width, height: self.dismissPopUpNode.frame.size.height)
-            
+//
+//            self.blur.frame = CGRect(x: self.blur.frame.origin.x, y: self.blur.frame.origin.y + 1000, width: self.blur.frame.size.width, height: self.blur.frame.size.height)
+//
+            self.popUp.frame = CGRect(x: self.popUp.frame.origin.x, y: self.popUp.frame.origin.y + self.popUp.frame.height, width: self.popUp.frame.size.width, height: self.popUp.frame.size.height)
+//
+//            self.popUpLabel.frame = CGRect(x: self.popUpLabel.frame.origin.x, y: self.popUpLabel.frame.origin.y + 1000, width: self.popUpLabel.frame.size.width, height: self.popUpLabel.frame.size.height)
+//
+//            self.dismissPopUpNode.frame = CGRect(x: self.dismissPopUpNode.frame.origin.x, y: self.dismissPopUpNode.frame.origin.y + 1000, width: self.dismissPopUpNode.frame.size.width, height: self.dismissPopUpNode.frame.size.height)
+//
         }, completion: { (finished) -> Void in})
     }
     
-    func dismiss(_ Button: UIButton){
+    func dismiss(){
         print("Dismissed")
         
         UIView.animate(withDuration: 0.8, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: { () -> Void in
-            
-            self.blur.frame = CGRect(x: self.blur.frame.origin.x, y: -1000, width: self.blur.frame.size.width, height: self.blur.frame.size.height)
-            
-            self.popUpView.frame = CGRect(x: self.popUpView.frame.origin.x, y: self.popUpView.frame.origin.y - 1000, width: self.popUpView.frame.size.width, height: self.popUpView.frame.size.height)
-            
-            self.popUpLabel.frame = CGRect(x: self.popUpLabel.frame.origin.x, y: -1000, width: self.popUpLabel.frame.size.width, height: self.popUpLabel.frame.size.height)
-            
-            self.dismissPopUpNode.frame = CGRect(x: self.dismissPopUpNode.frame.origin.x, y: -1000, width: self.dismissPopUpNode.frame.size.width, height: self.dismissPopUpNode.frame.size.height)
+//
+//            self.blur.frame = CGRect(x: self.blur.frame.origin.x, y: -1000, width: self.blur.frame.size.width, height: self.blur.frame.size.height)
+//
+            self.popUp.frame = CGRect(x: self.popUp.frame.origin.x, y: self.popUp.frame.origin.y - self.popUp.frame.height, width: self.popUp.frame.size.width, height: self.popUp.frame.size.height)
+//
+//            self.popUpLabel.frame = CGRect(x: self.popUpLabel.frame.origin.x, y: -1000, width: self.popUpLabel.frame.size.width, height: self.popUpLabel.frame.size.height)
+//
+//            self.dismissPopUpNode.frame = CGRect(x: self.dismissPopUpNode.frame.origin.x, y: -1000, width: self.dismissPopUpNode.frame.size.width, height: self.dismissPopUpNode.frame.size.height)
             
         }, completion: { (finished) -> Void in
-            self.blur.removeFromSuperview()
-            self.popUpView.removeFromSuperview()
-            self.popUpLabel.removeFromSuperview()
-            self.dismissPopUpNode.removeFromSuperview()
-            self.showLabels()
+            self.popUp.removeFromSuperview()
+//            self.popUp.blur.removeFromSuperview()
+//            self.popUp.popUpView.removeFromSuperview()
+//            self.popUp.popUpLabel.removeFromSuperview()
+//            self.popUp.dismissPopUpNode.removeFromSuperview()
+//            self.popUp.showLabels()
         })
     }
     
+    @IBAction func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
+        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
+            
+            let translation = gestureRecognizer.translation(in: self.view)
+            // note: 'view' is optional and need to be unwrapped
+            gestureRecognizer.view!.center = CGPoint(x: gestureRecognizer.view!.center.x, y: gestureRecognizer.view!.center.y + translation.y)
+            gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
+            print(gestureRecognizer.view!.center)
+        }
+        if(popUp.center.y <= 160){
+            dismiss()
+        }
+    }
+    
     override func didMove(to view: SKView) {
+        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        self.popUp.addGestureRecognizer(gestureRecognizer)
         
         print("")
         print("")
@@ -117,29 +136,34 @@ class DeathScene: SKScene {
         print("")
         print("")
         
-        blur.frame = (self.view?.bounds)!
-        blur.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (1000))
+        popUp.frame = (self.view?.bounds)!
+        popUp.center = CGPoint(x: ((self.view?.center.x)!), y: ((self.view?.center.y)! - (self.popUp.frame.height)))
         
         popUpView.layer.cornerRadius = 20
         popUpView.bounds = CGRect(x: 0, y: 0, width: 300, height: 180)
-        popUpView.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (1000))
-        
-        dismissPopUpNode.bounds = CGRect(x: 0, y: 0, width: 170, height: 20)
-        dismissPopUpNode.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (940))
-        dismissPopUpNode.setTitle("Swipe Up To Dismiss", for: .normal)
-        dismissPopUpNode.addTarget(self, action: #selector(self.dismiss(_:)), for: UIControlEvents.touchUpInside)
-        dismissPopUpNode.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
-        dismissPopUpNode.setTitleColor(UIColor.white, for: UIControlState.normal)
-        
+        popUpView.center = CGPoint(x: ((self.popUp.center.x)), y: (self.popUp.center.y))
         popUpView.backgroundColor = UIColor.red
         popUpView.layer.opacity = 0.6
         
+        blur.frame = (self.popUp.bounds)
+        blur.center = CGPoint(x: ((self.popUp.center.x)), y: (self.popUp.center.y))
+        
+        dismissPopUpNode.bounds = CGRect(x: 0, y: 0, width: 170, height: 20)
+        dismissPopUpNode.center = CGPoint(x: ((self.popUp.center.x)), y: (self.popUp.center.y) + 50)
+        dismissPopUpNode.setTitle("Swipe Up To Dismiss", for: .normal)
+        //dismissPopUpNode.addTarget(self, action: #selector(self.dismiss(_:)), for: UIControlEvents.touchUpInside)
+        dismissPopUpNode.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
+        dismissPopUpNode.setTitleColor(UIColor.black, for: UIControlState.normal)
+    
         popUpLabel.text = "This is just a game, but the message is far from it. Drowsy driving is actually quite dangerous. Keep yourself from making this mistake and catch some more Zs!"
         popUpLabel.textAlignment = .center
+        popUpLabel.textColor = .white
         popUpLabel.numberOfLines = 0
         popUpLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 15)
         popUpLabel.bounds = CGRect(x: 0, y: 0, width: 275, height: 150)
-        popUpLabel.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (1020))
+        popUpLabel.center = CGPoint(x: ((self.popUp.center.x)), y: (self.popUp.center.y) - 30)
+        
+        showView()
         
         zCountLabel = UILabel(frame: CGRect(x: self.frame.width/7.7, y: self.frame.height/7.1, width: 250, height: 40))
         
@@ -196,6 +220,7 @@ class DeathScene: SKScene {
         
         let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
+            self.showView()
             self.showView()
         }
     }
