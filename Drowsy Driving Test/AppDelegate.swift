@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        //UIApplication.shared.isIdleTimerDisabled = false
+        UIApplication.shared.isIdleTimerDisabled = false
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
             if(granted){
@@ -37,26 +37,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
         UNUserNotificationCenter.current().delegate = self
-        
+
+        var nineComponents = DateComponents()
+        nineComponents.hour = 9
+        nineComponents.minute = 48
+
         let nightShiftContent = UNMutableNotificationContent()
         nightShiftContent.title = "Hey there"
         nightShiftContent.body = "You should turn on Night Shift"
         let noThanks = UNNotificationAction(identifier: "noThanks", title: "No Thanks", options: .destructive)
-        let goToSettings = UNNotificationAction(identifier: "goToSettings", title: "SETTINGS", options: .authenticationRequired)
+        let goToSettings = UNNotificationAction(identifier: "goToSettings", title: "Go to Settings", options: .destructive)
         let nightShiftCategory = UNNotificationCategory(identifier: "nightShiftCategory", actions: [noThanks, goToSettings], intentIdentifiers: [], options: [])
         nightShiftContent.categoryIdentifier = "nightShiftCategory"
         UNUserNotificationCenter.current().setNotificationCategories([nightShiftCategory])
+        //let nightShiftTrigger = UNCalendarNotificationTrigger(dateMatching: nineComponents, repeats: true)
         let nightShiftTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
         let nightShiftRequest = UNNotificationRequest(identifier: "nightShift", content: nightShiftContent, trigger: nightShiftTrigger)
         
         UNUserNotificationCenter.current().add(nightShiftRequest) { (error) in
             print(error ?? "Notification failed")
         }
-        
-        let calendar = Calendar.current
-        let time = Date()
-        
-        //let hours = calendar.component(.hour, from: time)
         
         let learnMore = LearnMoreViewController()
         let play = PlayViewController()
@@ -97,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             print("No Thanks")
         }else{
             print("Go To Settings")
-            UIApplication.shared.open(URL(string:"App-Prefs:root=Brightness&path=NIGHT_SHIFT")!, options: [:], completionHandler: nil)
+            UIApplication.shared.open(URL(string:"App-Prefs:root=General")!, options: [:], completionHandler: nil)
         }
     }
     func applicationWillResignActive(_ application: UIApplication) {
