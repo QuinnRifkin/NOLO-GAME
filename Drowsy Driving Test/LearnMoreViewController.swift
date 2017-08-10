@@ -10,6 +10,7 @@ import UIKit
 import SpriteKit
 import GameplayKit
 import AVFoundation
+import Charts
 
 class LearnMoreViewController: UIViewController {
     
@@ -26,6 +27,5 @@ class LearnMoreViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
+   }
 }
