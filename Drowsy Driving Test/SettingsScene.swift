@@ -27,7 +27,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     var unmuteButton : SKSpriteNode!
     
     
-    let mute : UserDefaults = UserDefaults.standard
+    //let mute : UserDefaults = UserDefaults.standard
     
     
     
@@ -71,12 +71,12 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     }
     
     func getIsMute() ->Bool{
-        return mute.bool(forKey: "isMute")
+        return gameScene.mute.bool(forKey: "isMute")
     }
 
     override func didMove(to view: SKView) {
         
-        mute.set(false, forKey: "isMute")
+        
         
         
         nameInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/8.4, width: self.frame.width/3, height: 30))
@@ -377,13 +377,13 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
                     muteButton.scale(to: CGSize(width: 300, height: 168))
                     muteButton.isHidden = false
                     unmuteButton.isHidden = true
-                    mute.set(false, forKey: "isMute")
+                    gameScene.mute.set(false, forKey: "isMute")
                     print("not mute")
                 }else{
                     unmuteButton.scale(to: CGSize(width: 415, height: 168))
                     muteButton.isHidden = true
                     unmuteButton.isHidden = false
-                    mute.set(true, forKey: "isMute")
+                    gameScene.mute.set(true, forKey: "isMute")
                     print("mute")
                 }
             }
