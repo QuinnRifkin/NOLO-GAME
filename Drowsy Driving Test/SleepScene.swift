@@ -13,16 +13,13 @@ import AVFoundation
 
 class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource{
     
-    
-
     var welcomeScene = WelcomeScene()
     var sleepViewController = SleepViewController()
     var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
     
-    var counter = 0
-    var timer = Timer()
-    var isPlaying = false
+    var goodBad = UserDefaults.standard
     
+    var isPlaying = false
     var isRecordingSleep: Bool = false
     
     var adultLabel: SKSpriteNode!
@@ -31,6 +28,7 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
     var badSleep: SKSpriteNode!
     var manualSleepEntry : SKSpriteNode!
     var manualSleepEntryNode : SKSpriteNode!
+    var manualSleepLabel : SKSpriteNode!
     var startRecordingButton : SKSpriteNode!
     var startRecordingNode : SKSpriteNode!
     var stopRecordingButton : SKSpriteNode!
@@ -49,11 +47,6 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
     var thisYear : Int!
     
     var sleepLabel: UILabel!
-    
-    var inputHours = ""
-    var inputHoursInt = 0
-    var inputMinutes = ""
-    var inputMinutesInt = 0
     
     var startHour = "12"
     var startMin = "00"
@@ -150,9 +143,7 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         }
     }
     
-    
     func monitoringAlert(title: String, message: String, cancelTitle: String, okTitle: String){
-        
         let alert = UIAlertController(title: title , message: message,  preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: cancelTitle, style: UIAlertActionStyle.destructive, handler: { action in
            print("do nothing")}))
@@ -180,7 +171,10 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
             vc.present(alert, animated: true, completion: nil)
         }
     }
-
+    
+    func alreadyEntered(){
+        monitoringAlertS(title: "Sorry", message: "Seems you have already made a sleep entry today, come back tomorrow to add more data. To remove todays data, visit the sleep app", okTitle: "Ok")
+    }
     
     func preSaveCleaning(){
         if(startAmPm == "PM"){
@@ -199,10 +193,40 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         startDate = calendar.date(from: startDateComponents)!
         endDate = calendar.date(from: endDateComponents)!
         sleepViewController.saveSleepAnalysis(startDate: startDate, endDate: endDate)
+        goodBadSleepDisplay()
+        startDate = Date()
+        endDate = Date()
+        dismissView(self.cancel)
+    }
+    
+    func goodBadSleepDisplay(){
+        let difference = Calendar.current.dateComponents([.hour], from: startDate, to: endDate)
+        let hours = (difference.hour)!
+        if(adultLabel.isHidden){
+            if(hours >= 8){
+                goodSleep.isHidden = false
+                badSleep.isHidden = true
+                goodBad.set(true, forKey: "Good")
+            }else{
+                goodSleep.isHidden = true
+                badSleep.isHidden = false
+                goodBad.set(false, forKey: "Good")
+            }
+        }else if(teenLabel.isHidden){
+            if(hours >= 6){
+                goodSleep.isHidden = false
+                badSleep.isHidden = true
+                goodBad.set(true, forKey: "Good")
+            }else{
+                goodSleep.isHidden = true
+                badSleep.isHidden = false
+                goodBad.set(false, forKey: "Good")
+            }
+        }
     }
 
     override func didMove(to view: SKView) {
-        
+
         let currentComponents = calendar.dateComponents([.year, .month, .day], from: now)
         
         let currentYear = currentComponents.year!
@@ -234,7 +258,6 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         endDateComponents.month = currentMonth
         endDateComponents.day = currentDay
         
-        
         print(currentYear)
         print(currentMonth)
         print(currentDay)
@@ -245,20 +268,20 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         sleepInputScreen.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (1000))
         
         sleepInputView.layer.cornerRadius = 20
-        sleepInputView.bounds = CGRect(x: 0, y: 0, width: 300, height: 180)
+        sleepInputView.bounds = CGRect(x: 0, y: 0, width: 300, height: 250)
         sleepInputView.backgroundColor = UIColor.red
         sleepInputView.layer.opacity = 0.6
         sleepInputView.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (1000))
         
-        startTimeInput.bounds = CGRect(x: 0, y: 0, width: 140, height: 20)
-        startTimeInput.center = CGPoint(x: ((self.view?.center.x)! - (0)), y: ((self.view?.center.y)! - (1010)))
+        startTimeInput.bounds = CGRect(x: 0, y: 0, width: 180, height: 40)
+        startTimeInput.center = CGPoint(x: ((self.view?.center.x)! - (0)), y: ((self.view?.center.y)! - (1030)))
         startTimeInput.attributedPlaceholder = NSAttributedString(string: "Start", attributes: [NSForegroundColorAttributeName : UIColor.black])
-        startTimeInput.font = UIFont(name: "HelveticaNeue-Light", size: 15)
+        startTimeInput.font = UIFont(name: "HelveticaNeue-Light", size: 25)
         startTimeInput.borderStyle = UITextBorderStyle.roundedRect
         startTimeInput.autocorrectionType = UITextAutocorrectionType.no
         startTimeInput.keyboardType = UIKeyboardType.default
         startTimeInput.returnKeyType = UIReturnKeyType.continue
-        startTimeInput.clearButtonMode = UITextFieldViewMode.whileEditing;
+        startTimeInput.clearButtonMode = UITextFieldViewMode.never
         startTimeInput.contentVerticalAlignment = UIControlContentVerticalAlignment.center
         startTimeInput.textAlignment = NSTextAlignment.center
         startTimeInput.delegate = self as UITextFieldDelegate
@@ -267,15 +290,15 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         sleepInputKeyboardStart.delegate = self
         sleepInputKeyboardStart.dataSource = self
         
-        endTimeInput.bounds = CGRect(x: 0, y: 0, width: 140, height: 20)
-        endTimeInput.center = CGPoint(x: ((self.view?.center.x)! - (0)), y: ((self.view?.center.y)! - (985)))
+        endTimeInput.bounds = CGRect(x: 0, y: 0, width: 180, height: 40)
+        endTimeInput.center = CGPoint(x: ((self.view?.center.x)! - (0)), y: ((self.view?.center.y)! - (975)))
         endTimeInput.attributedPlaceholder = NSAttributedString(string: "End", attributes: [NSForegroundColorAttributeName : UIColor.black])
-        endTimeInput.font = UIFont(name: "HelveticaNeue-Light", size: 15)
+        endTimeInput.font = UIFont(name: "HelveticaNeue-Light", size: 25)
         endTimeInput.borderStyle = UITextBorderStyle.roundedRect
         endTimeInput.autocorrectionType = UITextAutocorrectionType.no
         endTimeInput.keyboardType = UIKeyboardType.default
         endTimeInput.returnKeyType = UIReturnKeyType.continue
-        endTimeInput.clearButtonMode = UITextFieldViewMode.whileEditing;
+        endTimeInput.clearButtonMode = UITextFieldViewMode.never
         endTimeInput.contentVerticalAlignment = UIControlContentVerticalAlignment.center
         endTimeInput.textAlignment = NSTextAlignment.center
         endTimeInput.delegate = self as UITextFieldDelegate
@@ -285,14 +308,14 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         sleepInputKeyboardEnd.dataSource = self
         
         submit.bounds = CGRect(x: 0, y: 0, width: 70, height: 20)
-        submit.center = CGPoint(x: ((self.view?.center.x)! + (50)), y: (self.view?.center.y)! - (940))
+        submit.center = CGPoint(x: ((self.view?.center.x)! + (50)), y: (self.view?.center.y)! - (920))
         submit.setTitle("Submit", for: .normal)
         submit.addTarget(self, action: #selector(self.finalSubmission(_:)), for: UIControlEvents.touchUpInside)
         submit.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
         submit.setTitleColor(UIColor.white, for: UIControlState.normal)
         
         cancel.bounds = CGRect(x: 0, y: 0, width: 70, height: 20)
-        cancel.center = CGPoint(x: ((self.view?.center.x)! - (50)), y: (self.view?.center.y)! - (940))
+        cancel.center = CGPoint(x: ((self.view?.center.x)! - (50)), y: (self.view?.center.y)! - (920))
         cancel.setTitle("Cancel", for: .normal)
         cancel.addTarget(self, action: #selector(self.dismissView(_:)), for: UIControlEvents.touchUpInside)
         cancel.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
@@ -302,21 +325,33 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         sleepInputLabel.textColor = .white
         sleepInputLabel.textAlignment = .center
         sleepInputLabel.numberOfLines = 0
-        sleepInputLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 15)
+        sleepInputLabel.font = UIFont(name: "HelveticaNeue-Light", size: 18)
         sleepInputLabel.bounds = CGRect(x: 0, y: 0, width: 275, height: 150)
-        sleepInputLabel.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (1050))
+        sleepInputLabel.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (1090))
 
         manualSleepEntry = self.childNode(withName: "ManualSleepButton") as! SKSpriteNode
         manualSleepEntryNode = self.childNode(withName: "ManualSleep") as! SKSpriteNode
-        startRecordingButton = self.childNode(withName: "StartRecordingButton") as! SKSpriteNode
+        manualSleepLabel = self.childNode(withName: "ManualLabel") as! SKSpriteNode
+        startRecordingButton = self.childNode(withName: "StartRecordingLabel") as! SKSpriteNode
         startRecordingNode = self.childNode(withName: "StartRecording") as! SKSpriteNode
-        stopRecordingButton = self.childNode(withName: "StopRecordingButton") as! SKSpriteNode
+        stopRecordingButton = self.childNode(withName: "StopRecordingLabel") as! SKSpriteNode
         stopRecordingNode = self.childNode(withName: "StopRecording") as! SKSpriteNode
         
         adultLabel = self.childNode(withName: "68Hours") as! SKSpriteNode
         teenLabel = self.childNode(withName: "810Hours") as! SKSpriteNode
         goodSleep = self.childNode(withName: "GoodSleep") as! SKSpriteNode
         badSleep = self.childNode(withName: "BadSleep") as! SKSpriteNode
+        
+        if(goodBad.value(forKey: "Good") == nil){
+            goodSleep.isHidden = true
+            badSleep.isHidden = true
+        }else if(goodBad.bool(forKey: "Good")){
+            goodSleep.isHidden = false
+            badSleep.isHidden = true
+        }else if(!goodBad.bool(forKey: "Good")){
+            goodSleep.isHidden = true
+            badSleep.isHidden = false
+        }
         
         let todaySleepHours = sleepViewController.getLongestDuration()
         let todaySleepMinutes = sleepViewController.getLongestDurationMin()
@@ -328,11 +363,18 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         sleepLabel.numberOfLines = 0
         sleepLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 20)
         sleepLabel.text = "You got " + String(todaySleepHours) + " hours and " + String(todaySleepMinutes) + " minutes of sleep last night."
-        //self.view?.addSubview(sleepLabel)
 
         year = welcomeScene.getBirthYear()
         birthYear = Int(year)!
         thisYear = calendar.component(.year, from: now)
+        
+        if(thisYear - birthYear >= 19){
+            adultLabel.isHidden = false
+            teenLabel.isHidden = true
+        }else{
+            teenLabel.isHidden = false
+            adultLabel.isHidden = true
+        }
         
         let name = String(welcomeScene.getName())
         if(name!.characters.count >= 25)
@@ -352,27 +394,6 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         namelabel.textAlignment = NSTextAlignment.left
         self.view?.addSubview(namelabel)
         
-        if(thisYear - birthYear >= 19){
-            adultLabel.isHidden = false
-            teenLabel.isHidden = true
-            if(todaySleepHours >= 6){
-                goodSleep.isHidden = false
-                badSleep.isHidden = true
-            }else{
-                badSleep.isHidden = false
-                goodSleep.isHidden = true
-            }
-        }else{
-            teenLabel.isHidden = false
-            adultLabel.isHidden = true
-            if(todaySleepHours >= 8){
-                goodSleep.isHidden = false
-                badSleep.isHidden = true
-            }else{
-                badSleep.isHidden = false
-                goodSleep.isHidden = true
-            }
-        }
         sleepInputKeyboardStart.tag = 1
         sleepInputKeyboardEnd.tag = 2
         
@@ -391,8 +412,6 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         toolbarMinutes.tintColor = UIColor.blue
         toolbarMinutes.setItems([cancelButtonMin, flexButton, doneButtonMin], animated: true)
         endTimeInput.inputAccessoryView = toolbarMinutes
-
-        
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -434,7 +453,7 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
             pickerLabel?.textAlignment = NSTextAlignment.center
         }
         
-        pickerLabel?.text = timeDatabase[component][row]//fetchLabelForRowNumber(row)
+        pickerLabel?.text = timeDatabase[component][row]
         
         return pickerLabel!;
     }
@@ -450,7 +469,6 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
     func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
         return 40.0
     }
-    
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if(pickerView == sleepInputKeyboardStart){
@@ -551,7 +569,6 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         self.view?.endEditing(true)
     }
     
-    
     override func update(_ currentTime: TimeInterval) {
         year = welcomeScene.getBirthYear()
         birthYear = Int(year)!
@@ -563,33 +580,38 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
             adultLabel.isHidden = true
         }
         playViewController.checkNameLabel(namelabel: namelabel)
-        
-        
-    }
-    
-    
-    func updateTimer() {
-        counter = counter + 1
-        
-        print(counter)
-        
     }
     
     func resetTimer(){
-        timer.invalidate()
+        endDate = Date()
+        let format = DateFormatter()
+        format.timeStyle = .short
+        print(format.string(from: endDate))
+        print(format.string(from: startDate))
+        print(endDate)
         isPlaying = false
+        let alert = UIAlertController(title: "Just making sure", message: "Are you sure you want to make this entry? This will be added to your sleep data in the health app. \n\nStart time: " + format.string(from: startDate) + "\nEnd time: " + format.string(from: endDate), preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.destructive, handler: { action in
+            do{
+                self.sleepViewController.saveSleepAnalysis(startDate: self.startDate, endDate: self.endDate)
+            } catch {
+                self.alreadyEntered()
+            }
+            print("submitted :)")
+            self.goodBadSleepDisplay()
+        }))
         
+        if let vc = self.view?.window?.rootViewController {
+            vc.present(alert, animated: true, completion: nil)
+        }
     }
     
     func sleepTimer(){
-        counter = 0
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        startDate = Date()
+        print(startDate)
         isPlaying = true
         
-    }
-    
-    func getCounter() -> Int{
-        return counter
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -600,15 +622,16 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
             
             if nodesArray.first?.name == "ManualSleep"{
                 manualSleepEntry.scale(to: CGSize(width: 538.2, height: 61.2))
+                manualSleepLabel.scale(to: CGSize(width: 460, height: 66))
             }
             
             if nodesArray.first?.name == "StartRecordingButton"{
-                startRecordingButton.scale(to: CGSize(width: 350 * 9/10, height: 180 * 9/10))
+                startRecordingButton.scale(to: CGSize(width: 280, height: 131))
                 startRecordingNode.scale(to: CGSize(width: 334 * 9/10 , height: 161 * 9/10))
             }
             
             if nodesArray.first?.name == "StopRecordingButton"{
-                stopRecordingButton.scale(to: CGSize(width: 315, height: 162))
+                stopRecordingButton.scale(to: CGSize(width: 280, height: 131))
                 stopRecordingNode.scale(to: CGSize(width: 300, height: 145))
             }
         }
@@ -622,15 +645,16 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
             
             if nodesArray.first?.name == "ManualSleep"{
                 manualSleepEntry.scale(to: CGSize(width: 598, height: 68))
+                manualSleepLabel.scale(to: CGSize(width: 511, height: 73))
             }
             
             if nodesArray.first?.name == "StartRecordingButton"{
-                startRecordingButton.scale(to: CGSize(width: 350, height: 180))
+                startRecordingButton.scale(to: CGSize(width: 311.5, height: 146))
                 startRecordingNode.scale(to: CGSize(width: 334, height: 161))
             }
             
             if nodesArray.first?.name == "StopRecordingButton"{
-                stopRecordingButton.scale(to: CGSize(width: 350, height: 180))
+                stopRecordingButton.scale(to: CGSize(width: 311.5, height: 146))
                 stopRecordingNode.scale(to: CGSize(width: 334, height: 161))
             }
         }
@@ -644,26 +668,25 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
             
             if nodesArray.first?.name == "ManualSleep"{
                 manualSleepEntry.scale(to: CGSize(width: 598, height: 68))
+                manualSleepLabel.scale(to: CGSize(width: 511, height: 73))
                 manualSleepEntryNode.isHidden = true
                 showView()
                 sleepLabel.isHidden = true
             }
             
             if nodesArray.first?.name == "StartRecordingButton"{
-                startRecordingButton.scale(to: CGSize(width: 350, height: 180))
+                startRecordingButton.scale(to: CGSize(width: 311.5, height: 146))
                 startRecordingNode.scale(to: CGSize(width: 334, height: 161))
                 if(isRecordingSleep){
                     monitoringAlertS(title: "Oops", message: "You are already recording!", okTitle: "Ok")
-                    
                 }
                 else{
                     monitoringAlert(title: "Hey", message: "Do you want to start recording your sleep?", cancelTitle: "No", okTitle: "Yes")
-                    
                 }
             }
             
             if nodesArray.first?.name == "StopRecordingButton"{
-                stopRecordingButton.scale(to: CGSize(width: 350, height: 180))
+                stopRecordingButton.scale(to: CGSize(width: 311.5, height: 146))
                 stopRecordingNode.scale(to: CGSize(width: 334, height: 161))
                 if(isRecordingSleep){
                     monitoringAlert(title: "Hey", message: "Do you want to stop recording your sleep?" , cancelTitle: "No", okTitle: "Yes")

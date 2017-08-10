@@ -137,7 +137,8 @@ class SleepViewController: UIViewController {
             let sleepSession = HKCategorySample(type:sleepType, value: HKCategoryValueSleepAnalysis.asleep.rawValue, start: startDate, end: endDate)
             
             // at the end, we save it
-            healthStore.save(sleepSession, withCompletion: { (success, error) -> Void in
+            do{
+                healthStore.save(sleepSession, withCompletion: { (success, error) -> Void in
                 
                 if error != nil {
                     // something happened
@@ -152,6 +153,9 @@ class SleepViewController: UIViewController {
                 }
                 
             })
+            }catch{
+                print("failed to save")
+            }
         }
     }
     func retrieveSleepAnalysis() {
@@ -169,7 +173,6 @@ class SleepViewController: UIViewController {
                     
                     // something happened
                     return
-                    
                 }
                 
                 if let result = tmpResult {
