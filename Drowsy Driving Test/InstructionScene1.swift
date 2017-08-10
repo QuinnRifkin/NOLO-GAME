@@ -23,6 +23,7 @@ class InstructionScene1: SKScene {
     
     let left = SKAction.moveBy(x: -120, y: 0, duration: 0.2)
     let right = SKAction.moveBy(x: 120, y: 0, duration: 0.2)
+    
     func swipeLeft(_ gestureRecognizer: UITapGestureRecognizer){
         carNode.run(left)
     }
