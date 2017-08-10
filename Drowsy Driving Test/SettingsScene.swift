@@ -26,11 +26,6 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     var muteButton : SKSpriteNode!
     var unmuteButton : SKSpriteNode!
     
-    
-    //let mute : UserDefaults = UserDefaults.standard
-    
-    
-    
     var nameInput : UITextField!
     var numberInput : UITextField!
     let agePicker = UIPickerView()
@@ -76,12 +71,9 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
 
     override func didMove(to view: SKView) {
         
+        nameInput = UITextField(frame: CGRect(x: self.frame.width/5, y: self.frame.height/10, width: self.frame.width/4, height: 30))
         
-        
-        
-        nameInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/8.4 + 25, width: self.frame.width/3, height: 30))
-        
-        numberInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/4.7, width: self.frame.width/3, height: 30))
+        numberInput = UITextField(frame: CGRect(x: self.frame.width/5, y: self.frame.height/6.5, width: self.frame.width/4, height: 30))
         
         resetLabel = self.childNode(withName: "Reset") as! SKSpriteNode
         
@@ -90,7 +82,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         
         unmuteButton.isHidden = true
         
-        resetLabel.run(SKAction.repeatForever(resetPulse))
+        //resetLabel.run(SKAction.repeatForever(resetPulse))
         
         let name = String(welcomeScene.getName())
         if(name!.characters.count >= 25)
@@ -303,9 +295,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         playViewController.stopMusic()
         
     }
-    
-    
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
         
@@ -313,14 +303,14 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "ResetNode" {
-                resetLabel.scale(to: CGSize(width: 200, height: 104))
+                resetLabel.scale(to: CGSize(width: 144, height: 74))
             }
             
             if nodesArray.first?.name == "MuteNode" { //click unmute
                 if(unmuteButton.isHidden){
-                    muteButton.scale(to: CGSize(width: 225, height: 130))
+                    muteButton.scale(to: CGSize(width: 135, height: 74))
                 }else{
-                    unmuteButton.scale(to: CGSize(width: 225, height: 130))
+                    unmuteButton.scale(to: CGSize(width: 190, height: 74))
                 }
             }
         }
@@ -333,13 +323,13 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "ResetNode" {
-                resetLabel.scale(to: CGSize(width: 225, height: 117))
+                resetLabel.scale(to: CGSize(width: 160, height: 82))
             }
             if nodesArray.first?.name == "MuteNode" {
                 if(muteButton.isHidden){
-                    muteButton.scale(to: CGSize(width: 250, height: 130))
+                    muteButton.scale(to: CGSize(width: 150, height: 82))
                 }else{
-                    unmuteButton.scale(to: CGSize(width: 250, height: 130))
+                    unmuteButton.scale(to: CGSize(width: 211, height: 82))
                 }
             }
         }
@@ -353,7 +343,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "ResetNode" {
-                resetLabel.scale(to: CGSize(width: 225, height: 117))
+                resetLabel.scale(to: CGSize(width: 160, height: 82))
                 if(highScore != 0){
                     let alert = UIAlertController(title: "WARNING", message: "Your highscore is " + String(highScore) + "\n There is no going back...", preferredStyle: UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
@@ -374,13 +364,13 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
             }
             if nodesArray.first?.name == "MuteNode" { //click unmute
                 if(muteButton.isHidden){
-                    muteButton.scale(to: CGSize(width: 250, height: 130))
+                    muteButton.scale(to: CGSize(width: 150, height: 82))
                     muteButton.isHidden = false
                     unmuteButton.isHidden = true
                     gameScene.mute.set(false, forKey: "isMute")
                     print("not mute")
                 }else{
-                    unmuteButton.scale(to: CGSize(width: 250, height: 130))
+                    unmuteButton.scale(to: CGSize(width: 211, height: 82))
                     muteButton.isHidden = true
                     unmuteButton.isHidden = false
                     gameScene.mute.set(true, forKey: "isMute")
