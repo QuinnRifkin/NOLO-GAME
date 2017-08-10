@@ -23,6 +23,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         static let zspritex : UInt32 = 2
     }
     
+    let mute : UserDefaults = UserDefaults.standard
+    
+    
+    
     var widthFrame : UInt32 = 0
     var halfWidthFrame : UInt32 = 0
     var heightFrame : UInt32 = 0
@@ -318,10 +322,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
 
-       /* if(!settingsScene.mute.bool(forKey: "isMute")){
+        if(!mute.bool(forKey: "isMute")){
             playViewController.playMusic(file: "GameContinueSound")
             playViewController.setLoops(loops: -1)
-        }*/
+        }
         
         if(highScoreDefault.value(forKey: "HighScore") != nil){
             highScore = highScoreDefault.value(forKey: "HighScore") as! NSInteger!
