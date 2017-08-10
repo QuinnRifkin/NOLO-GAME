@@ -40,12 +40,10 @@
 		1FF69D721EFAAF49006140E2 /* SparkEmitter.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D711EFAAF49006140E2 /* SparkEmitter.sks */; };
 		1FF69D861EFAEEA9006140E2 /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D831EFAEEA9006140E2 /* MenuScene.sks */; };
 		1FF69D881EFAEEA9006140E2 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1FF69D851EFAEEA9006140E2 /* GameScene.sks */; };
-		2CE2A914F14D3CF0D76015CC /* Pods_Drowsy_Driving_Test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4901DC661CB1F02C72BE2A8 /* Pods_Drowsy_Driving_Test.framework */; };
 		8F6C95E71F2F7F6C003CE1C1 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6C95E61F2F7F6C003CE1C1 /* WelcomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1472F2FE3144B92AFE683FCE /* Pods-Drowsy Driving Test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Drowsy Driving Test.release.xcconfig"; path = "Pods/Target Support Files/Pods-Drowsy Driving Test/Pods-Drowsy Driving Test.release.xcconfig"; sourceTree = "<group>"; };
 		1F58E01B1F13BCE6007193F3 /* PressStart2P.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PressStart2P.ttf; sourceTree = "<group>"; };
 		1F58E01F1F13C394007193F3 /* Gradius.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = Gradius.TTF; sourceTree = "<group>"; };
 		1F58E0271F1D06E1007193F3 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -82,9 +80,7 @@
 		1FF69D711EFAAF49006140E2 /* SparkEmitter.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SparkEmitter.sks; sourceTree = "<group>"; };
 		1FF69D831EFAEEA9006140E2 /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		1FF69D851EFAEEA9006140E2 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		4785A8DAE9CF488176D78619 /* Pods-Drowsy Driving Test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Drowsy Driving Test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Drowsy Driving Test/Pods-Drowsy Driving Test.debug.xcconfig"; sourceTree = "<group>"; };
 		8F6C95E61F2F7F6C003CE1C1 /* WelcomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
-		C4901DC661CB1F02C72BE2A8 /* Pods_Drowsy_Driving_Test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Drowsy_Driving_Test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +90,6 @@
 			files = (
 				1F58E0381F1E4688007193F3 /* HealthKit.framework in Frameworks */,
 				1FD179F91F324EC300B46311 /* GameKit.framework in Frameworks */,
-				2CE2A914F14D3CF0D76015CC /* Pods_Drowsy_Driving_Test.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,7 +101,6 @@
 			children = (
 				1FD179F81F324EC300B46311 /* GameKit.framework */,
 				1F58E0371F1E4688007193F3 /* HealthKit.framework */,
-				C4901DC661CB1F02C72BE2A8 /* Pods_Drowsy_Driving_Test.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -127,7 +121,6 @@
 				1FF69D461EF41AFE006140E2 /* Drowsy Driving Test */,
 				1FF69D451EF41AFE006140E2 /* Products */,
 				1F58E0341F1E4672007193F3 /* Frameworks */,
-				BCFD0FEE8343CA61C4A630D4 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -178,15 +171,6 @@
 			path = "Drowsy Driving Test";
 			sourceTree = "<group>";
 		};
-		BCFD0FEE8343CA61C4A630D4 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				4785A8DAE9CF488176D78619 /* Pods-Drowsy Driving Test.debug.xcconfig */,
-				1472F2FE3144B92AFE683FCE /* Pods-Drowsy Driving Test.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -194,12 +178,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1FF69D5C1EF41AFE006140E2 /* Build configuration list for PBXNativeTarget "Drowsy Driving Test" */;
 			buildPhases = (
-				D9FA5254AABF62A3632080CA /* [CP] Check Pods Manifest.lock */,
 				1FF69D401EF41AFE006140E2 /* Sources */,
 				1FF69D411EF41AFE006140E2 /* Frameworks */,
 				1FF69D421EF41AFE006140E2 /* Resources */,
-				7626A32152517091A7043F3C /* [CP] Embed Pods Frameworks */,
-				2A5F10F2DEEDE633263EE98E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -287,54 +268,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		2A5F10F2DEEDE633263EE98E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Drowsy Driving Test/Pods-Drowsy Driving Test-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7626A32152517091A7043F3C /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Drowsy Driving Test/Pods-Drowsy Driving Test-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D9FA5254AABF62A3632080CA /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1FF69D401EF41AFE006140E2 /* Sources */ = {
@@ -469,7 +402,6 @@
 		};
 		1FF69D5D1EF41AFE006140E2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4785A8DAE9CF488176D78619 /* Pods-Drowsy Driving Test.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -489,7 +421,6 @@
 		};
 		1FF69D5E1EF41AFE006140E2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1472F2FE3144B92AFE683FCE /* Pods-Drowsy Driving Test.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

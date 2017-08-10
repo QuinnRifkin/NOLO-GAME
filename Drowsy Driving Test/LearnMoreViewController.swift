@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 import GameplayKit
 import AVFoundation
-import Charts
+
 
 class LearnMoreViewController: UIViewController {
     
