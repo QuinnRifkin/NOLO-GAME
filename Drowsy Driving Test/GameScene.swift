@@ -16,6 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var highScore: Int = 0
     
     var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
+   // var settingsScene = SettingsScene()
     
     struct collisionType{
         static let carx : UInt32 = 1
@@ -317,9 +318,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
 
-        
-        playViewController.playMusic(file: "GameContinueSound")
-        playViewController.setLoops(loops: -1)
+       /* if(!settingsScene.mute.bool(forKey: "isMute")){
+            playViewController.playMusic(file: "GameContinueSound")
+            playViewController.setLoops(loops: -1)
+        }*/
         
         if(highScoreDefault.value(forKey: "HighScore") != nil){
             highScore = highScoreDefault.value(forKey: "HighScore") as! NSInteger!

@@ -16,11 +16,20 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     let gameScene = GameScene()
     let gameViewController = GameViewController()
     let sleepScene = SleepScene()
+    let playViewController = PlayViewController()
     
     var resetPulse = SKAction.sequence([SKAction.scale(by: 1.1, duration: 0.5), SKAction.wait(forDuration: 0.05), SKAction.scale(by: (1/1.1), duration: 0.5), SKAction.wait(forDuration: 0.05)])
     
     let nameLabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
     var resetLabel : SKSpriteNode!
+    
+    var muteButton : SKSpriteNode!
+    var unmuteButton : SKSpriteNode!
+    
+    
+    let mute : UserDefaults = UserDefaults.standard
+    
+    
     
     var nameInput : UITextField!
     var numberInput : UITextField!
@@ -60,14 +69,26 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     func getBirthYear() -> String {
         return welcomeScene.getBirthYear()
     }
+    
+    func getIsMute() ->Bool{
+        return mute.bool(forKey: "isMute")
+    }
 
     override func didMove(to view: SKView) {
         
+        mute.set(false, forKey: "isMute")
+        
         
         nameInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/8.4, width: self.frame.width/3, height: 30))
+        
         numberInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/4.7, width: self.frame.width/3, height: 30))
         
         resetLabel = self.childNode(withName: "Reset") as! SKSpriteNode
+        
+        muteButton = self.childNode(withName: "MuteButton") as! SKSpriteNode
+        unmuteButton = self.childNode(withName: "UnmuteButton") as! SKSpriteNode
+        
+        unmuteButton.isHidden = true
         
         resetLabel.run(SKAction.repeatForever(resetPulse))
         
@@ -97,8 +118,8 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         let cancelNameButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(SettingsScene.cancelNamePressed(sender:)))
         
         nameInput.attributedPlaceholder = NSAttributedString(string: welcomeScene.getName(), attributes: [NSForegroundColorAttributeName : UIColor.black])
-        nameInput.font = UIFont(name: "HelveticaNeue-Light", size: 15)
-        nameInput.borderStyle = UITextBorderStyle.roundedRect
+        nameInput.font = UIFont(name: "ChalkboardSE-Regular", size: 15)
+        nameInput.borderStyle = .roundedRect
         nameInput.autocorrectionType = UITextAutocorrectionType.no
         nameInput.keyboardType = UIKeyboardType.default
         nameInput.returnKeyType = UIReturnKeyType.done
@@ -107,7 +128,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         nameInput.delegate = self as UITextFieldDelegate
         nameInput.backgroundColor = .white
         
-        numberInput.font = UIFont(name: "HelveticaNeue-Light", size: 15)
+        numberInput.font = UIFont(name: "ChalkboardSE-Regular", size: 15)
         numberInput.attributedPlaceholder = NSAttributedString(string: welcomeScene.getBirthMonth() + " " + welcomeScene.getBirthDay() + ", " + welcomeScene.getBirthYear(), attributes: [NSForegroundColorAttributeName : UIColor.black])
         numberInput.borderStyle = UITextBorderStyle.roundedRect
         numberInput.autocorrectionType = UITextAutocorrectionType.no
@@ -122,7 +143,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         agePicker.dataSource = self
         numberInput.inputView = agePicker
         
-        toolbar.barStyle = UIBarStyle.default
+        toolbar.barStyle = .default
         toolbar.tintColor = UIColor.blue
         toolbar.setItems([cancelButton, flexButton, doneButton], animated: true)
         numberInput.inputAccessoryView = toolbar
@@ -277,6 +298,14 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         
     }
     
+    func stopMusic(){
+        //isMute = true
+        playViewController.stopMusic()
+        
+    }
+    
+    
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
         
@@ -285,6 +314,14 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
             
             if nodesArray.first?.name == "ResetNode" {
                 resetLabel.scale(to: CGSize(width: 213, height: 108))
+            }
+            
+            if nodesArray.first?.name == "MuteNode" { //click unmute
+                if(unmuteButton.isHidden){
+                    muteButton.scale(to: CGSize(width: 270, height: 152))
+                }else{
+                    unmuteButton.scale(to: CGSize(width: 375, height: 152))
+                }
             }
         }
     }
@@ -297,6 +334,13 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
             
             if nodesArray.first?.name == "ResetNode" {
                 resetLabel.scale(to: CGSize(width: 256, height: 130))
+            }
+            if nodesArray.first?.name == "MuteNode" {
+                if(muteButton.isHidden){
+                    muteButton.scale(to: CGSize(width: 300, height: 168))
+                }else{
+                    unmuteButton.scale(to: CGSize(width: 415, height: 168))
+                }
             }
         }
     }
@@ -326,6 +370,21 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
                     if let vc = self.view?.window?.rootViewController {
                         vc.present(alert, animated: true, completion: nil)
                     }
+                }
+            }
+            if nodesArray.first?.name == "MuteNode" { //click unmute
+                if(muteButton.isHidden){
+                    muteButton.scale(to: CGSize(width: 300, height: 168))
+                    muteButton.isHidden = false
+                    unmuteButton.isHidden = true
+                    mute.set(false, forKey: "isMute")
+                    print("not mute")
+                }else{
+                    unmuteButton.scale(to: CGSize(width: 415, height: 168))
+                    muteButton.isHidden = true
+                    unmuteButton.isHidden = false
+                    mute.set(true, forKey: "isMute")
+                    print("mute")
                 }
             }
         }
