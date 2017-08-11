@@ -73,6 +73,24 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
     var arrayMinutes = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"]
     var amPm = ["AM","PM"]
     
+    func quickActionStart(){
+        if(isRecordingSleep){
+            monitoringAlertS(title: "Oops", message: "You are already recording!", okTitle: "Ok")
+        }
+        else{
+            monitoringAlert(title: "Hey", message: "Do you want to start recording your sleep?", cancelTitle: "No", okTitle: "Yes")
+        }
+    }
+    
+    func quickActionStop(){
+        if(isRecordingSleep){
+            monitoringAlert(title: "Hey", message: "Do you want to stop recording your sleep?" , cancelTitle: "No", okTitle: "Yes")
+        }
+        else{
+            monitoringAlertS(title: "Oops", message: "You are not currently recording", okTitle: "Ok")
+        }
+    }
+    
     func showView(){
         self.view?.addSubview(sleepInputScreen)
         self.view?.addSubview(sleepInputView)
@@ -580,6 +598,7 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
             adultLabel.isHidden = true
         }
         playViewController.checkNameLabel(namelabel: namelabel)
+        
     }
     
     func resetTimer(){
@@ -694,7 +713,6 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
                 else{
                     monitoringAlertS(title: "Oops", message: "You are not currently recording", okTitle: "Ok")
                 }
-                
             }
         }
     }
