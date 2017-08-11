@@ -24,8 +24,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let mute : UserDefaults = UserDefaults.standard
     
-    
-    
     var widthFrame : UInt32 = 0
     var halfWidthFrame : UInt32 = 0
     var heightFrame : UInt32 = 0
@@ -117,10 +115,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func swipeLeft(_ gestureRecognizer: UITapGestureRecognizer){
         car.run(left)
+        print("Left")
     }
     
     func swipeRight(_ gestureRecognizer: UITapGestureRecognizer){
         car.run(right)
+        print("Right")
     }
     
     func addLeftWall(){
@@ -257,14 +257,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         highScoreDefault.set(0, forKey: "HighScore")
     }
     
+    func isMute() ->Bool{
+        return mute.bool(forKey: "isMute")
+    }
+    
+    func setMute(muteBool : Bool){
+        mute.set(muteBool, forKey: "isMute")
+    }
+    
     override func didMove(to view: SKView) {
-        
-        let swLeft:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(_:)))
-        let swRight:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight(_:)))
         
         physicsWorld.gravity = CGVector.zero
         physicsWorld.contactDelegate = self
         
+        let swLeft:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(_:)))
+        let swRight:UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight(_:)))
         swLeft.direction = .left
         view.addGestureRecognizer(swLeft)
         swRight.direction = .right
@@ -319,10 +326,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
 
-        if(!mute.bool(forKey: "isMute")){
-            playViewController.playMusic(file: "GameContinueSound")
-            playViewController.setLoops(loops: -1)
-        }
+        self.playViewController.playMusic(file: "GameContinueSound")
+        self.playViewController.setLoops(loops: -1)
         
         if(highScoreDefault.value(forKey: "HighScore") != nil){
             highScore = highScoreDefault.value(forKey: "HighScore") as! NSInteger!
@@ -361,6 +366,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         timeLabel.textAlignment = NSTextAlignment.right
         highScoreLabel.textAlignment = NSTextAlignment.right
         zCountLabel.textAlignment = NSTextAlignment.right
+        
+        if(isMute()/*!mute.bool(forKey: "isMute")*/){
+            self.playViewController.setVolume(volume: 00)
+        }
         
         zSprites = [zSpriteRandom1, zSpriteRandom2, zSpriteRandom3, zSpriteRandom4]
         obstacles = [obstacle1,obstacle2,obstacle3,obstacle4]

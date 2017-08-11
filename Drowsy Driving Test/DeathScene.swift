@@ -24,6 +24,7 @@ class DeathScene: SKScene {
     var popUpLabel = UILabel()
     var dismissPopUp = UILabel()
     var dismissPopUpNode = UIButton()
+    var popUpHandle = UIView()
     
     var gameScene = GameScene()
     var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
@@ -66,17 +67,10 @@ class DeathScene: SKScene {
         self.popUp.addSubview(popUpView)
         self.popUp.addSubview(popUpLabel)
         self.popUp.addSubview(dismissPopUpNode)
+        self.popUp.addSubview(popUpHandle)
         
         UIView.animate(withDuration: 0.8, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: { () -> Void in
-//
-//            self.blur.frame = CGRect(x: self.blur.frame.origin.x, y: self.blur.frame.origin.y + 1000, width: self.blur.frame.size.width, height: self.blur.frame.size.height)
-//
-            self.popUp.frame = CGRect(x: self.popUp.frame.origin.x, y: self.popUp.frame.origin.y + self.popUp.frame.height, width: self.popUp.frame.size.width, height: self.popUp.frame.size.height)
-//
-//            self.popUpLabel.frame = CGRect(x: self.popUpLabel.frame.origin.x, y: self.popUpLabel.frame.origin.y + 1000, width: self.popUpLabel.frame.size.width, height: self.popUpLabel.frame.size.height)
-//
-//            self.dismissPopUpNode.frame = CGRect(x: self.dismissPopUpNode.frame.origin.x, y: self.dismissPopUpNode.frame.origin.y + 1000, width: self.dismissPopUpNode.frame.size.width, height: self.dismissPopUpNode.frame.size.height)
-//
+            self.popUp.frame = CGRect(x: self.popUp.frame.origin.x, y: self.popUp.frame.origin.y + ((self.popUp.frame.height)*2), width: self.popUp.frame.size.width, height: self.popUp.frame.size.height)
         }, completion: { (finished) -> Void in
             print(self.popUp.center)
         })
@@ -86,21 +80,9 @@ class DeathScene: SKScene {
         print("Dismissed")
         
         UIView.animate(withDuration: 0.8, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: { () -> Void in
-//
-//            self.blur.frame = CGRect(x: self.blur.frame.origin.x, y: -1000, width: self.blur.frame.size.width, height: self.blur.frame.size.height)
-//
             self.popUp.frame = CGRect(x: self.popUp.frame.origin.x, y: self.popUp.frame.origin.y - self.popUp.frame.height, width: self.popUp.frame.size.width, height: self.popUp.frame.size.height)
-//
-//            self.popUpLabel.frame = CGRect(x: self.popUpLabel.frame.origin.x, y: -1000, width: self.popUpLabel.frame.size.width, height: self.popUpLabel.frame.size.height)
-//
-//            self.dismissPopUpNode.frame = CGRect(x: self.dismissPopUpNode.frame.origin.x, y: -1000, width: self.dismissPopUpNode.frame.size.width, height: self.dismissPopUpNode.frame.size.height)
-            
         }, completion: { (finished) -> Void in
             self.popUp.removeFromSuperview()
-//            self.popUp.blur.removeFromSuperview()
-//            self.popUp.popUpView.removeFromSuperview()
-//            self.popUp.popUpLabel.removeFromSuperview()
-//            self.popUp.dismissPopUpNode.removeFromSuperview()
             self.showLabels()
         })
     }
@@ -109,7 +91,6 @@ class DeathScene: SKScene {
         if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
             if(self.popUp.center.y <= 1001){
                 let translation = gestureRecognizer.translation(in: self.view)
-                // note: 'view' is optional and need to be unwrapped
                 self.popUp.center = CGPoint(x: self.popUp.center.x, y: self.popUp.center.y + translation.y)
                 gestureRecognizer.setTranslation(CGPoint.zero, in: self.view)
                 print(self.popUp.center)
@@ -129,46 +110,58 @@ class DeathScene: SKScene {
                 }
             }
         }
-        if(popUp.center.y <= 750){
+        if(gestureRecognizer.velocity(in: self.view).y <= -1400 || (gestureRecognizer.state == .ended && popUp.center.y <= 675)){
             dismiss()
         }
+//        if(gestureRecognizer.state == .ended && popUp.center.y <= 675){
+//            dismiss()
+//        }
+        if(gestureRecognizer.state == .ended && popUp.center.y >= 500){
+            UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: { () -> Void in
+                self.popUp.center = CGPoint(x: self.popUp.center.x, y: 1000.5 + -45)
+            }, completion: { (finished) -> Void in
+                print("reset3")
+            })
+        }
+    }
+
+    var gestureRecognizer: UIPanGestureRecognizer!
+    
+    func addGesture(){
+        gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
+        view?.addGestureRecognizer(gestureRecognizer)
+    }
+    
+    func removeGesture(){
+        view?.removeGestureRecognizer(gestureRecognizer)
     }
     
     override func didMove(to view: SKView) {
-        let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePan))
-        view.addGestureRecognizer(gestureRecognizer)
         
-        print("")
-        print("")
-        print("")
-        print("x:")
-        print((self.view?.center.x)!)
-        print("")
-        print("y:")
-        print((self.view?.center.y)!)
-        print("")
-        print("")
-        print("")
-        print((self.view?.center)!)
-        print("")
-        print("")
-        
+        self.addGesture()
+
         popUp.frame = (self.view?.bounds)!
-        popUp.center = CGPoint(x: ((self.view?.center.x)!), y: ((self.view?.center.y)! - (self.popUp.frame.height)))
+        popUp.center = CGPoint(x: ((self.view?.center.x)!), y: ((self.view?.center.y)! - (self.popUp.frame.height)) - (45))
         
         popUpView.layer.cornerRadius = 20
         popUpView.bounds = CGRect(x: 0, y: 0, width: 300, height: 180)
-        popUpView.center = CGPoint(x: ((self.popUp.center.x)), y: (self.popUp.center.y))
+        popUpView.center = CGPoint(x: ((self.popUp.center.x)), y: (self.popUp.center.y) + (45))
         popUpView.backgroundColor = UIColor.red
         popUpView.layer.opacity = 0.6
         
+        popUpHandle.layer.cornerRadius = 5
+        popUpHandle.bounds = CGRect(x: 0, y: 0, width: 70, height: 5)
+        popUpHandle.center = CGPoint(x: ((self.popUp.center.x)), y: (self.popUp.center.y) + (350))
+        popUpHandle.backgroundColor = UIColor.black
+        popUpHandle.layer.opacity = 0.6
+        
         blur.frame = (self.popUp.bounds)
-        blur.center = CGPoint(x: ((self.popUp.center.x)), y: (self.popUp.center.y))
+        blur.center = CGPoint(x: ((self.popUp.center.x)), y: (self.popUp.center.y) + (45))
         
         dismissPopUpNode.bounds = CGRect(x: 0, y: 0, width: 170, height: 20)
-        dismissPopUpNode.center = CGPoint(x: ((self.popUp.center.x)), y: (self.popUp.center.y) + 50)
+        dismissPopUpNode.center = CGPoint(x: ((self.popUp.center.x)), y: (self.popUp.center.y) + (95))
         dismissPopUpNode.setTitle("Swipe Up To Dismiss", for: .normal)
-        //dismissPopUpNode.addTarget(self, action: #selector(self.dismiss(_:)), for: UIControlEvents.touchUpInside)
+        //dismissPopUpNode.addTarget(self, action: #selector(self.tempDismiss(_:)), for: UIControlEvents.touchUpInside)
         dismissPopUpNode.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
         dismissPopUpNode.setTitleColor(UIColor.black, for: UIControlState.normal)
     
@@ -178,7 +171,7 @@ class DeathScene: SKScene {
         popUpLabel.numberOfLines = 0
         popUpLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 15)
         popUpLabel.bounds = CGRect(x: 0, y: 0, width: 275, height: 150)
-        popUpLabel.center = CGPoint(x: ((self.popUp.center.x)), y: (self.popUp.center.y) - 30)
+        popUpLabel.center = CGPoint(x: ((self.popUp.center.x)), y: (self.popUp.center.y) + (15))
 
         zCountLabel = UILabel(frame: CGRect(x: self.frame.width/7.7, y: self.frame.height/7.1, width: 250, height: 40))
         
@@ -190,7 +183,6 @@ class DeathScene: SKScene {
         factBar = self.childNode(withName: "factBar") as! SKSpriteNode
         
         playAgainButtonNode.isHidden = true
-        
         
         sleepFactz = ["Sleep deprivation can result in obesity and poor diet quality.", "Sleep deprivation causes heart disease.", "Sleep deprivation increases the risk of diabetes.", "Not getting enough sleep can result in rash decision making.", "Drowsy driving can be as dangerous as drunk driving.", "Getting more sleep is proven to increase performance in school.", "Putting your phone away before bed will result in a much better sleep.", "Beauty Sleep is real; Going to bed earlier can improve your physical appearance.", "An average of 83,000 car crashes occur each year due to drowsy driving.", "Less than 30% of highschool students get sufficient sleep (8-10hrs).", "Humans are the only mammals that delay their sleep on purpose.", "Exercising on a regular basis makes it easier to fall asleep.", "12% of people dream in black and white.", "Sleep deprivation can kill you faster than food deprivaton.", "If falling asleep takes less than 10 minutes, chances are you are sleep deprived."]
         
@@ -236,9 +228,6 @@ class DeathScene: SKScene {
         let when = DispatchTime.now() + 0.5 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when) {
             self.showView()
-            self.showView()
-            print(self.popUp.center)
-            print("lolz")
         }
     }
     
@@ -278,6 +267,8 @@ class DeathScene: SKScene {
             let nodesArray = self.nodes(at: location)
             
             if nodesArray.first?.name == "PlayAgainNode" {
+                //self.view?.removeGestureRecognizer(gestureRecognizer)
+                self.removeGesture()
                 playAgain.scale(to: CGSize(width: 480, height: 140))
                 namelabel.isHidden = true
                 playViewController.tabBarController?.tabBar.isHidden = true

@@ -92,6 +92,10 @@ class PlayViewController: UIViewController, GKGameCenterControllerDelegate {
         audioPlayer.numberOfLoops = loops
     }
     
+    func setVolume(volume: Float){
+        audioPlayer.volume = volume
+    }
+    
     func getDefault() -> Int {
         return launchDefault.integer(forKey: "Launch")
     }

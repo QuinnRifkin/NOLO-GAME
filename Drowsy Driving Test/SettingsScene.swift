@@ -16,7 +16,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     let gameScene = GameScene()
     let gameViewController = GameViewController()
     let sleepScene = SleepScene()
-    let playViewController = PlayViewController()
+    var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
     
     var resetPulse = SKAction.sequence([SKAction.scale(by: 1.1, duration: 0.5), SKAction.wait(forDuration: 0.05), SKAction.scale(by: (1/1.1), duration: 0.5), SKAction.wait(forDuration: 0.05)])
     
@@ -64,10 +64,6 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     func getBirthYear() -> String {
         return welcomeScene.getBirthYear()
     }
-    
-    func getIsMute() ->Bool{
-        return gameScene.mute.bool(forKey: "isMute")
-    }
 
     override func didMove(to view: SKView) {
         
@@ -79,8 +75,13 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         
         muteButton = self.childNode(withName: "MuteButton") as! SKSpriteNode
         unmuteButton = self.childNode(withName: "UnmuteButton") as! SKSpriteNode
-        
-        unmuteButton.isHidden = true
+        if(gameScene.isMute()){
+            muteButton.isHidden = true
+            unmuteButton.isHidden = false
+        }else{
+            muteButton.isHidden = false
+            unmuteButton.isHidden = true
+        }
         
         //resetLabel.run(SKAction.repeatForever(resetPulse))
         
@@ -291,7 +292,6 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     }
     
     func stopMusic(){
-        //isMute = true
         playViewController.stopMusic()
         
     }
@@ -367,13 +367,13 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
                     muteButton.scale(to: CGSize(width: 150, height: 82))
                     muteButton.isHidden = false
                     unmuteButton.isHidden = true
-                    gameScene.mute.set(false, forKey: "isMute")
+                    gameScene.setMute(muteBool: false)  //.mute.set(false, forKey: "isMute")
                     print("not mute")
                 }else{
                     unmuteButton.scale(to: CGSize(width: 211, height: 82))
                     muteButton.isHidden = true
                     unmuteButton.isHidden = false
-                    gameScene.mute.set(true, forKey: "isMute")
+                    gameScene.setMute(muteBool: true)  //.mute.set(true, forKey: "isMute")
                     print("mute")
                 }
             }
