@@ -16,7 +16,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var highScore: Int = 0
     
     var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
-   // var settingsScene = SettingsScene()
     
     struct collisionType{
         static let carx : UInt32 = 1
@@ -115,9 +114,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var timeCartoon : SKSpriteNode!
     var scoreCartoon : SKSpriteNode!
     var highscoreCartoon : SKSpriteNode!
-    
-    
-    
+
     func swipeLeft(_ gestureRecognizer: UITapGestureRecognizer){
         car.run(left)
     }

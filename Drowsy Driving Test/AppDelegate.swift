@@ -17,6 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     var gameViewController:GameViewController!
     var playViewController:PlayViewController!
+    var sleepScene:SleepScene!
     
     var tabBarController: UITabBarController?
     
@@ -24,8 +25,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     var nightShiftBool = true
     
+    let startRec = UIMutableApplicationShortcutItem(type: "Start", localizedTitle: "Start Recording", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .play), userInfo: nil)
+    
+    let stopRec = UIMutableApplicationShortcutItem(type: "Stop", localizedTitle: "Stop Recording", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .prohibit), userInfo: nil)
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        application.shortcutItems = [startRec, stopRec]
+    
         UIApplication.shared.isIdleTimerDisabled = false
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
@@ -39,8 +46,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         UNUserNotificationCenter.current().delegate = self
 
         var nineComponents = DateComponents()
-        nineComponents.hour = 9
-        nineComponents.minute = 48
+        nineComponents.hour = 21
+        nineComponents.minute = 0
 
         let nightShiftContent = UNMutableNotificationContent()
         nightShiftContent.title = "Hey there"
@@ -50,11 +57,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         let nightShiftCategory = UNNotificationCategory(identifier: "nightShiftCategory", actions: [noThanks, goToSettings], intentIdentifiers: [], options: [])
         nightShiftContent.categoryIdentifier = "nightShiftCategory"
         UNUserNotificationCenter.current().setNotificationCategories([nightShiftCategory])
-        //let nightShiftTrigger = UNCalendarNotificationTrigger(dateMatching: nineComponents, repeats: true)
-        let nightShiftTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
+        let nightShiftTrigger = UNCalendarNotificationTrigger(dateMatching: nineComponents, repeats: true)
+        //let nightShiftTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
         let nightShiftRequest = UNNotificationRequest(identifier: "nightShift", content: nightShiftContent, trigger: nightShiftTrigger)
         
         UNUserNotificationCenter.current().add(nightShiftRequest) { (error) in
+            print(error ?? "Notification failed")
+        }
+        
+        var eightComponents = DateComponents()
+        eightComponents.hour = 8
+        eightComponents.minute = 0
+        
+        let recordingContent = UNMutableNotificationContent()
+        recordingContent.title = "Hey there"
+        recordingContent.body = "You should turn on Night Shift"
+        let oK = UNNotificationAction(identifier: "Ok", title: "Ok", options: .destructive)
+        let goToApp = UNNotificationAction(identifier: "goToApp", title: "Go to App", options: .foreground)
+        let recordingCategory = UNNotificationCategory(identifier: "recordingCategory", actions: [oK, goToApp], intentIdentifiers: [], options: [])
+        recordingContent.categoryIdentifier = "recordingCategory"
+        UNUserNotificationCenter.current().setNotificationCategories([recordingCategory])
+        let recordingTrigger = UNCalendarNotificationTrigger(dateMatching: eightComponents, repeats: true)
+        //let nightShiftTrigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
+        let recordingRequest = UNNotificationRequest(identifier: "recording", content: recordingContent, trigger: recordingTrigger)
+        
+        UNUserNotificationCenter.current().add(recordingRequest) { (error) in
             print(error ?? "Notification failed")
         }
         
@@ -93,13 +120,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        if (response.actionIdentifier == "noThanks"){
+        if(response.actionIdentifier == "noThanks"){
             print("No Thanks")
-        }else{
+        }else if(response.actionIdentifier == "goToSettings"){
             print("Go To Settings")
             UIApplication.shared.open(URL(string:"App-Prefs:root=General")!, options: [:], completionHandler: nil)
+        }else if(response.actionIdentifier == "Ok"){
+            print("Ok")
+            UIApplication.shared.open(URL(string:"App-Prefs:root=General")!, options: [:], completionHandler: nil)
+        }else if(response.actionIdentifier == "goToApp"){
+            print("Go To App")
         }
     }
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        switch(shortcutItem){
+            case startRec:
+                print ("Started")
+                do{sleepScene.quickActionStart()}
+                catch{ print("failed :()")}
+            case stopRec:
+                print ("Stopped")
+                
+                do{sleepScene.quickActionStop()}
+                catch{ print("failed :()")}
+            default:
+                print("nothing pressed")
+        }
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -129,7 +178,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         self.window?.rootViewController = storyboard.instantiateInitialViewController()
     }
     
-    
     func checkUserDefault() -> Int{
         var user : Int
         if(userDefault.value(forKey: "Launch") == nil || userDefault.integer(forKey: "Launch" ) == 0 ){
@@ -141,46 +189,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         return user
     }
-    
-//    func registerforDeviceLockNotification() {
-//        //Screen lock notifications
-//        CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),     //center
-//            Unmanaged.passUnretained(self).toOpaque(),     // observer
-//            displayStatusChangedCallback,     // callback
-//            "com.apple.springboard.lockcomplete" as CFString,     // event name
-//            nil,     // object
-//            .deliverImmediately)
-//        CFNotificationCenterAddObserver(CFNotificationCenterGetDarwinNotifyCenter(),     //center
-//            Unmanaged.passUnretained(self).toOpaque(),     // observer
-//            displayStatusChangedCallback,     // callback
-//            "com.apple.springboard.lockstate" as CFString,    // event name
-//            nil,     // object
-//            .deliverImmediately)
-//    }
-//    
-//    private let displayStatusChangedCallback: CFNotificationCallback = { _, cfObserver, cfName, _, _ in
-//        guard let lockState = cfName?.rawValue as String? else {
-//            return
-//        }
-//        
-//        let catcher = Unmanaged<AppDelegate>.fromOpaque(UnsafeRawPointer(OpaquePointer(cfObserver)!)).takeUnretainedValue()
-//        catcher.displayStatusChanged(lockState)
-//    }
-//    
-//    private func displayStatusChanged(_ lockState: String) {
-//        // the "com.apple.springboard.lockcomplete" notification will always come after the "com.apple.springboard.lockstate" notification
-//        print("Darwin notification NAME = \(lockState)")
-//        if (lockState == "com.apple.springboard.lockcomplete") {
-//            print("DEVICE LOCKED")
-//        } else {
-//            print("LOCK STATUS CHANGED")
-//        }
-//    }
-    
-    //let nc = NotificationCenter.default
-    //nc.addObserver(forName:Notification.Name(rawValue:"MyNotification"),
-    //object:nil, queue:nil,
-    //using:catchNotification)
-
 }
 
