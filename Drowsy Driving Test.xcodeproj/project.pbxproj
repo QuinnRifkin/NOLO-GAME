@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F03A7251F3DFCB3009F0CF3 /* BarGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F03A7241F3DFCB3009F0CF3 /* BarGraph.swift */; };
 		1F58E01C1F13BCE6007193F3 /* PressStart2P.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F58E01B1F13BCE6007193F3 /* PressStart2P.ttf */; };
 		1F58E0201F13C394007193F3 /* Gradius.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 1F58E01F1F13C394007193F3 /* Gradius.TTF */; };
 		1F58E0281F1D06E1007193F3 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F58E0271F1D06E1007193F3 /* MenuViewController.swift */; };
@@ -44,6 +45,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F03A7241F3DFCB3009F0CF3 /* BarGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarGraph.swift; sourceTree = "<group>"; };
 		1F58E01B1F13BCE6007193F3 /* PressStart2P.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PressStart2P.ttf; sourceTree = "<group>"; };
 		1F58E01F1F13C394007193F3 /* Gradius.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = Gradius.TTF; sourceTree = "<group>"; };
 		1F58E0271F1D06E1007193F3 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				1F58E0391F1E46A3007193F3 /* SleepViewController.swift */,
 				1FF69D4F1EF41AFE006140E2 /* GameViewController.swift */,
 				1FF69D561EF41AFE006140E2 /* LaunchScreen.storyboard */,
+				1F03A7241F3DFCB3009F0CF3 /* BarGraph.swift */,
 				1FF69D711EFAAF49006140E2 /* SparkEmitter.sks */,
 				1F7230B81EFC3EE8001C62F4 /* Assets.xcassets */,
 				1FB590241F02F67B0097F7D1 /* GameStartSound.mp3 */,
@@ -281,6 +284,7 @@
 				1F5CE6C91EFD66E900002231 /* LearnMoreScene.swift in Sources */,
 				1F58E02A1F1D3F25007193F3 /* LearnMoreViewController.swift in Sources */,
 				1FF69D501EF41AFE006140E2 /* GameViewController.swift in Sources */,
+				1F03A7251F3DFCB3009F0CF3 /* BarGraph.swift in Sources */,
 				1F58E03A1F1E46A3007193F3 /* SleepViewController.swift in Sources */,
 				1FF69D6C1EFAA377006140E2 /* MenuScene.swift in Sources */,
 				1FF69D481EF41AFE006140E2 /* AppDelegate.swift in Sources */,
