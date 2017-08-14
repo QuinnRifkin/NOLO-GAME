@@ -88,13 +88,21 @@ class BarGraph: UIView {
         
         now = Date()
         
-        duration(start: sundayStart ?? now, end: sundayEnd ?? now, day: sunday, xposition: -120, dayName: "sunday")
-        duration(start: mondayStart ?? now, end: mondayEnd ?? now, day: monday, xposition: -80, dayName: "monday")
-        duration(start: tuesdayStart ?? now, end: tuesdayEnd ?? now, day: tuesday, xposition: -40, dayName: "tuesday")
-        duration(start: wednesdayStart ?? now, end: wednesdayEnd ?? now, day: wednesday, xposition: 0, dayName: "wednesday")
-        duration(start: thursdayStart ?? now, end: thursdayEnd ?? now, day: thursday, xposition: 40, dayName: "thursday")
-        duration(start: fridayStart ?? now, end: fridayEnd ?? now, day: friday, xposition: 80, dayName: "friday")
-        duration(start: saturdayStart ?? now, end: saturdayEnd ?? now, day: saturday, xposition: 120, dayName: "saturday")
+//        duration(start: sundayStart ?? now, end: sundayEnd ?? now, day: sunday, xposition: -120, dayName: "sunday")
+//        duration(start: mondayStart ?? now, end: mondayEnd ?? now, day: monday, xposition: -80, dayName: "monday")
+//        duration(start: tuesdayStart ?? now, end: tuesdayEnd ?? now, day: tuesday, xposition: -40, dayName: "tuesday")
+//        duration(start: wednesdayStart ?? now, end: wednesdayEnd ?? now, day: wednesday, xposition: 0, dayName: "wednesday")
+//        duration(start: thursdayStart ?? now, end: thursdayEnd ?? now, day: thursday, xposition: 40, dayName: "thursday")
+//        duration(start: fridayStart ?? now, end: fridayEnd ?? now, day: friday, xposition: 80, dayName: "friday")
+//        duration(start: saturdayStart ?? now, end: saturdayEnd ?? now, day: saturday, xposition: 120, dayName: "saturday")
+        
+        tester(day: sunday, xposition: -120, rawValue: 650, color: .green)
+        tester(day: monday, xposition: -80, rawValue: 400, color: .red)
+        tester(day: tuesday, xposition: -40, rawValue: 300, color: .red)
+        tester(day: wednesday, xposition: 0, rawValue: 700, color: .green)
+        tester(day: thursday, xposition: 40, rawValue: 550, color: .green)
+        tester(day: friday, xposition: 80, rawValue: 600, color: .green)
+        tester(day: saturday, xposition: 120, rawValue: 400, color: .red)
         
         self.graph.addSubview(sunday)
         self.graph.addSubview(monday)
@@ -149,61 +157,68 @@ class BarGraph: UIView {
         label.textAlignment = .center
     }
     
-    func reLoad(){
-        self.sunday.removeFromSuperview()
-        self.monday.removeFromSuperview()
-        self.tuesday.removeFromSuperview()
-        self.wednesday.removeFromSuperview()
-        self.thursday.removeFromSuperview()
-        self.friday.removeFromSuperview()
-        self.saturday.removeFromSuperview()
-        
-        duration(start: sundayStart ?? now, end: sundayEnd ?? now, day: sunday, xposition: -120, dayName: "sunday")
-        duration(start: mondayStart ?? now, end: mondayEnd ?? now, day: monday, xposition: -80, dayName: "monday")
-        duration(start: tuesdayStart ?? now, end: tuesdayEnd ?? now, day: tuesday, xposition: -40, dayName: "tuesday")
-        duration(start: wednesdayStart ?? now, end: wednesdayEnd ?? now, day: wednesday, xposition: 0, dayName: "wednesday")
-        duration(start: thursdayStart ?? now, end: thursdayEnd ?? now, day: thursday, xposition: 40, dayName: "thursday")
-        duration(start: fridayStart ?? now, end: fridayEnd ?? now, day: friday, xposition: 80, dayName: "friday")
-        duration(start: saturdayStart ?? now, end: saturdayEnd ?? now, day: saturday, xposition: 120, dayName: "saturday")
-        
-        self.graph.addSubview(sunday)
-        self.graph.addSubview(monday)
-        self.graph.addSubview(tuesday)
-        self.graph.addSubview(wednesday)
-        self.graph.addSubview(thursday)
-        self.graph.addSubview(friday)
-        self.graph.addSubview(saturday)
-        self.graph.addSubview(target)
+//    func reLoad(){
+//        self.sunday.removeFromSuperview()
+//        self.monday.removeFromSuperview()
+//        self.tuesday.removeFromSuperview()
+//        self.wednesday.removeFromSuperview()
+//        self.thursday.removeFromSuperview()
+//        self.friday.removeFromSuperview()
+//        self.saturday.removeFromSuperview()
+//
+//        duration(start: sundayStart ?? now, end: sundayEnd ?? now, day: sunday, xposition: -120, dayName: "sunday")
+//        duration(start: mondayStart ?? now, end: mondayEnd ?? now, day: monday, xposition: -80, dayName: "monday")
+//        duration(start: tuesdayStart ?? now, end: tuesdayEnd ?? now, day: tuesday, xposition: -40, dayName: "tuesday")
+//        duration(start: wednesdayStart ?? now, end: wednesdayEnd ?? now, day: wednesday, xposition: 0, dayName: "wednesday")
+//        duration(start: thursdayStart ?? now, end: thursdayEnd ?? now, day: thursday, xposition: 40, dayName: "thursday")
+//        duration(start: fridayStart ?? now, end: fridayEnd ?? now, day: friday, xposition: 80, dayName: "friday")
+//        duration(start: saturdayStart ?? now, end: saturdayEnd ?? now, day: saturday, xposition: 120, dayName: "saturday")
+//
+//        self.graph.addSubview(sunday)
+//        self.graph.addSubview(monday)
+//        self.graph.addSubview(tuesday)
+//        self.graph.addSubview(wednesday)
+//        self.graph.addSubview(thursday)
+//        self.graph.addSubview(friday)
+//        self.graph.addSubview(saturday)
+//        self.graph.addSubview(target)
+//    }
+    
+    func tester(day: UIView, xposition: CGFloat, rawValue: Int, color: UIColor){
+        day.backgroundColor = color
+        day.layer.cornerRadius = 3
+        day.bounds = CGRect(x: 0, y: 0, width: 30, height: ((rawValue)/10))
+        day.center = CGPoint(x: (150 + (xposition)), y: (50 - ((day.frame.height)/2) + (44)))
     }
     
-    func updateTarget(){
-        if(isAdult){
-            target.center = CGPoint(x: 150, y: 55)
-        }else{
-            target.center = CGPoint(x: 150, y: 35)
-        }
-        ageAdj(day: sunday, dayName: "sunday")
-        ageAdj(day: monday, dayName: "monday")
-        ageAdj(day: tuesday, dayName: "tuesday")
-        ageAdj(day: wednesday, dayName: "wednesday")
-        ageAdj(day: thursday, dayName: "thursday")
-        ageAdj(day: friday, dayName: "friday")
-        ageAdj(day: saturday, dayName: "saturday")
-    }
-    
-    func ageAdj(day: UIView, dayName: String){
-        if(isAdult ?? false){
-            if(savedValues.integer(forKey: dayName) >= 450){
-                day.backgroundColor = .green
-            }else{
-                day.backgroundColor = .red
-            }
-        }else{
-            if(savedValues.integer(forKey: dayName) >= 600){
-                day.backgroundColor = .green
-            }else{
-                day.backgroundColor = .red
-            }
-        }
-    }
+//    func updateTarget(){
+//        if(isAdult){
+//            target.center = CGPoint(x: 150, y: 55)
+//        }else{
+//            target.center = CGPoint(x: 150, y: 35)
+//        }
+//        ageAdj(day: sunday, dayName: "sunday")
+//        ageAdj(day: monday, dayName: "monday")
+//        ageAdj(day: tuesday, dayName: "tuesday")
+//        ageAdj(day: wednesday, dayName: "wednesday")
+//        ageAdj(day: thursday, dayName: "thursday")
+//        ageAdj(day: friday, dayName: "friday")
+//        ageAdj(day: saturday, dayName: "saturday")
+//    }
+//
+//    func ageAdj(day: UIView, dayName: String){
+//        if(isAdult ?? false){
+//            if(savedValues.integer(forKey: dayName) >= 450){
+//                day.backgroundColor = .green
+//            }else{
+//                day.backgroundColor = .red
+//            }
+//        }else{
+//            if(savedValues.integer(forKey: dayName) >= 600){
+//                day.backgroundColor = .green
+//            }else{
+//                day.backgroundColor = .red
+//            }
+//        }
+//    }
 }

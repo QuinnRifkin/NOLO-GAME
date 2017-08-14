@@ -233,7 +233,7 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         default:
             print("graph entry failed")
         }
-        barGraph.reLoad()
+        //barGraph.reLoad()
         sleepViewController.saveSleepAnalysis(startDate: startDate, endDate: endDate)
         goodBadSleepDisplay()
         startDate = Date()
@@ -631,7 +631,7 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
             adultLabel.isHidden = true
             barGraph.isAdult = false
         }
-        barGraph.updateTarget()
+        //barGraph.updateTarget()
         playViewController.checkNameLabel(namelabel: namelabel)
     }
     
@@ -679,7 +679,7 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
             default:
                 print("graph entry failed")
             }
-            self.barGraph.reLoad()
+            //self.barGraph.reLoad()
         }))
         
         if let vc = self.view?.window?.rootViewController {
