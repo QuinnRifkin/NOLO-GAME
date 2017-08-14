@@ -25,14 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     var nightShiftBool = true
     
-    let startRec = UIMutableApplicationShortcutItem(type: "Start", localizedTitle: "Start Recording", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .play), userInfo: nil)
-    
-    let stopRec = UIMutableApplicationShortcutItem(type: "Stop", localizedTitle: "Stop Recording", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .prohibit), userInfo: nil)
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        application.shortcutItems = [startRec, stopRec]
-    
         UIApplication.shared.isIdleTimerDisabled = false
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
@@ -71,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         let recordingContent = UNMutableNotificationContent()
         recordingContent.title = "Hey there"
-        recordingContent.body = "You should turn on Night Shift"
+        recordingContent.body = "Make sure you stop recording your sleep. If you forgot, enter it manually "
         let oK = UNNotificationAction(identifier: "Ok", title: "Ok", options: .destructive)
         let goToApp = UNNotificationAction(identifier: "goToApp", title: "Go to App", options: .foreground)
         let recordingCategory = UNNotificationCategory(identifier: "recordingCategory", actions: [oK, goToApp], intentIdentifiers: [], options: [])
@@ -127,7 +121,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             UIApplication.shared.open(URL(string:"App-Prefs:root=General")!, options: [:], completionHandler: nil)
         }else if(response.actionIdentifier == "Ok"){
             print("Ok")
-            UIApplication.shared.open(URL(string:"App-Prefs:root=General")!, options: [:], completionHandler: nil)
         }else if(response.actionIdentifier == "goToApp"){
             print("Go To App")
         }

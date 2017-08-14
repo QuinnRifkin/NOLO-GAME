@@ -17,6 +17,8 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
     var sleepViewController = SleepViewController()
     var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
     
+    let barGraph = BarGraph()
+    
     var goodBad = UserDefaults.standard
     
     var isPlaying = false
@@ -48,10 +50,10 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
     
     var sleepLabel: UILabel!
     
-    var startHour = "12"
+    var startHour = "10"
     var startMin = "00"
-    var startAmPm = "AM"
-    var endHour = "12"
+    var startAmPm = "PM"
+    var endHour = "10"
     var endMin = "00"
     var endAmPm = "AM"
     
@@ -67,7 +69,7 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
     let toolbarHours = UIToolbar(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
     let toolbarMinutes = UIToolbar(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
     
-    var timeDatabase = [["0","1","2","3","4","5","6","7","8","9","10","11","12"],[":"],["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"],["AM","PM"]]
+    var timeDatabase = [["1","2","3","4","5","6","7","8","9","10","11","12"],[":"],["00","01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"],["AM","PM"]]
     
     var arrayHours = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"]
     var arrayMinutes = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59"]
@@ -189,11 +191,7 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
             vc.present(alert, animated: true, completion: nil)
         }
     }
-    
-    func alreadyEntered(){
-        monitoringAlertS(title: "Sorry", message: "Seems you have already made a sleep entry today, come back tomorrow to add more data. To remove todays data, visit the sleep app", okTitle: "Ok")
-    }
-    
+
     func preSaveCleaning(){
         if(startAmPm == "PM"){
             startDateComponents.hour = Int(startHour)! + 12
@@ -210,6 +208,32 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         endDateComponents.minute = Int(endMin)
         startDate = calendar.date(from: startDateComponents)!
         endDate = calendar.date(from: endDateComponents)!
+        switch(startDateComponents.weekday){
+        case 1?:
+            barGraph.sundayStart = startDate
+            barGraph.sundayEnd = endDate
+        case 2?:
+            barGraph.mondayStart = startDate
+            barGraph.mondayEnd = endDate
+        case 3?:
+            barGraph.tuesdayStart = startDate
+            barGraph.tuesdayEnd = endDate
+        case 4?:
+            barGraph.wednesdayStart = startDate
+            barGraph.wednesdayEnd = endDate
+        case 5?:
+            barGraph.thursdayStart = startDate
+            barGraph.thursdayEnd = endDate
+        case 6?:
+            barGraph.fridayStart = startDate
+            barGraph.fridayEnd = endDate
+        case 7?:
+            barGraph.saturdayStart = startDate
+            barGraph.saturdayEnd = endDate
+        default:
+            print("graph entry failed")
+        }
+        barGraph.reLoad()
         sleepViewController.saveSleepAnalysis(startDate: startDate, endDate: endDate)
         goodBadSleepDisplay()
         startDate = Date()
@@ -244,13 +268,15 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
     }
 
     override func didMove(to view: SKView) {
-
-        let currentComponents = calendar.dateComponents([.year, .month, .day], from: now)
+        
+        let currentComponents = calendar.dateComponents([.year, .month, .day, .weekday], from: now)
         
         let currentYear = currentComponents.year!
         let currentMonth = currentComponents.month!
         let currentDay = currentComponents.day!
+        let currentWeekDay = currentComponents.weekday!
         
+        startDateComponents.weekday = currentWeekDay
         startDateComponents.year = currentYear
         if(currentDay == 1){
             startDateComponents.month = currentMonth - 1
@@ -281,6 +307,9 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         print(currentDay)
         
         self.view?.frame = CGRect(x: 0, y: 0, width: 375, height: 667)
+        //barGraph.centerFrame = CGPoint(x: 180, y: 330)
+        print((self.view?.center)!)
+        self.view?.addSubview(barGraph)
         
         sleepInputScreen.frame = (self.view?.bounds)!
         sleepInputScreen.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (1000))
@@ -307,6 +336,9 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         startTimeInput.inputView = sleepInputKeyboardStart
         sleepInputKeyboardStart.delegate = self
         sleepInputKeyboardStart.dataSource = self
+        sleepInputKeyboardStart.selectRow(33, inComponent: 0, animated: false)
+        sleepInputKeyboardStart.selectRow(180, inComponent: 2, animated: false)
+        sleepInputKeyboardStart.selectRow(1, inComponent: 3, animated: false)
         
         endTimeInput.bounds = CGRect(x: 0, y: 0, width: 180, height: 40)
         endTimeInput.center = CGPoint(x: ((self.view?.center.x)! - (0)), y: ((self.view?.center.y)! - (975)))
@@ -324,6 +356,8 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         endTimeInput.inputView = sleepInputKeyboardEnd
         sleepInputKeyboardEnd.delegate = self
         sleepInputKeyboardEnd.dataSource = self
+        sleepInputKeyboardEnd.selectRow(33, inComponent: 0, animated: false)
+        sleepInputKeyboardEnd.selectRow(180, inComponent: 2, animated: false)
         
         submit.bounds = CGRect(x: 0, y: 0, width: 70, height: 20)
         submit.center = CGPoint(x: ((self.view?.center.x)! + (50)), y: (self.view?.center.y)! - (920))
@@ -389,9 +423,11 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         if(thisYear - birthYear >= 19){
             adultLabel.isHidden = false
             teenLabel.isHidden = true
+            barGraph.isAdult = true
         }else{
             teenLabel.isHidden = false
             adultLabel.isHidden = true
+            barGraph.isAdult = false
         }
         
         let name = String(welcomeScene.getName())
@@ -439,25 +475,15 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if(component == 1){
             return 1
-        } else {
-        return timeDatabase[component].count
+        }else if(component == 3){
+            return timeDatabase[component].count
+        }else{
+            return (timeDatabase[component].count)*5
         }
-        //if(pickerView == sleepInputKeyboardStart){
-            //return arrayHours.count
-        //} else if(pickerView == sleepInputKeyboardEnd){
-            //return arrayMinutes.count
-        //}
-        //return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return timeDatabase[component][row]
-        //if(pickerView == sleepInputKeyboardStart){
-        //    return arrayHours[row]
-        //} else if(pickerView == sleepInputKeyboardEnd){
-        //    return arrayMinutes[row]
-        //}
-        //return ""
+        return timeDatabase[component][row%timeDatabase[component].count]
     }
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
@@ -471,7 +497,7 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
             pickerLabel?.textAlignment = NSTextAlignment.center
         }
         
-        pickerLabel?.text = timeDatabase[component][row]
+        pickerLabel?.text = timeDatabase[component][row%timeDatabase[component].count]
         
         return pickerLabel!;
     }
@@ -492,25 +518,24 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         if(pickerView == sleepInputKeyboardStart){
             switch(component){
                 case 0:
-                    startHour = timeDatabase[component][pickerView.selectedRow(inComponent: 0)]
+                    startHour = timeDatabase[component][pickerView.selectedRow(inComponent: 0)%timeDatabase[component].count]
                 case 2:
-                    startMin = timeDatabase[component][pickerView.selectedRow(inComponent: 2)]
+                    startMin = timeDatabase[component][pickerView.selectedRow(inComponent: 2)%timeDatabase[component].count]
                 case 3:
-                    startAmPm = timeDatabase[component][pickerView.selectedRow(inComponent: 3)]
+                    startAmPm = timeDatabase[component][pickerView.selectedRow(inComponent: 3)%timeDatabase[component].count]
                 default: break
             }
             //inputHours = arrayHours[pickerView.selectedRow(inComponent: 0)]
         } else if(pickerView == sleepInputKeyboardEnd){
             switch(component){
             case 0:
-                endHour = timeDatabase[component][pickerView.selectedRow(inComponent: 0)]
+                endHour = timeDatabase[component][pickerView.selectedRow(inComponent: 0)%timeDatabase[component].count]
             case 2:
-                endMin = timeDatabase[component][pickerView.selectedRow(inComponent: 2)]
+                endMin = timeDatabase[component][pickerView.selectedRow(inComponent: 2)%timeDatabase[component].count]
             case 3:
-                endAmPm = timeDatabase[component][pickerView.selectedRow(inComponent: 3)]
+                endAmPm = timeDatabase[component][pickerView.selectedRow(inComponent: 3)%timeDatabase[component].count]
             default: break
             }
-            //inputMinutes = arrayMinutes[pickerView.selectedRow(inComponent: 0)]
         }
         startTimeInput.textAlignment = NSTextAlignment.center
         startTimeInput.text = startHour + ":" + startMin + " " + startAmPm
@@ -521,6 +546,13 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
     func textFieldDidBeginEditing(_ textField: UITextField) {
         moveTextField(textField: startTimeInput, moveDistace: -30, up: true)
         moveTextField(textField: endTimeInput, moveDistace: -30, up: true)
+        if(textField == startTimeInput){
+            startTimeInput.textAlignment = NSTextAlignment.center
+            startTimeInput.text = startHour + ":" + startMin + " " + startAmPm
+        }else if(textField == endTimeInput){
+            endTimeInput.textAlignment = NSTextAlignment.center
+            endTimeInput.text = endHour + ":" + endMin + " " + endAmPm
+        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -593,12 +625,14 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         if(thisYear - birthYear >= 19){
             adultLabel.isHidden = false
             teenLabel.isHidden = true
+            barGraph.isAdult = true
         }else{
             teenLabel.isHidden = false
             adultLabel.isHidden = true
+            barGraph.isAdult = false
         }
+        barGraph.updateTarget()
         playViewController.checkNameLabel(namelabel: namelabel)
-        
     }
     
     func resetTimer(){
@@ -609,16 +643,43 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         print(format.string(from: startDate))
         print(endDate)
         isPlaying = false
+        let weekdayComponents = calendar.dateComponents([.weekday], from: startDate)
         let alert = UIAlertController(title: "Just making sure", message: "Are you sure you want to make this entry? This will be added to your sleep data in the health app. \n\nStart time: " + format.string(from: startDate) + "\nEnd time: " + format.string(from: endDate), preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "No", style: UIAlertActionStyle.cancel, handler: nil))
         alert.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.destructive, handler: { action in
             do{
                 self.sleepViewController.saveSleepAnalysis(startDate: self.startDate, endDate: self.endDate)
             } catch {
-                self.alreadyEntered()
+                print("Submission Failed")
             }
             print("submitted :)")
             self.goodBadSleepDisplay()
+            switch(weekdayComponents.weekday){
+            case 1?:
+                self.barGraph.sundayStart = self.startDate
+                self.barGraph.sundayEnd = self.endDate
+            case 2?:
+                self.barGraph.mondayStart = self.startDate
+                self.barGraph.mondayEnd = self.endDate
+            case 3?:
+                self.barGraph.tuesdayStart = self.startDate
+                self.barGraph.tuesdayEnd = self.endDate
+            case 4?:
+                self.barGraph.wednesdayStart = self.startDate
+                self.barGraph.wednesdayEnd = self.endDate
+            case 5?:
+                self.barGraph.thursdayStart = self.startDate
+                self.barGraph.thursdayEnd = self.endDate
+            case 6?:
+                self.barGraph.fridayStart = self.startDate
+                self.barGraph.fridayEnd = self.endDate
+            case 7?:
+                self.barGraph.saturdayStart = self.startDate
+                self.barGraph.saturdayEnd = self.endDate
+            default:
+                print("graph entry failed")
+            }
+            self.barGraph.reLoad()
         }))
         
         if let vc = self.view?.window?.rootViewController {
