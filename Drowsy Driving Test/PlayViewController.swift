@@ -103,8 +103,8 @@ class PlayViewController: UIViewController, GKGameCenterControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        authenticateLocalPlayer()
-        checkGCLeaderboard()
+        //authenticateLocalPlayer()
+        //checkGCLeaderboard()
         
         self.view = SKView()
         let delegate2 = UIApplication.shared.delegate as! AppDelegate
