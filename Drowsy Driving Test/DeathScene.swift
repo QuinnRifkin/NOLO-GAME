@@ -142,10 +142,27 @@ class DeathScene: SKScene {
         
         if(UIScreen.main.bounds.height == 480){
             namelabel = UILabel(frame: CGRect(x: 30, y: 2, width: 150, height: 50))
+            zCountLabel = UILabel(frame: CGRect(x: UIScreen.main.bounds.width/2 + 70, y: UIScreen.main.bounds.height/4 + 10, width: 100, height: 40))
+            highScoreLabel = UILabel(frame: CGRect(x: UIScreen.main.bounds.width/2 + 70, y: UIScreen.main.bounds.height/3 + 5, width: 100, height: 40))
+            zCountLabel.text = String( gameScene.getFinishZCount())
+            highScoreLabel.text = String( gameScene.getHighScore())
+            popUpHandle.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - (800))
+            popUpHandle.isHidden = true
         }else if(UIScreen.main.bounds.height == 568){
             namelabel = UILabel(frame: CGRect(x: 10, y: 10, width: 150, height: 50))
+            zCountLabel = UILabel(frame: CGRect(x: UIScreen.main.bounds.width/2 + 70, y: UIScreen.main.bounds.height/4 + 10, width: 100, height: 40))
+            highScoreLabel = UILabel(frame: CGRect(x: UIScreen.main.bounds.width/2 + 70, y: UIScreen.main.bounds.height/3 + 10, width: 100, height: 40))
+            zCountLabel.text = String( gameScene.getFinishZCount())
+            highScoreLabel.text = String( gameScene.getHighScore())
+            popUpHandle.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 + (200))
+            popUpHandle.isHidden = true
         }else{
             namelabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
+            zCountLabel = UILabel(frame: CGRect(x: self.frame.width/7.7, y: self.frame.height/7.1, width: 250, height: 40))
+            highScoreLabel = UILabel(frame: CGRect(x: self.frame.width/7.7, y: self.frame.height/5.6, width: 300, height: 40))
+            zCountLabel.text = "        " + String( gameScene.getFinishZCount())
+            highScoreLabel.text = "        " + String( gameScene.getHighScore())
+            popUpHandle.center = CGPoint(x: ((self.popUp.center.x)), y: (self.popUp.center.y) + (350))
         }
 
         popUp.frame = (self.view?.bounds)!
@@ -159,7 +176,6 @@ class DeathScene: SKScene {
         
         popUpHandle.layer.cornerRadius = 5
         popUpHandle.bounds = CGRect(x: 0, y: 0, width: 70, height: 5)
-        popUpHandle.center = CGPoint(x: ((self.popUp.center.x)), y: (self.popUp.center.y) + (350))
         popUpHandle.backgroundColor = UIColor.black
         popUpHandle.layer.opacity = 0.6
         
@@ -181,10 +197,6 @@ class DeathScene: SKScene {
         popUpLabel.bounds = CGRect(x: 0, y: 0, width: 275, height: 150)
         popUpLabel.center = CGPoint(x: ((self.popUp.center.x)), y: (self.popUp.center.y) + (15))
 
-        zCountLabel = UILabel(frame: CGRect(x: self.frame.width/7.7, y: self.frame.height/7.1, width: 250, height: 40))
-        
-        highScoreLabel = UILabel(frame: CGRect(x: self.frame.width/7.7, y: self.frame.height/5.6, width: 300, height: 40))
-
         playAgainButtonNode = self.childNode(withName: "PlayAgainNode") as! SKSpriteNode
         playAgain = self.childNode(withName: "PlayAgain") as! SKSpriteNode
         
@@ -203,7 +215,7 @@ class DeathScene: SKScene {
             fact1.font = UIFont(name: "ChalkboardSE-Regular", size: 15)
             print("Tis a pad")
         }else if(UIScreen.main.bounds.height == 568){
-            fact1 = UILabel(frame: CGRect(x: (UIScreen.main.bounds.width)/2 , y: (UIScreen.main.bounds.width) + 30, width: 270, height: 150))
+            fact1 = UILabel(frame: CGRect(x: (UIScreen.main.bounds.width)/2 , y: (UIScreen.main.bounds.width) + 30, width: 240, height: 150))
             fact1.center = CGPoint(x: (UIScreen.main.bounds.width)/2 , y: (UIScreen.main.bounds.height) - 100)
             fact1.font = UIFont(name: "ChalkboardSE-Regular", size: 15)
             print("Tis not a pad, but tis small")
@@ -222,12 +234,10 @@ class DeathScene: SKScene {
         zCountLabel.textAlignment = NSTextAlignment.left
         zCountLabel.textColor = .white
         zCountLabel.font = UIFont(name: "PressStart2P" , size: 20)
-        zCountLabel.text = "        " + String( gameScene.getFinishZCount())
         
         highScoreLabel.textAlignment = NSTextAlignment.left
         highScoreLabel.textColor = .white
         highScoreLabel.font = UIFont(name: "PressStart2P" , size: 20)
-        highScoreLabel.text = "        " + String( gameScene.getHighScore())
 
         let name = String(welcomeScene.getName())
         if(name!.characters.count >= 25)

@@ -288,11 +288,28 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreCartoon.position = CGPoint(x: 250, y: 540)
         highscoreCartoon.position = CGPoint(x: 210, y: 485)
         
-        timeLabel = UILabel(frame: CGRect(x: 0, y: 27, width: self.frame.width/2 , height: 20))
+        if(UIScreen.main.bounds.height == 480){
+            timeLabel = UILabel(frame: CGRect(x: 0, y: 27, width: 60 , height: 20))
+            highScoreLabel = UILabel(frame: CGRect(x: 0, y: 83, width: 60 , height: 20))
+            zCountLabel = UILabel(frame: CGRect(x: 0, y: 55, width: 60 , height: 20))
+            timeLabel.center = CGPoint(x: UIScreen.main.bounds.width - 45, y: 27)
+            highScoreLabel.center = CGPoint(x: UIScreen.main.bounds.width - 45, y: 67)
+            zCountLabel.center = CGPoint(x: UIScreen.main.bounds.width - 45, y: 47)
+        }else if(UIScreen.main.bounds.height == 568){
+            timeLabel = UILabel(frame: CGRect(x: 0, y: 27, width: self.frame.width/2 , height: 20))
+            highScoreLabel = UILabel(frame: CGRect(x: 0, y: 83, width: self.frame.width/2 , height: 20))
+            zCountLabel = UILabel(frame: CGRect(x: 0, y: 55, width: self.frame.width/2 , height: 20))
+            timeLabel.center = CGPoint(x: UIScreen.main.bounds.width/2 - 30, y: 30)
+            highScoreLabel.center = CGPoint(x: UIScreen.main.bounds.width/2 - 30, y: 80)
+            zCountLabel.center = CGPoint(x: UIScreen.main.bounds.width/2 - 30, y: 55)
+        }else{
+            timeLabel = UILabel(frame: CGRect(x: 0, y: 27, width: self.frame.width/2 , height: 20))
+            highScoreLabel = UILabel(frame: CGRect(x: 0, y: 83, width: self.frame.width/2 , height: 20))
+            zCountLabel = UILabel(frame: CGRect(x: 0, y: 55, width: self.frame.width/2 , height: 20))
+        }
+        
         timeLabel.font = UIFont.init(name: "PressStart2P", size: 15)
-        highScoreLabel = UILabel(frame: CGRect(x: 0, y: 83, width: self.frame.width/2 , height: 20))
         highScoreLabel.font = UIFont.init(name: "PressStart2P", size: 15)
-        zCountLabel = UILabel(frame: CGRect(x: 0, y: 55, width: self.frame.width/2 , height: 20))
         zCountLabel.font = UIFont.init(name: "PressStart2P", size: 15)
         
         widthFrame = UInt32(self.frame.width)

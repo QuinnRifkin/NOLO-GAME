@@ -269,14 +269,6 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
 
     override func didMove(to view: SKView) {
         
-        if(UIScreen.main.bounds.height == 480){
-            namelabel = UILabel(frame: CGRect(x: 30, y: 2, width: 150, height: 50))
-        }else if(UIScreen.main.bounds.height == 568){
-            namelabel = UILabel(frame: CGRect(x: 10, y: 10, width: 150, height: 50))
-        }else{
-            namelabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
-        }
-        
         let currentComponents = calendar.dateComponents([.year, .month, .day, .weekday], from: now)
         
         let currentYear = currentComponents.year!
@@ -319,17 +311,70 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         print((self.view?.center)!)
         self.view?.addSubview(barGraph)
         
-        sleepInputScreen.frame = (self.view?.bounds)!
-        sleepInputScreen.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (1000))
+        if(UIScreen.main.bounds.height == 480){
+            namelabel = UILabel(frame: CGRect(x: 30, y: 2, width: 150, height: 50))
+            
+            sleepInputScreen.frame = (self.view?.bounds)!
+            sleepInputScreen.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - (1000))
+            
+            sleepInputView.bounds = CGRect(x: 0, y: 0, width: 300, height: 250)
+            
+            sleepInputView.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - (1000))
+            
+            sleepInputLabel.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - (1090))
+            
+            submit.center = CGPoint(x: UIScreen.main.bounds.width/2 + 50, y: UIScreen.main.bounds.height/2 - (920))
+            
+            cancel.center = CGPoint(x: UIScreen.main.bounds.width/2 - 50, y: UIScreen.main.bounds.height/2 - (920))
+            
+            startTimeInput.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - (1030))
+            
+            endTimeInput.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - (975))
+        }else if(UIScreen.main.bounds.height == 568){
+            namelabel = UILabel(frame: CGRect(x: 10, y: 10, width: 150, height: 50))
+            
+            sleepInputScreen.frame = (self.view?.bounds)!
+            sleepInputScreen.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - (1000))
+            
+            sleepInputView.bounds = CGRect(x: 0, y: 0, width: 300, height: 250)
+            
+            sleepInputView.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - (1000))
+            
+            sleepInputLabel.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - (1090))
+            
+            submit.center = CGPoint(x: UIScreen.main.bounds.width/2 + 50, y: UIScreen.main.bounds.height/2 - (920))
+            
+            cancel.center = CGPoint(x: UIScreen.main.bounds.width/2 - 50, y: UIScreen.main.bounds.height/2 - (920))
+            
+            startTimeInput.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - (1030))
+            
+            endTimeInput.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - (975))
+        }else{
+            namelabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
+            
+            sleepInputScreen.frame = (self.view?.bounds)!
+            sleepInputScreen.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (1000))
+            
+            sleepInputView.bounds = CGRect(x: 0, y: 0, width: 300, height: 250)
+            
+            sleepInputView.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (1000))
+            
+            sleepInputLabel.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (1090))
+            
+            submit.center = CGPoint(x: ((self.view?.center.x)! + (50)), y: (self.view?.center.y)! - (920))
+            
+            cancel.center = CGPoint(x: ((self.view?.center.x)! - (50)), y: (self.view?.center.y)! - (920))
+            
+            startTimeInput.center = CGPoint(x: ((self.view?.center.x)! - (0)), y: ((self.view?.center.y)! - (1030)))
+            
+            endTimeInput.center = CGPoint(x: ((self.view?.center.x)! - (0)), y: ((self.view?.center.y)! - (975)))
+        }
         
         sleepInputView.layer.cornerRadius = 20
-        sleepInputView.bounds = CGRect(x: 0, y: 0, width: 300, height: 250)
         sleepInputView.backgroundColor = UIColor.red
         sleepInputView.layer.opacity = 0.6
-        sleepInputView.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (1000))
         
         startTimeInput.bounds = CGRect(x: 0, y: 0, width: 180, height: 40)
-        startTimeInput.center = CGPoint(x: ((self.view?.center.x)! - (0)), y: ((self.view?.center.y)! - (1030)))
         startTimeInput.attributedPlaceholder = NSAttributedString(string: "Start", attributes: [NSForegroundColorAttributeName : UIColor.black])
         startTimeInput.font = UIFont(name: "HelveticaNeue-Light", size: 25)
         startTimeInput.borderStyle = UITextBorderStyle.roundedRect
@@ -349,7 +394,6 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         sleepInputKeyboardStart.selectRow(1, inComponent: 3, animated: false)
         
         endTimeInput.bounds = CGRect(x: 0, y: 0, width: 180, height: 40)
-        endTimeInput.center = CGPoint(x: ((self.view?.center.x)! - (0)), y: ((self.view?.center.y)! - (975)))
         endTimeInput.attributedPlaceholder = NSAttributedString(string: "End", attributes: [NSForegroundColorAttributeName : UIColor.black])
         endTimeInput.font = UIFont(name: "HelveticaNeue-Light", size: 25)
         endTimeInput.borderStyle = UITextBorderStyle.roundedRect
@@ -368,14 +412,12 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         sleepInputKeyboardEnd.selectRow(180, inComponent: 2, animated: false)
         
         submit.bounds = CGRect(x: 0, y: 0, width: 70, height: 20)
-        submit.center = CGPoint(x: ((self.view?.center.x)! + (50)), y: (self.view?.center.y)! - (920))
         submit.setTitle("Submit", for: .normal)
         submit.addTarget(self, action: #selector(self.finalSubmission(_:)), for: UIControlEvents.touchUpInside)
         submit.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
         submit.setTitleColor(UIColor.white, for: UIControlState.normal)
         
         cancel.bounds = CGRect(x: 0, y: 0, width: 70, height: 20)
-        cancel.center = CGPoint(x: ((self.view?.center.x)! - (50)), y: (self.view?.center.y)! - (920))
         cancel.setTitle("Cancel", for: .normal)
         cancel.addTarget(self, action: #selector(self.dismissView(_:)), for: UIControlEvents.touchUpInside)
         cancel.setTitleColor(UIColor.gray, for: UIControlState.highlighted)
@@ -387,7 +429,6 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
         sleepInputLabel.numberOfLines = 0
         sleepInputLabel.font = UIFont(name: "HelveticaNeue-Light", size: 18)
         sleepInputLabel.bounds = CGRect(x: 0, y: 0, width: 275, height: 150)
-        sleepInputLabel.center = CGPoint(x: ((self.view?.center.x)!), y: (self.view?.center.y)! - (1090))
 
         manualSleepEntry = self.childNode(withName: "ManualSleepButton") as! SKSpriteNode
         manualSleepEntryNode = self.childNode(withName: "ManualSleep") as! SKSpriteNode
