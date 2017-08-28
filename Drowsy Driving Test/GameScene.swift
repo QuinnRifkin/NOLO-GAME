@@ -585,7 +585,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
                 let transition = SKTransition.fade(withDuration: 1)
                 let gameScene = DeathScene(fileNamed: "GameScene")
-                gameScene?.scaleMode = .aspectFill
+                gameScene?.scaleMode = .aspectFit
                 let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
                 DispatchQueue.main.asyncAfter(deadline: when2) {
                     self.zCountLabel.isHidden = true
@@ -608,7 +608,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
                 let transition = SKTransition.fade(withDuration: 1)
                 let gameScene = DeathScene(fileNamed: "MenuScene")
-                gameScene?.scaleMode = .aspectFill
+                gameScene?.scaleMode = .aspectFit
                 let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
                 DispatchQueue.main.asyncAfter(deadline: when2) {
                     self.zCountLabel.isHidden = true

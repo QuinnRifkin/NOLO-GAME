@@ -20,7 +20,7 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
     
     var resetPulse = SKAction.sequence([SKAction.scale(by: 1.1, duration: 0.5), SKAction.wait(forDuration: 0.05), SKAction.scale(by: (1/1.1), duration: 0.5), SKAction.wait(forDuration: 0.05)])
     
-    let nameLabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
+    var nameLabel : UILabel!
     var resetLabel : SKSpriteNode!
     
     var muteButton : SKSpriteNode!
@@ -67,9 +67,28 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
 
     override func didMove(to view: SKView) {
         
-        nameInput = UITextField(frame: CGRect(x: self.frame.width/5, y: self.frame.height/10, width: self.frame.width/4, height: 30))
+        if(UIScreen.main.bounds.height == 480){
+            nameLabel = UILabel(frame: CGRect(x: 30, y: 2, width: 150, height: 50))
+        }else if(UIScreen.main.bounds.height == 568){
+            nameLabel = UILabel(frame: CGRect(x: 10, y: 10, width: 150, height: 50))
+        }else{
+            nameLabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
+        }
         
-        numberInput = UITextField(frame: CGRect(x: self.frame.width/5, y: self.frame.height/6.5, width: self.frame.width/4, height: 30))
+        if(UIScreen.main.bounds.height == 480){
+            nameInput = UITextField(frame: CGRect(x: 0, y: 0, width: self.frame.width/5, height: 20))
+            numberInput = UITextField(frame: CGRect(x: 0, y: 0, width: self.frame.width/5, height: 20))
+            nameInput.center = CGPoint(x: UIScreen.main.bounds.width/1.5 ,y: UIScreen.main.bounds.height/4 - 15)
+            numberInput.center = CGPoint(x: UIScreen.main.bounds.width/1.5 ,y: UIScreen.main.bounds.height/4 + 40)
+        }else if(UIScreen.main.bounds.height == 568){
+            nameInput = UITextField(frame: CGRect(x: 0, y: 0, width: self.frame.width/4, height: 30))
+            numberInput = UITextField(frame: CGRect(x: 0, y: 0, width: self.frame.width/4, height: 30))
+            nameInput.center = CGPoint(x: UIScreen.main.bounds.width/2 ,y: UIScreen.main.bounds.height/2 - 30)
+            numberInput.center = CGPoint(x: UIScreen.main.bounds.width/2 ,y: UIScreen.main.bounds.height/2 + 20)
+        }else{
+            nameInput = UITextField(frame: CGRect(x: self.frame.width/5, y: self.frame.height/10, width: self.frame.width/4, height: 30))
+            numberInput = UITextField(frame: CGRect(x: self.frame.width/5, y: self.frame.height/6.5, width: self.frame.width/4, height: 30))
+        }
         
         resetLabel = self.childNode(withName: "Reset") as! SKSpriteNode
         

@@ -26,19 +26,32 @@ class LearnMoreScene: SKScene {
     let welcomeScene = WelcomeScene()
     let gameViewController = GameViewController()
 
-    let nameLabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
+    var nameLabel : UILabel!
     
     override func didMove(to view: SKView) {
+        
+        if(UIScreen.main.bounds.height == 480){
+            nameLabel = UILabel(frame: CGRect(x: 30, y: 2, width: 150, height: 50))
+            infoLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 250, height: 270))
+            infoLabel.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/3.5)
+            infoLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 15)
+        }else if(UIScreen.main.bounds.height == 568){
+            nameLabel = UILabel(frame: CGRect(x: 10, y: 10, width: 150, height: 50))
+            infoLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 270))
+            infoLabel.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/3.5)
+            infoLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 18)
+        }else{
+            nameLabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
+            infoLabel = UILabel(frame: CGRect(x: 15, y: 40, width: self.frame.width/2.1, height: 270))
+            infoLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 20)
+        }
     
-        infoLabel = UILabel(frame: CGRect(x: 15, y: 40, width: self.frame.width/2.1, height: 270))
         infoLabel.text = "NOLO is a campaign developed by teens, for teens, that strides to spread awareness and knowledge of the causes and impacts of insufficient sleep. NOLO’s ultimate goal is to make sleep a priority amongst teenagers."
         infoLabel.numberOfLines = 0
-        infoLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 20)
         infoLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
         infoLabel.textColor = .black
         infoLabel.textAlignment = NSTextAlignment.left
         websiteIconNode = self.childNode(withName: "WebsiteIcon") as! SKSpriteNode
-        
         
         twitterButtonNode = self.childNode(withName: "TwitterNode") as! SKSpriteNode
         twitterButtonNode.texture = SKTexture(imageNamed: "TwitterIcon")

@@ -32,7 +32,7 @@ class MenuScene: SKScene {
     
     let welcomeScene = WelcomeScene()
     
-    let namelabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
+    var namelabel : UILabel!
     
     var fact : String!
     var fact1 : UILabel!
@@ -42,8 +42,15 @@ class MenuScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        
         playViewController.tabBarController?.tabBar.isHidden = false
+        
+        if(UIScreen.main.bounds.height == 480){
+            namelabel = UILabel(frame: CGRect(x: 30, y: 2, width: 150, height: 50))
+        }else if(UIScreen.main.bounds.height == 568){
+            namelabel = UILabel(frame: CGRect(x: 10, y: 10, width: 150, height: 50))
+        }else{
+            namelabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
+        }
         
         titleNode = self.childNode(withName: "PlayNode") as! SKSpriteNode
         howToNode = self.childNode(withName: "HowTo") as! SKSpriteNode
@@ -77,10 +84,24 @@ class MenuScene: SKScene {
 
         fact = (String) (sleepFactz[Int(arc4random_uniform(15))])
         
-        fact1 = UILabel(frame: CGRect(x: 50 , y: -(factBar.position.y) + 30, width: 270, height: 150))
+        if(UIScreen.main.bounds.height == 480){
+            fact1 = UILabel(frame: CGRect(x: (UIScreen.main.bounds.width)/2 , y: (UIScreen.main.bounds.width) + 30, width: 200, height: 130))
+            fact1.center = CGPoint(x: (UIScreen.main.bounds.width)/2 , y: (UIScreen.main.bounds.height) - 85)
+            fact1.font = UIFont(name: "ChalkboardSE-Regular", size: 15)
+            print("Tis a pad")
+        }else if(UIScreen.main.bounds.height == 568){
+            fact1 = UILabel(frame: CGRect(x: (UIScreen.main.bounds.width)/2 , y: (UIScreen.main.bounds.width) + 30, width: 240, height: 150))
+            fact1.center = CGPoint(x: (UIScreen.main.bounds.width)/2 , y: (UIScreen.main.bounds.height) - 100)
+            fact1.font = UIFont(name: "ChalkboardSE-Regular", size: 15)
+            print("Tis not a pad, but tis small")
+        }else{
+            fact1 = UILabel(frame: CGRect(x: 50 , y: -(factBar.position.y) + 30, width: 270, height: 150))
+            fact1.font = UIFont(name: "ChalkboardSE-Regular", size: 20)
+            print("Tis not a pad, tis not small")
+        }
         
         fact1.text = fact
-        fact1.font = UIFont(name: "ChalkboardSE-Regular", size: 20)
+        
         fact1.lineBreakMode = NSLineBreakMode.byWordWrapping
         fact1.numberOfLines = 0
         fact1.textColor = .black
@@ -173,7 +194,7 @@ class MenuScene: SKScene {
                     playViewController.tabBarController?.tabBar.isHidden = true
                     let transition = SKTransition.doorsOpenVertical(withDuration: 1)
                     let gameScene = GameScene(fileNamed: "GameScene")
-                    gameScene?.scaleMode = .aspectFill
+                    gameScene?.scaleMode = .aspectFit
                     let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
                     DispatchQueue.main.asyncAfter(deadline: when2) {
                         self.namelabel.isHidden = true
@@ -185,7 +206,7 @@ class MenuScene: SKScene {
                 howToNode.scale(to: CGSize(width: 576, height: 140))
                     let transition = SKTransition.push(with: SKTransitionDirection.left, duration: 0.5)
                     let gameScene = GameScene(fileNamed: "InstructionScene1")
-                    gameScene?.scaleMode = .aspectFill
+                    gameScene?.scaleMode = .aspectFit
                     let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
                     DispatchQueue.main.asyncAfter(deadline: when2) {
                         //self.namelabel.isHidden = true

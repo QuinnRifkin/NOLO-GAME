@@ -16,7 +16,7 @@ class WelcomeViewController: UIViewController {
         super.viewDidLoad()
         self.view = SKView()
         if let scene = SKScene(fileNamed: "WelcomeScene") {
-                scene.scaleMode = .aspectFill
+                scene.scaleMode = .aspectFit
                 let view = self.view as! SKView?
                     view?.presentScene(scene)
                     view?.ignoresSiblingOrder = true

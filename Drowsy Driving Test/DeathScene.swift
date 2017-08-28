@@ -29,7 +29,7 @@ class DeathScene: SKScene {
     var gameScene = GameScene()
     var playViewController = (UIApplication.shared.delegate as! AppDelegate).playViewController!
     let welcomeScene = WelcomeScene()
-    let namelabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
+    var namelabel : UILabel!
     
     var timeLabel : UILabel!
     var highScoreLabel : UILabel!
@@ -139,6 +139,14 @@ class DeathScene: SKScene {
     override func didMove(to view: SKView) {
         
         self.addGesture()
+        
+        if(UIScreen.main.bounds.height == 480){
+            namelabel = UILabel(frame: CGRect(x: 30, y: 2, width: 150, height: 50))
+        }else if(UIScreen.main.bounds.height == 568){
+            namelabel = UILabel(frame: CGRect(x: 10, y: 10, width: 150, height: 50))
+        }else{
+            namelabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
+        }
 
         popUp.frame = (self.view?.bounds)!
         popUp.center = CGPoint(x: ((self.view?.center.x)!), y: ((self.view?.center.y)! - (self.popUp.frame.height)) - (45))
@@ -188,10 +196,24 @@ class DeathScene: SKScene {
         
         fact = (String) (sleepFactz[Int(arc4random_uniform(15))])
         
-        fact1 = UILabel(frame: CGRect(x: 50 , y: -(factBar.position.y) + 30, width: 270, height: 150))
+        
+        if(UIScreen.main.bounds.height == 480){
+            fact1 = UILabel(frame: CGRect(x: (UIScreen.main.bounds.width)/2 , y: (UIScreen.main.bounds.width) + 30, width: 200, height: 130))
+            fact1.center = CGPoint(x: (UIScreen.main.bounds.width)/2 , y: (UIScreen.main.bounds.height) - 85)
+            fact1.font = UIFont(name: "ChalkboardSE-Regular", size: 15)
+            print("Tis a pad")
+        }else if(UIScreen.main.bounds.height == 568){
+            fact1 = UILabel(frame: CGRect(x: (UIScreen.main.bounds.width)/2 , y: (UIScreen.main.bounds.width) + 30, width: 270, height: 150))
+            fact1.center = CGPoint(x: (UIScreen.main.bounds.width)/2 , y: (UIScreen.main.bounds.height) - 100)
+            fact1.font = UIFont(name: "ChalkboardSE-Regular", size: 15)
+            print("Tis not a pad, but tis small")
+        }else{
+            fact1 = UILabel(frame: CGRect(x: 50 , y: -(factBar.position.y) + 30, width: 270, height: 150))
+            fact1.font = UIFont(name: "ChalkboardSE-Regular", size: 20)
+            print("Tis not a pad, tis not small")
+        }
         
         fact1.text = fact
-        fact1.font = UIFont(name: "ChalkboardSE-Regular", size: 20)
         fact1.lineBreakMode = NSLineBreakMode.byWordWrapping
         fact1.numberOfLines = 0
         fact1.textColor = .black

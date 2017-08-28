@@ -42,7 +42,7 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
     var endDate = Date()
     var now = Date()
     var calendar = Calendar.current
-    let namelabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
+    var namelabel : UILabel!
 
     var year : String!
     var birthYear : Int!
@@ -268,6 +268,14 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
     }
 
     override func didMove(to view: SKView) {
+        
+        if(UIScreen.main.bounds.height == 480){
+            namelabel = UILabel(frame: CGRect(x: 30, y: 2, width: 150, height: 50))
+        }else if(UIScreen.main.bounds.height == 568){
+            namelabel = UILabel(frame: CGRect(x: 10, y: 10, width: 150, height: 50))
+        }else{
+            namelabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
+        }
         
         let currentComponents = calendar.dateComponents([.year, .month, .day, .weekday], from: now)
         

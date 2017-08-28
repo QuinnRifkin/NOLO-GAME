@@ -36,7 +36,7 @@ class PlayViewController: UIViewController, GKGameCenterControllerDelegate {
     func sceneTransition(scene: SKScene, transitionScene: String, transitionType: SKTransition){
         let transition = transitionType
         let gameScene = DeathScene(fileNamed: transitionScene)
-        gameScene?.scaleMode = .aspectFill
+        gameScene?.scaleMode = .aspectFit
         
         scene.view?.presentScene(gameScene!, transition: transition)
     }
@@ -109,7 +109,7 @@ class PlayViewController: UIViewController, GKGameCenterControllerDelegate {
         self.view = SKView()
         let delegate2 = UIApplication.shared.delegate as! AppDelegate
         delegate2.playViewController = self
-        gameViewController.viewControllerScene(scene: "MenuScene", viewController: self)
+        gameViewController.viewControllerScene(scene: "WelcomeScene", viewController: self)
     }
     
     func authenticateLocalPlayer() {

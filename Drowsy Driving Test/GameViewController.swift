@@ -30,7 +30,7 @@ class GameViewController: UIViewController {
         }
         let transition = transitionType
         let gameScene = MenuScene(fileNamed: transitionScene)
-        gameScene?.scaleMode = .aspectFill
+        gameScene?.scaleMode = .aspectFit
         let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
         DispatchQueue.main.asyncAfter(deadline: when2) {
             scene.view?.presentScene(gameScene!, transition: transition)
@@ -46,11 +46,10 @@ class GameViewController: UIViewController {
         let transition = SKTransition.reveal(with: SKTransitionDirection.left, duration: 0.5)
         let gameScene = MenuScene(fileNamed: transitionScene)
         let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
-        gameScene?.scaleMode = .aspectFill
+        gameScene?.scaleMode = .aspectFit
         DispatchQueue.main.asyncAfter(deadline: when2) {
             scene.view?.presentScene(gameScene!, transition: transition)
         }
-
     }
     
     func socialMediaLink(appLink: String, webLink: String){
@@ -69,7 +68,7 @@ class GameViewController: UIViewController {
         let view = viewController.view as! SKView?
         
         if let scene = SKScene(fileNamed: scene){
-            scene.scaleMode = .aspectFill
+            scene.scaleMode = .aspectFit
             view!.presentScene(scene)
             view!.ignoresSiblingOrder = false
             view!.showsFPS = true

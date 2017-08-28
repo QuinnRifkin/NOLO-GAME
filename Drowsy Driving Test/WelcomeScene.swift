@@ -78,6 +78,14 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
         nameInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/5, width: self.frame.width/3, height: 30))
         numberInput = UITextField(frame: CGRect(x: self.frame.width/12, y: self.frame.height/4, width: self.frame.width/3, height: 30))
         
+        if(UIScreen.main.bounds.height == 480){
+            nameInput.center = CGPoint(x: UIScreen.main.bounds.width/2 ,y: UIScreen.main.bounds.height/2 - 20)
+            numberInput.center = CGPoint(x: UIScreen.main.bounds.width/2 ,y: UIScreen.main.bounds.height/2 + 30)
+        }else if(UIScreen.main.bounds.height == 568){
+            nameInput.center = CGPoint(x: UIScreen.main.bounds.width/2 ,y: UIScreen.main.bounds.height/2 - 30)
+            numberInput.center = CGPoint(x: UIScreen.main.bounds.width/2 ,y: UIScreen.main.bounds.height/2 + 20)
+        }
+        
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(WelcomeScene.donePressed(sender:)))
         let flexButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: self, action: nil)
         
@@ -221,7 +229,7 @@ class WelcomeScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicker
                 continueButtonNode.scale(to: CGSize(width: 240, height: 76.5))
                 let transition = SKTransition.crossFade(withDuration: 0.05)
                 let gameScene = SettingsScene(fileNamed: "MenuScene")
-                gameScene?.scaleMode = .aspectFill
+                gameScene?.scaleMode = .aspectFit
                 let when2 = DispatchTime.now() + 0.15 // change 2 to desired number of seconds
                 DispatchQueue.main.asyncAfter(deadline: when2) {
                     self.nameInput.isHidden = true

@@ -55,12 +55,27 @@ class BarGraph: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        if(UIScreen.main.bounds.height == 480){
+            graph.bounds = CGRect(x: 0, y: 0, width: 240, height: 80)
+            graph.center = CGPoint(x: UIScreen.main.bounds.width/2 , y: UIScreen.main.bounds.height/2 + 30)
+            blur.frame = CGRect(x: 150, y: 50, width: 240, height: 110)
+            blur.center = CGPoint(x: 150, y: 60)
+        }else if(UIScreen.main.bounds.height == 568){
+            graph.bounds = CGRect(x: 0, y: 0, width: 300, height: 100)
+            graph.center = CGPoint(x: UIScreen.main.bounds.width/2 , y: UIScreen.main.bounds.height/2 + 25)
+            blur.frame = CGRect(x: 150, y: 50, width: 300, height: 130)
+            blur.center = CGPoint(x: 150, y: 60)
+        }else{
+            graph.bounds = CGRect(x: 0, y: 0, width: 300, height: 100)
+            graph.center = CGPoint(x: 187.5 , y: 333.5  + 30)
+            blur.frame = CGRect(x: 150, y: 50, width: 300, height: 130)
+            blur.center = CGPoint(x: 150, y: 60)
+        }
+        
         graph.layer.cornerRadius = 5
-        graph.bounds = CGRect(x: 0, y: 0, width: 300, height: 100)
-        graph.center = CGPoint(x: 187.5 , y: 333.5  + 30)
+        
+        
         blur.layer.cornerRadius = 10
-        blur.frame = CGRect(x: 150, y: 50, width: 300, height: 130)
-        blur.center = CGPoint(x: 150, y: 60)
         blur.backgroundColor = .white
         blur.layer.opacity = 0.5
         self.addSubview(graph)
