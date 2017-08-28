@@ -55,21 +55,81 @@ class BarGraph: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        now = Date()
+        
         if(UIScreen.main.bounds.height == 480){
             graph.bounds = CGRect(x: 0, y: 0, width: 240, height: 80)
-            graph.center = CGPoint(x: UIScreen.main.bounds.width/2 , y: UIScreen.main.bounds.height/2 + 30)
-            blur.frame = CGRect(x: 150, y: 50, width: 240, height: 110)
-            blur.center = CGPoint(x: 150, y: 60)
+            graph.center = CGPoint(x: UIScreen.main.bounds.width/2 , y: UIScreen.main.bounds.height/2 + 25)
+            blur.frame = CGRect(x: 120, y: 50, width: 240, height: 110)
+            blur.center = CGPoint(x: 120, y: 42)
+            
+            addLabel(label: sun, title: "S", xOffSet: -105)
+            addLabel(label: mon, title: "M", xOffSet: -70)
+            addLabel(label: tues, title: "T", xOffSet: -35)
+            addLabel(label: wed, title: "W", xOffSet: 0)
+            addLabel(label: thurs, title: "T", xOffSet: 35)
+            addLabel(label: fri, title: "F", xOffSet: 70)
+            addLabel(label: sat, title: "S", xOffSet: 105)
+            
+            target.bounds = CGRect(x: 0, y: 0, width: 215, height: 1)
+            target.center = CGPoint(x: 50, y: 52)
+            
+            duration(start: sundayStart ?? now, end: sundayEnd ?? now, day: sunday, xposition: -105, dayName: "sunday")
+            duration(start: mondayStart ?? now, end: mondayEnd ?? now, day: monday, xposition: -70, dayName: "monday")
+            duration(start: tuesdayStart ?? now, end: tuesdayEnd ?? now, day: tuesday, xposition: -35, dayName: "tuesday")
+            duration(start: wednesdayStart ?? now, end: wednesdayEnd ?? now, day: wednesday, xposition: 0, dayName: "wednesday")
+            duration(start: thursdayStart ?? now, end: thursdayEnd ?? now, day: thursday, xposition: 35, dayName: "thursday")
+            duration(start: fridayStart ?? now, end: fridayEnd ?? now, day: friday, xposition: 70, dayName: "friday")
+            duration(start: saturdayStart ?? now, end: saturdayEnd ?? now, day: saturday, xposition: 105, dayName: "saturday")
+            
         }else if(UIScreen.main.bounds.height == 568){
             graph.bounds = CGRect(x: 0, y: 0, width: 300, height: 100)
             graph.center = CGPoint(x: UIScreen.main.bounds.width/2 , y: UIScreen.main.bounds.height/2 + 25)
             blur.frame = CGRect(x: 150, y: 50, width: 300, height: 130)
             blur.center = CGPoint(x: 150, y: 60)
+            
+            addLabel(label: sun, title: "S", xOffSet: -120)
+            addLabel(label: mon, title: "M", xOffSet: -80)
+            addLabel(label: tues, title: "T", xOffSet: -40)
+            addLabel(label: wed, title: "W", xOffSet: 0)
+            addLabel(label: thurs, title: "T", xOffSet: 40)
+            addLabel(label: fri, title: "F", xOffSet: 80)
+            addLabel(label: sat, title: "S", xOffSet: 120)
+            
+            target.bounds = CGRect(x: 0, y: 0, width: 275, height: 1)
+            target.center = CGPoint(x: 150, y: 52)
+            
+            duration(start: sundayStart ?? now, end: sundayEnd ?? now, day: sunday, xposition: -120, dayName: "sunday")
+            duration(start: mondayStart ?? now, end: mondayEnd ?? now, day: monday, xposition: -80, dayName: "monday")
+            duration(start: tuesdayStart ?? now, end: tuesdayEnd ?? now, day: tuesday, xposition: -40, dayName: "tuesday")
+            duration(start: wednesdayStart ?? now, end: wednesdayEnd ?? now, day: wednesday, xposition: 0, dayName: "wednesday")
+            duration(start: thursdayStart ?? now, end: thursdayEnd ?? now, day: thursday, xposition: 40, dayName: "thursday")
+            duration(start: fridayStart ?? now, end: fridayEnd ?? now, day: friday, xposition: 80, dayName: "friday")
+            duration(start: saturdayStart ?? now, end: saturdayEnd ?? now, day: saturday, xposition: 120, dayName: "saturday")
         }else{
             graph.bounds = CGRect(x: 0, y: 0, width: 300, height: 100)
             graph.center = CGPoint(x: 187.5 , y: 333.5  + 30)
             blur.frame = CGRect(x: 150, y: 50, width: 300, height: 130)
             blur.center = CGPoint(x: 150, y: 60)
+            
+            addLabel(label: sun, title: "S", xOffSet: -120)
+            addLabel(label: mon, title: "M", xOffSet: -80)
+            addLabel(label: tues, title: "T", xOffSet: -40)
+            addLabel(label: wed, title: "W", xOffSet: 0)
+            addLabel(label: thurs, title: "T", xOffSet: 40)
+            addLabel(label: fri, title: "F", xOffSet: 80)
+            addLabel(label: sat, title: "S", xOffSet: 120)
+            
+            target.bounds = CGRect(x: 0, y: 0, width: 275, height: 1)
+            target.center = CGPoint(x: 150, y: 52)
+            
+            duration(start: sundayStart ?? now, end: sundayEnd ?? now, day: sunday, xposition: -120, dayName: "sunday")
+            duration(start: mondayStart ?? now, end: mondayEnd ?? now, day: monday, xposition: -80, dayName: "monday")
+            duration(start: tuesdayStart ?? now, end: tuesdayEnd ?? now, day: tuesday, xposition: -40, dayName: "tuesday")
+            duration(start: wednesdayStart ?? now, end: wednesdayEnd ?? now, day: wednesday, xposition: 0, dayName: "wednesday")
+            duration(start: thursdayStart ?? now, end: thursdayEnd ?? now, day: thursday, xposition: 40, dayName: "thursday")
+            duration(start: fridayStart ?? now, end: fridayEnd ?? now, day: friday, xposition: 80, dayName: "friday")
+            duration(start: saturdayStart ?? now, end: saturdayEnd ?? now, day: saturday, xposition: 120, dayName: "saturday")
         }
         
         graph.layer.cornerRadius = 5
@@ -81,17 +141,7 @@ class BarGraph: UIView {
         self.addSubview(graph)
         self.graph.addSubview(blur)
         
-        target.bounds = CGRect(x: 0, y: 0, width: 275, height: 1)
-        target.center = CGPoint(x: 150, y: 52)
         target.backgroundColor = .black
-        
-        addLabel(label: sun, title: "S", xOffSet: -120)
-        addLabel(label: mon, title: "M", xOffSet: -80)
-        addLabel(label: tues, title: "T", xOffSet: -40)
-        addLabel(label: wed, title: "W", xOffSet: 0)
-        addLabel(label: thurs, title: "T", xOffSet: 40)
-        addLabel(label: fri, title: "F", xOffSet: 80)
-        addLabel(label: sat, title: "S", xOffSet: 120)
         
         self.graph.addSubview(sun)
         self.graph.addSubview(mon)
@@ -100,16 +150,6 @@ class BarGraph: UIView {
         self.graph.addSubview(thurs)
         self.graph.addSubview(fri)
         self.graph.addSubview(sat)
-        
-        now = Date()
-        
-        duration(start: sundayStart ?? now, end: sundayEnd ?? now, day: sunday, xposition: -120, dayName: "sunday")
-        duration(start: mondayStart ?? now, end: mondayEnd ?? now, day: monday, xposition: -80, dayName: "monday")
-        duration(start: tuesdayStart ?? now, end: tuesdayEnd ?? now, day: tuesday, xposition: -40, dayName: "tuesday")
-        duration(start: wednesdayStart ?? now, end: wednesdayEnd ?? now, day: wednesday, xposition: 0, dayName: "wednesday")
-        duration(start: thursdayStart ?? now, end: thursdayEnd ?? now, day: thursday, xposition: 40, dayName: "thursday")
-        duration(start: fridayStart ?? now, end: fridayEnd ?? now, day: friday, xposition: 80, dayName: "friday")
-        duration(start: saturdayStart ?? now, end: saturdayEnd ?? now, day: saturday, xposition: 120, dayName: "saturday")
         
         self.graph.addSubview(sunday)
         self.graph.addSubview(monday)
@@ -153,14 +193,29 @@ class BarGraph: UIView {
             }
         }
         day.layer.cornerRadius = 3
-        day.bounds = CGRect(x: 0, y: 0, width: 30, height: ((rawValue)/10))
-        day.center = CGPoint(x: (150 + (xposition)), y: (50 - ((day.frame.height)/2) + (44)))
+        if(UIScreen.main.bounds.height == 480){
+            day.bounds = CGRect(x: 0, y: 0, width: 30*(8/10), height: ((rawValue)/10)*(8/10))
+            day.center = CGPoint(x: (120 + (xposition)), y: (50 - ((day.frame.height)/2) + (44)))
+        }else if(UIScreen.main.bounds.height == 568){
+            day.bounds = CGRect(x: 0, y: 0, width: 30, height: ((rawValue)/10))
+            day.center = CGPoint(x: (150 + (xposition)), y: (50 - ((day.frame.height)/2) + (44)))
+        }else{
+            day.bounds = CGRect(x: 0, y: 0, width: 30, height: ((rawValue)/10))
+            day.center = CGPoint(x: (150 + (xposition)), y: (50 - ((day.frame.height)/2) + (44)))
+        }
     }
     
     func addLabel(label: UILabel, title: String, xOffSet: Int){
         label.text = title
         label.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
-        label.center = CGPoint(x: (150 + (xOffSet)), y: (110))
+        
+        if(UIScreen.main.bounds.height == 480){
+            label.center = CGPoint(x: (120 + (xOffSet)), y: (80))
+        }else if(UIScreen.main.bounds.height == 568){
+            label.center = CGPoint(x: (150 + (xOffSet)), y: (110))
+        }else{
+            label.center = CGPoint(x: (150 + (xOffSet)), y: (110))
+        }
         label.textAlignment = .center
     }
     
@@ -173,13 +228,31 @@ class BarGraph: UIView {
         self.friday.removeFromSuperview()
         self.saturday.removeFromSuperview()
         
-        duration(start: sundayStart ?? now, end: sundayEnd ?? now, day: sunday, xposition: -120, dayName: "sunday")
-        duration(start: mondayStart ?? now, end: mondayEnd ?? now, day: monday, xposition: -80, dayName: "monday")
-        duration(start: tuesdayStart ?? now, end: tuesdayEnd ?? now, day: tuesday, xposition: -40, dayName: "tuesday")
-        duration(start: wednesdayStart ?? now, end: wednesdayEnd ?? now, day: wednesday, xposition: 0, dayName: "wednesday")
-        duration(start: thursdayStart ?? now, end: thursdayEnd ?? now, day: thursday, xposition: 40, dayName: "thursday")
-        duration(start: fridayStart ?? now, end: fridayEnd ?? now, day: friday, xposition: 80, dayName: "friday")
-        duration(start: saturdayStart ?? now, end: saturdayEnd ?? now, day: saturday, xposition: 120, dayName: "saturday")
+        if(UIScreen.main.bounds.height == 480){
+            duration(start: sundayStart ?? now, end: sundayEnd ?? now, day: sunday, xposition: -105, dayName: "sunday")
+            duration(start: mondayStart ?? now, end: mondayEnd ?? now, day: monday, xposition: -70, dayName: "monday")
+            duration(start: tuesdayStart ?? now, end: tuesdayEnd ?? now, day: tuesday, xposition: -35, dayName: "tuesday")
+            duration(start: wednesdayStart ?? now, end: wednesdayEnd ?? now, day: wednesday, xposition: 0, dayName: "wednesday")
+            duration(start: thursdayStart ?? now, end: thursdayEnd ?? now, day: thursday, xposition: 35, dayName: "thursday")
+            duration(start: fridayStart ?? now, end: fridayEnd ?? now, day: friday, xposition: 70, dayName: "friday")
+            duration(start: saturdayStart ?? now, end: saturdayEnd ?? now, day: saturday, xposition: 105, dayName: "saturday")
+        }else if(UIScreen.main.bounds.height == 568){
+            duration(start: sundayStart ?? now, end: sundayEnd ?? now, day: sunday, xposition: -120, dayName: "sunday")
+            duration(start: mondayStart ?? now, end: mondayEnd ?? now, day: monday, xposition: -80, dayName: "monday")
+            duration(start: tuesdayStart ?? now, end: tuesdayEnd ?? now, day: tuesday, xposition: -40, dayName: "tuesday")
+            duration(start: wednesdayStart ?? now, end: wednesdayEnd ?? now, day: wednesday, xposition: 0, dayName: "wednesday")
+            duration(start: thursdayStart ?? now, end: thursdayEnd ?? now, day: thursday, xposition: 40, dayName: "thursday")
+            duration(start: fridayStart ?? now, end: fridayEnd ?? now, day: friday, xposition: 80, dayName: "friday")
+            duration(start: saturdayStart ?? now, end: saturdayEnd ?? now, day: saturday, xposition: 120, dayName: "saturday")
+        }else{
+            duration(start: sundayStart ?? now, end: sundayEnd ?? now, day: sunday, xposition: -120, dayName: "sunday")
+            duration(start: mondayStart ?? now, end: mondayEnd ?? now, day: monday, xposition: -80, dayName: "monday")
+            duration(start: tuesdayStart ?? now, end: tuesdayEnd ?? now, day: tuesday, xposition: -40, dayName: "tuesday")
+            duration(start: wednesdayStart ?? now, end: wednesdayEnd ?? now, day: wednesday, xposition: 0, dayName: "wednesday")
+            duration(start: thursdayStart ?? now, end: thursdayEnd ?? now, day: thursday, xposition: 40, dayName: "thursday")
+            duration(start: fridayStart ?? now, end: fridayEnd ?? now, day: friday, xposition: 80, dayName: "friday")
+            duration(start: saturdayStart ?? now, end: saturdayEnd ?? now, day: saturday, xposition: 120, dayName: "saturday")
+        }
         
         self.graph.addSubview(sunday)
         self.graph.addSubview(monday)
@@ -193,9 +266,21 @@ class BarGraph: UIView {
     
     func updateTarget(){
         if(isAdult){
-            target.center = CGPoint(x: 150, y: 55)
+            if(UIScreen.main.bounds.height == 480){
+                target.center = CGPoint(x: 120, y: 55)
+            }else if(UIScreen.main.bounds.height == 568){
+                target.center = CGPoint(x: 150, y: 55)
+            }else{
+                target.center = CGPoint(x: 150, y: 55)
+            }
         }else{
-            target.center = CGPoint(x: 150, y: 35)
+            if(UIScreen.main.bounds.height == 480){
+                target.center = CGPoint(x: 120, y: 35)
+            }else if(UIScreen.main.bounds.height == 568){
+                target.center = CGPoint(x: 150, y: 35)
+            }else{
+                target.center = CGPoint(x: 150, y: 35)
+            }
         }
         ageAdj(day: sunday, dayName: "sunday")
         ageAdj(day: monday, dayName: "monday")
