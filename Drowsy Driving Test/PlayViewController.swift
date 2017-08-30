@@ -109,7 +109,7 @@ class PlayViewController: UIViewController, GKGameCenterControllerDelegate {
         self.view = SKView()
         let delegate2 = UIApplication.shared.delegate as! AppDelegate
         delegate2.playViewController = self
-        gameViewController.viewControllerScene(scene: "WelcomeScene", viewController: self)
+        gameViewController.viewControllerScene(scene: "MenuScene", viewController: self)
     }
     
     func authenticateLocalPlayer() {
