@@ -83,10 +83,13 @@ class SettingsScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPicke
         }else if(UIScreen.main.bounds.height == 568){
             nameInput = UITextField(frame: CGRect(x: 0, y: 0, width: self.frame.width/4, height: 30))
             numberInput = UITextField(frame: CGRect(x: 0, y: 0, width: self.frame.width/4, height: 30))
-            nameInput.center = CGPoint(x: UIScreen.main.bounds.width/2 ,y: UIScreen.main.bounds.height/2 - 30)
-            numberInput.center = CGPoint(x: UIScreen.main.bounds.width/2 ,y: UIScreen.main.bounds.height/2 + 20)
             nameInput.center = CGPoint(x: UIScreen.main.bounds.width/1.5 ,y: UIScreen.main.bounds.height/4 - 15)
             numberInput.center = CGPoint(x: UIScreen.main.bounds.width/1.5 ,y: UIScreen.main.bounds.height/4 + 40)
+        }else if(UIScreen.main.bounds.height == 736){
+            nameInput = UITextField(frame: CGRect(x: 0, y: 0, width: self.frame.width/3.5, height: 30))
+            numberInput = UITextField(frame: CGRect(x: 0, y: 0, width: self.frame.width/3.5, height: 30))
+            nameInput.center = CGPoint(x: UIScreen.main.bounds.width/1.5 ,y: UIScreen.main.bounds.height/4 - 20)
+            numberInput.center = CGPoint(x: UIScreen.main.bounds.width/1.5 ,y: UIScreen.main.bounds.height/4 + 60)
         }else{
             nameInput = UITextField(frame: CGRect(x: self.frame.width/5, y: self.frame.height/10, width: self.frame.width/4, height: 30))
             numberInput = UITextField(frame: CGRect(x: self.frame.width/5, y: self.frame.height/6.5, width: self.frame.width/4, height: 30))

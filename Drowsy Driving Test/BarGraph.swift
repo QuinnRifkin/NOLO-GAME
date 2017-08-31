@@ -106,6 +106,30 @@ class BarGraph: UIView {
             duration(start: thursdayStart ?? now, end: thursdayEnd ?? now, day: thursday, xposition: 40, dayName: "thursday")
             duration(start: fridayStart ?? now, end: fridayEnd ?? now, day: friday, xposition: 80, dayName: "friday")
             duration(start: saturdayStart ?? now, end: saturdayEnd ?? now, day: saturday, xposition: 120, dayName: "saturday")
+        }else if(UIScreen.main.bounds.height == 736){
+            graph.bounds = CGRect(x: 0, y: 0, width: 300, height: 100)
+            graph.center = CGPoint(x: UIScreen.main.bounds.width/2 , y: UIScreen.main.bounds.height/2 + 35)
+            blur.frame = CGRect(x: 150, y: 50, width: 300, height: 130)
+            blur.center = CGPoint(x: 150, y: 60)
+            
+            addLabel(label: sun, title: "S", xOffSet: -120)
+            addLabel(label: mon, title: "M", xOffSet: -80)
+            addLabel(label: tues, title: "T", xOffSet: -40)
+            addLabel(label: wed, title: "W", xOffSet: 0)
+            addLabel(label: thurs, title: "T", xOffSet: 40)
+            addLabel(label: fri, title: "F", xOffSet: 80)
+            addLabel(label: sat, title: "S", xOffSet: 120)
+            
+            target.bounds = CGRect(x: 0, y: 0, width: 275, height: 1)
+            target.center = CGPoint(x: 150, y: 52)
+            
+            duration(start: sundayStart ?? now, end: sundayEnd ?? now, day: sunday, xposition: -120, dayName: "sunday")
+            duration(start: mondayStart ?? now, end: mondayEnd ?? now, day: monday, xposition: -80, dayName: "monday")
+            duration(start: tuesdayStart ?? now, end: tuesdayEnd ?? now, day: tuesday, xposition: -40, dayName: "tuesday")
+            duration(start: wednesdayStart ?? now, end: wednesdayEnd ?? now, day: wednesday, xposition: 0, dayName: "wednesday")
+            duration(start: thursdayStart ?? now, end: thursdayEnd ?? now, day: thursday, xposition: 40, dayName: "thursday")
+            duration(start: fridayStart ?? now, end: fridayEnd ?? now, day: friday, xposition: 80, dayName: "friday")
+            duration(start: saturdayStart ?? now, end: saturdayEnd ?? now, day: saturday, xposition: 120, dayName: "saturday")
         }else{
             graph.bounds = CGRect(x: 0, y: 0, width: 300, height: 100)
             graph.center = CGPoint(x: 187.5 , y: 333.5  + 30)

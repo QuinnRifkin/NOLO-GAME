@@ -103,7 +103,11 @@ class DeathScene: SKScene {
                 let when = DispatchTime.now() + 0.05 // change 2 to desired number of seconds
                 DispatchQueue.main.asyncAfter(deadline: when) {
                     UIView.animate(withDuration: 0.1, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: { () -> Void in
-                        self.popUp.center = CGPoint(x: self.popUp.center.x, y: 1000.5)
+                        if(UIScreen.main.bounds.height == 736){
+                            self.popUp.center = CGPoint(x: self.popUp.center.x, y: 1000.5 + 150)
+                        }else{
+                            self.popUp.center = CGPoint(x: self.popUp.center.x, y: 1000.5 + -45)
+                        }
                     }, completion: { (finished) -> Void in
                         print("reset2")
                     })
@@ -113,12 +117,13 @@ class DeathScene: SKScene {
         if(gestureRecognizer.velocity(in: self.view).y <= -1400 || (gestureRecognizer.state == .ended && popUp.center.y <= 675)){
             dismiss()
         }
-//        if(gestureRecognizer.state == .ended && popUp.center.y <= 675){
-//            dismiss()
-//        }
         if(gestureRecognizer.state == .ended && popUp.center.y >= 500){
             UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: { () -> Void in
-                self.popUp.center = CGPoint(x: self.popUp.center.x, y: 1000.5 + -45)
+                if(UIScreen.main.bounds.height == 736){
+                    self.popUp.center = CGPoint(x: self.popUp.center.x, y: 1000.5 + 150)
+                }else{
+                    self.popUp.center = CGPoint(x: self.popUp.center.x, y: 1000.5 + -45)
+                }
             }, completion: { (finished) -> Void in
                 print("reset3")
             })
@@ -152,6 +157,14 @@ class DeathScene: SKScene {
             namelabel = UILabel(frame: CGRect(x: 10, y: 10, width: 150, height: 50))
             zCountLabel = UILabel(frame: CGRect(x: UIScreen.main.bounds.width/2 + 70, y: UIScreen.main.bounds.height/4 + 10, width: 100, height: 40))
             highScoreLabel = UILabel(frame: CGRect(x: UIScreen.main.bounds.width/2 + 70, y: UIScreen.main.bounds.height/3 + 10, width: 100, height: 40))
+            zCountLabel.text = String( gameScene.getFinishZCount())
+            highScoreLabel.text = String( gameScene.getHighScore())
+            popUpHandle.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 + (200))
+            popUpHandle.isHidden = true
+        }else if(UIScreen.main.bounds.height == 736){
+            namelabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
+            zCountLabel = UILabel(frame: CGRect(x: UIScreen.main.bounds.width/2 + 90, y: UIScreen.main.bounds.height/4 + 22, width: 100, height: 40))
+            highScoreLabel = UILabel(frame: CGRect(x: UIScreen.main.bounds.width/2 + 90, y: UIScreen.main.bounds.height/3 + 20, width: 100, height: 40))
             zCountLabel.text = String( gameScene.getFinishZCount())
             highScoreLabel.text = String( gameScene.getHighScore())
             popUpHandle.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 + (200))
@@ -208,7 +221,6 @@ class DeathScene: SKScene {
         
         fact = (String) (sleepFactz[Int(arc4random_uniform(15))])
         
-        
         if(UIScreen.main.bounds.height == 480){
             fact1 = UILabel(frame: CGRect(x: (UIScreen.main.bounds.width)/2 , y: (UIScreen.main.bounds.width) + 30, width: 200, height: 130))
             fact1.center = CGPoint(x: (UIScreen.main.bounds.width)/2 , y: (UIScreen.main.bounds.height) - 85)
@@ -219,12 +231,17 @@ class DeathScene: SKScene {
             fact1.center = CGPoint(x: (UIScreen.main.bounds.width)/2 , y: (UIScreen.main.bounds.height) - 100)
             fact1.font = UIFont(name: "ChalkboardSE-Regular", size: 15)
             print("Tis not a pad, but tis small")
+        }else if(UIScreen.main.bounds.height == 736){
+            fact1 = UILabel(frame: CGRect(x: (UIScreen.main.bounds.width)/2 , y: (UIScreen.main.bounds.width) + 30, width: 280, height: 170))
+            fact1.center = CGPoint(x: (UIScreen.main.bounds.width)/2 , y: (UIScreen.main.bounds.height) - 132)
+            fact1.font = UIFont(name: "ChalkboardSE-Regular", size: 20)
+            print("Tis a plus")
         }else{
             fact1 = UILabel(frame: CGRect(x: 50 , y: -(factBar.position.y) + 30, width: 270, height: 150))
             fact1.font = UIFont(name: "ChalkboardSE-Regular", size: 20)
             print("Tis not a pad, tis not small")
         }
-        
+
         fact1.text = fact
         fact1.lineBreakMode = NSLineBreakMode.byWordWrapping
         fact1.numberOfLines = 0

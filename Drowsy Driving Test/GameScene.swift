@@ -302,6 +302,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             timeLabel.center = CGPoint(x: UIScreen.main.bounds.width/2 - 30, y: 30)
             highScoreLabel.center = CGPoint(x: UIScreen.main.bounds.width/2 - 30, y: 80)
             zCountLabel.center = CGPoint(x: UIScreen.main.bounds.width/2 - 30, y: 55)
+        }else if(UIScreen.main.bounds.height == 736){
+            timeLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width/2 , height: 20))
+            highScoreLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width/2 , height: 20))
+            zCountLabel = UILabel(frame: CGRect(x: 0, y: 0, width: self.frame.width/2 , height: 20))
+            timeLabel.center = CGPoint(x: UIScreen.main.bounds.width/2 + 15, y: 40)
+            highScoreLabel.center = CGPoint(x: UIScreen.main.bounds.width/2 + 15, y: 103)
+            zCountLabel.center = CGPoint(x: UIScreen.main.bounds.width/2 + 15, y: 72)
         }else{
             timeLabel = UILabel(frame: CGRect(x: 0, y: 27, width: self.frame.width/2 , height: 20))
             highScoreLabel = UILabel(frame: CGRect(x: 0, y: 83, width: self.frame.width/2 , height: 20))
