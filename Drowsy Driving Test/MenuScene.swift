@@ -94,6 +94,11 @@ class MenuScene: SKScene {
             fact1.center = CGPoint(x: (UIScreen.main.bounds.width)/2 , y: (UIScreen.main.bounds.height) - 100)
             fact1.font = UIFont(name: "ChalkboardSE-Regular", size: 15)
             print("Tis not a pad, but tis small")
+        }else if(UIScreen.main.bounds.height == 736){
+            fact1 = UILabel(frame: CGRect(x: (UIScreen.main.bounds.width)/2 , y: (UIScreen.main.bounds.width) + 30, width: 280, height: 170))
+            fact1.center = CGPoint(x: (UIScreen.main.bounds.width)/2 , y: (UIScreen.main.bounds.height) - 132)
+            fact1.font = UIFont(name: "ChalkboardSE-Regular", size: 20)
+            print("Tis a plus")
         }else{
             fact1 = UILabel(frame: CGRect(x: 50 , y: -(factBar.position.y) + 30, width: 270, height: 150))
             fact1.font = UIFont(name: "ChalkboardSE-Regular", size: 20)

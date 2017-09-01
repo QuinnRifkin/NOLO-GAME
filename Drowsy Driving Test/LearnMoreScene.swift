@@ -40,6 +40,11 @@ class LearnMoreScene: SKScene {
             infoLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 270))
             infoLabel.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/3.5)
             infoLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 18)
+        }else if(UIScreen.main.bounds.height == 736){
+            nameLabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
+            infoLabel = UILabel(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 20, height: 260))
+            infoLabel.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/3.5 + 2)
+            infoLabel.font = UIFont(name: "ChalkboardSE-Regular", size: 25)
         }else{
             nameLabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
             infoLabel = UILabel(frame: CGRect(x: 15, y: 40, width: self.frame.width/2.1, height: 270))

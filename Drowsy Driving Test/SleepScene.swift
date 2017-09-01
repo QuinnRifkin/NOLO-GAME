@@ -349,6 +349,26 @@ class SleepScene: SKScene, UITextFieldDelegate, UIPickerViewDelegate, UIPickerVi
             startTimeInput.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - (1030))
             
             endTimeInput.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - (975))
+        }else if(UIScreen.main.bounds.height == 736){
+            namelabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
+            
+            sleepInputScreen.frame = UIScreen.main.bounds//(self.view?.bounds)!
+            
+            sleepInputScreen.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - (1000))
+            
+            sleepInputView.bounds = CGRect(x: 0, y: 0, width: 300, height: 250)
+            
+            sleepInputView.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - (1000))
+            
+            sleepInputLabel.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - (1090))
+            
+            submit.center = CGPoint(x: UIScreen.main.bounds.width/2 + 50, y: UIScreen.main.bounds.height/2 - (920))
+            
+            cancel.center = CGPoint(x: UIScreen.main.bounds.width/2 - 50, y: UIScreen.main.bounds.height/2 - (920))
+            
+            startTimeInput.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - (1030))
+            
+            endTimeInput.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2 - (975))
         }else{
             namelabel = UILabel(frame: CGRect(x: 6, y: -15, width: 150, height: 100))
             
